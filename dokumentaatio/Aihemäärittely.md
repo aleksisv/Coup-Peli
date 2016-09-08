@@ -9,7 +9,7 @@ Coupin tässä toteutuksessa yksi pelaaja pelaa valitsemaansa määrää tekoäl
 Graafisuus liittyy ohjelmaan siten, että käyttäjä näkee ruudulla omat korttinsa, sekä pelilaudan tilanteen.
 
 **Käyttäjät**: Pelaaja.
-<<<<<<< HEAD
+
 **Pelaajan toiminnot**: 
 * Aloita peli.
 * Tee siirto.
@@ -19,4 +19,3 @@ Graafisuus liittyy ohjelmaan siten, että käyttäjä näkee ruudulla omat kortt
 **Pelaajan toiminnot**: * Aloita peli.
 			* Tee siirto.
 			* Epäile vastustajan siirtoa.
->>>>>>> b46557cd346c58afbd59633050803728008baa8c
