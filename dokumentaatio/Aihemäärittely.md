@@ -14,8 +14,3 @@ Graafisuus liittyy ohjelmaan siten, että käyttäjä näkee ruudulla omat kortt
 * Aloita peli.
 * Tee siirto.
 * Epäile vastustajan siirtoa.
-=======
-
-**Pelaajan toiminnot**: * Aloita peli.
-			* Tee siirto.
-			* Epäile vastustajan siirtoa.
