@@ -1,16 +1,30 @@
 
 package main;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 public class Peli extends AbstraktiPeli {
     
-    private int pelaajamaara;
+    private int osanottajamaara;
+    private ArrayList<Osanottaja> osanottajajoukko;
 
     public Peli(int pelaajamaara) {
-        this.pelaajamaara = pelaajamaara;
+        this.osanottajamaara = pelaajamaara;
+        this.osanottajajoukko = new ArrayList<Osanottaja>();
+        luoOsanottajat();
+        
     }
 
     public int getPelaajamaara() {
-        return pelaajamaara;
+        return osanottajamaara;
+    }
+    
+    private void luoOsanottajat(){
+        osanottajajoukko.add(new Pelaaja());
+        for (int i = 0; i < osanottajamaara - 1; i++) {
+            osanottajajoukko.add(new Vastustaja());
+        }
     }
     
     

@@ -1,14 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package main;
 
-/**
- *
- * @author aleksisvuoksenmaa
- */
 public class Kortti {
+    private int id;
+    private String tyyppi;
+    private boolean paljastettu;
+
+    public Kortti(int id, String tyyppi, boolean paljastettu) {
+        this.id = id;
+        this.tyyppi = tyyppi;
+        this.paljastettu = paljastettu;
+    }
+    
+    public Kortti(int id, String tyyppi) {
+        this.id = id;
+        this.tyyppi = tyyppi;
+        this.paljastettu = false;
+    }
+    
+    
+    
     
 }

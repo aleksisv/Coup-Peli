@@ -13,5 +13,5 @@ public class Pelaaja extends Osanottaja{
     private String tyyppi;
     private String nimi;
     private int raha;
-    private Korttikasi käsi;
+    private Korttikasi kasi;
 }
