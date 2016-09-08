@@ -1,7 +1,7 @@
 
 package main;
 
-public class Peli {
+public class Peli extends AbstraktiPeli {
     
     private int pelaajamaara;
 
