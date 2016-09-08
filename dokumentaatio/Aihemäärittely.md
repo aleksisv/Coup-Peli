@@ -7,8 +7,16 @@ Pelaajat voivat käyttää korttiensa erityisominaisuuksia tai yrittää huijata
 
 Coupin tässä toteutuksessa yksi pelaaja pelaa valitsemaansa määrää tekoälyjä vastaan.
 Graafisuus liittyy ohjelmaan siten, että käyttäjä näkee ruudulla omat korttinsa, sekä pelilaudan tilanteen.
+
 **Käyttäjät**: Pelaaja.
+<<<<<<< HEAD
 **Pelaajan toiminnot**: 
 * Aloita peli.
 * Tee siirto.
 * Epäile vastustajan siirtoa.
+=======
+
+**Pelaajan toiminnot**: * Aloita peli.
+			* Tee siirto.
+			* Epäile vastustajan siirtoa.
+>>>>>>> b46557cd346c58afbd59633050803728008baa8c
