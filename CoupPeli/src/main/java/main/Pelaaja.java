@@ -9,9 +9,12 @@ package main;
  *
  * @author aleksisvuoksenmaa
  */
-public class Pelaaja extends Osanottaja{
-    private String tyyppi;
-    private String nimi;
-    private int raha;
+public class Pelaaja extends Osanottaja {
     private Korttikasi kasi;
+
+    public Pelaaja(String nimi) {
+        super(nimi);
+    }
+
+   
 }

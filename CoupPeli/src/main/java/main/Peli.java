@@ -21,9 +21,9 @@ public class Peli extends AbstraktiPeli {
     }
     
     private void luoOsanottajat(){
-        osanottajajoukko.add(new Pelaaja());
+        osanottajajoukko.add(new Pelaaja("X"));
         for (int i = 0; i < osanottajamaara - 1; i++) {
-            osanottajajoukko.add(new Vastustaja());
+            osanottajajoukko.add(new Vastustaja("i"));
         }
     }
     

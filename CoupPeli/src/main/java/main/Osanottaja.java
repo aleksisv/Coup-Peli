@@ -2,12 +2,10 @@
 package main;
 
 public class Osanottaja {
-    private String tyyppi;
     private String nimi;
     private int raha;
 
-    public Osanottaja(String tyyppi, String nimi) {
-        this.tyyppi = tyyppi;
+    public Osanottaja(String nimi) {
         this.nimi = nimi;
         this.raha = 2;
     }
