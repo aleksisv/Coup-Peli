@@ -5,4 +5,5 @@ jossa pelaajan tehtävänä on omia korttejaan ja näiden erikoisominaisuuksia k
 
 ## Dokumentaatio
 [tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
+
 [aiheen kuvaus ja määrittely](dokumentaatio/aihemäärittely.md)
