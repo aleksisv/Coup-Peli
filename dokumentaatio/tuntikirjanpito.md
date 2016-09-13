@@ -6,4 +6,6 @@ Päivä | Tunnit | Kuvaus
 07.09.2016 | 1h | Yritin saada mutaatiotestauksen toimimaan
 08.09.2016 | 3h | Mavenin kuntoon laittamista, dokumentaatiota ja ohjelmapohjan luontia.
 09.09.2016 | 0.5h | Pientä muokkausta aihemäärittelyyn.
-
+10.09.2016 | 0h | -
+11.09.2016 | 1h | Toteutusta koskevaa mietintää.
+12.09.2016 | 1h | Lisärakennetta luokkiin. Erityisesti lisää metodeita Peli-luokkaan.
