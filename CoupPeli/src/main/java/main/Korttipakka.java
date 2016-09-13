@@ -18,7 +18,7 @@ public class Korttipakka {
         this.lisaaTietynTyyppisetKortit(pakka, "Ambassador");
     }
     
-    public void lisaaTietynTyyppisetKortit(ArrayList<Kortti> pakka, String tyyppi){
+    public void lisaaTietynTyyppisetKortit(ArrayList<Kortti> pakka, String tyyppi) {
         for (int i = 0; i < 3; i++) {
             Kortti kortti = new Kortti(i, tyyppi);
         }

@@ -13,6 +13,12 @@ public class Osanottaja {
     public void epaile(Pelaaja pelaaja) {
         
     }
+
+    public String getNimi() {
+        return nimi;
+    }
+    
+    
     
     
 }
