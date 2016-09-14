@@ -13,6 +13,18 @@ public class Korttikasi {
     public Korttikasi() {
         this.kortit = new ArrayList<Kortti>();
     }
+
+    public ArrayList<Kortti> getKortit() {
+        return kortit;
+    }
+    
+    public int koko() {
+        return kortit.size();
+    }
+    
+    public boolean sisaltyykoKortti(Kortti kortti){
+        return kortit.contains(kortti);
+    }
     
     
 }

@@ -20,7 +20,7 @@ public class Osanottaja {
     
     public void epaile(Pelaaja pelaaja, Kortti mitaEiOle) {
         if(!pelaaja.getKasi().sisaltyykoKortti(mitaEiOle)) {
-            
+            pelaaja.setRaha(pelaaja.getRaha() - 2);
         }
     }
 
