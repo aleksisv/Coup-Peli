@@ -1,4 +1,3 @@
-
 package main;
 
 import org.junit.After;
@@ -8,15 +7,38 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-
 public class PeliTest {
-    
-    @Test
-        public void test() {
-                Peli tester = new Peli(1); // MyClass is tested
-                assertEquals(tester.getPelaajamaara(), 1);
-                
-        }
 
-    
+    private int vakio1;
+    private int vakio2;
+
+    public PeliTest() {
+        this.vakio1 = 3;
+        this.vakio2 = 4;
+    }
+
+
+    @BeforeClass
+    public static void setUpClass() {
+        int vakio1 = 100;
+    }
+
+    @Test
+    public void pelaajaMaaratOikein1() {
+        Peli testipeli = new Peli(1);
+        assertEquals(testipeli.getPelaajamaara(), 1);
+    }
+
+    @Test
+    public void pelaajaMaaratOikein2() {
+        Peli testipeli = new Peli(4);
+        assertEquals(testipeli.getPelaajamaara(), 4);
+    }
+
+    @Test
+    public void pelaajaMaaratOikein3() {
+        Peli testipeli = new Peli(vakio1);
+        assertEquals(testipeli.getPelaajamaara(), 3);
+    }
+
 }

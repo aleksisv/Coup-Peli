@@ -44,6 +44,10 @@ public class Osanottaja {
         return raha;
     }
     
+    public void saaRahaa(int maara) {
+        this.setRaha(this.getRaha() + maara);
+    }
+    
     
 
     @Override
