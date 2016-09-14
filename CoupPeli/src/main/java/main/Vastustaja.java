@@ -18,6 +18,14 @@ public class Vastustaja extends Osanottaja {
         super(nimi);
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+    
+    
+    
+
 
     
     

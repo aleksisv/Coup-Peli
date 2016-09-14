@@ -28,13 +28,12 @@ public class Peli extends AbstraktiPeli {
         luoOsanottajat();
         this.vuoronumero = r.nextInt(this.osanottajamaara);
         
-        /*while (this.osanottajajoukko.size() > 1) {
+        while (this.osanottajajoukko.size() > 1) {
             pelaaVuoro(this.osanottajajoukko.get(vuoronumero % osanottajajoukko.size()));
             this.vuoronumero++;
-        }*/
+        }
         System.out.println("Voittaja: " + this.osanottajajoukko.get(0).toString());
-        
-        
+
     }
 
     public int getPelaajamaara() {
@@ -46,23 +45,25 @@ public class Peli extends AbstraktiPeli {
         for (int i = 0; i < osanottajamaara - 1; i++) {
             osanottajajoukko.add(new Vastustaja("i"));
         }
+        for (Osanottaja osanottajajoukko1 : osanottajajoukko) {
+            System.out.println(osanottajajoukko1);
+        }
     }
     
     private void pelaaVuoro(Osanottaja osanottaja) {
         if (osanottaja.equals(this.pelaaja)) {
             pelaajanVuoro((Pelaaja) osanottaja);
-        } else { 
-            vastustajanVuoro((Vastustaja) osanottaja); 
-        }
+        } 
+//        else { 
+//            vastustajanVuoro((Vastustaja) osanottaja); 
+//        }
     }
     
     private void pelaajanVuoro(Pelaaja pelaaja) {
         System.out.println("Minkä siirron haluat tehdä?\n");
         lukija.nextLine();
-        
-        
-        
     }
+    
     
     private void vastustajanVuoro(Vastustaja osanottaja) {
        
