@@ -9,3 +9,5 @@ Päivä | Tunnit | Kuvaus
 10.09.2016 | 0h | -
 11.09.2016 | 1h | Toteutusta koskevaa mietintää.
 12.09.2016 | 1h | Lisärakennetta luokkiin. Erityisesti lisää metodeita Peli-luokkaan.
+13.09.2016 | 1h | Checkstylen valmisteleminen ja ohjelman toteutuksen mietintää.
+14.09.2016 | 3h | Luokkakaavio ja lisää ohjelmointia.
