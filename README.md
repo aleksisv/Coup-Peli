@@ -7,3 +7,5 @@ jossa pelaajan tehtävänä on omia korttejaan ja näiden erikoisominaisuuksia k
 [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 
 [Aiheen kuvaus ja määrittely](dokumentaatio/aihemäärittely.md)
+
+![Luokkakaavio](dokumentaatio/luokkakaavio.png)
