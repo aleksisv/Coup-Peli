@@ -9,7 +9,7 @@ public class Pelaaja extends Osanottaja {
     }
 
     public Korttikasi getKorttikasi() {
-        return super.getKasi();
+        return super.getKorttikasi();
     }
 
     @Override
@@ -18,7 +18,7 @@ public class Pelaaja extends Osanottaja {
     }
 
     public void menetaRahaa(int maara) {
-        this.setRaha(this.getRaha() - maara);
+        super.menetaRahaa(maara);
     }
 
     @Override
@@ -27,13 +27,7 @@ public class Pelaaja extends Osanottaja {
     }
 
     public void annaRahaaPankille(int maara, Pankki pankki) {
-        if (this.getRaha() >= maara) {
-            pankki.lisaaRahaa(maara);
-            this.menetaRahaa(maara);
-        } else {
-            pankki.lisaaRahaa(this.getRaha());
-            this.menetaRahaa(this.getRaha());
-        }
+        super.annaRahaaPankille(maara, pankki);
     }
 
     public void otaRahaaPankilta(int maara, Pankki pankki) {
@@ -41,12 +35,7 @@ public class Pelaaja extends Osanottaja {
     }
 
     public void tapaKortti() {
-        Korttikasi korttikasi = this.getKorttikasi();
-        Random r = new Random();
-
-        int tapettavanKohta = r.nextInt(korttikasi.koko());
-
-        korttikasi.poistaPakastaTassaKohdassaOleva(tapettavanKohta);
+        super.tapaKortti();
     }
 
     public void kaytaBasicIncome(Pankki pankki) {

@@ -1,6 +1,7 @@
 package fi.aleksisv.logiikka;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Korttipakka {
 
@@ -43,6 +44,11 @@ public class Korttipakka {
         Kortti apu = this.getPakka().get(i);
         this.getPakka().remove(i);
         return apu;
+    }
+
+    public Kortti nostaPakastaSatunnainenKortti() {
+        Random r = new Random();
+        return this.nostaPakastaTassaKohdassaOleva(r.nextInt(this.korttipakanKoko()));
     }
 
     public boolean sisaltyyko(Kortti kortti) {

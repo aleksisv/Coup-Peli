@@ -28,7 +28,7 @@ public class OsanottajaTest {
     @Test
     public void luoOsanottajanOikein3() {
         Osanottaja osanottaja = new Osanottaja("Aino");
-        assertEquals(osanottaja.getKasi().koko(), 0);
+        assertEquals(osanottaja.getKorttikasi().koko(), 0);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class OsanottajaTest {
         Osanottaja osanottaja = new Osanottaja("Aino");
         Korttipakka korttipakka = new Korttipakka();
         osanottaja.nostaSatunnainenKorttiPakasta(korttipakka);
-        assertEquals(osanottaja.getKasi().koko(), 1);
+        assertEquals(osanottaja.getKorttikasi().koko(), 1);
     }
 
     @BeforeClass

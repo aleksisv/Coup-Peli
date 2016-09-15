@@ -4,24 +4,26 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Osanottaja {
-
+    
     private String nimi;
     private int raha;
-    private Korttikasi kasi;
+    private Korttikasi korttikasi;
     
     public Osanottaja(String nimi) {
         this.nimi = nimi;
         this.raha = 2;
-        this.kasi = new Korttikasi();
+        this.korttikasi = new Korttikasi();
     }
     
-    public Korttikasi getKasi() {
-        return kasi;
+    public Korttikasi getKorttikasi() {
+        return this.korttikasi;
     }
     
     public void epaile(Pelaaja pelaaja, Kortti mitaEiOle) {
-        if (!pelaaja.getKasi().sisaltyykoKortti(mitaEiOle)) {
-            pelaaja.setRaha(pelaaja.getRaha() - 2);
+        if (!pelaaja.getKorttikasi().sisaltyykoKortti(mitaEiOle)) {
+            pelaaja.tapaKortti();
+        } else {
+            this.tapaKortti();
         }
     }
     
@@ -34,7 +36,7 @@ public class Osanottaja {
     }
     
     public void setKasi(Korttikasi kasi) {
-        this.kasi = kasi;
+        this.korttikasi = kasi;
     }
     
     public void setNimi(String nimi) {
@@ -43,6 +45,15 @@ public class Osanottaja {
     
     public int getRaha() {
         return raha;
+    }
+    
+    public void tapaKortti() {
+        Korttikasi korttikasi = this.getKorttikasi();
+        Random r = new Random();
+
+        int tapettavanKohta = r.nextInt(korttikasi.koko());
+
+        korttikasi.poistaPakastaTassaKohdassaOleva(tapettavanKohta);
     }
     
     public void saaRahaa(int maara) {
@@ -57,7 +68,7 @@ public class Osanottaja {
     }
     
     public void lisaaKorttiKorttipakkaan(Kortti kortti) {
-        this.getKasi().lisaaKorttikateen(kortti);
+        this.getKorttikasi().lisaaKorttikateen(kortti);
     }
     
     @Override
