@@ -14,37 +14,34 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PelaajaTest {
-    
+
     public PelaajaTest() {
     }
-    
-    
+
     @Test
     public void pelaajallaAlussaOikeaMaaraRahaa() {
         Pelaaja pelaaja = new Pelaaja("Pelaaja");
         assertEquals(pelaaja.getRaha(), 2);
     }
-    
+
     @Test
     public void pelaajanNimiOikea() {
         Pelaaja pelaaja = new Pelaaja("Pelaaja");
         assertEquals(pelaaja.getNimi(), "Pelaaja");
     }
-    
-    
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }

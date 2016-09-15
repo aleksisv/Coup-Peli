@@ -1,7 +1,7 @@
-
 package fi.aleksisv.logiikka;
 
 public class Vastustaja extends Osanottaja {
+
     private Korttikasi kasi;
 
     public Vastustaja(String nimi) {
@@ -12,12 +12,5 @@ public class Vastustaja extends Osanottaja {
     public String toString() {
         return super.toString();
     }
-    
-    
-    
 
-
-    
-    
-    
 }

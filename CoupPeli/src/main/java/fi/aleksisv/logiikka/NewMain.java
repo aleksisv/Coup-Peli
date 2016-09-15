@@ -1,4 +1,3 @@
-
 package fi.aleksisv.logiikka;
 
 import java.util.ArrayList;
@@ -9,5 +8,5 @@ public class NewMain {
         Peli peli = new Peli(3);
         peli.kaynnistaPeli();
     }
-    
+
 }

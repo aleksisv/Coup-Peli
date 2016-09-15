@@ -17,41 +17,42 @@ import static org.junit.Assert.*;
  * @author aleksisvuoksenmaa
  */
 public class KorttiTest {
-    
+
     public KorttiTest() {
     }
-    
+
     @Test
     public void vertaileekoKorttejaOikein1() {
         Kortti kortti1 = new Kortti("Contessa", false);
         Kortti kortti2 = new Kortti("Contessa", false);
         assertEquals(kortti1, kortti2);
     }
-    
+
     @Test
     public void vertaileekoKorttejaOikein2() {
         Kortti kortti1 = new Kortti("Contessa", false);
         Kortti kortti2 = new Kortti("Contessa", true);
         assertEquals(kortti1, kortti2);
     }
+
     public void vertaileekoKorttejaOikein3() {
         Kortti kortti1 = new Kortti("Contessa", false);
         Kortti kortti2 = new Kortti("Assassin", false);
         assertNotEquals(kortti1, kortti2);
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }

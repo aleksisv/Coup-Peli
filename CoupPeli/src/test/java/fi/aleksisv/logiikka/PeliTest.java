@@ -1,6 +1,5 @@
 package fi.aleksisv.logiikka;
 
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,7 +16,6 @@ public class PeliTest {
         this.vakio1 = 3;
         this.vakio2 = 4;
     }
-
 
     @BeforeClass
     public static void setUpClass() {
@@ -41,7 +39,7 @@ public class PeliTest {
         Peli testipeli = new Peli(vakio1);
         assertEquals(testipeli.getOsanottajamaara(), 3);
     }
-    
+
     @Test
     public void pudotaVastustajaOikein() {
         Peli testipeli = new Peli(3);
@@ -50,9 +48,9 @@ public class PeliTest {
         testipeli.pudotaVastustaja(vastustaja);
         assertEquals(false, testipeli.getOsanottajamaara() == 3);
 //        testipeli.pudotaPelaaja(pelaaja);
-        
+
     }
-    
+
     public void lisaaVastustajaOikein() {
         Peli testipeli = new Peli(3);
         Vastustaja vastustaja = new Vastustaja("Vastustaja");

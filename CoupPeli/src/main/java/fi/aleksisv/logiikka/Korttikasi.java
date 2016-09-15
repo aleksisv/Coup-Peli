@@ -1,24 +1,25 @@
-
 package fi.aleksisv.logiikka;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Korttikasi {
+
     private ArrayList<Kortti> kortit;
 
     public Korttikasi(ArrayList<Kortti> kortit) {
         this.kortit = kortit;
     }
-    
+
     public Korttikasi() {
         this.kortit = new ArrayList();
     }
-    
+
     public int koko() {
         return kortit.size();
     }
-    
-    public boolean sisaltyykoKortti(Kortti kortti){
+
+    public boolean sisaltyykoKortti(Kortti kortti) {
         for (Kortti kortit1 : kortit) {
             if (kortit1.equals(kortti)) {
                 return true;
@@ -26,7 +27,7 @@ public class Korttikasi {
         }
         return false;
     }
-    
+
     public ArrayList<Kortti> getKorttikasi() {
         return this.kortit;
     }
@@ -38,5 +39,17 @@ public class Korttikasi {
     public void poistaPakastaTassaKohdassaOleva(int tapettavanKohta) {
         this.kortit.remove(tapettavanKohta);
     }
-    
+
+    public void lisaaKaksiSatunnaistaKorttia(Korttipakka pakka) {
+        Random r = new Random();
+        for (int i = 0; i < 2; i++) {
+            int lisattavanSijainti = r.nextInt(pakka.korttipakanKoko());
+            lisaaKorttikateen(pakka.nostaPakastaTassaKohdassaOleva(i));
+        }
+    }
+
+    public void lisaaKorttikateen(Kortti kortti) {
+        this.kortit.add(kortti);
+    }
+
 }

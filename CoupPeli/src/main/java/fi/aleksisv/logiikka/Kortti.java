@@ -2,7 +2,6 @@ package fi.aleksisv.logiikka;
 
 public class Kortti {
 
-
     private String tyyppi;
     private boolean onkoPaljastettu;
 
@@ -28,10 +27,10 @@ public class Kortti {
         if ((this.tyyppi == null) ? (toinenKortti.tyyppi != null) : !this.tyyppi.equals(toinenKortti.tyyppi)) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     @Override
     public String toString() {
         return this.tyyppi;

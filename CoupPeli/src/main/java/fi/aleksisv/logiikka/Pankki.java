@@ -1,7 +1,7 @@
-
 package fi.aleksisv.logiikka;
 
 public class Pankki {
+
     private int rahamaara;
 
     public Pankki() {
@@ -15,17 +15,17 @@ public class Pankki {
     public void setRahamaara(int rahamaara) {
         this.rahamaara = rahamaara;
     }
-    
+
     public void vahennaRahaa(int maara) {
         this.setRahamaara(this.getRahamaara() - maara);
     }
-    
+
     public void lisaaRahaa(int maara) {
         this.setRahamaara(this.getRahamaara() + maara);
     }
-    
+
     public int annaRahat(int maara) {
-        if(maara <= this.rahamaara) {
+        if (maara <= this.rahamaara) {
             this.vahennaRahaa(maara);
             return maara;
         } else {
@@ -34,7 +34,7 @@ public class Pankki {
             return palautettava;
         }
     }
-    
+
     public void pankkiNolliin() {
         this.rahamaara = 0;
     }
@@ -43,8 +43,5 @@ public class Pankki {
     public String toString() {
         return "Pankilla on rahaa " + this.rahamaara + "Coup-yksikköä.";
     }
-    
-    
-    
-    
+
 }

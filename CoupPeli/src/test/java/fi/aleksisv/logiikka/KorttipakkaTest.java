@@ -17,28 +17,28 @@ import static org.junit.Assert.*;
  * @author aleksisvuoksenmaa
  */
 public class KorttipakkaTest {
-    
+
     public KorttipakkaTest() {
     }
-    
+
     @Test
     public void alussaPakassaOikeaMaaraKortteja() {
         Korttipakka korttipakka = new Korttipakka();
         assertEquals(korttipakka.korttipakanKoko(), 15);
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
