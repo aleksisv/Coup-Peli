@@ -24,6 +24,14 @@ public class PelaajaTest {
         assertEquals(pelaaja.getRaha(), 2);
     }
     
+    @Test
+    public static void pelaajanNimiOikea() {
+        Pelaaja pelaaja = new Pelaaja("Pelaaja");
+        assertEquals(pelaaja.getNimi(), "Pelaaja");
+    }
+    
+    
+    
     @BeforeClass
     public static void setUpClass() {
     }

@@ -41,10 +41,10 @@ public class Pelaaja extends Osanottaja {
     }
     
     public void tapaKortti() {
-        ArrayList<Kortti> kortit = this.getKorttikasi().getKortit();
+        Korttipakka korttipakka = this.getKorttikasi().getKorttipakka();
         Random r = new Random();
         
-        kortit.remove(r.nextInt(kortit.size()));
+        korttipakka.poistaPakastaTassaKohdassaOleva(r.nextInt(korttipakka.korttipakanKoko()));
     }
     
     public void kaytaBasicIncome(Pankki pankki) {

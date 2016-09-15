@@ -4,26 +4,26 @@ package main;
 import java.util.ArrayList;
 
 public class Korttikasi {
-    private ArrayList<Kortti> kortit;
+    private Korttipakka korttipakka;
 
-    public Korttikasi(ArrayList<Kortti> kortit) {
-        this.kortit = kortit;
+    public Korttikasi(Korttipakka kortit) {
+        this.korttipakka = kortit;
     }
     
     public Korttikasi() {
-        this.kortit = new ArrayList<Kortti>();
+        this.korttipakka = new Korttipakka();
     }
 
-    public ArrayList<Kortti> getKortit() {
-        return kortit;
+    public Korttipakka getKorttipakka() {
+        return this.korttipakka;
     }
     
     public int koko() {
-        return kortit.size();
+        return korttipakka.getPakka().size();
     }
     
     public boolean sisaltyykoKortti(Kortti kortti){
-        return kortit.contains(kortti);
+        return korttipakka.sisaltyyko(kortti);
     }
     
     

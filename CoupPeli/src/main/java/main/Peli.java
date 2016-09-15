@@ -46,7 +46,7 @@ public class Peli extends AbstraktiPeli {
     private void luoOsanottajat() {
         osanottajajoukko.add(this.pelaaja);
         for (int i = 0; i < osanottajamaara - 1; i++) {
-            osanottajajoukko.add(new Vastustaja(Integer.toString(i)));
+            luojaLisaaVastustaja(Integer.toString(i));
         }
         for (Osanottaja osanottajat : osanottajajoukko) {
             System.out.print(osanottajat);
@@ -55,9 +55,20 @@ public class Peli extends AbstraktiPeli {
         System.out.println("");
     }
     
-    private void pelaaVuoro(Osanottaja osanottaja) {
-        if (osanottaja.equals(this.pelaaja)) {
+    public void luojaLisaaVastustaja(String nimi) {
+        Vastustaja vastustaja = new Vastustaja(nimi);
+        lisaaVastustaja(vastustaja);
+    }
+    
+    public void lisaaVastustaja(Vastustaja vastustaja) {
+        osanottajajoukko.add(vastustaja);
+    }
+    
+    public void pelaaVuoro(Osanottaja osanottaja) {
+        if (osanottaja instanceof Pelaaja) {
             pelaajanVuoro((Pelaaja) osanottaja);
+        } else if (osanottaja instanceof Vastustaja) {
+            vastustajanVuoro((Vastustaja) osanottaja);
         }
         
         for (Osanottaja o : osanottajajoukko) {
@@ -75,28 +86,47 @@ public class Peli extends AbstraktiPeli {
     
     private void pelaajanVuoro(Pelaaja pelaaja) {
         System.out.println("Minkä siirron haluat tehdä?\n");
-        System.out.println("Vaihtoehdot: (1) tapa vastustajan kortti \n");
+        System.out.println("Vaihtoehdot: (1) poista vastustajan kortti \n"
+                + "(2) älä tee mitään.");
         
 //        int vastaus1 = Integer.parseInt(lukija.nextLine());
         int vastaus1 = 1;
         
         if(vastaus1 == 1) {
-            System.out.println("Valitse pelaaja, jonka haluat tappaa. Vaihtoehdot: ");
+            System.out.println("Valitse pelaaja, jonka kortin haluat poistaa. Vaihtoehdot: ");
             for (Osanottaja o : osanottajajoukko) {
                 if(!o.equals(this.pelaaja)) {
                     System.out.println(o);
                 }
             }
             //int vastaus2 = Integer.parseInt(lukija.nextLine());
-            this.osanottajajoukko.remove(1);
+            this.osanottajajoukko.remove(1);   
+        } else if (vastaus1 == 2) {
             
         }
     }
     
-    
     private void vastustajanVuoro(Vastustaja osanottaja) {
+       Random r = new Random();
+       int kukaPudotetaan = r.nextInt(this.osanottajajoukko.size());
+       pudotaTassaKohdassaOleva(kukaPudotetaan);
        
     }
+    
+    public void pudotaVastustaja(Vastustaja vastustaja) {
+        this.osanottajajoukko.remove(vastustaja);
+        this.osanottajamaara--;
+    }
+    
+    public void pudotaTassaKohdassaOleva(int osanottajanPaikka) {
+        this.osanottajajoukko.remove(osanottajanPaikka);
+        this.osanottajamaara--;
+    }
+    
+    
+    
+    
+    
     
     
     

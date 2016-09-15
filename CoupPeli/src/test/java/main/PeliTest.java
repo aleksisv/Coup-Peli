@@ -40,5 +40,23 @@ public class PeliTest {
         Peli testipeli = new Peli(vakio1);
         assertEquals(testipeli.getPelaajamaara(), 3);
     }
+    
+    @Test
+    public void pudotaVastustajaOikein() {
+        Peli testipeli = new Peli(3);
+        Vastustaja vastustaja = new Vastustaja("Jaa");
+        testipeli.lisaaVastustaja(vastustaja);
+        testipeli.pudotaVastustaja(vastustaja);
+        assertEquals(false, testipeli.getPelaajamaara() == 3);
+//        testipeli.pudotaPelaaja(pelaaja);
+        
+    }
+    
+    public void lisaaVastustajaOikein() {
+        Peli testipeli = new Peli(3);
+        Vastustaja vastustaja = new Vastustaja("Vastustaja");
+        testipeli.lisaaVastustaja(vastustaja);
+        assertEquals(true, testipeli.getPelaajamaara() == 4);
+    }
 
 }

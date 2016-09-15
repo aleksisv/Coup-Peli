@@ -22,6 +22,39 @@ public class Korttipakka {
         for (int i = 0; i < 3; i++) {
             Kortti kortti = new Kortti(i, tyyppi);
         }
-    } 
+        for (Kortti pakka1 : pakka) {
+            System.out.println(pakka1);
+        }
+    }
+
+    public ArrayList<Kortti> getPakka() {
+        return pakka;
+    }
+    
+    public int korttipakanKoko() {
+        return this.pakka.size();
+    }
+    
+    public void poistaPakastaTassaKohdassaOleva(int i){
+        this.getPakka().remove(i);
+    }
+    
+    public boolean sisaltyyko(Kortti kortti) {
+        for (Kortti kor : pakka) {
+            if (kortti.equals(kor)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return this.pakka.toString();
+    }
+
+    
+    
+    
     
 }
