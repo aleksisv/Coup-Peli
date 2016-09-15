@@ -1,7 +1,6 @@
 
-package main;
+package fi.aleksisv.logiikka;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Pelaaja extends Osanottaja {
@@ -14,6 +13,7 @@ public class Pelaaja extends Osanottaja {
         return super.getKasi();
     }
     
+    @Override
     public void setRaha(int maara){
        super.setRaha(maara);
     }
@@ -22,6 +22,7 @@ public class Pelaaja extends Osanottaja {
         this.setRaha(this.getRaha() - maara);
     }
     
+    @Override
     public void saaRahaa(int maara){
         this.setRaha(this.getRaha() + maara);
     }
@@ -41,10 +42,12 @@ public class Pelaaja extends Osanottaja {
     }
     
     public void tapaKortti() {
-        Korttipakka korttipakka = this.getKorttikasi().getKorttipakka();
+        Korttikasi korttikasi = this.getKorttikasi();
         Random r = new Random();
         
-        korttipakka.poistaPakastaTassaKohdassaOleva(r.nextInt(korttipakka.korttipakanKoko()));
+        int tapettavanKohta = r.nextInt(korttikasi.koko());
+        
+        korttikasi.poistaPakastaTassaKohdassaOleva(tapettavanKohta);
     }
     
     public void kaytaBasicIncome(Pankki pankki) {

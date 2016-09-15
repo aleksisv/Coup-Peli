@@ -1,4 +1,4 @@
-package main;
+package fi.aleksisv.logiikka;
 
 import java.util.ArrayList;
 
@@ -6,11 +6,11 @@ public class Korttipakka {
     private ArrayList<Kortti> pakka;
 
     public Korttipakka() {
-        this.pakka = new ArrayList<Kortti>();
+        this.pakka = new ArrayList();
         this.lisaaKortit(this.pakka);
     }
     
-    public void lisaaKortit(ArrayList<Kortti> pakka) {
+    private void lisaaKortit(ArrayList<Kortti> pakka) {
         this.lisaaTietynTyyppisetKortit(pakka, "Contessa");
         this.lisaaTietynTyyppisetKortit(pakka, "Assassin");
         this.lisaaTietynTyyppisetKortit(pakka, "Captain");
@@ -20,10 +20,9 @@ public class Korttipakka {
     
     public void lisaaTietynTyyppisetKortit(ArrayList<Kortti> pakka, String tyyppi) {
         for (int i = 0; i < 3; i++) {
-            Kortti kortti = new Kortti(i, tyyppi);
-        }
-        for (Kortti pakka1 : pakka) {
-            System.out.println(pakka1);
+            Kortti kortti = new Kortti(tyyppi);
+            pakka.add(kortti);
+            System.out.println(kortti);
         }
     }
 
@@ -47,6 +46,12 @@ public class Korttipakka {
         }
         return false;
     }
+
+    public void setPakka(ArrayList<Kortti> pakka) {
+        this.pakka = pakka;
+    }
+    
+    
 
     @Override
     public String toString() {

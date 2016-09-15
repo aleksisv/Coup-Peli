@@ -1,4 +1,5 @@
-package main;
+package fi.aleksisv.logiikka;
+
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -26,19 +27,19 @@ public class PeliTest {
     @Test
     public void pelaajaMaaratOikein1() {
         Peli testipeli = new Peli(1);
-        assertEquals(testipeli.getPelaajamaara(), 1);
+        assertEquals(testipeli.getOsanottajamaara(), 1);
     }
 
     @Test
     public void pelaajaMaaratOikein2() {
         Peli testipeli = new Peli(4);
-        assertEquals(testipeli.getPelaajamaara(), 4);
+        assertEquals(testipeli.getOsanottajamaara(), 4);
     }
 
     @Test
     public void pelaajaMaaratOikein3() {
         Peli testipeli = new Peli(vakio1);
-        assertEquals(testipeli.getPelaajamaara(), 3);
+        assertEquals(testipeli.getOsanottajamaara(), 3);
     }
     
     @Test
@@ -47,7 +48,7 @@ public class PeliTest {
         Vastustaja vastustaja = new Vastustaja("Jaa");
         testipeli.lisaaVastustaja(vastustaja);
         testipeli.pudotaVastustaja(vastustaja);
-        assertEquals(false, testipeli.getPelaajamaara() == 3);
+        assertEquals(false, testipeli.getOsanottajamaara() == 3);
 //        testipeli.pudotaPelaaja(pelaaja);
         
     }
@@ -56,7 +57,7 @@ public class PeliTest {
         Peli testipeli = new Peli(3);
         Vastustaja vastustaja = new Vastustaja("Vastustaja");
         testipeli.lisaaVastustaja(vastustaja);
-        assertEquals(true, testipeli.getPelaajamaara() == 4);
+        assertEquals(true, testipeli.getOsanottajamaara() == 4);
     }
 
 }

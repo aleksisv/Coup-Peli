@@ -1,21 +1,19 @@
-package main;
+package fi.aleksisv.logiikka;
 
 public class Kortti {
 
-    private int id;
-    private String tyyppi;
-    private boolean paljastettu;
 
-    public Kortti(int id, String tyyppi, boolean paljastettu) {
-        this.id = id;
+    private String tyyppi;
+    private boolean onkoPaljastettu;
+
+    public Kortti(String tyyppi, boolean onkoPaljastettu) {
         this.tyyppi = tyyppi;
-        this.paljastettu = paljastettu;
+        this.onkoPaljastettu = onkoPaljastettu;
     }
 
-    public Kortti(int id, String tyyppi) {
-        this.id = id;
+    public Kortti(String tyyppi) {
         this.tyyppi = tyyppi;
-        this.paljastettu = false;
+        this.onkoPaljastettu = false;
     }
 
     @Override
@@ -32,6 +30,11 @@ public class Kortti {
         }
         
         return true;
+    }
+    
+    @Override
+    public String toString() {
+        return this.tyyppi;
     }
 
 }

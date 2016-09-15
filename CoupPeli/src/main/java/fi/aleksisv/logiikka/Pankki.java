@@ -1,5 +1,5 @@
 
-package main;
+package fi.aleksisv.logiikka;
 
 public class Pankki {
     private int rahamaara;

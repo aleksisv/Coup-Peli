@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package fi.aleksisv.logiikka;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,25 +12,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class PelaajaTest {
+/**
+ *
+ * @author aleksisvuoksenmaa
+ */
+public class KorttipakkaTest {
     
-    public PelaajaTest() {
-    }
-    
-    
-    @Test
-    public static void pelaajallaAlussaOikeaMaaraRahaa() {
-        Pelaaja pelaaja = new Pelaaja("Pelaaja");
-        assertEquals(pelaaja.getRaha(), 2);
+    public KorttipakkaTest() {
     }
     
     @Test
-    public static void pelaajanNimiOikea() {
-        Pelaaja pelaaja = new Pelaaja("Pelaaja");
-        assertEquals(pelaaja.getNimi(), "Pelaaja");
+    public void alussaPakassaOikeaMaaraKortteja() {
+        Korttipakka korttipakka = new Korttipakka();
+        assertEquals(korttipakka.korttipakanKoko(), 15);
     }
-    
-    
     
     @BeforeClass
     public static void setUpClass() {
@@ -48,4 +43,9 @@ public class PelaajaTest {
     public void tearDown() {
     }
 
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
 }

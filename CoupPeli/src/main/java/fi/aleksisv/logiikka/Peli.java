@@ -1,11 +1,10 @@
 
-package main;
+package fi.aleksisv.logiikka;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Peli extends AbstraktiPeli {
     
@@ -15,20 +14,23 @@ public class Peli extends AbstraktiPeli {
     private int vuoronumero;
     private Pelaaja pelaaja;
     private Scanner lukija;
+    private Pankki pankki;
+    private Korttipakka korttipakka;
 
     public Peli(int pelaajamaara) {
         this.osanottajamaara = pelaajamaara;
-        this.osanottajajoukko = new ArrayList<Osanottaja>();
+        this.osanottajajoukko = new ArrayList();
         this.vuoronumero = 0;
-        this.pelaaja = new Pelaaja("Pelaaja");
+        this.pelaaja = new Pelaaja("Aleksis");
         this.lukija = new Scanner(System.in);
+        this.pankki = new Pankki();
+        this.korttipakka = new Korttipakka();
     }
     
     public void kaynnistaPeli() {
         Random r = new Random();
         luoOsanottajat();
         this.vuoronumero = 0;
-//        this.vuoronumero = r.nextInt(this.osanottajamaara);
         System.out.println("Vuoronumero: " + this.vuoronumero);
         
         while (this.osanottajajoukko.size() > 1) {
@@ -39,7 +41,7 @@ public class Peli extends AbstraktiPeli {
 
     }
 
-    public int getPelaajamaara() {
+    public int getOsanottajamaara() {
         return osanottajamaara;
     }
     
@@ -122,12 +124,61 @@ public class Peli extends AbstraktiPeli {
         this.osanottajajoukko.remove(osanottajanPaikka);
         this.osanottajamaara--;
     }
-    
-    
-    
-    
-    
-    
-    
+
+    public Korttipakka getKorttipakka() {
+        return korttipakka;
+    }
+
+    public Scanner getLukija() {
+        return lukija;
+    }
+
+    public ArrayList<Osanottaja> getOsanottajajoukko() {
+        return osanottajajoukko;
+    }
+
+    public Pankki getPankki() {
+        return pankki;
+    }
+
+    public Pelaaja getPelaaja() {
+        return pelaaja;
+    }
+
+    public int getVuoronumero() {
+        return vuoronumero;
+    }
+
+    public void setKorttipakka(Korttipakka korttipakka) {
+        this.korttipakka = korttipakka;
+    }
+
+    public void setLukija(Scanner lukija) {
+        this.lukija = lukija;
+    }
+
+    public void setOsanottajajoukko(ArrayList<Osanottaja> osanottajajoukko) {
+        this.osanottajajoukko = osanottajajoukko;
+    }
+
+    public void setOsanottajamaara(int osanottajamaara) {
+        this.osanottajamaara = osanottajamaara;
+    }
+
+    public void setPankki(Pankki pankki) {
+        this.pankki = pankki;
+    }
+
+    public void setPelaaja(Pelaaja pelaaja) {
+        this.pelaaja = pelaaja;
+    }
+
+    public void setPysayta(boolean pysayta) {
+        this.pysayta = pysayta;
+    }
+
+    public void setVuoronumero(int vuoronumero) {
+        this.vuoronumero = vuoronumero;
+    }
     
 }
