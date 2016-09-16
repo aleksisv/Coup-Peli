@@ -12,3 +12,4 @@ Päivä | Tunnit | Kuvaus
 13.09.2016 | 1h | Checkstylen valmisteleminen ja ohjelman toteutuksen mietintää.
 14.09.2016 | 3h | Luokkakaavio ja lisää ohjelmointia.
 15.09.2016 | 3h | Ohjelmointia. Uusia testejä. Tiedoston konfigurointia.
+16.09.2016 | 2h | Ohjelmointia. Testien ajamista.

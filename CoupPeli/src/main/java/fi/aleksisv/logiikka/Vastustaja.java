@@ -91,8 +91,6 @@ public class Vastustaja extends Osanottaja {
     public void tapaKortti() {
         super.tapaKortti();
     }
-    
-    
 
     @Override
     public String toString() {

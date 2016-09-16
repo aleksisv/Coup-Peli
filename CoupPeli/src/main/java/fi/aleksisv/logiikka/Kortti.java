@@ -15,6 +15,14 @@ public class Kortti {
         this.onkoPaljastettu = false;
     }
 
+    public String getTyyppi() {
+        return tyyppi;
+    }
+
+    public boolean onkoPaljastettu() {
+        return onkoPaljastettu;
+    }
+
     @Override
     public boolean equals(Object objekti) {
         if (objekti == null) {

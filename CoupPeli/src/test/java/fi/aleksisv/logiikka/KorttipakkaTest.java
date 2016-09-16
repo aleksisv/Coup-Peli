@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fi.aleksisv.logiikka;
 
 import org.junit.After;
@@ -12,10 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author aleksisvuoksenmaa
- */
 public class KorttipakkaTest {
 
     public KorttipakkaTest() {
@@ -25,6 +16,31 @@ public class KorttipakkaTest {
     public void alussaPakassaOikeaMaaraKortteja() {
         Korttipakka korttipakka = new Korttipakka();
         assertEquals(korttipakka.korttipakanKoko(), 15);
+    }
+
+    @Test
+    public void onkoTamanNiminenKorttiPakassaToimiiOikein1() {
+        Korttipakka korttipakka = new Korttipakka();
+        boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("Contessa");
+        assertEquals(vastaus, true);
+    }
+
+    @Test
+    public void onkoTamanNiminenKorttiPakassaToimiiOikein2() {
+        Korttipakka korttipakka = new Korttipakka();
+        boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("ContessA");
+        assertEquals(vastaus, false);
+    }
+
+    @Test
+    public void korttienPoistaminenToimiiOikein1() {
+        Korttipakka korttipakka = new Korttipakka();
+        korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
+        korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
+        korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
+        boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("Contessa");
+        assertEquals(vastaus, false);
+
     }
 
     @BeforeClass
@@ -43,9 +59,4 @@ public class KorttipakkaTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

@@ -24,7 +24,6 @@ public class Korttipakka {
         for (int i = 0; i < 3; i++) {
             Kortti kortti = new Kortti(tyyppi);
             pakka.add(kortti);
-            System.out.println(kortti);
         }
     }
 
@@ -51,9 +50,28 @@ public class Korttipakka {
         return this.nostaPakastaTassaKohdassaOleva(r.nextInt(this.korttipakanKoko()));
     }
 
+    public Kortti nostaPakastaTamanNiminenKortti(String tyyppi) {
+        for (Kortti kortti : pakka) {
+            if (kortti.getTyyppi().equals(tyyppi)) {
+                pakka.remove(kortti);
+                return kortti;
+            }
+        }
+        return null;
+    }
+
     public boolean sisaltyyko(Kortti kortti) {
         for (Kortti kor : pakka) {
             if (kortti.equals(kor)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean onkoTamanNiminenKorttiPakassa(String kortinNimi) {
+        for (Kortti kor : pakka) {
+            if (kor.getTyyppi().equals(kortinNimi)) {
                 return true;
             }
         }

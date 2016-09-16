@@ -35,10 +35,17 @@ public class KorttiTest {
         assertEquals(kortti1, kortti2);
     }
 
+    @Test
     public void vertaileekoKorttejaOikein3() {
         Kortti kortti1 = new Kortti("Contessa", false);
         Kortti kortti2 = new Kortti("Assassin", false);
         assertNotEquals(kortti1, kortti2);
+    }
+
+    @Test
+    public void onkoTulosteOikea1() {
+        Kortti kortti = new Kortti("Assassin");
+        assertEquals(kortti.toString(), "Assassin");
     }
 
     @BeforeClass

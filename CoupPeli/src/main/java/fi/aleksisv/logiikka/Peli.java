@@ -30,7 +30,6 @@ public class Peli extends AbstraktiPeli {
         Random r = new Random();
         luoOsanottajat();
         this.vuoronumero = 0;
-        System.out.println("Vuoronumero: " + this.vuoronumero);
 
         while (this.osanottajajoukko.size() > 1) {
             pelaaVuoro(this.osanottajajoukko.get(vuoronumero % osanottajajoukko.size()));
@@ -45,10 +44,12 @@ public class Peli extends AbstraktiPeli {
     }
 
     private void luoOsanottajat() {
+        annaKortit(this.pelaaja);
         osanottajajoukko.add(this.pelaaja);
         for (int i = 0; i < osanottajamaara - 1; i++) {
             luojaLisaaVastustaja(Integer.toString(i));
         }
+        System.out.print("Pelaajia jäljellä: ");
         for (Osanottaja osanottajat : osanottajajoukko) {
             System.out.print(osanottajat);
             System.out.print(" ");
@@ -80,45 +81,49 @@ public class Peli extends AbstraktiPeli {
         }
 
         for (Osanottaja o : osanottajajoukko) {
-            if (osanottaja.getKorttikasi().koko() < 1) {
+            if (o.getKorttikasi().koko() < 1) {
                 osanottajajoukko.remove(o);
                 this.osanottajamaara--;
             }
         }
 
-        if (!osanottajajoukko.contains(this.pelaaja)) {
-            System.out.println(Arrays.toString(osanottajajoukko.toArray()));
-            System.out.println("Hävisit pelin");
-        }
-
         kerroTilanne();
+
+        if (!osanottajajoukko.contains(this.pelaaja)) {
+            pysayta = true;
+            System.out.println("Hävisit pelin.");
+        }
     }
 
     private void pelaajanVuoro(Pelaaja pelaaja) {
-        System.out.println("Minkä siirron haluat tehdä?\n");
+        System.out.println("Vuoro: " + vuoronumero + "\n");
+        System.out.println("Minkä siirron haluat tehdä?");
         System.out.println("Vaihtoehdot: (1) poista vastustajan kortti \n"
-                + "(2) älä tee mitään.");
+                + "             (2) älä tee mitään.");
 
-        int vastaus1 = Integer.parseInt(lukija.nextLine());
+//        int vastaus1 = Integer.parseInt(lukija.nextLine());
+        int vastaus1 = 1;
 
         if (vastaus1 == 1) {
-            System.out.println("Valitse pelaaja, jonka kortin haluat poistaa. Vaihtoehdot: ");
+            System.out.print("Valitse pelaaja, jonka kortin haluat poistaa. Vaihtoehdot: ");
             for (Osanottaja o : osanottajajoukko) {
                 if (!o.equals(this.pelaaja)) {
-                    System.out.println(o);
+                    System.out.print(o + " ");
                 }
             }
-            int vastaus2 = Integer.parseInt(lukija.nextLine());
+//            int vastaus2 = Integer.parseInt(lukija.nextLine());
+            int vastaus2 = 1;
             this.osanottajajoukko.remove(vastaus2);
         } else if (vastaus1 == 2) {
             System.out.println("");
         }
+        System.out.println("");
     }
 
     private void vastustajanVuoro(Vastustaja osanottaja) {
         Random r = new Random();
         int kukaPudotetaan = r.nextInt(this.osanottajajoukko.size());
-        System.out.println("Vastustaja " + osanottaja + "aikoo pudottaa osanottajan" + this.osanottajajoukko.get(kukaPudotetaan));
+        System.out.println("Vastustaja " + osanottaja + " aikoo pudottaa osanottajan " + this.osanottajajoukko.get(kukaPudotetaan));
         pudotaTassaKohdassaOleva(kukaPudotetaan);
         this.osanottajamaara--;
 
@@ -161,16 +166,8 @@ public class Peli extends AbstraktiPeli {
         }
     }
 
-    public int getVuoronumero() {
-        return vuoronumero;
-    }
-
     public void setKorttipakka(Korttipakka korttipakka) {
         this.korttipakka = korttipakka;
-    }
-
-    public void setLukija(Scanner lukija) {
-        this.lukija = lukija;
     }
 
     public void setOsanottajajoukko(ArrayList<Osanottaja> osanottajajoukko) {
