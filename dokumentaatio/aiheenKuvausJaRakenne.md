@@ -1,4 +1,4 @@
-### Aihemäärittely
+# Aihemäärittely
 **Aihe**: Tietokonetoteutus vähemmän tunnetusta Coup-strategialautapelistä.
 Coup on peli, jossa joukko pelaajia yrittää voittaa vallankumouksen.
 Pelaajia on 2-6. Pelin alussa jokainen saa käyttöönsä kaksi korttia ja kaksi kolikkoa.
@@ -16,7 +16,7 @@ Graafinen käyttöliittymä on olennainen osa ohjelmaan, sillä pelaajan pitää
 * Epäile vastustajan siirtoa.
 
 
-###Rakenne
+#Rakenne
 
 ##Luokkarakenne
 
