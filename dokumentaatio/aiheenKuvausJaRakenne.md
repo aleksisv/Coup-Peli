@@ -20,5 +20,5 @@ Graafinen käyttöliittymä on olennainen osa ohjelmaan, sillä pelaajan pitää
 
 ##Luokkarakenne
 
-![Luokkakaavio](~/Coup-Peli/dokumentaatio/luokkakaavio.png)
+![Luokkakaavio](luokkakaavio.png)
 
