@@ -50,9 +50,8 @@ public class Osanottaja {
     public void tapaKortti() {
         Korttikasi korttikasi = this.getKorttikasi();
         Random r = new Random();
-
         int tapettavanKohta = r.nextInt(korttikasi.koko());
-
+        System.out.println(tapettavanKohta);
         korttikasi.poistaPakastaTassaKohdassaOleva(tapettavanKohta);
     }
 
@@ -69,6 +68,14 @@ public class Osanottaja {
 
     public void lisaaKorttiKorttipakkaan(Kortti kortti) {
         this.getKorttikasi().lisaaKorttikateen(kortti);
+    }
+    
+    public void epaile(Kortti kortti, Osanottaja osanottaja) {
+        if (!osanottaja.getKorttikasi().sisaltyykoKortti(kortti)) {
+            osanottaja.tapaKortti();
+        } else {
+            this.tapaKortti();
+        }
     }
 
     public void menetaRahaa(int maara) {

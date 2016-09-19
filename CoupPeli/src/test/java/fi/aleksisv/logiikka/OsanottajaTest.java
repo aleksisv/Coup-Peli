@@ -38,7 +38,63 @@ public class OsanottajaTest {
         osanottaja.nostaSatunnainenKorttiPakasta(korttipakka);
         assertEquals(osanottaja.getKorttikasi().koko(), 1);
     }
-
+    
+    @Test
+    public void epailyToimii1() {
+        Osanottaja osanottaja1 = new Osanottaja("Aino");
+        Osanottaja osanottaja2 = new Osanottaja("Anna");
+        osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        osanottaja1.epaile(new Kortti("Contessa"), osanottaja2);
+        assertEquals(osanottaja1.getKorttikasi().koko(), 0);
+    }
+    
+    @Test
+    public void epailyToimii2() {
+        Osanottaja osanottaja1 = new Osanottaja("Aino");
+        Osanottaja osanottaja2 = new Osanottaja("Anna");
+        osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
+        osanottaja1.epaile(new Kortti("Contessa"), osanottaja2);
+        assertEquals(osanottaja1.getKorttikasi().koko(), 1);
+    }
+    
+    @Test
+    public void epailyToimii3() {
+        Osanottaja osanottaja1 = new Osanottaja("Aino");
+        Osanottaja osanottaja2 = new Osanottaja("Anna");
+        osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        osanottaja1.epaile(new Kortti("Contessa"), osanottaja2);
+        assertEquals(osanottaja2.getKorttikasi().koko(), 1);
+    }
+    
+    @Test
+    public void epailyToimii4() {
+        Osanottaja osanottaja1 = new Osanottaja("Aino");
+        Osanottaja osanottaja2 = new Osanottaja("Anna");
+        osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
+        osanottaja1.epaile(new Kortti("Contessa"), osanottaja2);
+        assertEquals(osanottaja2.getKorttikasi().koko(), 0);
+    }
+    
+    @Test
+    public void basicIncomeToimii1() {
+        Osanottaja osanottaja1 = new Osanottaja("Aino");
+        Pankki pankki = new Pankki();
+        osanottaja1.kaytaBasicIncome(pankki);
+        assertEquals(osanottaja1.getRaha(), 3);
+    }
+    
+    @Test
+    public void basicIncomeToimii2() {
+        Osanottaja osanottaja1 = new Osanottaja("Aino");
+        Pankki pankki = new Pankki();
+        osanottaja1.kaytaBasicIncome(pankki);
+        assertEquals(pankki.getRahamaara(), 99);
+    }
+    
     @BeforeClass
     public static void setUpClass() {
     }

@@ -40,7 +40,20 @@ public class KorttipakkaTest {
         korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
         boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("Contessa");
         assertEquals(vastaus, false);
-
+    }
+    
+    @Test
+    public void nostaminenPakastaToimii1() {
+        Korttipakka korttipakka = new Korttipakka();
+        Kortti contessa = korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
+        assertEquals(new Kortti("Contessa"), contessa);
+    }
+    
+    @Test
+    public void nostaminenPakastaToimii2() {
+        Korttipakka korttipakka = new Korttipakka();
+        Kortti kortti = korttipakka.nostaPakastaTamanNiminenKortti("Mikko");
+        assertEquals(null, kortti);
     }
 
     @BeforeClass

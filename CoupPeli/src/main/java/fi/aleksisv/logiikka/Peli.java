@@ -126,7 +126,6 @@ public class Peli extends AbstraktiPeli {
         System.out.println("Vastustaja " + osanottaja + " aikoo pudottaa osanottajan " + this.osanottajajoukko.get(kukaPudotetaan));
         pudotaTassaKohdassaOleva(kukaPudotetaan);
         this.osanottajamaara--;
-
     }
 
     public void pudotaVastustaja(Vastustaja vastustaja) {
