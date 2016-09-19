@@ -13,3 +13,7 @@ Päivä | Tunnit | Kuvaus
 14.09.2016 | 3h | Luokkakaavio ja lisää ohjelmointia.
 15.09.2016 | 3h | Ohjelmointia. Uusia testejä. Tiedoston konfigurointia.
 16.09.2016 | 2h | Ohjelmointia. Testien ajamista.
+17.09.2016 | -  | Lomapäivä projektista
+18.09.2016 | 1h | Tarkempaa totetutuksen miettimistä.
+19.09.2016 | 2h | Koodausta ja testien luomista.
+
