@@ -151,6 +151,18 @@ public class Peli extends AbstraktiPeli {
                 this.kerroTilanne();
                 int vastaus2 = Integer.parseInt(lukija.nextLine());
                 pelaaja.kaytaAssassinate(pankki, this.osanottajajoukko.get(vastaus2));
+                break;
+            } else if (vastaus1 == 6) {
+                System.out.println("Valitsit Steal. Keneltä haluat varastaa.");
+                kerroTilanne();
+                int vastaus = Integer.parseInt(lukija.nextLine());
+                pelaaja.kaytaSteal(pankki, osanottajajoukko.get(vastaus));
+                break;
+            } else if (vastaus1 == 7) {
+                System.out.println("Valitsit swap influence. Toiminnallisuus tulee vasta myöhemmin.");
+            } else {
+                System.out.println("Anna toimiva vaihtoehto.");
+                continue;
             }
         }
         System.out.println("");

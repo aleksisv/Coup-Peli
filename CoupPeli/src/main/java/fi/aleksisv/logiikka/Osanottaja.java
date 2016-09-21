@@ -140,6 +140,11 @@ public class Osanottaja {
         osanottaja.tapaKortti();
     }
     
+    public void kaytaSteal(Pankki pankki, Osanottaja osanottaja) {
+        osanottaja.menetaRahaa(2);
+        this.saaRahaa(2);
+    }
+    
     public void kaytaTaxes(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(3));
     }
