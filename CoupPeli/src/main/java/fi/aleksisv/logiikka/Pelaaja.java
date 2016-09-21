@@ -1,6 +1,7 @@
 package fi.aleksisv.logiikka;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Pelaaja extends Osanottaja {
     
@@ -11,6 +12,22 @@ public class Pelaaja extends Osanottaja {
     @Override
     public Korttikasi getKorttikasi() {
         return super.getKorttikasi();
+    }
+
+    @Override
+    public void epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
+        super.epaile(osanottaja, mitaEiOle);
+    }
+    
+    @Override
+    public boolean haluaaEpailla(Osanottaja osanottaja, Kortti mitaEiOle) {
+        System.out.println("Haluatko epäillä vastustajan edellistä siirtoa?");
+        Scanner s = new Scanner(System.in);
+        String vastaus = s.nextLine();
+        if(vastaus.equalsIgnoreCase("Kyllä|Joo")) {
+            return true;
+        }
+        return false;
     }
     
     @Override

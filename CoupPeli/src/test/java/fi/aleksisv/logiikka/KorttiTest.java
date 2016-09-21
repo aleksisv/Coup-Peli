@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fi.aleksisv.logiikka;
 
 import org.junit.After;
@@ -12,10 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author aleksisvuoksenmaa
- */
 public class KorttiTest {
 
     public KorttiTest() {
@@ -41,6 +33,7 @@ public class KorttiTest {
         Kortti kortti2 = new Kortti("Assassin", false);
         assertNotEquals(kortti1, kortti2);
     }
+    
     @Test
     public void vertaileekoKorttejaOikein4() {
         Kortti kortti1 = new Kortti("Contessa", false);

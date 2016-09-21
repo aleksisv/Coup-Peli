@@ -12,10 +12,15 @@ public class Vastustaja extends Osanottaja {
     public void annaRahaaPankille(int maara, Pankki pankki) {
         super.annaRahaaPankille(maara, pankki);
     }
+    
+    @Override
+    public boolean haluaaEpailla(Osanottaja osanottaja, Kortti mitaEiOle) {
+        return super.haluaaEpailla(osanottaja, mitaEiOle);
+    }
 
     @Override
-    public void epaile(Pelaaja pelaaja, Kortti mitaEiOle) {
-        super.epaile(pelaaja, mitaEiOle);
+    public void epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
+        super.epaile(osanottaja, mitaEiOle);
     }
 
     @Override

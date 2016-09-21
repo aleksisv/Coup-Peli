@@ -18,13 +18,32 @@ public class Osanottaja {
     public Korttikasi getKorttikasi() {
         return this.korttikasi;
     }
+    
+    //Surkea tekoäly.
+    public boolean haluaaEpailla(Osanottaja osanottaja, Kortti mitaEiOle) {
+        if (this.korttikasi.sisaltyykoKortti(mitaEiOle)) {
+            return true;
+        }
+        return false;
+    }
 
-    public void epaile(Pelaaja pelaaja, Kortti mitaEiOle) {
-        if (!pelaaja.getKorttikasi().sisaltyykoKortti(mitaEiOle)) {
-            pelaaja.tapaKortti();
+    public void epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
+        if (!osanottaja.getKorttikasi().sisaltyykoKortti(mitaEiOle)) {
+            osanottaja.tapaKortti();
         } else {
             this.tapaKortti();
         }
+    }
+    
+    public String naytaNakyvatKortit() {
+        StringBuilder merkkijono = new StringBuilder();
+        for (Kortti kortti : this.korttikasi.getKorttikasi()) {
+            if(kortti.onkoPaljastettu()) {
+                merkkijono.append(kortti.toString() + ", ");
+            }
+        }
+        String palautettava = merkkijono.toString();
+        return palautettava.replaceAll(", $", "");
     }
 
     public String getNimi() {
@@ -98,6 +117,10 @@ public class Osanottaja {
 
     public void kaytaBasicIncome(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(1));
+    }
+    
+    public void kaytaTaxes(Pankki pankki) {
+        this.saaRahaa(pankki.annaRahat(3));
     }
 
     @Override
