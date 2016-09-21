@@ -16,4 +16,5 @@ Päivä | Tunnit | Kuvaus
 17.09.2016 | -  | Lomapäivä projektista
 18.09.2016 | 1h | Tarkempaa totetutuksen miettimistä.
 19.09.2016 | 2h | Koodausta ja testien luomista.
-
+20.09.2016 | 1h | Koodausta ja testien luomista. Hieman mietikelyä luokkien lisäämisestä ja karsimisesta.
+21.09.2016 | 3h | Koodausta ja testausta.
