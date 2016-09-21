@@ -128,6 +128,18 @@ public class Osanottaja {
         this.saaRahaa(pankki.annaRahat(1));
     }
     
+    public void kaytaAssassinate(Pankki pankki, Osanottaja osanottaja) {
+        this.menetaRahaa(3);
+        pankki.lisaaRahaa(3);
+        osanottaja.tapaKortti();
+    }
+    
+    public void kaytaCoup(Pankki pankki, Osanottaja osanottaja) {
+        this.menetaRahaa(7);
+        pankki.lisaaRahaa(7);
+        osanottaja.tapaKortti();
+    }
+    
     public void kaytaTaxes(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(3));
     }

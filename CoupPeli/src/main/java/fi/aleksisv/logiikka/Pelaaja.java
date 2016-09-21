@@ -69,8 +69,9 @@ public class Pelaaja extends Osanottaja {
         this.saaRahaa(pankki.annaRahat(2));
     }
     
-    public void kaytaAssassinate(Pankki pankki) {
-        this.menetaRahaa(pankki.annaRahat(2));
+    @Override
+    public void kaytaAssassinate(Pankki pankki, Osanottaja osanottaja) {
+        super.kaytaAssassinate(pankki, osanottaja);
     }
     
     @Override

@@ -56,6 +56,11 @@ public class Vastustaja extends Osanottaja {
     public void lisaaKorttiKorttipakkaan(Kortti kortti) {
         super.lisaaKorttiKorttipakkaan(kortti);
     }
+    
+    @Override
+    public void kaytaAssassinate(Pankki pankki, Osanottaja osanottaja) {
+        super.kaytaAssassinate(pankki, osanottaja);
+    }
 
     @Override
     public void menetaRahaa(int maara) {
