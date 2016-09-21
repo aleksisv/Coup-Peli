@@ -1,5 +1,8 @@
 package fi.aleksisv.logiikka;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Vastustaja extends Osanottaja {
 
     private Korttikasi kasi;
@@ -61,6 +64,34 @@ public class Vastustaja extends Osanottaja {
     public void kaytaAssassinate(Pankki pankki, Osanottaja osanottaja) {
         super.kaytaAssassinate(pankki, osanottaja);
     }
+
+    
+    public void kaytaCoup(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
+        Random r = new Random();
+        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).tapaKortti();   
+    }
+
+    @Override
+    public void kaytaSteal(Pankki pankki, Osanottaja osanottaja) {
+        super.kaytaSteal(pankki, osanottaja); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void kaytaTaxes(Pankki pankki) {
+        super.kaytaTaxes(pankki); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String naytaNakyvatKortit() {
+        return super.naytaNakyvatKortit(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean haluaaBlokata(Osanottaja osanottaja, Kortti kortti) {
+        return super.haluaaBlokata(osanottaja, kortti); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 
     @Override
     public void menetaRahaa(int maara) {

@@ -51,7 +51,7 @@ public class Korttikasi {
     public int paljastettujenKorttienLukumaara() {
         int i = 0;
         for (Kortti kortti : kortit) {
-            if(kortti.onkoPaljastettu() == true) {
+            if (kortti.onkoPaljastettu() == true) {
                 i++;
             }
         }

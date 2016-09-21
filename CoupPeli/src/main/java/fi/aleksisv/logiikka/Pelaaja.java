@@ -24,7 +24,7 @@ public class Pelaaja extends Osanottaja {
         System.out.println("Haluatko epäillä vastustajan edellistä siirtoa?");
         Scanner s = new Scanner(System.in);
         String vastaus = s.nextLine();
-        if(vastaus.equalsIgnoreCase("Kyllä|Joo")) {
+        if (vastaus.equalsIgnoreCase("Kyllä|Joo")) {
             return true;
         }
         return false;
@@ -65,8 +65,9 @@ public class Pelaaja extends Osanottaja {
         super.kaytaBasicIncome(pankki);
     }
     
+    @Override
     public void kaytaForeingAid(Pankki pankki) {
-        this.saaRahaa(pankki.annaRahat(2));
+        super.kaytaForeingAid(pankki);
     }
     
     @Override

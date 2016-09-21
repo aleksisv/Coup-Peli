@@ -40,7 +40,7 @@ public class Osanottaja {
     public String naytaNakyvatKortit() {
         StringBuilder merkkijono = new StringBuilder();
         for (Kortti kortti : this.korttikasi.getKorttikasi()) {
-            if(kortti.onkoPaljastettu()) {
+            if (kortti.onkoPaljastettu()) {
                 merkkijono.append(kortti.toString() + ", ");
             }
         }
@@ -93,7 +93,7 @@ public class Osanottaja {
     
     
     public boolean haluaaBlokata(Osanottaja osanottaja, Kortti kortti) {
-        if (this.korttikasi.sisaltyykoKortti(kortti)) {
+        if (osanottaja.getKorttikasi().sisaltyykoKortti(kortti)) {
             return true;
         } else {
             return false;
@@ -103,7 +103,8 @@ public class Osanottaja {
     public boolean blokkaa(Osanottaja osanottaja, Kortti kortti) {
         if (osanottaja.korttikasi.sisaltyykoKortti(kortti)) {
             return false;
-        } return true;
+        }
+        return true;
     }
 
     public void menetaRahaa(int maara) {
@@ -128,6 +129,10 @@ public class Osanottaja {
         this.saaRahaa(pankki.annaRahat(1));
     }
     
+    public void kaytaForeingAid(Pankki pankki) {
+        this.saaRahaa(pankki.annaRahat(2));
+    }
+    
     public void kaytaAssassinate(Pankki pankki, Osanottaja osanottaja) {
         this.menetaRahaa(3);
         pankki.lisaaRahaa(3);
@@ -148,6 +153,7 @@ public class Osanottaja {
     public void kaytaTaxes(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(3));
     }
+    
 
     @Override
     public String toString() {

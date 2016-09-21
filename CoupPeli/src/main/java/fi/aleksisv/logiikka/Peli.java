@@ -52,12 +52,7 @@ public class Peli extends AbstraktiPeli {
         for (int i = 0; i < osanottajamaara - 1; i++) {
             luojaLisaaVastustaja(Integer.toString(i));
         }
-        System.out.print("Pelaajia jäljellä: ");
-        for (Osanottaja osanottajat : osanottajajoukko) {
-            System.out.print(osanottajat);
-            System.out.print(" ");
-        }
-        System.out.println("");
+        
     }
 
     public void luojaLisaaVastustaja(String nimi) {
@@ -123,7 +118,9 @@ public class Peli extends AbstraktiPeli {
                 break;
             } else if (vastaus1 == 2) {
                 System.out.println("Valitsit Foreign Aid.");
-                pelaaja.kaytaForeingAid(pankki);
+                if (!blokkiVuoro(pelaaja, new Kortti("Captain"))) {
+                    pelaaja.kaytaForeingAid(pankki);
+                }
                 break;
             } else if (vastaus1 == 3) {
                 if (pelaaja.getRaha() < 7) {
@@ -137,10 +134,9 @@ public class Peli extends AbstraktiPeli {
                 System.out.println("Valitsit Taxes");
                 if (!epailyVuoro(pelaaja, new Kortti("Duke")) && !blokkiVuoro(pelaaja, new Kortti("Duke"))) {
                     pelaaja.kaytaTaxes(pankki);
-                    break;
-                } else {
-                    continue;
+                 
                 }
+                break;
             } else if (vastaus1 == 5) {
                 System.out.println("Valitsit Assassinate");
                 if (pelaaja.getRaha() < 3) {
@@ -168,19 +164,43 @@ public class Peli extends AbstraktiPeli {
         System.out.println("");
     }
 
-    private void vastustajanVuoro(Vastustaja osanottaja) {
+    private void vastustajanVuoro(Vastustaja vastustaja) {
+        String strategia = valitseStrategia(vastustaja);
+        
+        if(strategia.equalsIgnoreCase("foreing aid")) {
+            vastustaja.kaytaForeingAid(pankki);
+        } else if (strategia.equalsIgnoreCase("income")) {
+            vastustaja.kaytaBasicIncome(pankki);
+        } else if (strategia.equalsIgnoreCase("taxes")) {
+            vastustaja.kaytaTaxes(pankki);
+        } else if (strategia.equalsIgnoreCase("coup")) {
+            vastustaja.kaytaCoup(pankki, this.osanottajajoukko);
+        }
+    }
+    
+    public String valitseStrategia(Osanottaja osanottaja) {
+        ArrayList<String> mahdollisetStrategiat = new ArrayList<String>();
+        mahdollisetStrategiat.add("foreing aid");
+        mahdollisetStrategiat.add("income");
+        mahdollisetStrategiat.add("taxes");
+        mahdollisetStrategiat.add("steal");
+        if(osanottaja.getRaha() >= 3) {
+            mahdollisetStrategiat.add("assassinate");
+        }
+        if(osanottaja.getRaha()>= 7) {
+            mahdollisetStrategiat.add("coup");
+        }
         Random r = new Random();
-        int kukaPudotetaan = r.nextInt(this.osanottajajoukko.size());
-        System.out.println("Osanottaja " + osanottaja + " aikoo pudottaa osanottajan " + this.osanottajajoukko.get(kukaPudotetaan));
-        pudotaTassaKohdassaOleva(kukaPudotetaan);
-        this.osanottajamaara--;
+        return mahdollisetStrategiat.get(r.nextInt(mahdollisetStrategiat.size()));
     }
 
     public boolean epailyVuoro(Osanottaja osanottaja, Kortti kortti) {
 
         for (Osanottaja o : osanottajajoukko) {
+            if(!o.equals(osanottaja)){
             if (o.haluaaEpailla(osanottaja, kortti)) {
                 return o.epaile(osanottaja, kortti);
+            }
             }
         }
         return false;
