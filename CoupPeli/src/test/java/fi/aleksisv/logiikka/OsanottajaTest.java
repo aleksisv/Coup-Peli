@@ -45,8 +45,8 @@ public class OsanottajaTest {
         Osanottaja osanottaja2 = new Osanottaja("Anna");
         osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
-        osanottaja1.epaile(new Kortti("Contessa"), osanottaja2);
-        assertEquals(osanottaja1.getKorttikasi().koko(), 0);
+        boolean epaily = osanottaja1.epaile(osanottaja2, new Kortti("Contessa"));
+        assertEquals(epaily, false);
     }
     
     @Test
@@ -55,8 +55,8 @@ public class OsanottajaTest {
         Osanottaja osanottaja2 = new Osanottaja("Anna");
         osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
-        osanottaja1.epaile(new Kortti("Contessa"), osanottaja2);
-        assertEquals(osanottaja1.getKorttikasi().koko(), 1);
+        boolean epaily = osanottaja1.epaile(osanottaja2, new Kortti("Contessa"));
+        assertEquals(epaily, true);
     }
     
     @Test
@@ -65,8 +65,8 @@ public class OsanottajaTest {
         Osanottaja osanottaja2 = new Osanottaja("Anna");
         osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
-        osanottaja1.epaile(new Kortti("Contessa"), osanottaja2);
-        assertEquals(osanottaja2.getKorttikasi().koko(), 1);
+        boolean epaily = osanottaja1.epaile(osanottaja2, new Kortti("Contessa"));
+        assertEquals(epaily, false);
     }
     
     @Test
@@ -75,8 +75,8 @@ public class OsanottajaTest {
         Osanottaja osanottaja2 = new Osanottaja("Anna");
         osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
-        osanottaja1.epaile(new Kortti("Contessa"), osanottaja2);
-        assertEquals(osanottaja2.getKorttikasi().koko(), 0);
+        boolean epaily = osanottaja1.epaile(osanottaja2, new Kortti("Contessa"));
+        assertEquals(epaily, true);
     }
     
     @Test

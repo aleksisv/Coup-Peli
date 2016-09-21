@@ -29,7 +29,6 @@ public class Peli extends AbstraktiPeli {
     public void kaynnistaPeli() {
         Random r = new Random();
         luoOsanottajat();
-        this.vuoronumero = 0;
 
         while (this.osanottajajoukko.size() > 1) {
             pelaaVuoro(this.osanottajajoukko.get(vuoronumero % osanottajajoukko.size()));
@@ -42,6 +41,12 @@ public class Peli extends AbstraktiPeli {
     public int getOsanottajamaara() {
         return osanottajamaara;
     }
+
+    public int getVuoronumero() {
+        return vuoronumero;
+    }
+    
+    
 
     private void luoOsanottajat() {
         annaKortit(this.pelinPelaaja);
@@ -64,7 +69,11 @@ public class Peli extends AbstraktiPeli {
     }
 
     public void lisaaVastustaja(Vastustaja vastustaja) {
-        osanottajajoukko.add(vastustaja);
+        this.osanottajajoukko.add(vastustaja);
+        for (Osanottaja o : osanottajajoukko) {
+            System.out.println(o);
+        }
+        this.vuoronumero++;
     }
 
     public void annaKortit(Osanottaja osanottaja) {
@@ -96,28 +105,35 @@ public class Peli extends AbstraktiPeli {
     }
 
     private void pelaajanVuoro(Pelaaja pelaaja) {
-        System.out.println("Vuoro: " + vuoronumero + "\n");
-        System.out.println("Minkä siirron haluat tehdä?");
-        System.out.println("Vaihtoehdot: (1) Income (ota 1 kolikko pankista)\n"
-                + "             (2) Foreign Aid (ota kaksi kolikkoa pankista)\n"
-                + "             (3) Coup (maksaa seitsemän kolikkoa, tapa mikä tahansa kortti)\n"
-                + "             (4) Taxes (ota kolme kolikkoa pankista)\n"
-                + "             (5) Assassinate (maksa kolme kolikkoa, tapa mikä tahansa kortti)\n"
-                + "             (6) Steal (ota kaksi kolikkoa toiselta pelaajalta)\n"
-                + "             (7) Swap Influence (nosta kaksi korttia pakasta ja vaihda yksi omaan pakkaasi).");
 
-        int vastaus1 = Integer.parseInt(lukija.nextLine());
+        boolean poistutaankoLoopista = false;
 
-        if (vastaus1 == 1) {
-            System.out.print("Valitsit Income.");
-            pelaaja.kaytaBasicIncome(pankki);
-        } else if (vastaus1 == 2) {
-            System.out.println("Valitsit Foreign Aid.");
-            pelaaja.kaytaForeingAid(pankki);
-        } else if (vastaus1 == 3) {
-            System.out.println("Valitsit Taxes");
-            if(!epailyVuoro(pelaaja, new Kortti("Duke"))) {
-                pelaaja.kaytaTaxes(pankki);
+        while (poistutaankoLoopista = false) {
+
+            System.out.println("Vuoro: " + vuoronumero + "\n");
+            System.out.println("Minkä siirron haluat tehdä?");
+            System.out.println("Vaihtoehdot: (1) Income (ota 1 kolikko pankista)\n"
+                    + "             (2) Foreign Aid (ota kaksi kolikkoa pankista)\n"
+                    + "             (3) Coup (maksaa seitsemän kolikkoa, tapa mikä tahansa kortti)\n"
+                    + "             (4) Taxes (ota kolme kolikkoa pankista)\n"
+                    + "             (5) Assassinate (maksa kolme kolikkoa, tapa mikä tahansa kortti)\n"
+                    + "             (6) Steal (ota kaksi kolikkoa toiselta pelaajalta)\n"
+                    + "             (7) Swap Influence (nosta kaksi korttia pakasta ja vaihda yksi omaan pakkaasi).");
+            int vastaus1 = Integer.parseInt(lukija.nextLine());
+
+            if (vastaus1 == 1) {
+                poistutaankoLoopista = true;
+                System.out.print("Valitsit Income.");
+                pelaaja.kaytaBasicIncome(pankki);
+            } else if (vastaus1 == 2) {
+                poistutaankoLoopista = true;
+                System.out.println("Valitsit Foreign Aid.");
+                pelaaja.kaytaForeingAid(pankki);
+            } else if (vastaus1 == 3) {
+                System.out.println("Valitsit Taxes");
+                if (!epailyVuoro(pelaaja, new Kortti("Duke")) && !blokkiVuoro(pelaaja, new Kortti("Duke"))) {
+                    pelaaja.kaytaTaxes(pankki);
+                }
             }
         }
         System.out.println("");
@@ -130,15 +146,24 @@ public class Peli extends AbstraktiPeli {
         pudotaTassaKohdassaOleva(kukaPudotetaan);
         this.osanottajamaara--;
     }
-    
-    public boolean epailyVuoro(Osanottaja osanottaja, Kortti kortti){
-        
+
+    public boolean epailyVuoro(Osanottaja osanottaja, Kortti kortti) {
+
         for (Osanottaja o : osanottajajoukko) {
-            if(o.haluaaEpailla(osanottaja, kortti)) {
-                o.epaile(osanottaja, kortti);
+            if (o.haluaaEpailla(osanottaja, kortti)) {
+                return o.epaile(osanottaja, kortti);
             }
         }
-        return true;
+        return false;
+    }
+    
+    public boolean blokkiVuoro(Osanottaja osanottaja, Kortti kortti) {
+        for (Osanottaja o : osanottajajoukko) {
+            if (o.haluaaBlokata(osanottaja, kortti)) {
+                return o.blokkaa(osanottaja, kortti);
+            }
+        }
+        return false;
     }
 
     public void pudotaVastustaja(Vastustaja vastustaja) {

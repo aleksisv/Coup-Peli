@@ -50,12 +50,22 @@ public class PeliTest {
 //        testipeli.pudotaPelaaja(pelaaja);
 
     }
-
+    @Test
     public void lisaaVastustajaOikein() {
-        Peli testipeli = new Peli(3);
+        Peli testipeli = new Peli(4);
         Vastustaja vastustaja = new Vastustaja("Vastustaja");
         testipeli.lisaaVastustaja(vastustaja);
-        assertEquals(true, testipeli.getOsanottajamaara() == 4);
+        assertEquals(1, testipeli.getOsanottajajoukko().size());
     }
+    
+    @Test
+    public void kaynnistaaPelinOikein1() {
+        Peli testipeli = new Peli(4);
+        assertEquals(testipeli.getVuoronumero(), 0);
+        testipeli.kaynnistaPeli();
+        assertNotEquals(testipeli.getVuoronumero(), 0);
+    }
+    
+    
 
 }

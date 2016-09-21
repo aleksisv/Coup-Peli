@@ -19,8 +19,8 @@ public class Vastustaja extends Osanottaja {
     }
 
     @Override
-    public void epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
-        super.epaile(osanottaja, mitaEiOle);
+    public boolean epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
+        return super.epaile(osanottaja, mitaEiOle);
     }
 
     @Override

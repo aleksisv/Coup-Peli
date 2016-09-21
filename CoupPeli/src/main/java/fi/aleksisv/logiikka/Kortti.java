@@ -39,6 +39,12 @@ public class Kortti {
         return true;
     }
 
+    public void setOnkoPaljastettu(boolean onkoPaljastettu) {
+        this.onkoPaljastettu = onkoPaljastettu;
+    }
+    
+    
+
     @Override
     public String toString() {
         return this.tyyppi;

@@ -27,11 +27,13 @@ public class Osanottaja {
         return false;
     }
 
-    public void epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
+    public boolean epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
         if (!osanottaja.getKorttikasi().sisaltyykoKortti(mitaEiOle)) {
             osanottaja.tapaKortti();
+            return true;
         } else {
             this.tapaKortti();
+            return false;
         }
     }
     
@@ -71,7 +73,7 @@ public class Osanottaja {
         Random r = new Random();
         int tapettavanKohta = r.nextInt(korttikasi.koko());
         System.out.println(tapettavanKohta);
-        korttikasi.poistaPakastaTassaKohdassaOleva(tapettavanKohta);
+        korttikasi.paljastaPakastaTassaKohdassaOleva(tapettavanKohta);
     }
 
     public void saaRahaa(int maara) {
@@ -89,12 +91,19 @@ public class Osanottaja {
         this.getKorttikasi().lisaaKorttikateen(kortti);
     }
     
-    public void epaile(Kortti kortti, Osanottaja osanottaja) {
-        if (!osanottaja.getKorttikasi().sisaltyykoKortti(kortti)) {
-            osanottaja.tapaKortti();
+    
+    public boolean haluaaBlokata(Osanottaja osanottaja, Kortti kortti) {
+        if (this.korttikasi.sisaltyykoKortti(kortti)) {
+            return true;
         } else {
-            this.tapaKortti();
+            return false;
         }
+    }
+    
+    public boolean blokkaa(Osanottaja osanottaja, Kortti kortti) {
+        if (osanottaja.korttikasi.sisaltyykoKortti(kortti)) {
+            return false;
+        } return true;
     }
 
     public void menetaRahaa(int maara) {

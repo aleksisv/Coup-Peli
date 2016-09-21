@@ -36,8 +36,8 @@ public class Korttikasi {
         this.kortit = kortit;
     }
 
-    public void poistaPakastaTassaKohdassaOleva(int tapettavanKohta) {
-        this.kortit.remove(tapettavanKohta);
+    public void paljastaPakastaTassaKohdassaOleva(int tapettavanKohta) {
+        this.kortit.get(tapettavanKohta).setOnkoPaljastettu(true);
     }
 
     public void lisaaKaksiSatunnaistaKorttia(Korttipakka pakka) {
@@ -46,6 +46,16 @@ public class Korttikasi {
             int lisattavanSijainti = r.nextInt(pakka.korttipakanKoko());
             lisaaKorttikateen(pakka.nostaPakastaTassaKohdassaOleva(i));
         }
+    }
+    
+    public int paljastettujenKorttienLukumaara() {
+        int i = 0;
+        for (Kortti kortti : kortit) {
+            if(kortti.onkoPaljastettu() == true) {
+                i++;
+            }
+        }
+        return i;
     }
 
     public void lisaaKorttikateen(Kortti kortti) {

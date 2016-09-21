@@ -29,6 +29,34 @@ public class PelaajaTest {
         Pelaaja pelaaja = new Pelaaja("Pelaaja");
         assertEquals(pelaaja.getNimi(), "Pelaaja");
     }
+    
+    @Test
+    public void getKorttikasiToimii1() {
+        Pelaaja pelaaja = new Pelaaja("Pelaaja");
+        assertEquals(pelaaja.getKorttikasi().getClass(), Korttikasi.class);
+    }
+    
+    @Test
+    public void pelaajallaAlussaOikeaMaaraKortteja() {
+        Pelaaja pelaaja = new Pelaaja("Pelaaja");
+        assertEquals(pelaaja.getKorttikasi().koko(), 0);
+    }
+    
+    @Test
+    public void korttienTappaminenToimii1() {
+        Pelaaja pelaaja = new Pelaaja("Pelaaja");
+        pelaaja.getKorttikasi().lisaaKorttikateen(new Kortti("Contessa"));
+        pelaaja.tapaKortti();
+        assertEquals(pelaaja.getKorttikasi().koko(), 1);
+    }
+    
+    @Test
+    public void korttienPaljastaminenToimii() {
+        Pelaaja pelaaja = new Pelaaja("Pelaaja");
+        pelaaja.getKorttikasi().lisaaKorttikateen(new Kortti("Contessa"));
+        pelaaja.tapaKortti();
+        assertEquals(pelaaja.getKorttikasi().paljastettujenKorttienLukumaara(), 1);
+    }
 
     @BeforeClass
     public static void setUpClass() {
