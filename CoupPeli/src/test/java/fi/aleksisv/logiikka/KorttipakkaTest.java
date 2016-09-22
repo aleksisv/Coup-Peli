@@ -55,6 +55,27 @@ public class KorttipakkaTest {
         Kortti kortti = korttipakka.nostaPakastaTamanNiminenKortti("Mikko");
         assertEquals(null, kortti);
     }
+    
+    @Test
+    public void nostaPakastaTassaKohdassaToimii1() {
+        Korttipakka korttipakka = new Korttipakka();
+        assertEquals(new Kortti("Contessa"), korttipakka.nostaPakastaTassaKohdassaOleva(0));
+        assertEquals(new Kortti("Assassin"), korttipakka.nostaPakastaTassaKohdassaOleva(4));
+    }
+    
+    @Test
+    public void sisaltyykoToimii1() {
+        Korttipakka korttipakka = new Korttipakka();
+        assertEquals(korttipakka.sisaltyyko(new Kortti("Duke")), true);
+        assertEquals(korttipakka.sisaltyyko(new Kortti("Jasmin")), false);
+    }
+    
+    @Test
+    public void nostaPakastaSatunnainenKorttiToimii1() {
+        Korttipakka korttipakka = new Korttipakka();
+        korttipakka.nostaPakastaSatunnainenKortti();
+        assertEquals(korttipakka.korttipakanKoko(), 14);
+    }
 
     @BeforeClass
     public static void setUpClass() {

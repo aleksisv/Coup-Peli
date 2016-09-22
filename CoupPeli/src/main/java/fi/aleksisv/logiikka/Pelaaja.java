@@ -79,5 +79,9 @@ public class Pelaaja extends Osanottaja {
     public String toString() {
         return super.getNimi();
     }
+
+    public void epaileSiirtoa(Osanottaja osanottaja, int siirtoVaihtoehto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

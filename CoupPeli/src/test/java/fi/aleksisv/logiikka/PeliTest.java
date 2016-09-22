@@ -58,6 +58,43 @@ public class PeliTest {
         assertEquals(1, testipeli.getOsanottajajoukko().size());
     }
     
+    @Test
+    public void luoOsanottajatToimii1() {
+        Peli peli1 = new Peli(4);
+        Peli peli2 = new Peli(5);
+        peli1.luoOsanottajat();
+        peli2.luoOsanottajat();
+        assertEquals(peli1.getOsanottajajoukko().size(), 4);
+        assertEquals(peli2.getOsanottajajoukko().size(), 5);
+    }
+    
+    @Test
+    public void annaKortitToimii1() {
+        Pelaaja pelaaja = new Pelaaja("JA");
+        Peli peli = new Peli(4);
+        assertEquals(pelaaja.getKorttikasi().koko(), 0);
+        peli.annaKortit(pelaaja);
+        assertEquals(pelaaja.getKorttikasi().koko(), 2);
+        boolean sisaltyykoEdesJokuOikeistaKorteista = pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Contessa")) 
+                || pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Duke")) 
+                || pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Assassin"))
+                || pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Captain"))
+                || pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Ambassador"));
+        assertEquals(sisaltyykoEdesJokuOikeistaKorteista, true);
+        assertNotEquals(pelaaja.getKorttikasi().koko(), 0);
+    }
+    
+    
+    @Test
+    public void pelissaOlevatOsanottajatToimii1() {
+        Peli peli = new Peli(4);
+        peli.kaynnistaPeli();
+        assertEquals(peli.pelissaOlevatOsanottajat(), 4);
+        peli.getOsanottajajoukko().get(0).tapaKortti();
+        assertEquals(peli.pelissaOlevatOsanottajat(), 4);
+        peli.getOsanottajajoukko().get(0).tapaKortti();
+        assertEquals(peli.pelissaOlevatOsanottajat(), 3);
+    }
 //    @Test
 //    public void kaynnistaaPelinOikein1() {
 //        Peli testipeli = new Peli(4);

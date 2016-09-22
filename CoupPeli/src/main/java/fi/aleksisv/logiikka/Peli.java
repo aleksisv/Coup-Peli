@@ -14,10 +14,12 @@ public class Peli extends AbstraktiPeli {
     private Scanner lukija;
     private Pankki pankki;
     private Korttipakka korttipakka;
+    private ArrayList<Osanottaja> havinnytJoukko;
 
     public Peli(int pelaajamaara) {
         this.osanottajamaara = pelaajamaara;
         this.osanottajajoukko = new ArrayList();
+        this.havinnytJoukko = new ArrayList();
         this.vuoronumero = 0;
         this.pelinPelaaja = new Pelaaja("Aleksis");
         this.lukija = new Scanner(System.in);
@@ -29,10 +31,6 @@ public class Peli extends AbstraktiPeli {
         Random r = new Random();
         luoOsanottajat();
 
-        while (pelissaOlevatOsanottajat() > 1) {
-            pelaaVuoro(this.osanottajajoukko.get(vuoronumero % osanottajajoukko.size()));
-            this.vuoronumero++;
-        }
         System.out.println("Voittaja: " + this.osanottajajoukko.get(0).toString());
 
     }
@@ -45,13 +43,13 @@ public class Peli extends AbstraktiPeli {
         return vuoronumero;
     }
 
-    private void luoOsanottajat() {
+    public void luoOsanottajat() {
         annaKortit(this.pelinPelaaja);
         osanottajajoukko.add(this.pelinPelaaja);
         for (int i = 0; i < osanottajamaara - 1; i++) {
-            luojaLisaaVastustaja(Integer.toString(i));
+            luojaLisaaVastustaja(Integer.toString(i + 1));
         }
-        
+
     }
 
     public void luojaLisaaVastustaja(String nimi) {
@@ -71,135 +69,46 @@ public class Peli extends AbstraktiPeli {
     }
 
     public void pelaaVuoro(Osanottaja osanottaja) {
-        if (osanottaja instanceof Pelaaja) {
-            pelaajanVuoro((Pelaaja) osanottaja);
-        } else if (osanottaja instanceof Vastustaja) {
-            vastustajanVuoro((Vastustaja) osanottaja);
-        }
+//        boolean kaytaPoistettavaa = false;
+//        Osanottaja poistettava = new Osanottaja("A");
+//        for (Osanottaja o : osanottajajoukko) {
+//            if (o.getKorttikasi().paljastettujenKorttienLukumaara() == 2) {
+//                poistettava = o;
+//                kaytaPoistettavaa = true;
+//            }
+//        }
+//        if (kaytaPoistettavaa) {
+//            this.havinnytJoukko.add(poistettava);
+//            osanottajajoukko.remove(poistettava);
+//        }
+//
+//        kerroTilanne();
+//
+//        if (!osanottajajoukko.contains(this.pelinPelaaja)) {
+//            pysayta = true;
+//            System.out.println("Hävisit pelin.");
+//        }
+    }
 
+
+    public Vastustaja kukaVastustajistaEpailee (Osanottaja osanottaja, Kortti korttiMitaEiOle) {
         for (Osanottaja o : osanottajajoukko) {
-            if (o.getKorttikasi().koko() < 1) {
-                osanottajajoukko.remove(o);
-                this.osanottajamaara--;
+            if (!o.equals(osanottaja)) {
+                if (o.haluaaEpailla(osanottaja, korttiMitaEiOle)) {
+                    return (Vastustaja) o;
+                }
             }
         }
-
-        kerroTilanne();
-
-        if (!osanottajajoukko.contains(this.pelinPelaaja)) {
-            pysayta = true;
-            System.out.println("Hävisit pelin.");
-        }
-    }
-
-    private void pelaajanVuoro(Pelaaja pelaaja) {
-
-        while (true) {
-
-            System.out.println("Vuoro: " + vuoronumero + "\n");
-            System.out.println("Minkä siirron haluat tehdä?");
-            System.out.println("Vaihtoehdot: (1) Income (ota 1 kolikko pankista)\n"
-                    + "             (2) Foreign Aid (ota kaksi kolikkoa pankista)\n"
-                    + "             (3) Coup (maksaa seitsemän kolikkoa, tapa mikä tahansa kortti)\n"
-                    + "             (4) Taxes (ota kolme kolikkoa pankista)\n"
-                    + "             (5) Assassinate (maksa kolme kolikkoa, tapa mikä tahansa kortti)\n"
-                    + "             (6) Steal (ota kaksi kolikkoa toiselta pelaajalta)\n"
-                    + "             (7) Swap Influence (nosta kaksi korttia pakasta ja vaihda yksi omaan pakkaasi).");
-            int vastaus1 = 1;
-//            int vastaus1 = Integer.parseInt(lukija.nextLine());
-
-            if (vastaus1 == 1) {
-                System.out.print("Valitsit Income.");
-                pelaaja.kaytaBasicIncome(pankki);
-                break;
-            } else if (vastaus1 == 2) {
-                System.out.println("Valitsit Foreign Aid.");
-                if (!blokkiVuoro(pelaaja, new Kortti("Captain"))) {
-                    pelaaja.kaytaForeignAid(pankki);
-                }
-                break;
-            } else if (vastaus1 == 3) {
-                if (pelaaja.getRaha() < 7) {
-                    System.out.println("Liian vähän rahaa.");
-                    continue;
-                }
-                System.out.println("Valitsit Coup. Kenen kortin haluat paljastaa?");
-                int vastaus = Integer.parseInt(lukija.nextLine());
-                pelaaja.kaytaCoup(pankki, this.osanottajajoukko.get(vastaus));
-            } else if (vastaus1 == 4) {
-                System.out.println("Valitsit Taxes");
-                if (!epailyVuoro(pelaaja, new Kortti("Duke")) && !blokkiVuoro(pelaaja, new Kortti("Duke"))) {
-                    pelaaja.kaytaTaxes(pankki);
-                 
-                }
-                break;
-            } else if (vastaus1 == 5) {
-                System.out.println("Valitsit Assassinate");
-                if (pelaaja.getRaha() < 3) {
-                    System.out.println("Liian vähän rahaa.");
-                    continue;
-                }
-                System.out.println("Kenet haluat assassinoida?");
-                this.kerroTilanne();
-                int vastaus2 = Integer.parseInt(lukija.nextLine());
-                pelaaja.kaytaAssassinate(pankki, this.osanottajajoukko.get(vastaus2));
-                break;
-            } else if (vastaus1 == 6) {
-                System.out.println("Valitsit Steal. Keneltä haluat varastaa.");
-                kerroTilanne();
-                int vastaus = Integer.parseInt(lukija.nextLine());
-                pelaaja.kaytaSteal(pankki, osanottajajoukko.get(vastaus));
-                break;
-            } else if (vastaus1 == 7) {
-                System.out.println("Valitsit swap influence. Toiminnallisuus tulee vasta myöhemmin.");
-                break;
-            } else {
-                System.out.println("Anna toimiva vaihtoehto.");
-                continue;
-            }
-        }
-        System.out.println("");
-    }
-
-    private void vastustajanVuoro(Vastustaja vastustaja) {
-        String strategia = valitseStrategia(vastustaja);
-        
-        if(strategia.equalsIgnoreCase("foreing aid")) {
-            vastustaja.kaytaForeignAid(pankki);
-        } else if (strategia.equalsIgnoreCase("income")) {
-            vastustaja.kaytaBasicIncome(pankki);
-        } else if (strategia.equalsIgnoreCase("taxes")) {
-            vastustaja.kaytaTaxes(pankki);
-        } else if (strategia.equalsIgnoreCase("coup")) {
-            vastustaja.kaytaCoup(pankki, this.osanottajajoukko);
-        } else if (strategia.equals("assassinate")) {
-            vastustaja.kaytaAssassinate(pankki, this.osanottajajoukko);
-        }
-    }
-    
-    public String valitseStrategia(Osanottaja osanottaja) {
-        ArrayList<String> mahdollisetStrategiat = new ArrayList<String>();
-        mahdollisetStrategiat.add("foreing aid");
-        mahdollisetStrategiat.add("income");
-        mahdollisetStrategiat.add("taxes");
-        mahdollisetStrategiat.add("steal");
-        if(osanottaja.getRaha() >= 3) {
-            mahdollisetStrategiat.add("assassinate");
-        }
-        if(osanottaja.getRaha()>= 7) {
-            mahdollisetStrategiat.add("coup");
-        }
-        Random r = new Random();
-        return mahdollisetStrategiat.get(r.nextInt(mahdollisetStrategiat.size()));
+        return null;
     }
 
     public boolean epailyVuoro(Osanottaja osanottaja, Kortti kortti) {
 
         for (Osanottaja o : osanottajajoukko) {
-            if(!o.equals(osanottaja)){
-            if (o.haluaaEpailla(osanottaja, kortti)) {
-                return o.epaile(osanottaja, kortti);
-            }
+            if (!o.equals(osanottaja)) {
+                if (o.haluaaEpailla(osanottaja, kortti)) {
+                    return o.epaile(osanottaja, kortti);
+                }
             }
         }
         return false;
@@ -223,12 +132,12 @@ public class Peli extends AbstraktiPeli {
         this.osanottajajoukko.remove(osanottajanPaikka);
         this.osanottajamaara--;
     }
-    
+
     public int pelissaOlevatOsanottajat() {
-        int i = 0;
+        int i = this.osanottajamaara;
         for (Osanottaja osanottaja : osanottajajoukko) {
             if (osanottaja.montakoNakyvaaKorttia() == 2) {
-                i++;
+                i--;
             }
         }
         return i;
@@ -251,10 +160,25 @@ public class Peli extends AbstraktiPeli {
     }
 
     public void kerroTilanne() {
-        System.out.println("Pelaajia jäljellä: ");
         for (Osanottaja o : osanottajajoukko) {
+            System.out.print("Pelissä mukana: ");
+            System.out.println("Osanottaja: " + o + ", rahaa: " + o.getRaha() + ", näkyvät kortit: " + o.naytaNakyvatKortit());
+        }
+        for (Osanottaja o : havinnytJoukko) {
+            System.out.print("Pelistä pudonneita: ");
             System.out.println("Osanottaja: " + o + ", rahaa: " + o.getRaha() + ", näkyvät kortit: " + o.naytaNakyvatKortit());
         }
     }
 
+    public void setVuoronumero(int vuoronumero) {
+        this.vuoronumero = vuoronumero;
+    }
+
+    public Vastustaja kukaVastustajiastaEpailee(Osanottaja osanottaja, int siirtoVaihtoehto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean haluaakoJokuVastustajiastaBlokata(Osanottaja osanottaja, int siirtoVaihtoehto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

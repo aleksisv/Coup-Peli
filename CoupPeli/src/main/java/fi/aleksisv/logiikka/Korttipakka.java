@@ -36,7 +36,7 @@ public class Korttipakka {
     }
 
     public void poistaPakastaTassaKohdassaOleva(int i) {
-        this.getPakka().remove(i);
+        this.pakka.remove(i);
     }
 
     public Kortti nostaPakastaTassaKohdassaOleva(int i) {
@@ -47,7 +47,9 @@ public class Korttipakka {
 
     public Kortti nostaPakastaSatunnainenKortti() {
         Random r = new Random();
-        return this.nostaPakastaTassaKohdassaOleva(r.nextInt(this.korttipakanKoko()));
+        int i = r.nextInt(this.korttipakanKoko());
+        Kortti apukortti = this.nostaPakastaTassaKohdassaOleva(i);
+        return apukortti;
     }
 
     public Kortti nostaPakastaTamanNiminenKortti(String tyyppi) {
@@ -78,13 +80,6 @@ public class Korttipakka {
         return false;
     }
 
-    public void setPakka(ArrayList<Kortti> pakka) {
-        this.pakka = pakka;
-    }
 
-    @Override
-    public String toString() {
-        return this.pakka.toString();
-    }
 
 }

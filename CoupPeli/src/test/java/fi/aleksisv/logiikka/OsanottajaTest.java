@@ -89,10 +89,13 @@ public class OsanottajaTest {
     public void naytaNakyvatKortitToimii1() {
         Osanottaja osanottaja1 = new Osanottaja("Aino");
         osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
-        osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
         osanottaja1.tapaKortti();
+        assertEquals(osanottaja1.naytaNakyvatKortit(), "Contessa");
         osanottaja1.tapaKortti();
-        assertEquals(osanottaja1.naytaNakyvatKortit(), "Contessa, Contessa");
+        assertEquals(osanottaja1.naytaNakyvatKortit(), "Contessa, Assassin");
+        osanottaja1.tapaKortti();
+        assertEquals(osanottaja1.naytaNakyvatKortit(), "Contessa, Assassin");
     }
     
     @Test
@@ -183,6 +186,56 @@ public class OsanottajaTest {
         assertNotEquals(o.getRaha(), 4);
     }
     
+    @Test
+    public void kaytaAssassinateToimii1() {
+        Osanottaja o = new Osanottaja("Azra");
+        o.saaRahaa(10);
+        Pankki pankki = new Pankki();
+        Osanottaja kohde = new Osanottaja("OiEi");
+        kohde.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        assertEquals(kohde.montakoNakyvaaKorttia(), 0);
+        o.kaytaAssassinate(pankki, kohde);
+        assertEquals(kohde.montakoNakyvaaKorttia(), 1);
+        assertEquals(o.getRaha(), 9);
+        assertEquals(pankki.getRahamaara(), 103);
+    }
+    
+    @Test
+    public void kaytaCoupToimii1() {
+        Osanottaja o = new Osanottaja("Azra");
+        o.saaRahaa(10);
+        Pankki pankki = new Pankki();
+        Osanottaja kohde = new Osanottaja("OiEi");
+        kohde.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        assertEquals(kohde.montakoNakyvaaKorttia(), 0);
+        o.kaytaCoup(pankki, kohde);
+        assertEquals(kohde.montakoNakyvaaKorttia(), 1);
+        assertEquals(o.getRaha(), 5);
+        assertEquals(pankki.getRahamaara(), 107);
+    }
+    
+    @Test
+    public void kaytaTaxesToimii1() {
+        Osanottaja o = new Osanottaja("Azra");
+        Pankki pankki = new Pankki();
+        o.kaytaTaxes(pankki);
+        assertEquals(o.getRaha(), 5);
+        assertEquals(pankki.getRahamaara(), 97);
+    }
+    
+    @Test
+    public void montakoNakyvaaKorttiaToimii1() {
+        Osanottaja o = new Osanottaja("Azra");
+        o.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        o.lisaaKorttiKorttipakkaan(new Kortti("Duke"));
+        assertEquals(o.montakoNakyvaaKorttia(), 0);
+        o.tapaKortti();
+        assertEquals(o.montakoNakyvaaKorttia(), 1);
+        o.tapaKortti();
+        assertEquals(o.montakoNakyvaaKorttia(), 2);
+        o.tapaKortti();
+        assertEquals(o.montakoNakyvaaKorttia(), 2);
+    }
     
     @BeforeClass
     public static void setUpClass() {

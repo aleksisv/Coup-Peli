@@ -94,10 +94,11 @@ public class VastustajaTest {
     public void naytaNakyvatKortitToimii1() {
         Vastustaja v1 = new Vastustaja("Aino");
         v1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
-        v1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        v1.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
         v1.tapaKortti();
+        assertEquals(v1.naytaNakyvatKortit(), "Contessa");
         v1.tapaKortti();
-        assertEquals(v1.naytaNakyvatKortit(), "Contessa, Contessa");
+        assertEquals(v1.naytaNakyvatKortit(), "Contessa, Assassin");
     }
     
     @Test
@@ -151,46 +152,93 @@ public class VastustajaTest {
     
     @Test
     public void annaRahaaPankilleToimii1() {
-        Osanottaja o = new Osanottaja("Azra");
+        Vastustaja v = new Vastustaja("Azra");
         Pankki pankki = new Pankki();
         int pankinAlkurahat = pankki.getRahamaara();
-        o.annaRahaaPankille(1, pankki);
-        assertEquals(o.getRaha(), 1);
+        v.annaRahaaPankille(1, pankki);
+        assertEquals(v.getRaha(), 1);
         assertEquals(pankki.getRahamaara(), 1 + pankinAlkurahat);
     }
     
     @Test
     public void otaRahaaPankiltaToimii1() {
-        Osanottaja o = new Osanottaja("Azra");
+        Vastustaja v = new Vastustaja("Azra");
         Pankki pankki = new Pankki();
-        assertEquals(o.getRaha(), 2);
-        o.otaRahaaPankilta(4, pankki);
-        assertEquals(o.getRaha(), 6);
+        assertEquals(v.getRaha(), 2);
+        v.otaRahaaPankilta(4, pankki);
+        assertEquals(v.getRaha(), 6);
     }
     
     @Test
     public void kaytaBasicIncomeToimii1() {
-        Osanottaja o = new Osanottaja("Azra");
+        Vastustaja v = new Vastustaja("Azra");
         Pankki pankki = new Pankki();
-        o.kaytaBasicIncome(pankki);
-        assertEquals(o.getRaha(), 3);
-        o.kaytaBasicIncome(pankki);
-        assertNotEquals(o.getRaha(), 3);
+        v.kaytaBasicIncome(pankki);
+        assertEquals(v.getRaha(), 3);
+        v.kaytaBasicIncome(pankki);
+        assertNotEquals(v.getRaha(), 3);
     }
     
     @Test
     public void kaytaForeignAidToimii1() {
-        Osanottaja o = new Osanottaja("Azra");
+        Vastustaja v = new Vastustaja("Azra");
         Pankki pankki = new Pankki();
-        o.kaytaForeignAid(pankki);
-        assertEquals(o.getRaha(), 4);
-        o.kaytaForeignAid(pankki);
-        assertNotEquals(o.getRaha(), 4);
+        v.kaytaForeignAid(pankki);
+        assertEquals(v.getRaha(), 4);
+        v.kaytaForeignAid(pankki);
+        assertNotEquals(v.getRaha(), 4);
     }
-
     
+    @Test
+    public void kaytaAssassinateToimii1() {
+        Vastustaja v = new Vastustaja("Azra");
+        v.saaRahaa(10);
+        Pankki pankki = new Pankki();
+        Vastustaja kohde = new Vastustaja("OiEi");
+        kohde.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        assertEquals(kohde.montakoNakyvaaKorttia(), 0);
+        v.kaytaAssassinate(pankki, kohde);
+        assertEquals(kohde.montakoNakyvaaKorttia(), 1);
+        assertEquals(v.getRaha(), 9);
+        assertEquals(pankki.getRahamaara(), 103);
+    }
     
+    @Test
+    public void kaytaCoupToimii1() {
+        Vastustaja v = new Vastustaja("Azra");
+        v.saaRahaa(10);
+        Pankki pankki = new Pankki();
+        Vastustaja kohde = new Vastustaja("OiEi");
+        kohde.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        assertEquals(kohde.montakoNakyvaaKorttia(), 0);
+        v.kaytaCoup(pankki, kohde);
+        assertEquals(kohde.montakoNakyvaaKorttia(), 1);
+        assertEquals(v.getRaha(), 5);
+        assertEquals(pankki.getRahamaara(), 107);
+    }
     
+    @Test
+    public void kaytaTaxesToimii1() {
+        Vastustaja v = new Vastustaja("Azra");
+        Pankki pankki = new Pankki();
+        v.kaytaTaxes(pankki);
+        assertEquals(v.getRaha(), 5);
+        assertEquals(pankki.getRahamaara(), 97);
+    }
+    
+    @Test
+    public void montakoNakyvaaKorttiaToimii1() {
+        Vastustaja v = new Vastustaja("Azra");
+        v.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        v.lisaaKorttiKorttipakkaan(new Kortti("Duke"));
+        assertEquals(v.montakoNakyvaaKorttia(), 0);
+        v.tapaKortti();
+        assertEquals(v.montakoNakyvaaKorttia(), 1);
+        v.tapaKortti();
+        assertEquals(v.montakoNakyvaaKorttia(), 2);
+        v.tapaKortti();
+        assertEquals(v.montakoNakyvaaKorttia(), 2);
+    }
     
     @BeforeClass
     public static void setUpClass() {

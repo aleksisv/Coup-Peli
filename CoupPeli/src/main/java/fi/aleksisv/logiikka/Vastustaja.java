@@ -27,15 +27,6 @@ public class Vastustaja extends Osanottaja {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    public Korttikasi getKasi() {
-        return kasi;
-    }
-
-    @Override
     public Korttikasi getKorttikasi() {
         return super.getKorttikasi();
     }
@@ -144,6 +135,10 @@ public class Vastustaja extends Osanottaja {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public void epaileSiirtoa(Osanottaja osanottaja, int siirtoVaihtoehto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
