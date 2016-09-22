@@ -47,7 +47,7 @@ public class Korttikasi {
             lisaaKorttikateen(pakka.nostaPakastaTassaKohdassaOleva(i));
         }
     }
-    
+
     public int paljastettujenKorttienLukumaara() {
         int i = 0;
         for (Kortti kortti : kortit) {
@@ -59,7 +59,7 @@ public class Korttikasi {
     }
 
     public void lisaaKorttikateen(Kortti kortti) {
-        if(this.kortit.size() < 2) {
+        if (this.kortit.size() < 2) {
             this.kortit.add(kortti);
         }
     }

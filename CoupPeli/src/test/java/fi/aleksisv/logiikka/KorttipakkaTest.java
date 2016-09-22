@@ -41,35 +41,35 @@ public class KorttipakkaTest {
         boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("Contessa");
         assertEquals(vastaus, false);
     }
-    
+
     @Test
     public void nostaminenPakastaToimii1() {
         Korttipakka korttipakka = new Korttipakka();
         Kortti contessa = korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
         assertEquals(new Kortti("Contessa"), contessa);
     }
-    
+
     @Test
     public void nostaminenPakastaToimii2() {
         Korttipakka korttipakka = new Korttipakka();
         Kortti kortti = korttipakka.nostaPakastaTamanNiminenKortti("Mikko");
         assertEquals(null, kortti);
     }
-    
+
     @Test
     public void nostaPakastaTassaKohdassaToimii1() {
         Korttipakka korttipakka = new Korttipakka();
         assertEquals(new Kortti("Contessa"), korttipakka.nostaPakastaTassaKohdassaOleva(0));
         assertEquals(new Kortti("Assassin"), korttipakka.nostaPakastaTassaKohdassaOleva(4));
     }
-    
+
     @Test
     public void sisaltyykoToimii1() {
         Korttipakka korttipakka = new Korttipakka();
         assertEquals(korttipakka.sisaltyyko(new Kortti("Duke")), true);
         assertEquals(korttipakka.sisaltyyko(new Kortti("Jasmin")), false);
     }
-    
+
     @Test
     public void nostaPakastaSatunnainenKorttiToimii1() {
         Korttipakka korttipakka = new Korttipakka();

@@ -18,7 +18,7 @@ public class Osanottaja {
     public Korttikasi getKorttikasi() {
         return this.korttikasi;
     }
-    
+
     //Surkea tekoäly.
     public boolean haluaaEpailla(Osanottaja osanottaja, Kortti mitaEiOle) {
         if (this.korttikasi.sisaltyykoKortti(mitaEiOle)) {
@@ -36,7 +36,7 @@ public class Osanottaja {
             return false;
         }
     }
-    
+
     public String naytaNakyvatKortit() {
         StringBuilder merkkijono = new StringBuilder();
         for (Kortti kortti : this.korttikasi.getKorttikasi()) {
@@ -92,8 +92,7 @@ public class Osanottaja {
     public void lisaaKorttiKorttipakkaan(Kortti kortti) {
         this.getKorttikasi().lisaaKorttikateen(kortti);
     }
-    
-    
+
     public boolean haluaaBlokata(Osanottaja osanottaja, Kortti kortti) {
         if (osanottaja.getKorttikasi().sisaltyykoKortti(kortti)) {
             return true;
@@ -101,7 +100,7 @@ public class Osanottaja {
             return false;
         }
     }
-    
+
     public boolean blokkaa(Osanottaja osanottaja, Kortti kortti) {
         if (osanottaja.korttikasi.sisaltyykoKortti(kortti)) {
             return false;
@@ -110,12 +109,12 @@ public class Osanottaja {
     }
 
     public void menetaRahaa(int maara) {
-        if(this.getRaha() - maara >= 0) {
+        if (this.getRaha() - maara >= 0) {
             this.setRaha(this.getRaha() - maara);
         } else {
             this.setRaha(0);
         }
-        
+
     }
 
     public void annaRahaaPankille(int maara, Pankki pankki) {
@@ -135,36 +134,36 @@ public class Osanottaja {
     public void kaytaBasicIncome(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(1));
     }
-    
+
     public void kaytaForeignAid(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(2));
     }
-    
+
     public void kaytaAssassinate(Pankki pankki, Osanottaja osanottaja) {
         this.menetaRahaa(3);
         pankki.lisaaRahaa(3);
         osanottaja.tapaKortti();
     }
-    
+
     public void kaytaCoup(Pankki pankki, Osanottaja osanottaja) {
         this.menetaRahaa(7);
         pankki.lisaaRahaa(7);
         osanottaja.tapaKortti();
     }
-    
+
     public void kaytaSteal(Pankki pankki, Osanottaja osanottaja) {
         osanottaja.menetaRahaa(2);
         this.saaRahaa(2);
     }
-    
+
     public void kaytaTaxes(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(3));
     }
-    
+
     public int montakoNakyvaaKorttia() {
         int i = 0;
         for (Kortti kortti : this.getKorttikasi().getKorttikasi()) {
-            if(kortti.onkoPaljastettu()) {
+            if (kortti.onkoPaljastettu()) {
                 i++;
             }
         }

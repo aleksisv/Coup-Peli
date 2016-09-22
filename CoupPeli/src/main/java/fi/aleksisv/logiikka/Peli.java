@@ -90,8 +90,7 @@ public class Peli extends AbstraktiPeli {
 //        }
     }
 
-
-    public Vastustaja kukaVastustajistaEpailee (Osanottaja osanottaja, Kortti korttiMitaEiOle) {
+    public Vastustaja kukaVastustajistaEpailee(Osanottaja osanottaja, Kortti korttiMitaEiOle) {
         for (Osanottaja o : osanottajajoukko) {
             if (!o.equals(osanottaja)) {
                 if (o.haluaaEpailla(osanottaja, korttiMitaEiOle)) {

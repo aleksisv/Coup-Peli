@@ -84,7 +84,7 @@ public class OsanottajaTest {
         assertEquals(osanottaja1.getRaha(), 3);
         assertEquals(pankki.getRahamaara(), 99);
     }
-  
+
     @Test
     public void naytaNakyvatKortitToimii1() {
         Osanottaja osanottaja1 = new Osanottaja("Aino");
@@ -97,14 +97,14 @@ public class OsanottajaTest {
         osanottaja1.tapaKortti();
         assertEquals(osanottaja1.naytaNakyvatKortit(), "Contessa, Assassin");
     }
-    
+
     @Test
     public void saaRahaaToimii1() {
         Osanottaja osanottaja1 = new Osanottaja("Aino");
         osanottaja1.saaRahaa(2);
         assertEquals(osanottaja1.getRaha(), 4);
     }
-    
+
     @Test
     public void haluaaEpaillaToimii1() {
         Osanottaja osanottaja1 = new Osanottaja("Aino");
@@ -112,14 +112,15 @@ public class OsanottajaTest {
         assertEquals(osanottaja1.haluaaEpailla(osanottaja1, new Kortti("Contessa")), true);
         assertEquals(osanottaja1.haluaaEpailla(osanottaja1, new Kortti("Assassin")), false);
     }
-    
-    @Test public void haluaaBlokataToimii1() {
+
+    @Test
+    public void haluaaBlokataToimii1() {
         Osanottaja osanottaja1 = new Osanottaja("Aino");
         osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         assertEquals(osanottaja1.haluaaBlokata(osanottaja1, new Kortti("Contessa")), true);
         assertEquals(osanottaja1.haluaaBlokata(osanottaja1, new Kortti("Assassin")), false);
     }
-    
+
     @Test
     public void menetaRahaaToimii1() {
         Osanottaja osanottaja1 = new Osanottaja("Aino");
@@ -131,7 +132,7 @@ public class OsanottajaTest {
         osanottaja1.menetaRahaa(6);
         assertEquals(osanottaja1.getRaha(), 0);
     }
-    
+
     @Test
     public void blokkaaToimii1() {
         Osanottaja o1 = new Osanottaja("Azra");
@@ -140,13 +141,13 @@ public class OsanottajaTest {
         assertEquals(o1.blokkaa(o2, new Kortti("Assassin")), true);
         assertEquals(o1.blokkaa(o2, new Kortti("Contessa")), false);
     }
-    
+
     @Test
     public void toStringToimii1() {
         Osanottaja o = new Osanottaja("Azra");
         assertEquals(o.toString(), "Azra");
     }
-    
+
     @Test
     public void annaRahaaPankilleToimii1() {
         Osanottaja o = new Osanottaja("Azra");
@@ -156,7 +157,7 @@ public class OsanottajaTest {
         assertEquals(o.getRaha(), 1);
         assertEquals(pankki.getRahamaara(), 1 + pankinAlkurahat);
     }
-    
+
     @Test
     public void otaRahaaPankiltaToimii1() {
         Osanottaja o = new Osanottaja("Azra");
@@ -165,7 +166,7 @@ public class OsanottajaTest {
         o.otaRahaaPankilta(4, pankki);
         assertEquals(o.getRaha(), 6);
     }
-    
+
     @Test
     public void kaytaBasicIncomeToimii1() {
         Osanottaja o = new Osanottaja("Azra");
@@ -175,7 +176,7 @@ public class OsanottajaTest {
         o.kaytaBasicIncome(pankki);
         assertNotEquals(o.getRaha(), 3);
     }
-    
+
     @Test
     public void kaytaForeignAidToimii1() {
         Osanottaja o = new Osanottaja("Azra");
@@ -185,7 +186,7 @@ public class OsanottajaTest {
         o.kaytaForeignAid(pankki);
         assertNotEquals(o.getRaha(), 4);
     }
-    
+
     @Test
     public void kaytaAssassinateToimii1() {
         Osanottaja o = new Osanottaja("Azra");
@@ -199,7 +200,7 @@ public class OsanottajaTest {
         assertEquals(o.getRaha(), 9);
         assertEquals(pankki.getRahamaara(), 103);
     }
-    
+
     @Test
     public void kaytaCoupToimii1() {
         Osanottaja o = new Osanottaja("Azra");
@@ -213,7 +214,7 @@ public class OsanottajaTest {
         assertEquals(o.getRaha(), 5);
         assertEquals(pankki.getRahamaara(), 107);
     }
-    
+
     @Test
     public void kaytaTaxesToimii1() {
         Osanottaja o = new Osanottaja("Azra");
@@ -222,7 +223,7 @@ public class OsanottajaTest {
         assertEquals(o.getRaha(), 5);
         assertEquals(pankki.getRahamaara(), 97);
     }
-    
+
     @Test
     public void montakoNakyvaaKorttiaToimii1() {
         Osanottaja o = new Osanottaja("Azra");

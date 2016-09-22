@@ -15,7 +15,7 @@ public class Vastustaja extends Osanottaja {
     public void annaRahaaPankille(int maara, Pankki pankki) {
         super.annaRahaaPankille(maara, pankki);
     }
-    
+
     @Override
     public boolean haluaaEpailla(Osanottaja osanottaja, Kortti mitaEiOle) {
         return super.haluaaEpailla(osanottaja, mitaEiOle);
@@ -50,24 +50,20 @@ public class Vastustaja extends Osanottaja {
     public void kaytaForeignAid(Pankki pankki) {
         super.kaytaForeignAid(pankki); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
 
     @Override
     public void lisaaKorttiKorttipakkaan(Kortti kortti) {
         super.lisaaKorttiKorttipakkaan(kortti);
     }
-    
 
     public void kaytaAssassinate(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
         osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).tapaKortti();
     }
 
-    
     public void kaytaCoup(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
-        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).tapaKortti();   
+        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).tapaKortti();
     }
 
     @Override
@@ -89,8 +85,6 @@ public class Vastustaja extends Osanottaja {
     public boolean haluaaBlokata(Osanottaja osanottaja, Kortti kortti) {
         return super.haluaaBlokata(osanottaja, kortti); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
 
     @Override
     public void menetaRahaa(int maara) {

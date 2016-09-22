@@ -50,6 +50,7 @@ public class PeliTest {
 //        testipeli.pudotaPelaaja(pelaaja);
 
     }
+
     @Test
     public void lisaaVastustajaOikein() {
         Peli testipeli = new Peli(4);
@@ -57,7 +58,7 @@ public class PeliTest {
         testipeli.lisaaVastustaja(vastustaja);
         assertEquals(1, testipeli.getOsanottajajoukko().size());
     }
-    
+
     @Test
     public void luoOsanottajatToimii1() {
         Peli peli1 = new Peli(4);
@@ -67,7 +68,7 @@ public class PeliTest {
         assertEquals(peli1.getOsanottajajoukko().size(), 4);
         assertEquals(peli2.getOsanottajajoukko().size(), 5);
     }
-    
+
     @Test
     public void annaKortitToimii1() {
         Pelaaja pelaaja = new Pelaaja("JA");
@@ -75,16 +76,15 @@ public class PeliTest {
         assertEquals(pelaaja.getKorttikasi().koko(), 0);
         peli.annaKortit(pelaaja);
         assertEquals(pelaaja.getKorttikasi().koko(), 2);
-        boolean sisaltyykoEdesJokuOikeistaKorteista = pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Contessa")) 
-                || pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Duke")) 
+        boolean sisaltyykoEdesJokuOikeistaKorteista = pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Contessa"))
+                || pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Duke"))
                 || pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Assassin"))
                 || pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Captain"))
                 || pelaaja.getKorttikasi().sisaltyykoKortti(new Kortti("Ambassador"));
         assertEquals(sisaltyykoEdesJokuOikeistaKorteista, true);
         assertNotEquals(pelaaja.getKorttikasi().koko(), 0);
     }
-    
-    
+
     @Test
     public void pelissaOlevatOsanottajatToimii1() {
         Peli peli = new Peli(4);
@@ -102,7 +102,5 @@ public class PeliTest {
 //        testipeli.kaynnistaPeli();
 //        assertNotEquals(testipeli.getVuoronumero(), 0);
 //    }
-    
-    
 
 }

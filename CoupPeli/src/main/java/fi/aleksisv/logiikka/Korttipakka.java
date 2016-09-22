@@ -80,6 +80,4 @@ public class Korttipakka {
         return false;
     }
 
-
-
 }

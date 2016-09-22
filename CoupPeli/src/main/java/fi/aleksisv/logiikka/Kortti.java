@@ -42,8 +42,6 @@ public class Kortti {
     public void setOnkoPaljastettu(boolean onkoPaljastettu) {
         this.onkoPaljastettu = onkoPaljastettu;
     }
-    
-    
 
     @Override
     public String toString() {
