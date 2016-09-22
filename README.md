@@ -9,5 +9,8 @@ jossa pelaajan tehtävänä on omia korttejaan ja näiden erikoisominaisuuksia k
 [Aiheen kuvaus ja määrittely](dokumentaatio/aihemäärittely.md)
 
 [Pit-raportti](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/dokumentaatio/pit-raportti/201609222019/index.html)
+
+[Checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/dokumentaatio/checkstyle-raportti/site/checkstyle.html)
+
 ![Luokkakaavio](dokumentaatio/luokkakaavio.png)
 
