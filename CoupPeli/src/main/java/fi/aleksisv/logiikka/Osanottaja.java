@@ -70,10 +70,12 @@ public class Osanottaja {
 
     public void tapaKortti() {
         Korttikasi korttikasi = this.getKorttikasi();
-        Random r = new Random();
-        int tapettavanKohta = r.nextInt(korttikasi.koko());
-        System.out.println(tapettavanKohta);
-        korttikasi.paljastaPakastaTassaKohdassaOleva(tapettavanKohta);
+        for (int i = 0; i < this.korttikasi.getKorttikasi().size(); i++) {
+            if (this.korttikasi.getKorttikasi().get(i).onkoPaljastettu() == false) {
+                korttikasi.paljastaPakastaTassaKohdassaOleva(i);
+                break;
+            }
+        }
     }
 
     public void saaRahaa(int maara) {
@@ -108,7 +110,12 @@ public class Osanottaja {
     }
 
     public void menetaRahaa(int maara) {
-        this.setRaha(this.getRaha() - maara);
+        if(this.getRaha() - maara >= 0) {
+            this.setRaha(this.getRaha() - maara);
+        } else {
+            this.setRaha(0);
+        }
+        
     }
 
     public void annaRahaaPankille(int maara, Pankki pankki) {
@@ -122,14 +129,14 @@ public class Osanottaja {
     }
 
     public void otaRahaaPankilta(int maara, Pankki pankki) {
-        this.setRaha(pankki.annaRahat(maara));
+        this.setRaha(pankki.annaRahat(maara) + this.getRaha());
     }
 
     public void kaytaBasicIncome(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(1));
     }
     
-    public void kaytaForeingAid(Pankki pankki) {
+    public void kaytaForeignAid(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(2));
     }
     
@@ -154,6 +161,15 @@ public class Osanottaja {
         this.saaRahaa(pankki.annaRahat(3));
     }
     
+    public int montakoNakyvaaKorttia() {
+        int i = 0;
+        for (Kortti kortti : this.getKorttikasi().getKorttikasi()) {
+            if(kortti.onkoPaljastettu()) {
+                i++;
+            }
+        }
+        return i;
+    }
 
     @Override
     public String toString() {

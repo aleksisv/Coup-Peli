@@ -58,13 +58,13 @@ public class PeliTest {
         assertEquals(1, testipeli.getOsanottajajoukko().size());
     }
     
-    @Test
-    public void kaynnistaaPelinOikein1() {
-        Peli testipeli = new Peli(4);
-        assertEquals(testipeli.getVuoronumero(), 0);
-        testipeli.kaynnistaPeli();
-        assertNotEquals(testipeli.getVuoronumero(), 0);
-    }
+//    @Test
+//    public void kaynnistaaPelinOikein1() {
+//        Peli testipeli = new Peli(4);
+//        assertEquals(testipeli.getVuoronumero(), 0);
+//        testipeli.kaynnistaPeli();
+//        assertNotEquals(testipeli.getVuoronumero(), 0);
+//    }
     
     
 

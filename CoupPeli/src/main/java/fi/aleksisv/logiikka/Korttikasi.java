@@ -59,7 +59,9 @@ public class Korttikasi {
     }
 
     public void lisaaKorttikateen(Kortti kortti) {
-        this.kortit.add(kortti);
+        if(this.kortit.size() < 2) {
+            this.kortit.add(kortti);
+        }
     }
 
 }

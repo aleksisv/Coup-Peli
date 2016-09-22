@@ -57,7 +57,46 @@ public class PelaajaTest {
         pelaaja.tapaKortti();
         assertEquals(pelaaja.getKorttikasi().paljastettujenKorttienLukumaara(), 1);
     }
-
+    
+    @Test
+    public void epailyToimii1() {
+        Pelaaja pelaaja1 = new Pelaaja("Aino");
+        Pelaaja pelaaja2 = new Pelaaja("Anna");
+        pelaaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        pelaaja2.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        boolean epaily = pelaaja1.epaile(pelaaja2, new Kortti("Contessa"));
+        assertEquals(epaily, false);
+    }
+    
+    @Test
+    public void epailyToimii2() {
+        Pelaaja pelaaja1 = new Pelaaja("Aino");
+        Pelaaja pelaaja2 = new Pelaaja("Anna");
+        pelaaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        pelaaja2.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
+        boolean epaily = pelaaja1.epaile(pelaaja2, new Kortti("Contessa"));
+        assertEquals(epaily, true);
+    }
+    
+    @Test
+    public void epailyToimii3() {
+        Pelaaja pelaaja1 = new Pelaaja("Aino");
+        Pelaaja pelaaja2 = new Pelaaja("Anna");
+        pelaaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        pelaaja2.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        boolean epaily = pelaaja1.epaile(pelaaja2, new Kortti("Contessa"));
+        assertEquals(epaily, false);
+    }
+    
+    @Test
+    public void epailyToimii4() {
+        Pelaaja pelaaja1 = new Pelaaja("Aino");
+        Pelaaja pelaaja2 = new Pelaaja("Anna");
+        pelaaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
+        pelaaja2.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
+        boolean epaily = pelaaja1.epaile(pelaaja2, new Kortti("Contessa"));
+        assertEquals(epaily, true);
+    }
     @BeforeClass
     public static void setUpClass() {
     }

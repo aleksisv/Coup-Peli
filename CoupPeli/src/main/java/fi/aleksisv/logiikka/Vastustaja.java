@@ -56,13 +56,21 @@ public class Vastustaja extends Osanottaja {
     }
 
     @Override
+    public void kaytaForeignAid(Pankki pankki) {
+        super.kaytaForeignAid(pankki); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
+    @Override
     public void lisaaKorttiKorttipakkaan(Kortti kortti) {
         super.lisaaKorttiKorttipakkaan(kortti);
     }
     
-    @Override
-    public void kaytaAssassinate(Pankki pankki, Osanottaja osanottaja) {
-        super.kaytaAssassinate(pankki, osanottaja);
+
+    public void kaytaAssassinate(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
+        Random r = new Random();
+        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).tapaKortti();
     }
 
     

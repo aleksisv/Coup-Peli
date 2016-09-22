@@ -66,8 +66,8 @@ public class Pelaaja extends Osanottaja {
     }
     
     @Override
-    public void kaytaForeingAid(Pankki pankki) {
-        super.kaytaForeingAid(pankki);
+    public void kaytaForeignAid(Pankki pankki) {
+        super.kaytaForeignAid(pankki);
     }
     
     @Override

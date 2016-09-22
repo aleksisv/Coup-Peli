@@ -1,7 +1,6 @@
 package fi.aleksisv.logiikka;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -30,7 +29,7 @@ public class Peli extends AbstraktiPeli {
         Random r = new Random();
         luoOsanottajat();
 
-        while (this.osanottajajoukko.size() > 1) {
+        while (pelissaOlevatOsanottajat() > 1) {
             pelaaVuoro(this.osanottajajoukko.get(vuoronumero % osanottajajoukko.size()));
             this.vuoronumero++;
         }
@@ -63,9 +62,6 @@ public class Peli extends AbstraktiPeli {
 
     public void lisaaVastustaja(Vastustaja vastustaja) {
         this.osanottajajoukko.add(vastustaja);
-        for (Osanottaja o : osanottajajoukko) {
-            System.out.println(o);
-        }
     }
 
     public void annaKortit(Osanottaja osanottaja) {
@@ -109,8 +105,8 @@ public class Peli extends AbstraktiPeli {
                     + "             (5) Assassinate (maksa kolme kolikkoa, tapa mikä tahansa kortti)\n"
                     + "             (6) Steal (ota kaksi kolikkoa toiselta pelaajalta)\n"
                     + "             (7) Swap Influence (nosta kaksi korttia pakasta ja vaihda yksi omaan pakkaasi).");
-
-            int vastaus1 = Integer.parseInt(lukija.nextLine());
+            int vastaus1 = 1;
+//            int vastaus1 = Integer.parseInt(lukija.nextLine());
 
             if (vastaus1 == 1) {
                 System.out.print("Valitsit Income.");
@@ -119,7 +115,7 @@ public class Peli extends AbstraktiPeli {
             } else if (vastaus1 == 2) {
                 System.out.println("Valitsit Foreign Aid.");
                 if (!blokkiVuoro(pelaaja, new Kortti("Captain"))) {
-                    pelaaja.kaytaForeingAid(pankki);
+                    pelaaja.kaytaForeignAid(pankki);
                 }
                 break;
             } else if (vastaus1 == 3) {
@@ -156,6 +152,7 @@ public class Peli extends AbstraktiPeli {
                 break;
             } else if (vastaus1 == 7) {
                 System.out.println("Valitsit swap influence. Toiminnallisuus tulee vasta myöhemmin.");
+                break;
             } else {
                 System.out.println("Anna toimiva vaihtoehto.");
                 continue;
@@ -168,13 +165,15 @@ public class Peli extends AbstraktiPeli {
         String strategia = valitseStrategia(vastustaja);
         
         if(strategia.equalsIgnoreCase("foreing aid")) {
-            vastustaja.kaytaForeingAid(pankki);
+            vastustaja.kaytaForeignAid(pankki);
         } else if (strategia.equalsIgnoreCase("income")) {
             vastustaja.kaytaBasicIncome(pankki);
         } else if (strategia.equalsIgnoreCase("taxes")) {
             vastustaja.kaytaTaxes(pankki);
         } else if (strategia.equalsIgnoreCase("coup")) {
             vastustaja.kaytaCoup(pankki, this.osanottajajoukko);
+        } else if (strategia.equals("assassinate")) {
+            vastustaja.kaytaAssassinate(pankki, this.osanottajajoukko);
         }
     }
     
@@ -224,13 +223,19 @@ public class Peli extends AbstraktiPeli {
         this.osanottajajoukko.remove(osanottajanPaikka);
         this.osanottajamaara--;
     }
+    
+    public int pelissaOlevatOsanottajat() {
+        int i = 0;
+        for (Osanottaja osanottaja : osanottajajoukko) {
+            if (osanottaja.montakoNakyvaaKorttia() == 2) {
+                i++;
+            }
+        }
+        return i;
+    }
 
     public Korttipakka getKorttipakka() {
         return korttipakka;
-    }
-
-    public Scanner getLukija() {
-        return lukija;
     }
 
     public ArrayList<Osanottaja> getOsanottajajoukko() {
@@ -250,34 +255,6 @@ public class Peli extends AbstraktiPeli {
         for (Osanottaja o : osanottajajoukko) {
             System.out.println("Osanottaja: " + o + ", rahaa: " + o.getRaha() + ", näkyvät kortit: " + o.naytaNakyvatKortit());
         }
-    }
-
-    public void setKorttipakka(Korttipakka korttipakka) {
-        this.korttipakka = korttipakka;
-    }
-
-    public void setOsanottajajoukko(ArrayList<Osanottaja> osanottajajoukko) {
-        this.osanottajajoukko = osanottajajoukko;
-    }
-
-    public void setOsanottajamaara(int osanottajamaara) {
-        this.osanottajamaara = osanottajamaara;
-    }
-
-    public void setPankki(Pankki pankki) {
-        this.pankki = pankki;
-    }
-
-    public void setPelaaja(Pelaaja pelaaja) {
-        this.pelinPelaaja = pelaaja;
-    }
-
-    public void setPysayta(boolean pysayta) {
-        this.pysayta = pysayta;
-    }
-
-    public void setVuoronumero(int vuoronumero) {
-        this.vuoronumero = vuoronumero;
     }
 
 }
