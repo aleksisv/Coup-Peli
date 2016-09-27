@@ -19,3 +19,8 @@ Päivä | Tunnit | Kuvaus
 20.09.2016 | 1h | Koodausta ja testien luomista. Hieman mietikelyä luokkien lisäämisestä ja karsimisesta.
 21.09.2016 | 3h | Koodausta ja testausta.
 22.09.2016 | 4h | Koodausta ja testien luomista.
+23.09.2016 | -  | Lomapäivä projektista.
+24.09.2016 | 0.5h | Uuden rakenteen miettimistä.
+25.09.2016 | 1h | Jatkon miettimistä.
+26.09.2016 | - | Taukoa koodauksesta.
+27.09.2016 | 1h | Koodausta.
