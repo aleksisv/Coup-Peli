@@ -12,5 +12,4 @@ jossa pelaajan tehtävänä on omia korttejaan ja näiden erikoisominaisuuksia k
 
 [Checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/dokumentaatio/checkstyle-raportti/site/checkstyle.html)
 
-![Luokkakaavio](dokumentaatio/luokkakaavio.png)
 
