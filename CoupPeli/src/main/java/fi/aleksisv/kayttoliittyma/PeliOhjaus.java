@@ -3,21 +3,20 @@ package fi.aleksisv.kayttoliittyma;
 import fi.aleksisv.logiikka.*;
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.JFrame;
 
-/**
- *
- * @author aleksisvuoksenmaa
- */
 public class PeliOhjaus {
 
     private Scanner lukija;
     private Random r;
-    Peli peli;
+    private Peli peli;
+    GraafinenKayttoliittyma GKL;
 
     public PeliOhjaus() {
-        alkutoimet();
         this.lukija = new Scanner(System.in);
         this.r = new Random();
+        this.GKL = new GraafinenKayttoliittyma();
+        alkutoimet();
         pelaa();
     }
 
@@ -41,6 +40,7 @@ public class PeliOhjaus {
             siirtovalinta(this.peli.getOsanottajajoukko().get(this.peli.getVuoronumero() % this.peli.getOsanottajajoukko().size()));
             ilmoitaSiirtovalinnasta(this.peli.getOsanottajajoukko().get(this.peli.getVuoronumero() % this.peli.getOsanottajajoukko().size()), 1);
             this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
+            this.peli.kerroTilanne();
         }
     }
 
@@ -69,30 +69,39 @@ public class PeliOhjaus {
                 System.out.println("Valitsit vaihtoehdon " + i + ".\n");
                 if (i == 1) {
                     pelaaja.kaytaBasicIncome(this.peli.getPankki());
+                    break;
                 } else if (i == 2) {
                     pelaaja.kaytaForeignAid(this.peli.getPankki());
+                    break;
                 } else if (i == 3) {
                     if (pelaaja.getRaha() < 7) {
                         System.out.println("Sinulla ei ole rahaa tähän siirtoon. Valitse joku toinen. \n");
+                        continue;
                     }
                     System.out.println("Kenet haluat Coupata?");
                     int coupattava = Integer.parseInt(lukija.nextLine());
                     pelaaja.kaytaCoup(this.peli.getPankki(), this.peli.getOsanottajajoukko().get(coupattava));
+                    break;
                 } else if (i == 4) {
                     pelaaja.kaytaTaxes(this.peli.getPankki());
+                    break;
                 } else if (i == 5) {
                     if (pelaaja.getRaha() < 3) {
                         System.out.println("Sinulla ei ole rahaa tähän siirtoon. Valitse joku toinen. \n");
+                        continue;
                     }
                     System.out.println("Kenet haluat Assassinoida");
                     int assassinoitava = Integer.parseInt(lukija.nextLine());
                     pelaaja.kaytaAssassinate(this.peli.getPankki(), this.peli.getOsanottajajoukko().get(assassinoitava));
+                    break;
                 } else if (i == 6) {
                     System.out.println("Keneltä haluat varastaa?");
                     int varkaudenKohde = Integer.parseInt(lukija.nextLine());
                     pelaaja.kaytaSteal(this.peli.getPankki(), this.peli.getOsanottajajoukko().get(varkaudenKohde));
+                    break;
                 } else if (i == 7) {
                     System.out.println("Toiminnallisuutta ei vielä tueta.");
+                    continue;
                 }
             }
             System.out.println("Anna sääntöjen mukainen vastaus. \n");
@@ -108,8 +117,8 @@ public class PeliOhjaus {
         System.out.println("Osanottaja " + osanottaja + " haluaa yrittää siirtoa " + siirtoVaihtoehto + ".");
         boolean pelaajanEpaily = false;
         boolean pelaajanBlokkaus = true;
-        Vastustaja vastustajaJokaEpailee = this.peli.kukaVastustajiastaEpailee(osanottaja, siirtoVaihtoehto);
-        boolean vastustajanBlokki = this.peli.haluaakoJokuVastustajiastaBlokata(osanottaja, siirtoVaihtoehto);
+        Vastustaja vastustajaJokaEpailee = this.peli.kukaVastustajistaEpailee(osanottaja, siirtoVaihtoehto);
+        boolean vastustajanBlokki = this.peli.haluaakoJokuVastustajistaBlokata(osanottaja, siirtoVaihtoehto);
         if (!osanottaja.equals(this.peli.getPelaaja())) {
             System.out.println("\nHaluatko epäillä siirtoa?");
             pelaajanEpaily = Boolean.parseBoolean(lukija.nextLine());

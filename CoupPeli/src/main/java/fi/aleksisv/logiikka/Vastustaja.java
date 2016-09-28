@@ -3,6 +3,9 @@ package fi.aleksisv.logiikka;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Luokka vangitsee pelin sellaisen osanottajan, jota ohjaa tekoäly ja jota vastaan pelaaja pelaa.
+ */
 public class Vastustaja extends Osanottaja {
 
     private Korttikasi kasi;

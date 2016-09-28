@@ -3,6 +3,9 @@ package fi.aleksisv.logiikka;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Luokka kuvaa koko pelissä mukana olevien korttien joukkoa.
+ */
 public class Korttipakka {
 
     private ArrayList<Kortti> pakka;

@@ -6,7 +6,7 @@ jossa pelaajan tehtävänä on omia korttejaan ja näiden erikoisominaisuuksia k
 ## Dokumentaatio
 [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 
-[Aiheen kuvaus ja määrittely](dokumentaatio/aihemäärittely.md)
+[Aiheen kuvaus ja määrittely](dokumentaatio/aiheenKuvausJaRakenne.md)
 
 [Pit-raportti](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/dokumentaatio/pit-raportti/201609222019/index.html)
 

@@ -1,20 +1,24 @@
 package fi.aleksisv.logiikka;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
-import java.util.Scanner;
 
-public class Peli extends AbstraktiPeli {
+/**
+ * Luokka kuvaa Coup-Peliä. Peli-luokan olio pitää sisältää pelaajan, muita osanottajia (vastustajat),
+ * Pankin, Korttipakan, sekä muita tarpeellisia olioita.
+ */
+public class Peli {
 
     private int osanottajamaara;
     private ArrayList<Osanottaja> osanottajajoukko;
     private boolean pysayta;
     private int vuoronumero;
     private Pelaaja pelinPelaaja;
-    private Scanner lukija;
     private Pankki pankki;
     private Korttipakka korttipakka;
     private ArrayList<Osanottaja> havinnytJoukko;
+    private HashMap<Integer, Kortti> siirtoNumerot;
 
     public Peli(int pelaajamaara) {
         this.osanottajamaara = pelaajamaara;
@@ -22,9 +26,9 @@ public class Peli extends AbstraktiPeli {
         this.havinnytJoukko = new ArrayList();
         this.vuoronumero = 0;
         this.pelinPelaaja = new Pelaaja("Aleksis");
-        this.lukija = new Scanner(System.in);
         this.pankki = new Pankki();
         this.korttipakka = new Korttipakka();
+        this.siirtoNumerot = luoSiirtonumerot();
     }
 
     public void kaynnistaPeli() {
@@ -90,11 +94,11 @@ public class Peli extends AbstraktiPeli {
 //        }
     }
 
-    public Vastustaja kukaVastustajistaEpailee(Osanottaja osanottaja, Kortti korttiMitaEiOle) {
-        for (Osanottaja o : osanottajajoukko) {
-            if (!o.equals(osanottaja)) {
-                if (o.haluaaEpailla(osanottaja, korttiMitaEiOle)) {
-                    return (Vastustaja) o;
+    public Vastustaja kukaVastustajistaEpailee(Osanottaja osanottaja, int siirtoVaihtoehto) {
+        for (int i = 0; i < this.osanottajajoukko.size(); i++) {
+            if (!this.osanottajajoukko.get(i).equals(osanottaja)) {
+                if (this.osanottajajoukko.get(i).haluaaEpailla(osanottaja, this.siirtoNumerot.get(siirtoVaihtoehto))) {
+                    return (Vastustaja) this.osanottajajoukko.get(i);
                 }
             }
         }
@@ -160,12 +164,12 @@ public class Peli extends AbstraktiPeli {
 
     public void kerroTilanne() {
         for (Osanottaja o : osanottajajoukko) {
-            System.out.print("Pelissä mukana: ");
-            System.out.println("Osanottaja: " + o + ", rahaa: " + o.getRaha() + ", näkyvät kortit: " + o.naytaNakyvatKortit());
+            System.out.println("Mukana pelissä: ");
+            System.out.println("    Nimi: " + o + ", rahaa: " + o.getRaha() + ", näkyvät kortit: " + o.naytaNakyvatKortit());
         }
         for (Osanottaja o : havinnytJoukko) {
-            System.out.print("Pelistä pudonneita: ");
-            System.out.println("Osanottaja: " + o + ", rahaa: " + o.getRaha() + ", näkyvät kortit: " + o.naytaNakyvatKortit());
+            System.out.println("Pudonnut pelistä: ");
+            System.out.println("    Nimi: " + o + ", rahaa: " + o.getRaha() + ", näkyvät kortit: " + o.naytaNakyvatKortit());
         }
     }
 
@@ -173,11 +177,21 @@ public class Peli extends AbstraktiPeli {
         this.vuoronumero = vuoronumero;
     }
 
-    public Vastustaja kukaVastustajiastaEpailee(Osanottaja osanottaja, int siirtoVaihtoehto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private HashMap<Integer, Kortti> luoSiirtonumerot() {
+        HashMap<Integer,Kortti> mappi = new HashMap<Integer, Kortti>();
+        mappi.put(4, new Kortti("Duke"));
+        mappi.put(5, new Kortti("Assassin"));
+        mappi.put(6, new Kortti("Captain"));
+        
+        return mappi;
     }
 
-    public boolean haluaakoJokuVastustajiastaBlokata(Osanottaja osanottaja, int siirtoVaihtoehto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean haluaakoJokuVastustajistaBlokata(Osanottaja osanottaja, int siirtoVaihtoehto) {
+        for (Osanottaja o : osanottajajoukko) {
+            if (o.haluaaBlokata(osanottaja, this.siirtoNumerot.get(siirtoVaihtoehto))) {
+                return true;
+            }
+        }
+        return false;
     }
 }

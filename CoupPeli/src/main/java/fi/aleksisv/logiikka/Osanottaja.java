@@ -3,6 +3,9 @@ package fi.aleksisv.logiikka;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Luokka vangitsee pelin Osanottajan.
+ */
 public class Osanottaja {
 
     private String nimi;
@@ -19,7 +22,9 @@ public class Osanottaja {
         return this.korttikasi;
     }
 
-    //Surkea tekoäly.
+    /**
+     * Luokka vangitsee pelin Osanottajan.
+     */
     public boolean haluaaEpailla(Osanottaja osanottaja, Kortti mitaEiOle) {
         if (this.korttikasi.sisaltyykoKortti(mitaEiOle)) {
             return true;

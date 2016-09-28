@@ -3,12 +3,14 @@ package fi.aleksisv.logiikka;
 import fi.aleksisv.kayttoliittyma.PeliOhjaus;
 import java.util.ArrayList;
 
+/**
+ * Pääluokka.
+ */
 public class NewMain {
 
     public static void main(String[] args) {
-
-        Peli peli = new Peli(4);
-        peli.kaynnistaPeli();
+        PeliOhjaus peliohjaus = new PeliOhjaus();
+        
     }
 
 }

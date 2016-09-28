@@ -1,5 +1,8 @@
 package fi.aleksisv.logiikka;
 
+/**
+ * Luokka kuvaa pelin rahavarastoa.
+ */
 public class Pankki {
 
     private int rahamaara;

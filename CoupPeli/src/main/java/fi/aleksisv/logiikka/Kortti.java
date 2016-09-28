@@ -1,5 +1,8 @@
 package fi.aleksisv.logiikka;
 
+/**
+ * Luokka kuvaa pelin yhtä korttia.
+ */
 public class Kortti {
 
     private String tyyppi;
