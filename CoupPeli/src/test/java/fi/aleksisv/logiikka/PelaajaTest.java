@@ -46,7 +46,7 @@ public class PelaajaTest {
     public void korttienTappaminenToimii1() {
         Pelaaja pelaaja = new Pelaaja("Pelaaja");
         pelaaja.getKorttikasi().lisaaKorttikateen(new Kortti("Contessa"));
-        pelaaja.tapaKortti();
+        pelaaja.paljastaKortti();
         assertEquals(pelaaja.getKorttikasi().koko(), 1);
     }
 
@@ -54,7 +54,7 @@ public class PelaajaTest {
     public void korttienPaljastaminenToimii() {
         Pelaaja pelaaja = new Pelaaja("Pelaaja");
         pelaaja.getKorttikasi().lisaaKorttikateen(new Kortti("Contessa"));
-        pelaaja.tapaKortti();
+        pelaaja.paljastaKortti();
         assertEquals(pelaaja.getKorttikasi().paljastettujenKorttienLukumaara(), 1);
     }
 
@@ -112,11 +112,11 @@ public class PelaajaTest {
         Pelaaja p1 = new Pelaaja("Aino");
         p1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         p1.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
-        p1.tapaKortti();
+        p1.paljastaKortti();
         assertEquals(p1.naytaNakyvatKortit(), "Contessa");
-        p1.tapaKortti();
+        p1.paljastaKortti();
         assertEquals(p1.naytaNakyvatKortit(), "Contessa, Assassin");
-        p1.tapaKortti();
+        p1.paljastaKortti();
         assertEquals(p1.naytaNakyvatKortit(), "Contessa, Assassin");
     }
 
@@ -236,11 +236,11 @@ public class PelaajaTest {
         o.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         o.lisaaKorttiKorttipakkaan(new Kortti("Duke"));
         assertEquals(o.montakoNakyvaaKorttia(), 0);
-        o.tapaKortti();
+        o.paljastaKortti();
         assertEquals(o.montakoNakyvaaKorttia(), 1);
-        o.tapaKortti();
+        o.paljastaKortti();
         assertEquals(o.montakoNakyvaaKorttia(), 2);
-        o.tapaKortti();
+        o.paljastaKortti();
         assertEquals(o.montakoNakyvaaKorttia(), 2);
     }
 

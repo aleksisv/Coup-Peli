@@ -23,7 +23,7 @@ public class Osanottaja {
     }
 
     /**
-     * Luokka vangitsee pelin Osanottajan.
+     * Luokka kuvaa pelin Osanottajaa.
      */
     public boolean haluaaEpailla(Osanottaja osanottaja, Kortti mitaEiOle) {
         if (this.korttikasi.sisaltyykoKortti(mitaEiOle)) {
@@ -31,17 +31,35 @@ public class Osanottaja {
         }
         return false;
     }
-
+    
+    /**
+     * Metodi kuvaa epäilytapahtumaa, jossa metodin kutsuja haluaa väittää, ett
+     * jollakin osanottajalla ei ole tietynlaista korttia kädessään.
+     *
+     * @param osanottaja Osanottaja, jolta epäillään puuttuvan jokin kortti.
+     * @param mitaEiOle Minkä kortin epäillään puuttuvan osanottajan kädestä.
+     *
+     * @return Totuusarvo: sisältyykö kortti pelaajan käteen vai ei.
+     */
     public boolean epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
         if (!osanottaja.getKorttikasi().sisaltyykoKortti(mitaEiOle)) {
-            osanottaja.tapaKortti();
+            osanottaja.paljastaKortti();
             return true;
         } else {
-            this.tapaKortti();
+            this.paljastaKortti();
             return false;
         }
     }
-
+    
+    /**
+     * Metodi antaa merkkijonon, joka on esitys siitä, mitkä kaikki pelaajan
+     * kortit näkyvät muille pelaajile.
+     *
+     *
+     *
+     *
+     * @return Merkkijonoesitys näkyvistä korteista.
+     */
     public String naytaNakyvatKortit() {
         StringBuilder merkkijono = new StringBuilder();
         for (Kortti kortti : this.korttikasi.getKorttikasi()) {
@@ -72,8 +90,16 @@ public class Osanottaja {
     public int getRaha() {
         return raha;
     }
-
-    public void tapaKortti() {
+    
+    /**
+     * Metodi ta
+     *
+     * @param tyyppi Minkä tyyppinen kortti halutaan nostaa.
+     *
+     *
+     * @return Nostettu kortti.
+     */
+    public void paljastaKortti() {
         Korttikasi korttikasi = this.getKorttikasi();
         for (int i = 0; i < this.korttikasi.getKorttikasi().size(); i++) {
             if (this.korttikasi.getKorttikasi().get(i).onkoPaljastettu() == false) {
@@ -147,13 +173,13 @@ public class Osanottaja {
     public void kaytaAssassinate(Pankki pankki, Osanottaja osanottaja) {
         this.menetaRahaa(3);
         pankki.lisaaRahaa(3);
-        osanottaja.tapaKortti();
+        osanottaja.paljastaKortti();
     }
 
     public void kaytaCoup(Pankki pankki, Osanottaja osanottaja) {
         this.menetaRahaa(7);
         pankki.lisaaRahaa(7);
-        osanottaja.tapaKortti();
+        osanottaja.paljastaKortti();
     }
 
     public void kaytaSteal(Pankki pankki, Osanottaja osanottaja) {

@@ -61,12 +61,12 @@ public class Vastustaja extends Osanottaja {
 
     public void kaytaAssassinate(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
-        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).tapaKortti();
+        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).paljastaKortti();
     }
 
     public void kaytaCoup(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
-        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).tapaKortti();
+        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).paljastaKortti();
     }
 
     @Override
@@ -125,8 +125,8 @@ public class Vastustaja extends Osanottaja {
     }
 
     @Override
-    public void tapaKortti() {
-        super.tapaKortti();
+    public void paljastaKortti() {
+        super.paljastaKortti();
     }
 
     @Override

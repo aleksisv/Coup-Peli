@@ -29,10 +29,10 @@ public class OsanottajaTest {
         Osanottaja o = new Osanottaja("Aino");
         o.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
         o.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
-        o.tapaKortti();
+        o.paljastaKortti();
         assertEquals(o.getKorttikasi().getKorttikasi().get(0).onkoPaljastettu(), true);
         assertEquals(o.getKorttikasi().getKorttikasi().get(1).onkoPaljastettu(), false);
-        o.tapaKortti();
+        o.paljastaKortti();
         assertEquals(o.getKorttikasi().getKorttikasi().get(1).onkoPaljastettu(), true);
     }
     
@@ -90,11 +90,11 @@ public class OsanottajaTest {
         Osanottaja osanottaja1 = new Osanottaja("Aino");
         osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         osanottaja1.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
-        osanottaja1.tapaKortti();
+        osanottaja1.paljastaKortti();
         assertEquals(osanottaja1.naytaNakyvatKortit(), "Contessa");
-        osanottaja1.tapaKortti();
+        osanottaja1.paljastaKortti();
         assertEquals(osanottaja1.naytaNakyvatKortit(), "Contessa, Assassin");
-        osanottaja1.tapaKortti();
+        osanottaja1.paljastaKortti();
         assertEquals(osanottaja1.naytaNakyvatKortit(), "Contessa, Assassin");
     }
 
@@ -230,11 +230,11 @@ public class OsanottajaTest {
         o.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         o.lisaaKorttiKorttipakkaan(new Kortti("Duke"));
         assertEquals(o.montakoNakyvaaKorttia(), 0);
-        o.tapaKortti();
+        o.paljastaKortti();
         assertEquals(o.montakoNakyvaaKorttia(), 1);
-        o.tapaKortti();
+        o.paljastaKortti();
         assertEquals(o.montakoNakyvaaKorttia(), 2);
-        o.tapaKortti();
+        o.paljastaKortti();
         assertEquals(o.montakoNakyvaaKorttia(), 2);
     }
     

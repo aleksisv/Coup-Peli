@@ -60,8 +60,8 @@ public class Pelaaja extends Osanottaja {
     }
 
     @Override
-    public void tapaKortti() {
-        super.tapaKortti();
+    public void paljastaKortti() {
+        super.paljastaKortti();
     }
 
     @Override

@@ -90,9 +90,9 @@ public class PeliTest {
         Peli peli = new Peli(4);
         peli.kaynnistaPeli();
         assertEquals(peli.pelissaOlevatOsanottajat(), 4);
-        peli.getOsanottajajoukko().get(0).tapaKortti();
+        peli.getOsanottajajoukko().get(0).paljastaKortti();
         assertEquals(peli.pelissaOlevatOsanottajat(), 4);
-        peli.getOsanottajajoukko().get(0).tapaKortti();
+        peli.getOsanottajajoukko().get(0).paljastaKortti();
         assertEquals(peli.pelissaOlevatOsanottajat(), 3);
     }
 //    @Test

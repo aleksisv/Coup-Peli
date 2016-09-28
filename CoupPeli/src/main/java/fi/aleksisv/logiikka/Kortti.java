@@ -21,11 +21,20 @@ public class Kortti {
     public String getTyyppi() {
         return tyyppi;
     }
-
+    
+    
     public boolean onkoPaljastettu() {
         return onkoPaljastettu;
     }
-
+    
+    /**
+     * Metodi tarkastaa, ovatko kaksi korttia samat. Kortit ovat samat, jos niillä on sama tyyppi.
+     *
+     * @param objekti Kortti, johon kutsuvaa korttia halutaan verrata.
+     *
+     *
+     * @return Totuusarvo.
+     */
     @Override
     public boolean equals(Object objekti) {
         if (objekti == null) {
@@ -41,7 +50,7 @@ public class Kortti {
 
         return true;
     }
-
+    
     public void setOnkoPaljastettu(boolean onkoPaljastettu) {
         this.onkoPaljastettu = onkoPaljastettu;
     }

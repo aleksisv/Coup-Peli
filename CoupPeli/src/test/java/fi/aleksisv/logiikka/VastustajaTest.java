@@ -34,10 +34,10 @@ public class VastustajaTest {
         Vastustaja v = new Vastustaja("Aino");
         v.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
         v.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
-        v.tapaKortti();
+        v.paljastaKortti();
         assertEquals(v.getKorttikasi().getKorttikasi().get(0).onkoPaljastettu(), true);
         assertEquals(v.getKorttikasi().getKorttikasi().get(1).onkoPaljastettu(), false);
-        v.tapaKortti();
+        v.paljastaKortti();
         assertEquals(v.getKorttikasi().getKorttikasi().get(1).onkoPaljastettu(), true);
     }
     
@@ -95,9 +95,9 @@ public class VastustajaTest {
         Vastustaja v1 = new Vastustaja("Aino");
         v1.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         v1.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
-        v1.tapaKortti();
+        v1.paljastaKortti();
         assertEquals(v1.naytaNakyvatKortit(), "Contessa");
-        v1.tapaKortti();
+        v1.paljastaKortti();
         assertEquals(v1.naytaNakyvatKortit(), "Contessa, Assassin");
     }
     
@@ -232,11 +232,11 @@ public class VastustajaTest {
         v.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         v.lisaaKorttiKorttipakkaan(new Kortti("Duke"));
         assertEquals(v.montakoNakyvaaKorttia(), 0);
-        v.tapaKortti();
+        v.paljastaKortti();
         assertEquals(v.montakoNakyvaaKorttia(), 1);
-        v.tapaKortti();
+        v.paljastaKortti();
         assertEquals(v.montakoNakyvaaKorttia(), 2);
-        v.tapaKortti();
+        v.paljastaKortti();
         assertEquals(v.montakoNakyvaaKorttia(), 2);
     }
     
