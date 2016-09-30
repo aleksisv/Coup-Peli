@@ -4,7 +4,9 @@ package fi.aleksisv.kayttoliittyma;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-
+/**
+ * Luokka vastaa ohjelman GUI-puolesta.
+ */
 public class GraafinenKayttoliittyma {
     
     private JFrame ikkuna;

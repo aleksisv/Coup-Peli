@@ -8,7 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-
+/**
+ * Luokka kuvaa nappia, jonka avulla peli käynnistetään.
+ */
 public class PelausNappi extends JPanel implements ActionListener {
     JButton nappi;
 

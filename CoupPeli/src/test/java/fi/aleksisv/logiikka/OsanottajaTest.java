@@ -238,6 +238,17 @@ public class OsanottajaTest {
         assertEquals(o.montakoNakyvaaKorttia(), 2);
     }
     
+    @Test
+    public void kaytaStealToimii1() {
+        Osanottaja o = new Osanottaja("Azra");
+        Osanottaja kohde = new Osanottaja("Hmh");
+        Pankki pankki = new Pankki();
+        kohde.saaRahaa(1);
+        o.kaytaSteal(pankki, kohde);
+        assertEquals(o.getRaha(), 4);
+        assertEquals(kohde.getRaha(), 1);
+    }
+    
     @BeforeClass
     public static void setUpClass() {
     }

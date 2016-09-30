@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
- * Luokka kuvaa Coup-Peliä. Peli-luokan olio pitää sisältää pelaajan, muita osanottajia (vastustajat),
- * Pankin, Korttipakan, sekä muita tarpeellisia olioita.
+ * Luokka kuvaa Coup-Peliä. Peli-luokan olio pitää sisältää pelaajan, muita
+ * osanottajia (vastustajat), Pankin, Korttipakan, sekä muita tarpeellisia
+ * olioita.
  */
 public class Peli {
 
@@ -72,26 +73,19 @@ public class Peli {
         }
     }
 
-    public void pelaaVuoro(Osanottaja osanottaja) {
-//        boolean kaytaPoistettavaa = false;
-//        Osanottaja poistettava = new Osanottaja("A");
-//        for (Osanottaja o : osanottajajoukko) {
-//            if (o.getKorttikasi().paljastettujenKorttienLukumaara() == 2) {
-//                poistettava = o;
-//                kaytaPoistettavaa = true;
-//            }
-//        }
-//        if (kaytaPoistettavaa) {
-//            this.havinnytJoukko.add(poistettava);
-//            osanottajajoukko.remove(poistettava);
-//        }
-//
-//        kerroTilanne();
-//
-//        if (!osanottajajoukko.contains(this.pelinPelaaja)) {
-//            pysayta = true;
-//            System.out.println("Hävisit pelin.");
-//        }
+    public void paivitaTilanne() {
+        boolean kaytaPoistettavaa = false;
+        Osanottaja poistettava = new Osanottaja("");
+        for (Osanottaja o : osanottajajoukko) {
+            if(o.getKorttikasi().paljastettujenKorttienLukumaara() == 2) {
+                poistettava = o;
+                kaytaPoistettavaa = true;
+            }
+        }
+        if(kaytaPoistettavaa) {
+            this.havinnytJoukko.add(poistettava);
+            this.osanottajajoukko.remove(poistettava);
+        }
     }
 
     public Vastustaja kukaVastustajistaEpailee(Osanottaja osanottaja, int siirtoVaihtoehto) {
@@ -171,6 +165,11 @@ public class Peli {
             System.out.println("Pudonnut pelistä: ");
             System.out.println("    Nimi: " + o + ", rahaa: " + o.getRaha() + ", näkyvät kortit: " + o.naytaNakyvatKortit());
         }
+        
+        if (!osanottajajoukko.contains(this.pelinPelaaja)) {
+            pysayta = true;
+            System.out.println("Hävisit pelin.");
+        }
     }
 
     public void setVuoronumero(int vuoronumero) {
@@ -178,11 +177,10 @@ public class Peli {
     }
 
     private HashMap<Integer, Kortti> luoSiirtonumerot() {
-        HashMap<Integer,Kortti> mappi = new HashMap<Integer, Kortti>();
+        HashMap<Integer, Kortti> mappi = new HashMap<Integer, Kortti>();
         mappi.put(4, new Kortti("Duke"));
         mappi.put(5, new Kortti("Assassin"));
         mappi.put(6, new Kortti("Captain"));
-        
         return mappi;
     }
 
@@ -193,5 +191,9 @@ public class Peli {
             }
         }
         return false;
+    }
+
+    public HashMap<Integer, Kortti> getSiirtoNumerot() {
+        return siirtoNumerot;
     }
 }

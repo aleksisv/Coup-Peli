@@ -24,17 +24,6 @@ public class Pelaaja extends Osanottaja {
     }
 
     @Override
-    public boolean haluaaEpailla(Osanottaja osanottaja, Kortti mitaEiOle) {
-        System.out.println("Haluatko epäillä vastustajan edellistä siirtoa?");
-        Scanner s = new Scanner(System.in);
-        String vastaus = s.nextLine();
-        if (vastaus.equalsIgnoreCase("Kyllä|Joo")) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public void setRaha(int maara) {
         super.setRaha(maara);
     }
@@ -82,10 +71,6 @@ public class Pelaaja extends Osanottaja {
     @Override
     public String toString() {
         return super.getNimi();
-    }
-
-    public void epaileSiirtoa(Osanottaja osanottaja, int siirtoVaihtoehto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

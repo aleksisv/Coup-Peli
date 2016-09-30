@@ -240,6 +240,17 @@ public class VastustajaTest {
         assertEquals(v.montakoNakyvaaKorttia(), 2);
     }
     
+    @Test
+    public void kaytaStealToimii1() {
+        Vastustaja v = new Vastustaja("Azra");
+        Osanottaja kohde = new Osanottaja("Hmh");
+        Pankki pankki = new Pankki();
+        kohde.saaRahaa(1);
+        v.kaytaSteal(pankki, kohde);
+        assertEquals(v.getRaha(), 4);
+        assertEquals(kohde.getRaha(), 1);
+    }
+    
     @BeforeClass
     public static void setUpClass() {
     }

@@ -5,6 +5,9 @@ import java.util.Random;
 import java.util.Scanner;
 import javax.swing.JFrame;
 
+/**
+ * Luokka vastaa pelin ohjauksesta.
+ */
 public class PeliOhjaus {
 
     private Scanner lukija;
@@ -15,7 +18,7 @@ public class PeliOhjaus {
     public PeliOhjaus() {
         this.lukija = new Scanner(System.in);
         this.r = new Random();
-        this.GKL = new GraafinenKayttoliittyma();
+//        this.GKL = new GraafinenKayttoliittyma();
         alkutoimet();
         pelaa();
     }
@@ -37,22 +40,43 @@ public class PeliOhjaus {
 
     private void pelaa() {
         while (this.peli.getOsanottajajoukko().size() > 1) {
-            siirtovalinta(this.peli.getOsanottajajoukko().get(this.peli.getVuoronumero() % this.peli.getOsanottajajoukko().size()));
-            ilmoitaSiirtovalinnasta(this.peli.getOsanottajajoukko().get(this.peli.getVuoronumero() % this.peli.getOsanottajajoukko().size()), 1);
+            Osanottaja keneenKohdistuu = null;
+            boolean kohdistuukoJohonkuhun = false;
+            Osanottaja pelivuorossa = this.peli.getOsanottajajoukko().get(this.peli.getVuoronumero() % this.peli.getOsanottajajoukko().size());
+            int siirtovalinta = siirtovalinta(pelivuorossa);
+            if(siirtovalinta == 3 || siirtovalinta == 5 ||siirtovalinta == 6) {
+                keneenKohdistuu = selvitaKeneenSiirtoKohdistuu(pelivuorossa);
+            }
+            this.suoritaSiirto(pelivuorossa, keneenKohdistuu, siirtovalinta);
             this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
+            this.peli.paivitaTilanne();
             this.peli.kerroTilanne();
         }
     }
-
-    private void siirtovalinta(Osanottaja o) {
-        if (o instanceof Pelaaja) {
-            pelaajanSiirtovalinta((Pelaaja) o);
-        } else if (o instanceof Vastustaja) {
-            vastustajanSiirtovalinta((Vastustaja) o);
+    
+    private Osanottaja selvitaKeneenSiirtoKohdistuu(Osanottaja pelivuorossa) {
+        int kohde = 0;
+        if (pelivuorossa instanceof Pelaaja) {
+            System.out.println("Kehen haluat kohdistaa siirron?");
+            kohde = Integer.parseInt(lukija.nextLine());
+        } else if (pelivuorossa instanceof Vastustaja) {
+            kohde = r.nextInt(this.peli.getOsanottajajoukko().size());
+            if(this.peli.getOsanottajajoukko().get(kohde) == pelivuorossa) {
+                kohde = (kohde + 1) % this.peli.getOsanottajajoukko().size();
+            }
         }
+        return this.peli.getOsanottajajoukko().get(kohde);
     }
 
-    private void pelaajanSiirtovalinta(Pelaaja pelaaja) {
+    private int siirtovalinta(Osanottaja o) {
+        if (o instanceof Pelaaja) {
+            return pelaajanSiirtovalinta((Pelaaja) o);
+        } else if (o instanceof Vastustaja) {
+            return vastustajanSiirtovalinta((Vastustaja) o);
+        } else return 0;
+    }
+
+    private int pelaajanSiirtovalinta(Pelaaja pelaaja) {
         System.out.println("Vuoro numero " + this.peli.getVuoronumero() + ". \n");
         System.out.println("Minkä siirron haluat tehdä?");
         System.out.println("Vaihtoehdot: (1) Income (ota 1 kolikko pankista)\n"
@@ -66,43 +90,19 @@ public class PeliOhjaus {
         while (true) {
             int i = Integer.parseInt(lukija.nextLine());
             if (1 <= i && i <= 7) {
-                System.out.println("Valitsit vaihtoehdon " + i + ".\n");
-                if (i == 1) {
-                    pelaaja.kaytaBasicIncome(this.peli.getPankki());
-                    break;
-                } else if (i == 2) {
-                    pelaaja.kaytaForeignAid(this.peli.getPankki());
-                    break;
-                } else if (i == 3) {
+                if (i == 3) {
                     if (pelaaja.getRaha() < 7) {
                         System.out.println("Sinulla ei ole rahaa tähän siirtoon. Valitse joku toinen. \n");
                         continue;
                     }
-                    System.out.println("Kenet haluat Coupata?");
-                    int coupattava = Integer.parseInt(lukija.nextLine());
-                    pelaaja.kaytaCoup(this.peli.getPankki(), this.peli.getOsanottajajoukko().get(coupattava));
-                    break;
-                } else if (i == 4) {
-                    pelaaja.kaytaTaxes(this.peli.getPankki());
-                    break;
+                
                 } else if (i == 5) {
                     if (pelaaja.getRaha() < 3) {
                         System.out.println("Sinulla ei ole rahaa tähän siirtoon. Valitse joku toinen. \n");
                         continue;
                     }
-                    System.out.println("Kenet haluat Assassinoida");
-                    int assassinoitava = Integer.parseInt(lukija.nextLine());
-                    pelaaja.kaytaAssassinate(this.peli.getPankki(), this.peli.getOsanottajajoukko().get(assassinoitava));
-                    break;
-                } else if (i == 6) {
-                    System.out.println("Keneltä haluat varastaa?");
-                    int varkaudenKohde = Integer.parseInt(lukija.nextLine());
-                    pelaaja.kaytaSteal(this.peli.getPankki(), this.peli.getOsanottajajoukko().get(varkaudenKohde));
-                    break;
-                } else if (i == 7) {
-                    System.out.println("Toiminnallisuutta ei vielä tueta.");
-                    continue;
                 }
+                return i;
             }
             System.out.println("Anna sääntöjen mukainen vastaus. \n");
         }
@@ -113,46 +113,28 @@ public class PeliOhjaus {
         return r.nextInt(7) + 1;
     }
 
-    private void ilmoitaSiirtovalinnasta(Osanottaja osanottaja, int siirtoVaihtoehto) {
-        System.out.println("Osanottaja " + osanottaja + " haluaa yrittää siirtoa " + siirtoVaihtoehto + ".");
-        boolean pelaajanEpaily = false;
-        boolean pelaajanBlokkaus = true;
-        Vastustaja vastustajaJokaEpailee = this.peli.kukaVastustajistaEpailee(osanottaja, siirtoVaihtoehto);
-        boolean vastustajanBlokki = this.peli.haluaakoJokuVastustajistaBlokata(osanottaja, siirtoVaihtoehto);
-        if (!osanottaja.equals(this.peli.getPelaaja())) {
-            System.out.println("\nHaluatko epäillä siirtoa?");
-            pelaajanEpaily = Boolean.parseBoolean(lukija.nextLine());
-            System.out.println("\nHaluatko blokata siirron?");
-            pelaajanBlokkaus = Boolean.parseBoolean(lukija.nextLine());
-        }
-
-        if (vastustajanBlokki) {
-            return;
-        } else if (pelaajanBlokkaus) {
-            return;
-        } else if (pelaajanEpaily) {
-            this.peli.getPelaaja().epaileSiirtoa(osanottaja, siirtoVaihtoehto);
-        } else if (!(vastustajaJokaEpailee == null)) {
-            vastustajaJokaEpailee.epaileSiirtoa(osanottaja, siirtoVaihtoehto);
+    private void suoritaSiirto(Osanottaja pelivuorossa, Osanottaja kohde, int siirtoVaihtoehto) {
+        if (pelivuorossa.equals(this.peli.getPelaaja())) {
+            suoritaPelaajanSiirto(pelivuorossa, kohde, siirtoVaihtoehto);
         } else {
-            suoritaSiirto(osanottaja, siirtoVaihtoehto);
+            suoritaVastustajanSiirto(pelivuorossa, kohde, siirtoVaihtoehto);
         }
     }
 
-    private void suoritaSiirto(Osanottaja osanottaja, int siirtoVaihtoehto) {
-        if (osanottaja.equals(this.peli.getPelaaja())) {
-            suoritaPelaajanSiirto(siirtoVaihtoehto);
-        } else {
-            suoritaVastustajanSiirto(siirtoVaihtoehto);
+    private void suoritaPelaajanSiirto(Osanottaja pelivuorossa, Osanottaja kohde, int siirtoVaihtoehto) {
+        Pankki pankki = this.peli.getPankki();
+        Pelaaja pelaaja = (Pelaaja) pelivuorossa;
+        if(siirtoVaihtoehto == 1) {
+            pelaaja.kaytaBasicIncome(pankki);
+        } else if (siirtoVaihtoehto == 2) {
+            pelaaja.kaytaForeignAid(pankki);
+        } else if (siirtoVaihtoehto == 3) {
+            pelaaja.kaytaAssassinate(pankki, kohde);
         }
     }
 
-    private void suoritaPelaajanSiirto(int siirtoVaihtoehto) {
-
-    }
-
-    private void suoritaVastustajanSiirto(int siirtoVaihtoehto) {
-
+    private void suoritaVastustajanSiirto(Osanottaja pelivuorossa, Osanottaja kohde, int siirtoVaihtoehto) {
+        
     }
 
 }
