@@ -21,7 +21,7 @@ public class Korttikasi {
     public int koko() {
         return kortit.size();
     }
-    
+
     /**
      * Metodi tarkastaa, sisältyykö jokin kortti pelaajan käteen.
      *
@@ -46,9 +46,10 @@ public class Korttikasi {
     public void setKortit(ArrayList<Kortti> kortit) {
         this.kortit = kortit;
     }
-    
+
     /**
-     * Metodi muuttaa kädessä olevan kortin muille pelaajille näkyväksi, eli paljastaa sen.
+     * Metodi muuttaa kädessä olevan kortin muille pelaajille näkyväksi, eli
+     * paljastaa sen.
      *
      * @param paljastettavanKohta Missä kohtaa oleva kortti halutaan paljastaa.
      *
@@ -58,9 +59,10 @@ public class Korttikasi {
     public void paljastaPakastaTassaKohdassaOleva(int paljastettavanKohta) {
         this.kortit.get(paljastettavanKohta).setOnkoPaljastettu(true);
     }
-    
+
     /**
-     * Metodi lisää korttikäteen kaksi satunnaista korttia annetusta korttipakasta.
+     * Metodi lisää korttikäteen kaksi satunnaista korttia annetusta
+     * korttipakasta.
      *
      * @param pakka Korttipakka, josta kortit käteen lisätään.
      *
@@ -74,7 +76,7 @@ public class Korttikasi {
             lisaaKorttikateen(pakka.nostaPakastaTassaKohdassaOleva(i));
         }
     }
-    
+
     /**
      * Metodi laskee, kuinka monta paljastettua korttia pelaajalla on kädessään.
      *
@@ -92,14 +94,14 @@ public class Korttikasi {
         }
         return lukumaara;
     }
-    
+
     /**
      * Metodi lisää halutun tyyppisen kortin korttikäteen.
      *
      * @param kortti Mikä kortti käteen halutaan lisätä.
      *
      *
-     * 
+     *
      */
     public void lisaaKorttikateen(Kortti kortti) {
         if (this.kortit.size() < 2) {

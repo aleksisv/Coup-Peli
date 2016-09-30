@@ -25,6 +25,19 @@ public class KorttikasiTest {
         korttikasi.lisaaKaksiSatunnaistaKorttia(pakka);
         assertEquals(korttikasi.koko(), 2);
     }
+    
+    @Test
+    public void lisaaKorttikateenToimii1() {
+        Korttikasi korttikasi = new Korttikasi();
+        Korttipakka pakka = new Korttipakka();
+        assertEquals(korttikasi.koko(), 0);
+        korttikasi.lisaaKorttikateen(pakka.getPakka().get(0));
+        assertEquals(korttikasi.koko(), 1);
+        korttikasi.lisaaKorttikateen(pakka.getPakka().get(0));
+        assertEquals(korttikasi.koko(), 2);
+        korttikasi.lisaaKorttikateen(pakka.getPakka().get(0));
+        assertEquals(korttikasi.koko(), 2);
+    }
 
     @BeforeClass
     public static void setUpClass() {

@@ -1,4 +1,3 @@
-
 package fi.aleksisv.kayttoliittyma;
 
 import java.awt.BorderLayout;
@@ -12,6 +11,7 @@ import javax.swing.JPanel;
  * Luokka kuvaa nappia, jonka avulla peli käynnistetään.
  */
 public class PelausNappi extends JPanel implements ActionListener {
+
     JButton nappi;
 
     public PelausNappi() {
@@ -26,5 +26,5 @@ public class PelausNappi extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

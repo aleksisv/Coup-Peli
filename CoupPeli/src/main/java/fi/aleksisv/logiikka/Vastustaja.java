@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Luokka vangitsee pelin sellaisen osanottajan, jota ohjaa tekoäly ja jota vastaan pelaaja pelaa.
+ * Luokka vangitsee pelin sellaisen osanottajan, jota ohjaa tekoäly ja jota
+ * vastaan pelaaja pelaa.
  */
 public class Vastustaja extends Osanottaja {
 
@@ -45,13 +46,13 @@ public class Vastustaja extends Osanottaja {
     }
 
     @Override
-    public void kaytaBasicIncome(Pankki pankki) {
-        super.kaytaBasicIncome(pankki);
+    public void kaytaPerustulo(Pankki pankki) {
+        super.kaytaPerustulo(pankki);
     }
 
     @Override
-    public void kaytaForeignAid(Pankki pankki) {
-        super.kaytaForeignAid(pankki); //To change body of generated methods, choose Tools | Templates.
+    public void kaytaUlkomaanapu(Pankki pankki) {
+        super.kaytaUlkomaanapu(pankki); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -59,34 +60,34 @@ public class Vastustaja extends Osanottaja {
         super.lisaaKorttiKorttipakkaan(kortti);
     }
 
-    public void kaytaAssassinate(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
+    public void kaytaAssassinoi(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
         osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).paljastaKortti();
     }
 
-    public void kaytaCoup(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
+    public void kaytaVallankaappaus(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
         osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).paljastaKortti();
     }
 
     @Override
-    public void kaytaSteal(Pankki pankki, Osanottaja osanottaja) {
-        super.kaytaSteal(pankki, osanottaja); //To change body of generated methods, choose Tools | Templates.
+    public void kaytaVarasta(Pankki pankki, Osanottaja osanottaja) {
+        super.kaytaVarasta(pankki, osanottaja);
     }
 
     @Override
-    public void kaytaTaxes(Pankki pankki) {
-        super.kaytaTaxes(pankki); //To change body of generated methods, choose Tools | Templates.
+    public void kaytaVerotus(Pankki pankki) {
+        super.kaytaVerotus(pankki);
     }
 
     @Override
     public String naytaNakyvatKortit() {
-        return super.naytaNakyvatKortit(); //To change body of generated methods, choose Tools | Templates.
+        return super.naytaNakyvatKortit();
     }
 
     @Override
-    public boolean haluaaBlokata(Osanottaja osanottaja, Kortti kortti) {
-        return super.haluaaBlokata(osanottaja, kortti); //To change body of generated methods, choose Tools | Templates.
+    public boolean haluaaTorjua(Osanottaja osanottaja, Kortti kortti) {
+        return super.haluaaTorjua(osanottaja, kortti);
     }
 
     @Override
@@ -135,7 +136,7 @@ public class Vastustaja extends Osanottaja {
     }
 
     public void epaileSiirtoa(Osanottaja osanottaja, int siirtoVaihtoehto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

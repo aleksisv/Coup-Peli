@@ -54,18 +54,18 @@ public class Pelaaja extends Osanottaja {
     }
 
     @Override
-    public void kaytaBasicIncome(Pankki pankki) {
-        super.kaytaBasicIncome(pankki);
+    public void kaytaPerustulo(Pankki pankki) {
+        super.kaytaPerustulo(pankki);
     }
 
     @Override
-    public void kaytaForeignAid(Pankki pankki) {
-        super.kaytaForeignAid(pankki);
+    public void kaytaUlkomaanapu(Pankki pankki) {
+        super.kaytaUlkomaanapu(pankki);
     }
 
     @Override
-    public void kaytaAssassinate(Pankki pankki, Osanottaja osanottaja) {
-        super.kaytaAssassinate(pankki, osanottaja);
+    public void kaytaAssassinoi(Pankki pankki, Osanottaja osanottaja) {
+        super.kaytaAssassinoi(pankki, osanottaja);
     }
 
     @Override

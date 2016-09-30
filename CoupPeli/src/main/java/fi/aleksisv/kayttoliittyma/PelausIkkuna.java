@@ -1,4 +1,3 @@
-
 package fi.aleksisv.kayttoliittyma;
 
 import java.awt.event.WindowAdapter;
@@ -10,12 +9,11 @@ import javax.swing.JFrame;
  * mahdollisuuden tehdä siirtoja.
  */
 public class PelausIkkuna extends JFrame {
-    
+
     public PelausIkkuna() {
         setTitle("Coup-Peli");
         setSize(400, 300);
-        
+
     }
-    
-    
+
 }

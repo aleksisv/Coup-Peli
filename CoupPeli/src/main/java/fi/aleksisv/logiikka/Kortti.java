@@ -22,13 +22,18 @@ public class Kortti {
         return tyyppi;
     }
     
-    
+    /**
+     * Metodi tarkastaa, onko kortti paljastettu, eli pitääkö sen näkyä muille pelaajille.
+     *
+     * @return Totuusarvo.
+     */
     public boolean onkoPaljastettu() {
         return onkoPaljastettu;
     }
-    
+
     /**
-     * Metodi tarkastaa, ovatko kaksi korttia samat. Kortit ovat samat, jos niillä on sama tyyppi.
+     * Metodi tarkastaa, ovatko kaksi korttia samat. Kortit ovat samat, jos
+     * niillä on sama tyyppi.
      *
      * @param objekti Kortti, johon kutsuvaa korttia halutaan verrata.
      *

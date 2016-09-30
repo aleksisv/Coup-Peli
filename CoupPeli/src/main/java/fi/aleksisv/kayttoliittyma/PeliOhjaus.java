@@ -13,12 +13,12 @@ public class PeliOhjaus {
     private Scanner lukija;
     private Random r;
     private Peli peli;
-    GraafinenKayttoliittyma GKL;
+    GraafinenKayttoliittyma gkl;
 
     public PeliOhjaus() {
         this.lukija = new Scanner(System.in);
         this.r = new Random();
-//        this.GKL = new GraafinenKayttoliittyma();
+//        this.gkl = new GraafinenKayttoliittyma();
         alkutoimet();
         pelaa();
     }
@@ -32,7 +32,8 @@ public class PeliOhjaus {
         luoPeli(i);
 
     }
-
+    
+    
     private void luoPeli(int pelaajaMaara) {
         this.peli = new Peli(pelaajaMaara);
         peli.luoOsanottajat();
@@ -41,10 +42,9 @@ public class PeliOhjaus {
     private void pelaa() {
         while (this.peli.getOsanottajajoukko().size() > 1) {
             Osanottaja keneenKohdistuu = null;
-            boolean kohdistuukoJohonkuhun = false;
             Osanottaja pelivuorossa = this.peli.getOsanottajajoukko().get(this.peli.getVuoronumero() % this.peli.getOsanottajajoukko().size());
             int siirtovalinta = siirtovalinta(pelivuorossa);
-            if(siirtovalinta == 3 || siirtovalinta == 5 ||siirtovalinta == 6) {
+            if (siirtovalinta == 3 || siirtovalinta == 5 || siirtovalinta == 6) {
                 keneenKohdistuu = selvitaKeneenSiirtoKohdistuu(pelivuorossa);
             }
             this.suoritaSiirto(pelivuorossa, keneenKohdistuu, siirtovalinta);
@@ -52,8 +52,9 @@ public class PeliOhjaus {
             this.peli.paivitaTilanne();
             this.peli.kerroTilanne();
         }
+        System.out.println("Peli on ohi. Voittaja: \n   " + this.peli.getOsanottajajoukko().get(0));
     }
-    
+
     private Osanottaja selvitaKeneenSiirtoKohdistuu(Osanottaja pelivuorossa) {
         int kohde = 0;
         if (pelivuorossa instanceof Pelaaja) {
@@ -61,7 +62,7 @@ public class PeliOhjaus {
             kohde = Integer.parseInt(lukija.nextLine());
         } else if (pelivuorossa instanceof Vastustaja) {
             kohde = r.nextInt(this.peli.getOsanottajajoukko().size());
-            if(this.peli.getOsanottajajoukko().get(kohde) == pelivuorossa) {
+            if (this.peli.getOsanottajajoukko().get(kohde) == pelivuorossa) {
                 kohde = (kohde + 1) % this.peli.getOsanottajajoukko().size();
             }
         }
@@ -73,19 +74,21 @@ public class PeliOhjaus {
             return pelaajanSiirtovalinta((Pelaaja) o);
         } else if (o instanceof Vastustaja) {
             return vastustajanSiirtovalinta((Vastustaja) o);
-        } else return 0;
+        } else {
+            return 0;
+        }
     }
 
     private int pelaajanSiirtovalinta(Pelaaja pelaaja) {
-        System.out.println("Vuoro numero " + this.peli.getVuoronumero() + ". \n");
+        System.out.println("Vuoro " + this.peli.getVuoronumero() + ". \n");
         System.out.println("Minkä siirron haluat tehdä?");
-        System.out.println("Vaihtoehdot: (1) Income (ota 1 kolikko pankista)\n"
-                + "             (2) Foreign Aid (ota kaksi kolikkoa pankista)\n"
-                + "             (3) Coup (maksaa seitsemän kolikkoa, tapa mikä tahansa kortti)\n"
-                + "             (4) Taxes (ota kolme kolikkoa pankista)\n"
-                + "             (5) Assassinate (maksa kolme kolikkoa, tapa mikä tahansa kortti)\n"
-                + "             (6) Steal (ota kaksi kolikkoa toiselta pelaajalta)\n"
-                + "             (7) Swap Influence (nosta kaksi korttia pakasta ja vaihda yksi omaan pakkaasi).");
+        System.out.println("Vaihtoehdot: (1) Perustulo (ota 1 kolikko pankista)\n"
+                + "             (2) Ulkomaanapu (ota 2 kolikkoa pankista)\n"
+                + "             (3) Vallankaappaus (maksaa 7 kolikkoa, tapa mikä tahansa kortti)\n"
+                + "             (4) Verotus (ota 3 kolikkoa pankista)\n"
+                + "             (5) Assassinoi (maksa 3 kolikkoa, tapa mikä tahansa kortti)\n"
+                + "             (6) Varasta (ota 2 kolikkoa toiselta pelaajalta)\n"
+                + "             (7) Swap Influence (nosta 2 korttia pakasta ja vaihda 1 omaan pakkaasi).");
 
         while (true) {
             int i = Integer.parseInt(lukija.nextLine());
@@ -95,7 +98,7 @@ public class PeliOhjaus {
                         System.out.println("Sinulla ei ole rahaa tähän siirtoon. Valitse joku toinen. \n");
                         continue;
                     }
-                
+
                 } else if (i == 5) {
                     if (pelaaja.getRaha() < 3) {
                         System.out.println("Sinulla ei ole rahaa tähän siirtoon. Valitse joku toinen. \n");
@@ -124,17 +127,37 @@ public class PeliOhjaus {
     private void suoritaPelaajanSiirto(Osanottaja pelivuorossa, Osanottaja kohde, int siirtoVaihtoehto) {
         Pankki pankki = this.peli.getPankki();
         Pelaaja pelaaja = (Pelaaja) pelivuorossa;
-        if(siirtoVaihtoehto == 1) {
-            pelaaja.kaytaBasicIncome(pankki);
+        if (siirtoVaihtoehto == 1) {
+            pelaaja.kaytaPerustulo(pankki);
         } else if (siirtoVaihtoehto == 2) {
-            pelaaja.kaytaForeignAid(pankki);
+            pelaaja.kaytaUlkomaanapu(pankki);
         } else if (siirtoVaihtoehto == 3) {
-            pelaaja.kaytaAssassinate(pankki, kohde);
+            pelaaja.kaytaVallankaappaus(pankki, kohde);
+        } else if (siirtoVaihtoehto == 4) {
+            pelaaja.kaytaVerotus(pankki);
+        } else if (siirtoVaihtoehto == 5) {
+            pelaaja.kaytaAssassinoi(pankki, kohde);
+        } else if (siirtoVaihtoehto == 6) {
+            pelaaja.kaytaVarasta(pankki, kohde);
         }
     }
 
     private void suoritaVastustajanSiirto(Osanottaja pelivuorossa, Osanottaja kohde, int siirtoVaihtoehto) {
-        
+        Pankki pankki = this.peli.getPankki();
+        Vastustaja vastustaja = (Vastustaja) pelivuorossa;
+        if (siirtoVaihtoehto == 1) {
+            vastustaja.kaytaPerustulo(pankki);
+        } else if (siirtoVaihtoehto == 2) {
+            vastustaja.kaytaUlkomaanapu(pankki);
+        } else if (siirtoVaihtoehto == 3) {
+            vastustaja.kaytaVallankaappaus(pankki, kohde);
+        } else if (siirtoVaihtoehto == 4) {
+            vastustaja.kaytaVerotus(pankki);
+        } else if (siirtoVaihtoehto == 5) {
+            vastustaja.kaytaAssassinoi(pankki, kohde);
+        } else if (siirtoVaihtoehto == 6) {
+            vastustaja.kaytaVarasta(pankki, kohde);
+        }
     }
 
 }
