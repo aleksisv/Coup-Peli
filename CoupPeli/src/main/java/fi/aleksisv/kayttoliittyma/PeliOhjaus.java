@@ -41,13 +41,36 @@ public class PeliOhjaus {
 
     private void pelaa() {
         while (this.peli.getOsanottajajoukko().size() > 1) {
+            boolean epailikoTaiTorjuikoJoku = false;
             Osanottaja keneenKohdistuu = null;
             Osanottaja pelivuorossa = this.peli.getOsanottajajoukko().get(this.peli.getVuoronumero() % this.peli.getOsanottajajoukko().size());
             int siirtovalinta = siirtovalinta(pelivuorossa);
             if (siirtovalinta == 3 || siirtovalinta == 5 || siirtovalinta == 6) {
                 keneenKohdistuu = selvitaKeneenSiirtoKohdistuu(pelivuorossa);
+                if (keneenKohdistuu instanceof Pelaaja) {
+                    if(haluaakoPelaajaTorjuaSiirron(siirtovalinta)) {
+                        keneenKohdistuu.torju(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
+                        epailikoTaiTorjuikoJoku = true;
+                    }
+                    if(haluaakoPelaajaEpaillaSiirtoa(siirtovalinta)) {
+                        keneenKohdistuu.epaile(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
+                        epailikoTaiTorjuikoJoku = true;
+                    }
+                } else {
+                    if(keneenKohdistuu.haluaaTorjua(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta))){
+                        keneenKohdistuu.torju(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
+                        epailikoTaiTorjuikoJoku = true;
+                    }
+                    
+                    if(keneenKohdistuu.haluaaEpailla(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta))){
+                        keneenKohdistuu.epaile(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
+                        epailikoTaiTorjuikoJoku = true;
+                    }   
+                }
             }
-            this.suoritaSiirto(pelivuorossa, keneenKohdistuu, siirtovalinta);
+            if(!epailikoTaiTorjuikoJoku) {
+                this.suoritaSiirto(pelivuorossa, keneenKohdistuu, siirtovalinta);
+            }
             this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
             this.peli.paivitaTilanne();
             this.peli.kerroTilanne();
@@ -158,6 +181,17 @@ public class PeliOhjaus {
         } else if (siirtoVaihtoehto == 6) {
             vastustaja.kaytaVarasta(pankki, kohde);
         }
+    }
+
+    private boolean haluaakoPelaajaTorjuaSiirron(int siirtovalinta) {
+        System.out.println("Vastustaja teki valinnan " + siirtovalinta + ". Haluatko"
+        + " torjua siirron?");
+        return Boolean.parseBoolean(lukija.nextLine());
+    }
+
+    private boolean haluaakoPelaajaEpaillaSiirtoa(int siirtovalinta) {
+        System.out.println("Haluatko epäillä vastustajan siirtoa " + siirtovalinta + "?");
+        return Boolean.parseBoolean(lukija.nextLine());
     }
 
 }
