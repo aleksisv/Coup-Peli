@@ -156,6 +156,8 @@ public class OsanottajaTest {
         o.annaRahaaPankille(1, pankki);
         assertEquals(o.getRaha(), 1);
         assertEquals(pankki.getRahamaara(), 1 + pankinAlkurahat);
+        o.annaRahaaPankille(2, pankki);
+        assertEquals(o.getRaha(), 0);
     }
 
     @Test

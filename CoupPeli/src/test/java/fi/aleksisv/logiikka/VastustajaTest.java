@@ -250,6 +250,16 @@ public class VastustajaTest {
         assertEquals(v.getRaha(), 4);
         assertEquals(kohde.getRaha(), 1);
     }
+    
+    @Test
+    public void paljastaKorttiToimii1() {
+        Vastustaja v = new Vastustaja("Azra");
+        Korttipakka pakka = new Korttipakka();
+        v.nostaSatunnainenKorttiPakasta(pakka);
+        assertEquals(v.getKorttikasi().getKorttikasi().get(0).onkoPaljastettu(), false);
+        v.paljastaKortti();
+        assertEquals(v.getKorttikasi().getKorttikasi().get(0).onkoPaljastettu(), true);
+    }
 
     @BeforeClass
     public static void setUpClass() {

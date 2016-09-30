@@ -62,12 +62,14 @@ public class Vastustaja extends Osanottaja {
 
     public void kaytaAssassinoi(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
-        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).paljastaKortti();
+        Osanottaja assassinoitava = osanottajajoukko.get(r.nextInt(osanottajajoukko.size()));
+        assassinoitava.paljastaKortti();
     }
 
     public void kaytaVallankaappaus(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
-        osanottajajoukko.get(r.nextInt(osanottajajoukko.size())).paljastaKortti();
+        Osanottaja kohde = osanottajajoukko.get(r.nextInt(osanottajajoukko.size()));
+        kohde.paljastaKortti();
     }
 
     @Override
@@ -108,16 +110,6 @@ public class Vastustaja extends Osanottaja {
     @Override
     public void saaRahaa(int maara) {
         super.saaRahaa(maara);
-    }
-
-    @Override
-    public void setKasi(Korttikasi kasi) {
-        super.setKasi(kasi);
-    }
-
-    @Override
-    public void setNimi(String nimi) {
-        super.setNimi(nimi);
     }
 
     @Override

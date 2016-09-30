@@ -31,11 +31,9 @@ public class Peli {
         this.korttipakka = new Korttipakka();
         this.siirtoNumerot = luoSiirtonumerot();
     }
-    
+
     /**
      * Metodi pistää pelin käyntiin. Tällä hetkellä metodi ei ole käytössä.
-     *
-     * @param osanottaja Osanottaja, jolle kortit annetaan.
      *
      */
     public void kaynnistaPeli() {
@@ -52,7 +50,7 @@ public class Peli {
     public int getVuoronumero() {
         return vuoronumero;
     }
-    
+
     /**
      * Metodi luo pelin osanottajat.
      *
@@ -65,7 +63,7 @@ public class Peli {
         }
 
     }
-    
+
     /**
      * Metodi luo vastustajan ja lisää sen osanottajajoukkoon.
      *
@@ -77,7 +75,7 @@ public class Peli {
         lisaaVastustaja(vastustaja);
         annaKortit(vastustaja);
     }
-    
+
     /**
      * Metodi lisää vastustajan osanottajajoukkoon.
      *
@@ -87,7 +85,7 @@ public class Peli {
     public void lisaaVastustaja(Vastustaja vastustaja) {
         this.osanottajajoukko.add(vastustaja);
     }
-    
+
     /**
      * Metodi antaa parametrina annetulle osanottajalle kortit pelin alussa.
      *
@@ -95,11 +93,11 @@ public class Peli {
      *
      */
     public void annaKortit(Osanottaja osanottaja) {
-        for (int i = 0; i < 2; i++) {
-            osanottaja.getKorttikasi().lisaaKorttikateen(this.korttipakka.nostaPakastaSatunnainenKortti());
-        }
+        osanottaja.getKorttikasi().lisaaKorttikateen(this.korttipakka.nostaPakastaSatunnainenKortti());
+        osanottaja.getKorttikasi().lisaaKorttikateen(this.korttipakka.nostaPakastaSatunnainenKortti());
+
     }
-    
+
     /**
      * Metodi päivittää pelitilanteen, eli tarkistaa, ketkä osanottajista ovat
      * jo pudonneet ja ketkä ovat vielä mukana pelissä.
@@ -161,7 +159,7 @@ public class Peli {
         this.osanottajajoukko.remove(osanottajanPaikka);
         this.osanottajamaara--;
     }
-    
+
     /**
      * Metodi tarkastaa, kuinka monta osanottajaa pelissä on tällä hetkellä.
      *
@@ -192,7 +190,7 @@ public class Peli {
     public Pelaaja getPelaaja() {
         return pelinPelaaja;
     }
-    
+
     /**
      * Metodi tulostaa pelin tämänhetkisen tilanteen.
      *
@@ -217,10 +215,10 @@ public class Peli {
     public void setVuoronumero(int vuoronumero) {
         this.vuoronumero = vuoronumero;
     }
-    
+
     /**
-     * Metodi luo HashMapin, joka liittää siirron siihen korttii,
-     * joka siirtoon tarvitaan.
+     * Metodi luo HashMapin, joka liittää siirron siihen korttii, joka siirtoon
+     * tarvitaan.
      *
      * @return mappi Valmis HashMap.
      */
@@ -231,7 +229,7 @@ public class Peli {
         mappi.put(6, new Kortti("Captain"));
         return mappi;
     }
-    
+
     public boolean haluaakoJokuVastustajistaTorjua(Osanottaja osanottaja, int siirtoVaihtoehto) {
         for (Osanottaja o : osanottajajoukko) {
             if (o.haluaaTorjua(osanottaja, this.siirtoNumerot.get(siirtoVaihtoehto))) {
@@ -244,4 +242,10 @@ public class Peli {
     public HashMap<Integer, Kortti> getSiirtoNumerot() {
         return siirtoNumerot;
     }
+
+    public ArrayList<Osanottaja> getHavinnytJoukko() {
+        return havinnytJoukko;
+    }
+    
+    
 }

@@ -1,5 +1,6 @@
 package fi.aleksisv.logiikka;
 
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,6 +11,13 @@ import static org.junit.Assert.*;
 public class KorttikasiTest {
 
     public KorttikasiTest() {
+    }
+    
+    @Test
+    public void konstruktoriToimiiOikein1() {
+        ArrayList<Kortti> plaa = new ArrayList();
+        Korttikasi kasi = new Korttikasi(plaa);
+        assertEquals(kasi.getKorttikasi(), plaa);
     }
 
     @Test

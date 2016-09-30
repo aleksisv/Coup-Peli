@@ -36,6 +36,8 @@ public class Korttipakka {
 
     /**
      * Kertoo, kuinka monta korttia korttipakassa on tällä hetkellä.
+     * 
+     * @return Korttipakan koko.
      */
     public int korttipakanKoko() {
         return this.pakka.size();

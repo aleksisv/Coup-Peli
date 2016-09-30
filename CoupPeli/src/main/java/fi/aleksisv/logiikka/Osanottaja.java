@@ -142,6 +142,9 @@ public class Osanottaja {
      *
      * @param osanottaja. Osanottaja, jonka siirto halutaan mahdollisesti torjua.
      * @param kortti Kortti, joka on tarkoitus lisätä osanottajan käteen.
+     * 
+     * @return Totuusarvo: haluaako metodia kutsuva osanottaja torjua kortin
+     * vai ei.
      */
     public boolean haluaaTorjua(Osanottaja osanottaja, Kortti kortti) {
         if (osanottaja.getKorttikasi().sisaltyykoKortti(kortti)) {

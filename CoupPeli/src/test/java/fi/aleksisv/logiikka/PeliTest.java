@@ -92,6 +92,24 @@ public class PeliTest {
         peli.getOsanottajajoukko().get(0).paljastaKortti();
         assertEquals(peli.pelissaOlevatOsanottajat(), 3);
     }
+    
+    @Test
+    public void luoSiirtoNumerotToimii1() {
+        Peli peli = new Peli(4);
+        assertEquals(peli.getSiirtoNumerot().get(4), new Kortti("Duke"));
+    }
+    
+    @Test
+    public void paivitaTilanneToimii1() {
+        Peli peli = new Peli(4);
+        peli.luoOsanottajat();
+        assertEquals(peli.getOsanottajajoukko().size(), 4);
+        peli.getOsanottajajoukko().get(2).paljastaKortti();
+        peli.getOsanottajajoukko().get(2).paljastaKortti();
+        peli.paivitaTilanne();
+        assertEquals(peli.getOsanottajajoukko().size(), 3);
+        assertEquals(peli.getHavinnytJoukko().size(), 1);
+    }
 //    @Test
 //    public void kaynnistaaPelinOikein1() {
 //        Peli testipeli = new Peli(4);

@@ -35,6 +35,17 @@ public class PankkiTest {
         pankki.vahennaRahaa(vahennettava);
         assertEquals(pankki.getRahamaara(), loppumaara);
     }
+    
+    @Test
+    public void annaRahatToimii1() {
+        Pankki pankki = new Pankki();
+        int annetutRahat1 = pankki.annaRahat(20);
+        assertEquals(annetutRahat1, 20);
+        assertEquals(80, pankki.getRahamaara());
+        int annetutRahat2 = pankki.annaRahat(90);
+        assertEquals(annetutRahat2, 80);
+        assertEquals(0, pankki.getRahamaara());
+    }
 
     @Test
     public void pankkiNollaantuuOikein() {
@@ -42,6 +53,7 @@ public class PankkiTest {
         pankki.pankkiNolliin();
         assertEquals(pankki.getRahamaara(), 0);
     }
+    
 
     @Test
     public void rahaaLisataanOikein1() {

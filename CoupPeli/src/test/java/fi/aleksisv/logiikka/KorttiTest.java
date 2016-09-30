@@ -43,9 +43,23 @@ public class KorttiTest {
     
     @Test
     public void vertaileekoKorttejaOikein5() {
+        Kortti kortti1 = new Kortti(null);
+        Kortti kortti2 = new Kortti("Contessa");
+        assertEquals(false, kortti1.equals(kortti2));
+    }
+    
+    @Test
+    public void vertaileekoKorttejaOikein6() {
         Pelaaja pelaaja = new Pelaaja("Anna");
         Kortti kortti = new Kortti("Contessa", false);
         assertNotEquals(pelaaja, kortti);
+    }
+    
+    @Test
+    public void vertaileekoKorttejaOikein7() {
+        Kortti kortti1 = new Kortti("Contessa");
+        Kortti kortti2 = null;
+        assertEquals(false, kortti1.equals(kortti2));
     }
 
     @Test
