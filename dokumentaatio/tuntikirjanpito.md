@@ -25,3 +25,5 @@ Päivä | Tunnit | Kuvaus
 26.09.2016 | - | Taukoa koodauksesta.
 27.09.2016 | 1h | Koodausta.
 28.09.2016 | 3h | Koodausta, erityisesti käyttöliittymän miettimistä. JavaDocin aloittamista ja generoimista. 
+29.09.2016 | 2h | Koodausta.
+30.09.2016 | 5h | Koodausta ja JavaDocin tekoa.
