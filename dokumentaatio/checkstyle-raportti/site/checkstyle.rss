@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2016</copyright>
     <item>
-      <title>File: 11,
-             Errors: 0,
+      <title>File: 14,
+             Errors: 2,
              Warnings: 0,
              Infos: 0
       </title>
@@ -47,20 +47,6 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#fi.aleksisv.logiikka.Kortti.java">fi/aleksisv/logiikka/Kortti.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.logiikka.Pankki.java">fi/aleksisv/logiikka/Pankki.java</a>
                 </td>
                 <td>
                   0
@@ -111,7 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  1
                 </td>
               </tr>
                           <tr>
@@ -130,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.logiikka.AbstraktiPeli.java">fi/aleksisv/logiikka/AbstraktiPeli.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.PelausNappi.java">fi/aleksisv/kayttoliittyma/PelausNappi.java</a>
                 </td>
                 <td>
                   0
@@ -172,7 +158,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.logiikka.NewMain.java">fi/aleksisv/logiikka/NewMain.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.aleksisv.logiikka.Osanottaja.java">fi/aleksisv/logiikka/Osanottaja.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.Seuraaja.java">fi/aleksisv/kayttoliittyma/Seuraaja.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +186,49 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.logiikka.Osanottaja.java">fi/aleksisv/logiikka/Osanottaja.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.aleksisv.logiikka.Pankki.java">fi/aleksisv/logiikka/Pankki.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.GraafinenKayttoliittyma.java">fi/aleksisv/kayttoliittyma/GraafinenKayttoliittyma.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.PelausIkkuna.java">fi/aleksisv/kayttoliittyma/PelausIkkuna.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.aleksisv.logiikka.NewMain.java">fi/aleksisv/logiikka/NewMain.java</a>
                 </td>
                 <td>
                   0
