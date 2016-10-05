@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 public class Seuraaja implements ActionListener {
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent ae) {
+        System.out.println("Asioita tapahtuu");
     }
 
 }
