@@ -27,3 +27,8 @@ Päivä | Tunnit | Kuvaus
 28.09.2016 | 3h | Koodausta, erityisesti käyttöliittymän miettimistä. JavaDocin aloittamista ja generoimista. 
 29.09.2016 | 2h | Koodausta.
 30.09.2016 | 5h | Koodausta ja JavaDocin tekoa.
+01.10.2016 | -  | Vapaapäivä koodauksesta.
+02.10.2016 | -  | Vapaapäivä koodauksesta.
+03.10.2016 | 0.5h | Alustavaa käyttöliittymän toteutuksen miettimistä.
+04.10.2016 | 1h | Käyttöliittymän toteutuksen suunnittelua.
+05.10.2016 | 2h | Käyttöliittymän koodausta.
