@@ -9,7 +9,10 @@ import java.util.Random;
 public class Korttipakka {
 
     private ArrayList<Kortti> pakka;
-
+    
+    /**
+     * Luokan konstruktori.
+     */
     public Korttipakka() {
         this.pakka = new ArrayList();
         this.lisaaKortit(this.pakka);
@@ -29,14 +32,15 @@ public class Korttipakka {
             pakka.add(kortti);
         }
     }
-
+    
+    
     public ArrayList<Kortti> getPakka() {
         return pakka;
     }
 
     /**
      * Kertoo, kuinka monta korttia korttipakassa on tällä hetkellä.
-     * 
+     *
      * @return Korttipakan koko.
      */
     public int korttipakanKoko() {
@@ -45,7 +49,7 @@ public class Korttipakka {
 
     /**
      * Poistaa korttipakasta tietyssä kohdassa olevan kortin.
-     * 
+     *
      * @param i Mistä kohtaa kortti poistetaan.
      */
     public void poistaPakastaTassaKohdassaOleva(int i) {

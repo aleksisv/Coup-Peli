@@ -8,11 +8,21 @@ public class Kortti {
     private String tyyppi;
     private boolean onkoPaljastettu;
 
+    /**
+     * Luokan konstruktori.
+     *
+     * @param tyyppi Minkä tyyppinen kortti halutaan luoda.
+     * @param onkoPaljastettu Onko luotava kortti aluksi paljastettu vai ei.
+     */
     public Kortti(String tyyppi, boolean onkoPaljastettu) {
         this.tyyppi = tyyppi;
         this.onkoPaljastettu = onkoPaljastettu;
     }
-
+    
+    /**
+     * Luokan konstruktori.
+     * @param tyyppi Minkä tyyppinen kortti halutaan luoda.
+     */
     public Kortti(String tyyppi) {
         this.tyyppi = tyyppi;
         this.onkoPaljastettu = false;
@@ -21,9 +31,10 @@ public class Kortti {
     public String getTyyppi() {
         return tyyppi;
     }
-    
+
     /**
-     * Metodi tarkastaa, onko kortti paljastettu, eli pitääkö sen näkyä muille pelaajille.
+     * Metodi tarkastaa, onko kortti paljastettu, eli pitääkö sen näkyä muille
+     * pelaajille.
      *
      * @return Totuusarvo.
      */
@@ -55,7 +66,7 @@ public class Kortti {
 
         return true;
     }
-    
+
     public void setOnkoPaljastettu(boolean onkoPaljastettu) {
         this.onkoPaljastettu = onkoPaljastettu;
     }

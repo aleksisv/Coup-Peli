@@ -10,7 +10,12 @@ import java.util.Random;
 public class Vastustaja extends Osanottaja {
 
     private Korttikasi kasi;
-
+    
+    /**
+     * Luokan konstruktori.
+     * 
+     * @param nimi Luotavan vastustajan nimi.
+     */
     public Vastustaja(String nimi) {
         super(nimi);
     }
@@ -52,20 +57,32 @@ public class Vastustaja extends Osanottaja {
 
     @Override
     public void kaytaUlkomaanapu(Pankki pankki) {
-        super.kaytaUlkomaanapu(pankki); //To change body of generated methods, choose Tools | Templates.
+        super.kaytaUlkomaanapu(pankki);
     }
 
     @Override
     public void lisaaKorttiKorttipakkaan(Kortti kortti) {
         super.lisaaKorttiKorttipakkaan(kortti);
     }
-
+    
+    /**
+     * Metodi tekee Assassinointi-siirron.
+     * 
+     * @param pankki Pankki, jolle siirtoon tarvittava raha annetaan.
+     * @param osanottajajoukko Pelissä mukana olevat osanottajat.
+     */
     public void kaytaAssassinoi(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
         Osanottaja assassinoitava = osanottajajoukko.get(r.nextInt(osanottajajoukko.size()));
         assassinoitava.paljastaKortti();
     }
-
+    
+    /**
+     * Metodi tekee Vallankaappaus-siirron.
+     * 
+     * @param pankki Pankki, jolle siirtoon tarvittava raha annetaan.
+     * @param osanottajajoukko Pelissä mukana olevat osanottajat.
+     */
     public void kaytaVallankaappaus(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
         Random r = new Random();
         Osanottaja kohde = osanottajajoukko.get(r.nextInt(osanottajajoukko.size()));
@@ -125,10 +142,6 @@ public class Vastustaja extends Osanottaja {
     @Override
     public String toString() {
         return super.toString();
-    }
-
-    public void epaileSiirtoa(Osanottaja osanottaja, int siirtoVaihtoehto) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

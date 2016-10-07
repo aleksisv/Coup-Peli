@@ -9,7 +9,10 @@ import javax.swing.JFrame;
  * mahdollisuuden tehdä siirtoja.
  */
 public class PelausIkkuna extends JFrame {
-
+    
+    /**
+     * Luokan konstruktori.
+     */
     public PelausIkkuna() {
         setTitle("Coup-Peli");
         setSize(400, 300);

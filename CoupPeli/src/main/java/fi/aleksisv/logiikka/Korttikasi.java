@@ -9,15 +9,27 @@ import java.util.Random;
 public class Korttikasi {
 
     private ArrayList<Kortti> kortit;
-
+    
+    /**
+     * Luokan konstruktori.
+     * @param kortit ArrayList, joka kuvaa korttikättä.
+     */
     public Korttikasi(ArrayList<Kortti> kortit) {
         this.kortit = kortit;
     }
-
+    
+    /**
+     * Luokan konstruktori.
+     */
     public Korttikasi() {
         this.kortit = new ArrayList();
     }
-
+    
+    /**
+     * Metodi palauttaa korttikäden koon.
+     * 
+     * @return Korttikäden koko.
+     */
     public int koko() {
         return kortit.size();
     }

@@ -100,6 +100,18 @@ public class PeliTest {
     }
     
     @Test
+    public void getVuoroNumeroToimii1() {
+        Peli peli = new Peli(3);
+        assertEquals(peli.getVuoronumero(), 0);
+    }
+    
+    @Test
+    public void getPankkiToimii1() {
+        Peli peli = new Peli(3);
+        assertEquals(peli.getPankki().getRahamaara(), 100);
+    }
+    
+    @Test
     public void paivitaTilanneToimii1() {
         Peli peli = new Peli(4);
         peli.luoOsanottajat();
@@ -109,6 +121,21 @@ public class PeliTest {
         peli.paivitaTilanne();
         assertEquals(peli.getOsanottajajoukko().size(), 3);
         assertEquals(peli.getHavinnytJoukko().size(), 1);
+    }
+    
+    @Test
+    public void kerroTilanneTekstinaToimii1() {
+        Peli peli = new Peli(4);
+        assertEquals(peli.kerroTilanneTekstina(), "\n\nHävisit pelin.");
+        peli.lisaaPelaajaJoukkoon();
+        String verrattava = "Mukana pelissä:"
+                + "\n   Nimi: Aleksis"
+                + "\n   Rahaa: 2"
+                + "\n   Kädessä olevat kortit: " + peli.getPelaaja().naytaKorttikasi()
+                + "\n   Näkyvät kortit: "
+                + "\n\n";
+        verrattava = verrattava.toLowerCase().trim().replaceAll(" ", "");
+        assertEquals(peli.kerroTilanneTekstina().toLowerCase().trim().replaceAll(" ", ""), verrattava);
     }
 //    @Test
 //    public void kaynnistaaPelinOikein1() {

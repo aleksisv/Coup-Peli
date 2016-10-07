@@ -13,7 +13,10 @@ import javax.swing.JPanel;
 public class PelausNappi extends JPanel implements ActionListener {
 
     JButton nappi;
-
+    
+    /**
+     * Luokan konstruktori.
+     */
     public PelausNappi() {
         super(new BorderLayout());
         nappi = new JButton("Pelaa");

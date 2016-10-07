@@ -1,14 +1,16 @@
 package fi.aleksisv.logiikka;
 
-import java.util.Random;
-import java.util.Scanner;
-
 /**
  * Luokka kuvaa sellaista pelin Osanottaja-luokan oliota, jota ihminen käyttää
  * pelatessaan Coup-Peliä.
  */
 public class Pelaaja extends Osanottaja {
-
+    
+    /**
+     * Luokan konstruktori.
+     * 
+     * @param nimi Pelaajan nimi.
+     */
     public Pelaaja(String nimi) {
         super(nimi);
     }

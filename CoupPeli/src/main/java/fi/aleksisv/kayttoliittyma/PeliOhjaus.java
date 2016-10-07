@@ -15,18 +15,24 @@ public class PeliOhjaus {
     private Random r;
     private Peli peli;
     GraafinenKayttoliittyma gkl;
-
+    
+    /**
+     * Luokan konstruktori.
+     */
     public PeliOhjaus() {
         this.lukija = new Scanner(System.in);
         this.r = new Random();
-        GraafinenKayttoliittyma kayttoliittyma = new GraafinenKayttoliittyma();
-        SwingUtilities.invokeLater(kayttoliittyma);
+//        GraafinenKayttoliittyma kayttoliittyma = new GraafinenKayttoliittyma();
+//        SwingUtilities.invokeLater(kayttoliittyma);
 //        this.gkl = new GraafinenKayttoliittyma();
-        alkutoimet();
-        pelaa();
+//        alkutoimet();
+//        pelaa();
     }
-
-    private void alkutoimet() {
+    
+    /**
+     * Metodi suorittaa pelin alkutoimet.
+     */
+    public void alkutoimet() {
         System.out.println("Tämä on Coup-Peli. \n"
                 + "------------\n"
                 + "Monellako pelaajalla haluat pelata peliä?");
@@ -35,49 +41,105 @@ public class PeliOhjaus {
         luoPeli(i);
 
     }
-
-    private void luoPeli(int pelaajaMaara) {
+    
+    /**
+     * Metodi luo pelin halutulla pelaajamäärällä.
+     * 
+     * @param pelaajaMaara Monenko pelaajan peli luodaan.
+     */
+    public void luoPeli(int pelaajaMaara) {
         this.peli = new Peli(pelaajaMaara);
         peli.luoOsanottajat();
     }
-
-    private void pelaa() {
+    
+    /**
+     * Metodi vastaa pelin pyörimisestä.
+     */
+    public void pelaa() {
         while (this.peli.getOsanottajajoukko().size() > 1) {
-            boolean epailikoTaiTorjuikoJoku = false;
-            Osanottaja keneenKohdistuu = null;
-            Osanottaja pelivuorossa = this.peli.getOsanottajajoukko().get(this.peli.getVuoronumero() % this.peli.getOsanottajajoukko().size());
-            int siirtovalinta = siirtovalinta(pelivuorossa);
-            if (siirtovalinta == 3 || siirtovalinta == 5 || siirtovalinta == 6) {
-                keneenKohdistuu = selvitaKeneenSiirtoKohdistuu(pelivuorossa);
-                if (keneenKohdistuu instanceof Pelaaja) {
-                    if (haluaakoPelaajaTorjuaSiirron(siirtovalinta)) {
-                        keneenKohdistuu.torju(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
-                        epailikoTaiTorjuikoJoku = true;
-                    }
-                    if (haluaakoPelaajaEpaillaSiirtoa(siirtovalinta)) {
-                        keneenKohdistuu.epaile(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
-                        epailikoTaiTorjuikoJoku = true;
-                    }
-                } else {
-                    if (keneenKohdistuu.haluaaTorjua(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta))) {
-                        keneenKohdistuu.torju(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
-                        epailikoTaiTorjuikoJoku = true;
-                    }
-
-                    if (keneenKohdistuu.haluaaEpailla(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta))) {
-                        keneenKohdistuu.epaile(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
-                        epailikoTaiTorjuikoJoku = true;
-                    }
-                }
-            }
-            if (!epailikoTaiTorjuikoJoku) {
-                this.suoritaSiirto(pelivuorossa, keneenKohdistuu, siirtovalinta);
-            }
-            this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
-            this.peli.paivitaTilanne();
-            this.peli.kerroTilanne();
+            pelaaVuoro();
         }
         System.out.println("Peli on ohi. Voittaja: \n   " + this.peli.getOsanottajajoukko().get(0));
+    }
+    
+    /**
+     * Metodi vastaa yhden pelikierroksen etenemisestä.
+     */
+    public void pelaaKierros() {
+
+    }
+    
+    /**
+     * Metodi vastaa yhden vuoron pelaamisesta.
+     */
+    public void pelaaVuoro() {
+        if (this.peli.getOsanottajajoukko().size() <= 1) {
+            System.out.println("Peli on ohi. Voittaja: \n   " + this.peli.getOsanottajajoukko().get(0));
+            return;
+        }
+        boolean epailikoTaiTorjuikoJoku = false;
+        Osanottaja keneenKohdistuu = null;
+        Osanottaja pelivuorossa = this.peli.getOsanottajajoukko().get(this.peli.getVuoronumero() % this.peli.getOsanottajajoukko().size());
+        int siirtovalinta = siirtovalinta(pelivuorossa);
+        if (siirtovalinta == 3 || siirtovalinta == 5 || siirtovalinta == 6) {
+            keneenKohdistuu = selvitaKeneenSiirtoKohdistuu(pelivuorossa);
+            if (keneenKohdistuu instanceof Pelaaja) {
+                if (haluaakoPelaajaTorjuaSiirron(siirtovalinta)) {
+                    keneenKohdistuu.torju(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
+                    epailikoTaiTorjuikoJoku = true;
+                }
+                if (haluaakoPelaajaEpaillaSiirtoa(siirtovalinta)) {
+                    keneenKohdistuu.epaile(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
+                    epailikoTaiTorjuikoJoku = true;
+                }
+            } else {
+                if (keneenKohdistuu.haluaaTorjua(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta))) {
+                    keneenKohdistuu.torju(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
+                    epailikoTaiTorjuikoJoku = true;
+                }
+
+                if (keneenKohdistuu.haluaaEpailla(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta))) {
+                    keneenKohdistuu.epaile(pelivuorossa, this.peli.getSiirtoNumerot().get(siirtovalinta));
+                    epailikoTaiTorjuikoJoku = true;
+                }
+            }
+        }
+        if (!epailikoTaiTorjuikoJoku) {
+            this.suoritaSiirto(pelivuorossa, keneenKohdistuu, siirtovalinta);
+        }
+        this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
+        this.peli.paivitaTilanne();
+        System.out.println(this.peli.kerroTilanneTekstina());
+    }
+    
+    /**
+     * Metodi vastaa yhden siirron suorittamisesta.
+     * 
+     * @param siirto Mikä siirto halutaan suorittaa.
+     * @param kohde Mitä osanottajaa vastaan siirto halutaan tehdä.
+     */
+    public void pelaaSiirto(int siirto, int kohde) {
+        Osanottaja keneenKohdistuu = this.peli.getOsanottajajoukko().get(kohde);
+        Pelaaja pelivuorossa = this.peli.getPelaaja();
+        boolean epailikoTaiTorjuikoJoku = false;
+        if (siirto == 3 || siirto == 5 || siirto == 6) {
+
+            if (this.peli.getOsanottajajoukko().get(kohde).haluaaTorjua(this.peli.getPelaaja(), this.peli.getSiirtoNumerot().get(siirto))) {
+                keneenKohdistuu.torju(pelivuorossa, this.peli.getSiirtoNumerot().get(siirto));
+                epailikoTaiTorjuikoJoku = true;
+            }
+
+            if (keneenKohdistuu.haluaaEpailla(pelivuorossa, this.peli.getSiirtoNumerot().get(siirto))) {
+                keneenKohdistuu.epaile(pelivuorossa, this.peli.getSiirtoNumerot().get(siirto));
+                epailikoTaiTorjuikoJoku = true;
+            }
+
+        }
+        if (!epailikoTaiTorjuikoJoku) {
+            this.suoritaSiirto(pelivuorossa, keneenKohdistuu, siirto);
+        }
+        this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
+        this.peli.paivitaTilanne();
     }
 
     private Osanottaja selvitaKeneenSiirtoKohdistuu(Osanottaja pelivuorossa) {
@@ -194,6 +256,10 @@ public class PeliOhjaus {
     private boolean haluaakoPelaajaEpaillaSiirtoa(int siirtovalinta) {
         System.out.println("Haluatko epäillä vastustajan siirtoa " + siirtovalinta + "?");
         return Boolean.parseBoolean(lukija.nextLine());
+    }
+
+    public Peli getPeli() {
+        return peli;
     }
 
 }

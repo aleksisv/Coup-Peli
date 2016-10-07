@@ -10,7 +10,12 @@ public class Osanottaja {
     private String nimi;
     private int raha;
     private Korttikasi korttikasi;
-
+    
+    /**
+     * Luokan konstruktori.
+     *
+     * @param nimi Minkä niminen osanottaja luodaan.
+     */
     public Osanottaja(String nimi) {
         this.nimi = nimi;
         this.raha = 2;
@@ -28,7 +33,8 @@ public class Osanottaja {
      * @param osanottaja Osanottaja, jolta epäillään puuttuvan jokin kortti.
      * @param mitaEiOle Minkä kortin epäillään puuttuvan osanottajan kädestä.
      *
-     * @return Totuusarvo: haluaako tämä osanottaja epäillä toisen siirtoa vai ei.
+     * @return Totuusarvo: haluaako tämä osanottaja epäillä toisen siirtoa vai
+     * ei.
      */
     public boolean haluaaEpailla(Osanottaja osanottaja, Kortti mitaEiOle) {
         if (this.korttikasi.sisaltyykoKortti(mitaEiOle)) {
@@ -106,7 +112,7 @@ public class Osanottaja {
             }
         }
     }
-    
+
     /**
      * Metodin avulla osanottajalle annetaan rahaa.
      *
@@ -115,7 +121,7 @@ public class Osanottaja {
     public void saaRahaa(int maara) {
         this.setRaha(this.getRaha() + maara);
     }
-    
+
     /**
      * Metodin avulla osanottaja nostaa korttipakasta kortin.
      *
@@ -127,7 +133,7 @@ public class Osanottaja {
         Kortti apu = pakka.nostaPakastaTassaKohdassaOleva(i);
         this.lisaaKorttiKorttipakkaan(apu);
     }
-    
+
     /**
      * Metodin avulla osanottajan käteen lisätään kortti.
      *
@@ -136,15 +142,14 @@ public class Osanottaja {
     public void lisaaKorttiKorttipakkaan(Kortti kortti) {
         this.getKorttikasi().lisaaKorttikateen(kortti);
     }
-    
-     /**
+
+    /**
      * Metodin avulla osanottajan käteen lisätään kortti.
-     *
-     * @param osanottaja. Osanottaja, jonka siirto halutaan mahdollisesti torjua.
+     * @param osanottaja Osanottaja, jonka käteen kortti lisätään.
      * @param kortti Kortti, joka on tarkoitus lisätä osanottajan käteen.
-     * 
-     * @return Totuusarvo: haluaako metodia kutsuva osanottaja torjua kortin
-     * vai ei.
+     *
+     * @return Totuusarvo: haluaako metodia kutsuva osanottaja torjua kortin vai
+     * ei.
      */
     public boolean haluaaTorjua(Osanottaja osanottaja, Kortti kortti) {
         if (osanottaja.getKorttikasi().sisaltyykoKortti(kortti)) {
@@ -153,14 +158,13 @@ public class Osanottaja {
             return false;
         }
     }
-    
+
     /**
      * Metodin kuvaa tilannetta, jossa vastustaja yrittää torjua toisen
      * osanottajan siirron.
-     *
      * @param osanottaja Osanottaja, jonka siirto halutaan torjua.
      * @param kortti Kortti, jonka torjuja tarvitsee torjuakseen.
-     * 
+     *
      * @return Totuusarvo, joka kertoo onnistuiko torjuminen vai ei.
      */
     public boolean torju(Osanottaja osanottaja, Kortti kortti) {
@@ -169,7 +173,7 @@ public class Osanottaja {
         }
         return false;
     }
-    
+
     /**
      * Metodin avulla osanottajalta otetaan pois rahaa tietty määrä.
      *
@@ -183,7 +187,7 @@ public class Osanottaja {
         }
 
     }
-    
+
     /**
      * Metodin osanottajan varoja siirretään pankille.
      *
@@ -199,7 +203,7 @@ public class Osanottaja {
             this.menetaRahaa(this.getRaha());
         }
     }
-    
+
     /**
      * Metodin avulla osanottaja saa varoja pankilta.
      *
@@ -209,7 +213,7 @@ public class Osanottaja {
     public void otaRahaaPankilta(int maara, Pankki pankki) {
         this.setRaha(pankki.annaRahat(maara) + this.getRaha());
     }
-    
+
     /**
      * Metodi kuvaa osanottajan Perustulo-siirtoa.
      *
@@ -218,7 +222,7 @@ public class Osanottaja {
     public void kaytaPerustulo(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(1));
     }
-    
+
     /**
      * Metodi kuvaa osanottajan Ulkomaanapu-siirtoa.
      *
@@ -227,7 +231,7 @@ public class Osanottaja {
     public void kaytaUlkomaanapu(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(2));
     }
-    
+
     /**
      * Metodi kuvaa osanottajan Assassinoi-siirtoa.
      *
@@ -239,7 +243,7 @@ public class Osanottaja {
         pankki.lisaaRahaa(3);
         osanottaja.paljastaKortti();
     }
-    
+
     /**
      * Metodi kuvaa osanottajan Vallankaappaus-siirtoa.
      *
@@ -251,7 +255,7 @@ public class Osanottaja {
         pankki.lisaaRahaa(7);
         osanottaja.paljastaKortti();
     }
-    
+
     /**
      * Metodi kuvaa osanottajan Varasta-siirtoa.
      *
@@ -262,7 +266,7 @@ public class Osanottaja {
         osanottaja.menetaRahaa(2);
         this.saaRahaa(2);
     }
-    
+
     /**
      * Metodi kuvaa osanottajan Verotus-siirtoa.
      *
@@ -271,7 +275,7 @@ public class Osanottaja {
     public void kaytaVerotus(Pankki pankki) {
         this.saaRahaa(pankki.annaRahat(3));
     }
-    
+
     /**
      * Metodi laskee, kuinka monta näkyvää korttia pelaajalla on kädessään.
      *
@@ -290,6 +294,20 @@ public class Osanottaja {
     @Override
     public String toString() {
         return this.nimi;
+    }
+    
+    /**
+     * Metodi palauttaa merkkijonoesityksen osanottajan korttikädestä.
+     * @return Korttikäden merkkijonoesitys.
+     */
+    public String naytaKorttikasi() {
+        StringBuilder merkkijono = new StringBuilder();
+        for (Kortti kortti : this.korttikasi.getKorttikasi()) {
+
+            merkkijono.append(kortti.toString() + ", ");
+        }
+        String palautettava = merkkijono.toString();
+        return palautettava.replaceAll(", $", "");
     }
 
 }
