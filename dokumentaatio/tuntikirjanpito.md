@@ -32,3 +32,6 @@ Päivä | Tunnit | Kuvaus
 03.10.2016 | 0.5h | Alustavaa käyttöliittymän toteutuksen miettimistä.
 04.10.2016 | 1h | Käyttöliittymän toteutuksen suunnittelua.
 05.10.2016 | 2h | Käyttöliittymän koodausta.
+06.10.2016 | 4h | Käyttöliittymän koodausta ja sekvenssi- ja luokkakaavioiden piirtelyä.
+07.10.2016 | 5h | Käyttöliittymän koodausta ja sekvenssi- ja luokkakaavioiden piirtelyä.
+
