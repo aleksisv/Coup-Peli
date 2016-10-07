@@ -24,4 +24,8 @@ Graafinen käyttöliittymä on olennainen osa ohjelmaan, sillä pelaajan pitää
 
 # Käyttötapauksia
 ## Sekvenssikaaviot
+### Pelin luominen
 ![Luo Peli](luoPeli-sekvenssikaavio.png)
+
+### Siirron tekeminen
+![Tee siirto](pelaaSiirto-sekvenssikaavio.png)
