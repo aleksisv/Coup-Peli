@@ -22,3 +22,6 @@ Graafinen käyttöliittymä on olennainen osa ohjelmaan, sillä pelaajan pitää
 
 ![Luokkakaavio](luokkakaavio.png)
 
+# Käyttötapauksia
+## Sekvenssikaaviot
+![Luo Peli](luoPeli-sekvenssikaavio.png)
