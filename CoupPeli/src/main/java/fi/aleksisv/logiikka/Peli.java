@@ -195,31 +195,6 @@ public class Peli {
      * @return Merkkijonoesitys tilanteesta.
      *
      */
-    public String kerroTilanneTekstina() {
-        StringBuilder teksti = new StringBuilder();
-        for (Osanottaja o : osanottajajoukko) {
-            teksti.append("Mukana pelissä: \n");
-            if (o instanceof Pelaaja) {
-                teksti.append("    Nimi: " + o + "\n    Rahaa: " + o.getRaha()
-                        + "\n    Kädessä olevat kortit: " + o.naytaKorttikasi()
-                        + "\n    Näkyvät kortit: " + o.naytaNakyvatKortit() + "\n");
-            } else {
-                teksti.append("    Nimi: " + o + "\n    Rahaa: " + o.getRaha()
-                        + "\n    Näkyvät kortit: " + o.naytaNakyvatKortit() + "\n");
-            }
-        }
-        teksti.append("\n");
-        for (Osanottaja o : havinnytJoukko) {
-            teksti.append("Pudonnut pelistä: \n");
-            teksti.append("    Nimi: " + o + "\n    Rahaa: " + o.getRaha() + "\n    Näkyvät kortit: " + o.naytaNakyvatKortit() + "\n");
-        }
-        teksti.append("\n");
-        if (!osanottajajoukko.contains(this.pelinPelaaja)) {
-            pysayta = true;
-            teksti.append("Hävisit pelin.");
-        }
-        return teksti.toString();
-    }
 
     public void setVuoronumero(int vuoronumero) {
         this.vuoronumero = vuoronumero;
@@ -233,9 +208,9 @@ public class Peli {
      */
     private HashMap<Integer, Kortti> luoSiirtonumerot() {
         HashMap<Integer, Kortti> mappi = new HashMap<Integer, Kortti>();
-        mappi.put(4, new Kortti("Duke"));
-        mappi.put(5, new Kortti("Assassin"));
-        mappi.put(6, new Kortti("Captain"));
+        mappi.put(4, new Kortti("Herttua"));
+        mappi.put(5, new Kortti("Salamurhaaja"));
+        mappi.put(6, new Kortti("Kapteeni"));
         return mappi;
     }
 

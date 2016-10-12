@@ -10,10 +10,10 @@ import java.util.Random;
 public class Vastustaja extends Osanottaja {
 
     private Korttikasi kasi;
-    
+
     /**
      * Luokan konstruktori.
-     * 
+     *
      * @param nimi Luotavan vastustajan nimi.
      */
     public Vastustaja(String nimi) {
@@ -64,10 +64,10 @@ public class Vastustaja extends Osanottaja {
     public void lisaaKorttiKorttipakkaan(Kortti kortti) {
         super.lisaaKorttiKorttipakkaan(kortti);
     }
-    
+
     /**
      * Metodi tekee Assassinointi-siirron.
-     * 
+     *
      * @param pankki Pankki, jolle siirtoon tarvittava raha annetaan.
      * @param osanottajajoukko Pelissä mukana olevat osanottajat.
      */
@@ -76,10 +76,10 @@ public class Vastustaja extends Osanottaja {
         Osanottaja assassinoitava = osanottajajoukko.get(r.nextInt(osanottajajoukko.size()));
         assassinoitava.paljastaKortti();
     }
-    
+
     /**
      * Metodi tekee Vallankaappaus-siirron.
-     * 
+     *
      * @param pankki Pankki, jolle siirtoon tarvittava raha annetaan.
      * @param osanottajajoukko Pelissä mukana olevat osanottajat.
      */
@@ -141,7 +141,32 @@ public class Vastustaja extends Osanottaja {
 
     @Override
     public String toString() {
-        return super.toString();
+        String status = "";
+        if (super.montakoNakyvaaKorttia() == 2) {
+            status = " poissa pelistä.";
+        } else {
+            status = " pelissä.";
+        }
+        return "Nimi: " + this.getNimi() + "\nRahaa: " + this.getRaha()
+                + "\nNäkyvät kortit: " + this.naytaNakyvatKortit() 
+                + "\nStatus: " + status;
+    }
+
+    public int valitseSiirto(Random r) {
+        int siirtoEhdokas = 0;
+        while(true) {
+            siirtoEhdokas = r.nextInt();
+            if(siirtoEhdokas == 3) {
+                if(this.getRaha() >= 7) {
+                    break;
+                }
+            } else if (siirtoEhdokas == 5) {
+                if(this.getRaha() >= 3) {
+                    break;
+                }
+            }
+        }
+        return siirtoEhdokas;
     }
 
 }

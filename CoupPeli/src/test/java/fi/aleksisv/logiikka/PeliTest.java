@@ -123,20 +123,20 @@ public class PeliTest {
         assertEquals(peli.getHavinnytJoukko().size(), 1);
     }
     
-    @Test
-    public void kerroTilanneTekstinaToimii1() {
-        Peli peli = new Peli(4);
-        assertEquals(peli.kerroTilanneTekstina(), "\n\nHävisit pelin.");
-        peli.lisaaPelaajaJoukkoon();
-        String verrattava = "Mukana pelissä:"
-                + "\n   Nimi: Aleksis"
-                + "\n   Rahaa: 2"
-                + "\n   Kädessä olevat kortit: " + peli.getPelaaja().naytaKorttikasi()
-                + "\n   Näkyvät kortit: "
-                + "\n\n";
-        verrattava = verrattava.toLowerCase().trim().replaceAll(" ", "");
-        assertEquals(peli.kerroTilanneTekstina().toLowerCase().trim().replaceAll(" ", ""), verrattava);
-    }
+//    @Test
+//    public void kerroTilanneTekstinaToimii1() {
+//        Peli peli = new Peli(4);
+//        assertEquals(peli.kerroTilanneTekstina(), "\n\nHävisit pelin.");
+//        peli.lisaaPelaajaJoukkoon();
+//        String verrattava = "Mukana pelissä:"
+//                + "\n   Nimi: Aleksis"
+//                + "\n   Rahaa: 2"
+//                + "\n   Kädessä olevat kortit: " + peli.getPelaaja().naytaKorttikasi()
+//                + "\n   Näkyvät kortit: "
+//                + "\n\n";
+//        verrattava = verrattava.toLowerCase().trim().replaceAll(" ", "");
+//        assertEquals(peli.kerroTilanneTekstina().toLowerCase().trim().replaceAll(" ", ""), verrattava);
+//    }
 //    @Test
 //    public void kaynnistaaPelinOikein1() {
 //        Peli testipeli = new Peli(4);

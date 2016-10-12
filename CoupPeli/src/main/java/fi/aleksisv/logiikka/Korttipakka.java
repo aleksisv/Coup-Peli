@@ -19,11 +19,10 @@ public class Korttipakka {
     }
 
     private void lisaaKortit(ArrayList<Kortti> pakka) {
-        this.lisaaTietynTyyppisetKortit(pakka, "Contessa");
-        this.lisaaTietynTyyppisetKortit(pakka, "Assassin");
-        this.lisaaTietynTyyppisetKortit(pakka, "Captain");
-        this.lisaaTietynTyyppisetKortit(pakka, "Duke");
-        this.lisaaTietynTyyppisetKortit(pakka, "Ambassador");
+        this.lisaaTietynTyyppisetKortit(pakka, "Kreivitär");
+        this.lisaaTietynTyyppisetKortit(pakka, "Salamurhaaja");
+        this.lisaaTietynTyyppisetKortit(pakka, "Kapteeni");
+        this.lisaaTietynTyyppisetKortit(pakka, "Herttua");
     }
 
     private void lisaaTietynTyyppisetKortit(ArrayList<Kortti> pakka, String tyyppi) {

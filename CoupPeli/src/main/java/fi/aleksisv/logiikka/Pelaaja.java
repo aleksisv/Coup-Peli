@@ -21,11 +21,6 @@ public class Pelaaja extends Osanottaja {
     }
 
     @Override
-    public boolean epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
-        return super.epaile(osanottaja, mitaEiOle);
-    }
-
-    @Override
     public void setRaha(int maara) {
         super.setRaha(maara);
     }
@@ -72,7 +67,16 @@ public class Pelaaja extends Osanottaja {
 
     @Override
     public String toString() {
-        return super.getNimi();
+        String status = "";
+        if (super.montakoNakyvaaKorttia() == 2) {
+            status = " poissa pelistä.";
+        } else {
+            status = " pelissä.";
+        }
+        return "Nimi: " + this.getNimi() + "\nRahaa: " + this.getRaha() 
+                + "\nKortit kädessä: " + this.naytaKorttikasi()
+                + "\nNäkyvät kortit: " + this.naytaNakyvatKortit() + "\nStatus: " 
+                + status;
     }
 
 }

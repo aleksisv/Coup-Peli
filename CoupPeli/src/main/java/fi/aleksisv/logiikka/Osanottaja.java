@@ -53,6 +53,7 @@ public class Osanottaja {
      * @return Totuusarvo: sisältyykö kortti pelaajan käteen vai ei.
      */
     public boolean epaile(Osanottaja osanottaja, Kortti mitaEiOle) {
+        System.out.println(mitaEiOle);
         if (!osanottaja.getKorttikasi().sisaltyykoKortti(mitaEiOle)) {
             osanottaja.paljastaKortti();
             return true;
@@ -104,8 +105,7 @@ public class Osanottaja {
      *
      */
     public void paljastaKortti() {
-        Korttikasi korttikasi = this.getKorttikasi();
-        for (int i = 0; i < this.korttikasi.getKorttikasi().size(); i++) {
+        for (int i = 0; i < korttikasi.getKorttikasi().size(); i++) {
             if (this.korttikasi.getKorttikasi().get(i).onkoPaljastettu() == false) {
                 korttikasi.paljastaPakastaTassaKohdassaOleva(i);
                 break;
