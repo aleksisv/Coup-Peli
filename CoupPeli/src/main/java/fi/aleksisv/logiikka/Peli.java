@@ -178,14 +178,12 @@ public class Peli {
     public Pelaaja getPelaaja() {
         return this.pelinPelaaja;
     }
-
+    
     /**
-     * Metodi tuottaa String-olion pelin tämänhetkisestä tilanteesta.
-     * 
-     * @return Merkkijonoesitys tilanteesta.
+     * Vuoronumerosetteri.
      *
+     * @param vuoronumero Mikä vuoronumero halutaan asettaa.
      */
-
     public void setVuoronumero(int vuoronumero) {
         this.vuoronumero = vuoronumero;
     }
