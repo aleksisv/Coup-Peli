@@ -17,8 +17,15 @@ Graafinen käyttöliittymä on olennainen osa ohjelmaan, sillä pelaajan pitää
 
 
 #Rakenne
+Pelin logiikka-paketissa sijaitsevat itse pelin eri osatekijöitä kuvaavat oliot. Peli-luokka kuvaa
+Coup-Peliä ja pitää sisällään pelaajan ja vastustajat, jotka laajentavat yläluokkaan Osanottaja,
+korttipakan ja pankin. Osanottaja luokka kuvaa yleisellä tasolla yhtä pelin osanottajaa. Osanottajalla
+on korttikäsi, luokan Korttikäsi olio, joka sisältään pelikortteja kuvaavia Kortti-olioita. Osanottajalla on myös rahaa ja nimi. Luokkaa laajentavat luokat Pelaaja ja Vastustaja, joista
+Pelaaja-luokan oliot kuvaavat pelin uniikkia pelaajaa ja vastustajat ovat pelissä muuten esiintyvät osanottajat.
 
-##Luokkarakenne
+Graafinen käyttöliittymä vastaa käyttäjän ja pelin vuorovaikutuksesta. Graafinen käyttöliittymä pyörittää peliä osittain luokan PeliOhjaus avulla. PeliOhjaus-luokan olio luo pelin ja vastaa esimerkiksi pelin siirtojen kutsumisesta.
+ 
+###Luokkakaaviot
 
 ![Luokkakaavio](luokkakaavio.png)
 
