@@ -12,7 +12,8 @@ import javax.swing.*;
  */
 public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionListener {
 
-    private JFrame ikkuna, pelausIkkuna, epailyJaTorjuntaIkkuna;
+    private JFrame valiIkkuna, pelausIkkuna, epailyJaTorjuntaIkkuna;
+    private AvausIkkuna avausIkkuna;
     private PeliOhjaus peliOhjaus;
     private JButton aloitaPeliNappi, pelaaVuoroNappi, teeSiirto, vastustajanSiirto;
     private JTextField montakoPelaajaa;
@@ -27,42 +28,12 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
     public GraafinenKayttoliittyma() {
         this.r = new Random();
     }
-
     /**
      * Metodi pyörittää peliä.
      */
     public void run() {
-        ikkuna = new JFrame("Coup-Peli");
+        avausIkkuna = new AvausIkkuna("Coup-Peli", this);
         peliOhjaus = new PeliOhjaus();
-
-        ikkuna.setPreferredSize(new Dimension(1000, 6000));
-        ikkuna.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        luoKomponentit(ikkuna.getContentPane());
-
-        ikkuna.pack();
-        ikkuna.setVisible(true);
-
-    }
-
-    private void luoKomponentit(Container sailio) {
-        sailio.setLayout(new GridLayout(4, 2));
-        sailio.add(luoPelinAvausvalikko(), 0, 0);
-        this.huomioTekstit = new JTextArea("Luo peli haluamallasi määrällä pelaajia!");
-        sailio.add(huomioTekstit);
-
-    }
-
-    private JPanel luoPelinAvausvalikko() {
-        JPanel paneeli = new JPanel(new GridLayout(1, 2));
-        this.aloitaPeliNappi = new JButton("Aloita peli!");
-        this.aloitaPeliNappi.addActionListener(this);
-        this.montakoPelaajaa = new JTextField();
-
-        paneeli.add(aloitaPeliNappi);
-        paneeli.add(montakoPelaajaa);
-        return paneeli;
-
     }
 
     @Override
@@ -89,22 +60,28 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
             SwingUtilities.updateComponentTreeUI(pelausIkkuna);
         }
         if (this.peliOhjaus.getPeli().getOsanottajajoukko().size() == 1) {
-            this.ikkuna.dispose();
+            this.valiIkkuna.dispose();
             this.pelausIkkuna.dispose();
-            this.ikkuna = new JFrame("Peli on ohi!");
-            this.ikkuna.add(new JTextArea("Voittaja: " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
-            this.ikkuna.setSize(400, 400);
-            this.ikkuna.setVisible(true);
+            this.valiIkkuna = new JFrame("Peli on ohi!");
+            this.valiIkkuna.add(new JTextArea("Voittaja: " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
+            this.valiIkkuna.setSize(400, 400);
+            this.valiIkkuna.setVisible(true);
         }
-        SwingUtilities.updateComponentTreeUI(ikkuna);
+        SwingUtilities.updateComponentTreeUI(valiIkkuna);
     }
     
     private void aloitaPeli() {
-        int pelaajaMaara = Integer.parseInt(this.montakoPelaajaa.getText());
+        int pelaajaMaara = Integer.parseInt(avausIkkuna.getMontakoPelaajaa().getText());
         if (!(2 <= pelaajaMaara && pelaajaMaara <= 5)) {
             this.huomioTekstit.setText("Anna validi määrä (2-5) pelaajia.");
         } else {
             pelaajaMaara = (int) pelaajaMaara;
+            this.avausIkkuna.dispose();
+            this.valiIkkuna = new JFrame("Coup-Peli");
+            this.valiIkkuna.setVisible(true);
+            this.valiIkkuna.setSize(500, 500);
+            valiIkkuna.getContentPane().setLayout(new GridLayout(3, 2));
+            valiIkkuna.add(huomioTekstit);
             this.peliOhjaus.luoPeli(pelaajaMaara);
             this.huomioTekstit.setText("Aloitit pelin " + pelaajaMaara + " pelaajalla. Tee siirto.");
         }
@@ -113,9 +90,9 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
     private void luoPelausYmparisto() {
         luoPelinseuranta();
         luoPelausNappi();
-        aloitaPeliNappi.setVisible(false);
-        montakoPelaajaa.setVisible(false);
-        this.ikkuna.validate();
+        avausIkkuna.getAloitaPeliNappi().setVisible(false);
+        avausIkkuna.getMontakoPelaajaa().setVisible(false);
+        this.valiIkkuna.validate();
         
     }
 
@@ -123,13 +100,13 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         this.pelinSeurantapaneeli = new PelinSeurantaPaneeli(new GridLayout(1,
                 this.peliOhjaus.getPeli().getOsanottajajoukko().size()));
         this.pelinSeurantapaneeli.asetaAlkutila(this.peliOhjaus.getPeli());
-        this.ikkuna.add(pelinSeurantapaneeli);
+        this.valiIkkuna.add(pelinSeurantapaneeli);
     }
     
     private void luoPelausNappi() {
         this.pelaaVuoroNappi = new JButton("Pelaa vuoro!");
         pelaaVuoroNappi.addActionListener(this);
-        this.ikkuna.add(pelaaVuoroNappi);
+        this.valiIkkuna.add(pelaaVuoroNappi);
     }
 
     private void paivitaPelinseuranta(PelinSeurantaPaneeli seuranta) {
@@ -317,7 +294,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
             }
             paivitaPelinseuranta(pelinseuranta);
             this.pelausikkuna.setVisible(false);
-            SwingUtilities.updateComponentTreeUI(ikkuna);
+            SwingUtilities.updateComponentTreeUI(valiIkkuna);
         }
     }
 
@@ -353,7 +330,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
             }
             paivitaPelinseuranta(pelinseuranta);
             this.pelausikkuna.setVisible(false);
-            SwingUtilities.updateComponentTreeUI(ikkuna);
+            SwingUtilities.updateComponentTreeUI(valiIkkuna);
         }
     }
 
@@ -385,8 +362,17 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
             this.peliOhjaus.suoritaSiirto(o, kohdistuu, siirto);
             paivitaPelinseuranta(pelinseuranta);
             this.pelausikkuna.setVisible(false);
-            SwingUtilities.updateComponentTreeUI(ikkuna);
+            SwingUtilities.updateComponentTreeUI(valiIkkuna);
         }
     }
 
+    public void setHuomioTekstit(JTextArea huomioTekstit) {
+        this.huomioTekstit = huomioTekstit;
+    }
+
+    public void setAloitaPeliNappi(JButton aloitaPeliNappi) {
+        this.aloitaPeliNappi = aloitaPeliNappi;
+    }
+    
 }
+
