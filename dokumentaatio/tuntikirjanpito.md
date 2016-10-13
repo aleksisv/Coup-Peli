@@ -34,4 +34,9 @@ Päivä | Tunnit | Kuvaus
 05.10.2016 | 2h | Käyttöliittymän koodausta.
 06.10.2016 | 4h | Käyttöliittymän koodausta ja sekvenssi- ja luokkakaavioiden piirtelyä.
 07.10.2016 | 5h | Käyttöliittymän koodausta ja sekvenssi- ja luokkakaavioiden piirtelyä.
-
+08.10.2016 | 2h | Yleistä koodausta.
+09.10.2016 | -  | Vapaapäivä.
+10.10.2016 | 3h | Käyttöliittymän päivitystä.
+11.10.2016 | 4h | Käyttöliittymän päivitystä ja ohjelmarakenteen muutosta.
+12.10.2016 | 3h | Käyttöliittymän päivitystä, testausta, luokkien muutosta.
+13.10.2016 | 4h | Käyttöliittymän päivitystä. Ohjelman hiomista käytettökelpoiseksi.
