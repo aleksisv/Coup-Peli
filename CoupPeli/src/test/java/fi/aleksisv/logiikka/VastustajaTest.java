@@ -1,5 +1,6 @@
 package fi.aleksisv.logiikka;
 
+import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -252,6 +253,41 @@ public class VastustajaTest {
         assertEquals(v.getRaha(), 4);
         assertEquals(kohde.getRaha(), 1);
     }
+    
+    @Test
+    public void kaytaAssassinateToimii1() {
+        Vastustaja v = new Vastustaja("Azra");
+        Osanottaja kohde = new Osanottaja("Voi harmi!");
+        kohde.lisaaKorttiKorttipakkaan(new Kortti("Herttua"));
+        Pankki pankki = new Pankki();
+        v.saaRahaa(7);
+        assertEquals(kohde.montakoNakyvaaKorttia(), 0);
+        assertEquals(v.getRaha(), 9);
+        v.kaytaAssassinoi(pankki, kohde);
+        assertEquals(kohde.montakoNakyvaaKorttia(), 1);
+        assertEquals(v.getRaha(), 6);
+    }
+    
+    @Test
+    public void valitseSiirtoToimii1() {
+        Random r = new Random();
+        Vastustaja v = new Vastustaja("Azra");
+        int siirtoNumero = v.valitseSiirto(r);
+        boolean kuuluukoValille = 1<=siirtoNumero && siirtoNumero <=6;
+        assertEquals(true, kuuluukoValille);
+        v.saaRahaa(5);
+        siirtoNumero = v.valitseSiirto(new Random());
+        assertEquals(siirtoNumero, 3);
+        v.menetaRahaa(4);
+        v.lisaaKorttiKorttipakkaan(new Kortti("Salamurhaaja"));
+        siirtoNumero = v.valitseSiirto(r);
+        assertEquals(siirtoNumero, 5);
+        v.menetaRahaa(3);
+        siirtoNumero = v.valitseSiirto(r);
+        assertNotEquals(siirtoNumero, 5);
+        assertNotEquals(siirtoNumero, 3);
+    }
+    
     
     @Test
     public void paljastaKorttiToimii1() {

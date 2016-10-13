@@ -252,7 +252,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         this.pelausIkkuna = new JFrame("Vastustajan siirto.");
         this.pelausIkkuna.setSize(400, 400);
         JPanel lisaykset = new JPanel(new GridLayout(4, 1));
-        int siirto = vastustaja.valitseSiirto(r, this.peliOhjaus.getPeli().getOsanottajajoukko().size());
+        int siirto = vastustaja.valitseSiirto(r);
         int kohde = vastustaja.valitseKohde(r, this.peliOhjaus.getPeli().getOsanottajajoukko().size());
         JTextArea ilmoitus = new JTextArea("Vastutaja haluaa tehdä siirron " + this.peliOhjaus.getPeli().getSiirtoNimet().get(siirto) + " \nosanottajaa " + kohde + " vastaan.");
         JButton alaTeeMitaan = new JButton("Ok!");

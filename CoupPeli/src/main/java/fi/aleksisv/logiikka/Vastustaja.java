@@ -65,30 +65,6 @@ public class Vastustaja extends Osanottaja {
         super.lisaaKorttiKorttipakkaan(kortti);
     }
 
-    /**
-     * Metodi tekee Assassinointi-siirron.
-     *
-     * @param pankki Pankki, jolle siirtoon tarvittava raha annetaan.
-     * @param osanottajajoukko Pelissä mukana olevat osanottajat.
-     */
-    public void kaytaAssassinoi(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
-        Random r = new Random();
-        Osanottaja assassinoitava = osanottajajoukko.get(r.nextInt(osanottajajoukko.size()));
-        assassinoitava.paljastaKortti();
-    }
-
-    /**
-     * Metodi tekee Vallankaappaus-siirron.
-     *
-     * @param pankki Pankki, jolle siirtoon tarvittava raha annetaan.
-     * @param osanottajajoukko Pelissä mukana olevat osanottajat.
-     */
-    public void kaytaVallankaappaus(Pankki pankki, ArrayList<Osanottaja> osanottajajoukko) {
-        Random r = new Random();
-        Osanottaja kohde = osanottajajoukko.get(r.nextInt(osanottajajoukko.size()));
-        kohde.paljastaKortti();
-    }
-
     @Override
     public void kaytaVarasta(Pankki pankki, Osanottaja osanottaja) {
         super.kaytaVarasta(pankki, osanottaja);
@@ -152,7 +128,7 @@ public class Vastustaja extends Osanottaja {
                 + "\nStatus: " + status;
     }
 
-    public int valitseSiirto(Random r, int pelaajaMaara) {
+    public int valitseSiirto(Random r) {
         int siirtoEhdokas = 0;
         
         if(this.getRaha() >= 3) {
