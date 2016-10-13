@@ -288,6 +288,19 @@ public class VastustajaTest {
         assertNotEquals(siirtoNumero, 3);
     }
     
+    @Test
+    public void valitseKohdeToimii1() {
+        Random r = new Random();
+        Vastustaja v = new Vastustaja("0");
+        int pelaajaMaara = 2;
+        int kohde = v.valitseKohde(r, pelaajaMaara);
+        assertEquals(kohde, 1);
+        pelaajaMaara = 4;
+        kohde = v.valitseKohde(r, pelaajaMaara);
+        boolean joku = kohde == 1 || kohde == 2 || kohde ==3;
+        assertEquals(joku, true);
+    }
+    
     
     @Test
     public void paljastaKorttiToimii1() {
