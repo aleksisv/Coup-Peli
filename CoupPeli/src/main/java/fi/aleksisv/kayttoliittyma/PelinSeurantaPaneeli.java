@@ -14,6 +14,7 @@ import java.awt.Insets;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -40,6 +41,7 @@ public class PelinSeurantaPaneeli extends JPanel {
                 super.add(teksti);
             }
         }
+        SwingUtilities.updateComponentTreeUI(this);
     }
     
     public void paivitaTila(Peli peli) {
@@ -58,6 +60,7 @@ public class PelinSeurantaPaneeli extends JPanel {
                 super.add(teksti);
             }
         }
+        SwingUtilities.updateComponentTreeUI(this);
     }
     
     

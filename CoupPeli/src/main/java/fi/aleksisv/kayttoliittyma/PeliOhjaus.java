@@ -3,6 +3,11 @@ package fi.aleksisv.kayttoliittyma;
 import fi.aleksisv.logiikka.*;
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 /**
  * Luokka vastaa pelin ohjauksesta.
  */
@@ -58,6 +63,33 @@ public class PeliOhjaus {
         this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
         this.peli.paivitaTilanne();
     }
+    
+    public void yritaSiirtoa(int siirtonumero, int kohde, JFrame pelausIkkuna) {
+        Pelaaja pelaaja = this.getPeli().getPelaaja();
+        Vastustaja vastustaja = (Vastustaja) this.getPeli().getOsanottajajoukko().get(kohde);
+        Kortti siirto = this.getPeli().getSiirtoNumerot().get(siirtonumero);
+
+        if (vastustaja.haluaaEpailla(pelaaja, siirto)) {
+            
+            JButton tee = new JButton("Tee siirto.");
+            JButton alaTee = new JButton("Älä tee siirtoa.");
+            pelausIkkuna.add(new JTextArea("Vastustaja haluaa epäillä siirtoasi. Haluatko perua siirron?"));
+            pelausIkkuna.add(tee);
+            pelausIkkuna.add(alaTee);
+            SwingUtilities.updateComponentTreeUI(pelausIkkuna);
+            
+        } else if (vastustaja.haluaaTorjua(pelaaja, siirto)) {
+            JButton tee = new JButton("Tee siirto.");
+            JButton alaTee = new JButton("Älä tee siirtoa");
+            pelausIkkuna.add(new JTextArea("Vastustaja haluaa torjua siirtosi. Haluatko epäillä vastustajan torjumista?"));
+            pelausIkkuna.add(tee);
+            pelausIkkuna.add(alaTee);
+            SwingUtilities.updateComponentTreeUI(pelausIkkuna);
+            
+        } else {
+            this.suoritaSiirto(pelaaja, vastustaja, siirtonumero);
+        }
+    }
 
     public void suoritaSiirto(Osanottaja pelivuorossa, Osanottaja kohde, int siirtoVaihtoehto) {
         if (pelivuorossa.equals(this.peli.getPelaaja())) {
@@ -107,6 +139,14 @@ public class PeliOhjaus {
 
     public Peli getPeli() {
         return peli;
+    }
+
+    public boolean onkoPelaajallaRahaa(int siirtoNumero) {
+        if(siirtoNumero == 3) {
+            return this.peli.getPelaaja().getRaha() >= 7;
+        } else if (siirtoNumero == 6) {
+            return this.peli.getPelaaja().getRaha() >= 3;
+        } else return true;
     }
 
 }

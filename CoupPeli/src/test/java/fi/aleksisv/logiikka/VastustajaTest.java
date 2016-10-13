@@ -147,7 +147,9 @@ public class VastustajaTest {
     @Test
     public void toStringToimii1() {
         Vastustaja v = new Vastustaja("Azra");
-        assertEquals(v.toString(), "Azra");
+        assertEquals(v.toString(), "Nimi: " + "Azra" + "\nRahaa: " + v.getRaha()
+                + "\nNäkyvät kortit: " + v.naytaNakyvatKortit() 
+                + "\nStatus: " + " pelissä.");
     }
 
     @Test

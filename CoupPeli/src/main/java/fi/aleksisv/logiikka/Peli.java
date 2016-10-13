@@ -149,16 +149,6 @@ public class Peli {
     }
     
     /**
-     * Metodi pudottaa tietyssä kohdassa olevan osanottajan.
-     * 
-     * @param osanottajanPaikka Pudotettavan osanottajan paikka.
-     */
-    public void pudotaTassaKohdassaOleva(int osanottajanPaikka) {
-        this.osanottajajoukko.remove(osanottajanPaikka);
-        this.osanottajamaara--;
-    }
-
-    /**
      * Metodi tarkastaa, kuinka monta osanottajaa pelissä on tällä hetkellä.
      *
      * @return i Montako osanottajaa pelissä on jäljellä.
@@ -186,7 +176,7 @@ public class Peli {
     }
 
     public Pelaaja getPelaaja() {
-        return pelinPelaaja;
+        return this.pelinPelaaja;
     }
 
     /**

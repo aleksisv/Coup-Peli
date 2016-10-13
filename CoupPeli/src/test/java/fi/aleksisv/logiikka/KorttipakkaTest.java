@@ -15,38 +15,48 @@ public class KorttipakkaTest {
     @Test
     public void alussaPakassaOikeaMaaraKortteja() {
         Korttipakka korttipakka = new Korttipakka();
-        assertEquals(korttipakka.korttipakanKoko(), 15);
+        assertEquals(korttipakka.korttipakanKoko(), 12);
     }
 
     @Test
     public void onkoTamanNiminenKorttiPakassaToimiiOikein1() {
         Korttipakka korttipakka = new Korttipakka();
-        boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("Contessa");
+        boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("Kreivitär");
         assertEquals(vastaus, true);
     }
 
     @Test
     public void onkoTamanNiminenKorttiPakassaToimiiOikein2() {
         Korttipakka korttipakka = new Korttipakka();
-        boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("ContessA");
+        boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("KreiviTÄR");
         assertEquals(vastaus, false);
     }
 
     @Test
     public void korttienPoistaminenToimiiOikein1() {
         Korttipakka korttipakka = new Korttipakka();
-        korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
-        korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
-        korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
-        boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("Contessa");
+        korttipakka.nostaPakastaTamanNiminenKortti("Kreivitär");
+        korttipakka.nostaPakastaTamanNiminenKortti("Kreivitär");
+        korttipakka.nostaPakastaTamanNiminenKortti("Kreivitär");
+        boolean vastaus = korttipakka.onkoTamanNiminenKorttiPakassa("Kreivitär");
         assertEquals(vastaus, false);
+    }
+    
+    @Test
+    public void korttienPoistaminenToimiiOikein2() {
+        Korttipakka korttipakka = new Korttipakka();
+        Kortti kortti1 = korttipakka.nostaPakastaTassaKohdassaOleva(0);
+        korttipakka.poistaPakastaTassaKohdassaOleva(0);
+        korttipakka.poistaPakastaTassaKohdassaOleva(0);
+        korttipakka.poistaPakastaTassaKohdassaOleva(0);
+        assertNotEquals(kortti1, korttipakka.nostaPakastaTassaKohdassaOleva(0));
     }
 
     @Test
     public void nostaminenPakastaToimii1() {
         Korttipakka korttipakka = new Korttipakka();
-        Kortti contessa = korttipakka.nostaPakastaTamanNiminenKortti("Contessa");
-        assertEquals(new Kortti("Contessa"), contessa);
+        Kortti kreivitar = korttipakka.nostaPakastaTamanNiminenKortti("Kreivitär");
+        assertEquals(new Kortti("Kreivitär"), kreivitar);
     }
 
     @Test
@@ -59,14 +69,14 @@ public class KorttipakkaTest {
     @Test
     public void nostaPakastaTassaKohdassaToimii1() {
         Korttipakka korttipakka = new Korttipakka();
-        assertEquals(new Kortti("Contessa"), korttipakka.nostaPakastaTassaKohdassaOleva(0));
-        assertEquals(new Kortti("Assassin"), korttipakka.nostaPakastaTassaKohdassaOleva(4));
+        assertEquals(new Kortti("Kreivitär"), korttipakka.nostaPakastaTassaKohdassaOleva(0));
+        assertEquals(new Kortti("Salamurhaaja"), korttipakka.nostaPakastaTassaKohdassaOleva(4));
     }
 
     @Test
     public void sisaltyykoToimii1() {
         Korttipakka korttipakka = new Korttipakka();
-        assertEquals(korttipakka.sisaltyyko(new Kortti("Duke")), true);
+        assertEquals(korttipakka.sisaltyyko(new Kortti("Herttua")), true);
         assertEquals(korttipakka.sisaltyyko(new Kortti("Jasmin")), false);
     }
 
@@ -74,7 +84,7 @@ public class KorttipakkaTest {
     public void nostaPakastaSatunnainenKorttiToimii1() {
         Korttipakka korttipakka = new Korttipakka();
         korttipakka.nostaPakastaSatunnainenKortti();
-        assertEquals(korttipakka.korttipakanKoko(), 14);
+        assertEquals(korttipakka.korttipakanKoko(), 11);
     }
 
     @BeforeClass

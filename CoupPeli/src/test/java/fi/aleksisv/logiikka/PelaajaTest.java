@@ -148,10 +148,12 @@ public class PelaajaTest {
         assertEquals(o1.torju(o2, new Kortti("Contessa")), true);
     }
 
-    @Test
+   @Test
     public void toStringToimii1() {
-        Osanottaja o = new Osanottaja("Azra");
-        assertEquals(o.toString(), "Azra");
+        Pelaaja p = new Pelaaja("Azra");
+        assertEquals(p.toString(), "Nimi: " + "Azra" + "\nRahaa: " + p.getRaha()
+                + "\nKortit kädessä: " + p.naytaKorttikasi() + "\nNäkyvät kortit: " + p.naytaNakyvatKortit() 
+                + "\nStatus: " + " pelissä.");
     }
 
     @Test

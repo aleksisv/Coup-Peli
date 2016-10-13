@@ -12,7 +12,7 @@ import javax.swing.*;
  */
 public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionListener {
 
-    private JFrame ikkuna, pelausIkkuna;
+    private JFrame ikkuna, pelausIkkuna, epailyJaTorjuntaIkkuna;
     private PeliOhjaus peliOhjaus;
     private JButton aloitaPeliNappi, pelaaVuoroNappi, teeSiirto, vastustajanSiirto;
     private JTextField montakoPelaajaa;
@@ -47,7 +47,6 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
 
     private void luoKomponentit(Container sailio) {
         sailio.setLayout(new GridLayout(4, 2));
-
         sailio.add(luoPelinAvausvalikko(), 0, 0);
         this.huomioTekstit = new JTextArea("Luo peli haluamallasi määrällä pelaajia!");
         sailio.add(huomioTekstit);
@@ -66,17 +65,6 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
 
     }
 
-    private void aloitaPeli() {
-        int pelaajaMaara = Integer.parseInt(this.montakoPelaajaa.getText());
-        if (!(2 <= pelaajaMaara && pelaajaMaara <= 5)) {
-            this.huomioTekstit.setText("Anna validi määrä (2-5) pelaajia.");
-        } else {
-            pelaajaMaara = (int) pelaajaMaara;
-            this.peliOhjaus.luoPeli(pelaajaMaara);
-            this.huomioTekstit.setText("Aloitit pelin " + pelaajaMaara + " pelaajalla. Tee siirto.");
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent tapahtuma) {
         if (tapahtuma.getSource() == aloitaPeliNappi) {
@@ -86,8 +74,13 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
             pelaaVuoro();
             SwingUtilities.updateComponentTreeUI(pelausIkkuna);
         } else if (tapahtuma.getSource() == teeSiirto) {
+            int siirtoNumero = Integer.parseInt(nappularyhma1.getSelection().getActionCommand());
+            if(this.peliOhjaus.onkoPelaajallaRahaa(siirtoNumero)) {
             yritaSiirtoa(Integer.parseInt(nappularyhma1.getSelection().getActionCommand()),
                     Integer.parseInt(nappularyhma2.getSelection().getActionCommand()));
+            } else {
+                this.huomioTekstit.setText("Liian vähän rahaa siirtoon. Valitse uusi siirto.");
+            }
             SwingUtilities.updateComponentTreeUI(pelausIkkuna);
         } else if (tapahtuma.getSource() == vastustajanSiirto) {
             int pelivuorossa = this.peliOhjaus.getPeli().getVuoronumero() % this.peliOhjaus.getPeli().getOsanottajajoukko().size();
@@ -104,18 +97,38 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         }
         SwingUtilities.updateComponentTreeUI(ikkuna);
     }
+    
+    private void aloitaPeli() {
+        int pelaajaMaara = Integer.parseInt(this.montakoPelaajaa.getText());
+        if (!(2 <= pelaajaMaara && pelaajaMaara <= 5)) {
+            this.huomioTekstit.setText("Anna validi määrä (2-5) pelaajia.");
+        } else {
+            pelaajaMaara = (int) pelaajaMaara;
+            this.peliOhjaus.luoPeli(pelaajaMaara);
+            this.huomioTekstit.setText("Aloitit pelin " + pelaajaMaara + " pelaajalla. Tee siirto.");
+        }
+    }
 
     private void luoPelausYmparisto() {
         luoPelinseuranta();
         luoPelausNappi();
         aloitaPeliNappi.setVisible(false);
         montakoPelaajaa.setVisible(false);
+        this.ikkuna.validate();
+        
     }
 
     private void luoPelinseuranta() {
-        this.pelinSeurantapaneeli = new PelinSeurantaPaneeli(new GridLayout(1, this.peliOhjaus.getPeli().getOsanottajajoukko().size()));
+        this.pelinSeurantapaneeli = new PelinSeurantaPaneeli(new GridLayout(1,
+                this.peliOhjaus.getPeli().getOsanottajajoukko().size()));
         this.pelinSeurantapaneeli.asetaAlkutila(this.peliOhjaus.getPeli());
         this.ikkuna.add(pelinSeurantapaneeli);
+    }
+    
+    private void luoPelausNappi() {
+        this.pelaaVuoroNappi = new JButton("Pelaa vuoro!");
+        pelaaVuoroNappi.addActionListener(this);
+        this.ikkuna.add(pelaaVuoroNappi);
     }
 
     private void paivitaPelinseuranta(PelinSeurantaPaneeli seuranta) {
@@ -133,12 +146,6 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         }
         pelausIkkuna.pack();
         pelausIkkuna.setVisible(true);
-    }
-
-    private void luoPelausNappi() {
-        this.pelaaVuoroNappi = new JButton("Pelaa vuoro!");
-        pelaaVuoroNappi.addActionListener(this);
-        this.ikkuna.add(pelaaVuoroNappi);
     }
 
     private JPanel luoPelausVaihtoehdot() {
@@ -167,22 +174,35 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         Kortti siirto = this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirtonumero);
 
         if (vastustaja.haluaaEpailla(pelaaja, siirto)) {
+            this.epailyJaTorjuntaIkkuna = new JFrame("Vastustaja haluaa epäillä.");
+            JPanel epailyPaneeli = new JPanel(new GridLayout(3, 1));
+            this.epailyJaTorjuntaIkkuna.setVisible(true);
             JButton tee = new JButton("Tee siirto.");
             JButton alaTee = new JButton("Älä tee siirtoa.");
-            this.pelausIkkuna.add(new JTextArea("Vastustaja haluaa epäillä siirtoasi. Haluatko perua siirron?"));
-            this.pelausIkkuna.add(tee);
-            this.pelausIkkuna.add(alaTee);
+            epailyPaneeli.add(new JTextArea("Vastustaja haluaa epäillä siirtoasi. Haluatko perua siirron?"));
+            tee.addActionListener(this);
+            alaTee.addActionListener(this);
+            epailyPaneeli.add(tee);
+            epailyPaneeli.add(alaTee);
+            this.epailyJaTorjuntaIkkuna.pack();
         } else if (vastustaja.haluaaTorjua(pelaaja, siirto)) {
+            this.epailyJaTorjuntaIkkuna = new JFrame("Vastustaja haluaa torjua siirtosi.");
+            JPanel torjuntaPaneeli = new JPanel(new GridLayout(3, 1));
+            this.epailyJaTorjuntaIkkuna.setVisible(true);
             JButton tee = new JButton("Tee siirto.");
             JButton alaTee = new JButton("Älä tee siirtoa");
-            this.pelausIkkuna.add(new JTextArea("Vastustaja haluaa torjua siirtosi. Haluatko epäillä vastustajan torjumista?"));
-            this.pelausIkkuna.add(tee);
-            this.pelausIkkuna.add(alaTee);
+            tee.addActionListener(this);
+            alaTee.addActionListener(this);
+            torjuntaPaneeli.add(new JTextArea("Vastustaja haluaa torjua siirtosi. Haluatko epäillä vastustajan torjumista?"));
+            torjuntaPaneeli.add(tee);
+            torjuntaPaneeli.add(alaTee);
+            this.epailyJaTorjuntaIkkuna.pack();
         } else {
             this.peliOhjaus.suoritaSiirto(pelaaja, vastustaja, siirtonumero);
+            this.pelausIkkuna.setVisible(false);
         }
-        this.paivitaPelinseuranta(pelinSeurantapaneeli);
-        this.pelausIkkuna.setVisible(false);
+        this.pelausIkkuna.validate();
+        this.paivitaPelinseuranta(this.pelinSeurantapaneeli);
     }
 
     private void lisaaSiirtonapit(String[][] siirtoVaihtoehdot, JPanel napit) {
@@ -309,7 +329,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         private JFrame pelausikkuna;
         private PelinSeurantaPaneeli pelinseuranta;
 
-        public TorjuActionListener(PeliOhjaus peliOhjaus, Vastustaja vastustaja, int siirto, int kohde, JFrame pelausikkuna,
+        public TorjuActionListener(PeliOhjaus peliOhjaus, Osanottaja torjuja, int siirto, int kohde, JFrame pelausikkuna,
                 PelinSeurantaPaneeli pelinseuranta) {
             this.peliOhjaus = peliOhjaus;
             this.vastustaja = vastustaja;
