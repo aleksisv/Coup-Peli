@@ -89,10 +89,11 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
             SwingUtilities.updateComponentTreeUI(pelausIkkuna);
         }
         if (this.peliOhjaus.getPeli().getOsanottajajoukko().size() == 1) {
-            System.out.println("Peli on ohi! Osanottaja " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0).getNimi() + " voitti.");
-            ikkuna.dispose();
+            this.ikkuna.dispose();
+            this.pelausIkkuna.dispose();
             this.ikkuna = new JFrame("Peli on ohi!");
-            this.ikkuna.setSize(200, 200);
+            this.ikkuna.add(new JTextArea("Voittaja: " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
+            this.ikkuna.setSize(400, 400);
             this.ikkuna.setVisible(true);
         }
         SwingUtilities.updateComponentTreeUI(ikkuna);
@@ -249,17 +250,17 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
     private void vastustajanSiirto(Vastustaja vastustaja) {
         this.pelausIkkuna.setVisible(false);
         this.pelausIkkuna = new JFrame("Vastustajan siirto.");
-        this.pelausIkkuna.setSize(200, 200);
-        JPanel lisaykset = new JPanel(new FlowLayout());
-        int siirto = r.nextInt(6) + 1;
-        int kohde = r.nextInt(this.peliOhjaus.getPeli().getOsanottajajoukko().size() - 1) + 1;
+        this.pelausIkkuna.setSize(400, 400);
+        JPanel lisaykset = new JPanel(new GridLayout(4, 1));
+        int siirto = vastustaja.valitseSiirto(r, this.peliOhjaus.getPeli().getOsanottajajoukko().size());
+        int kohde = vastustaja.valitseKohde(r, this.peliOhjaus.getPeli().getOsanottajajoukko().size());
+        JTextArea ilmoitus = new JTextArea("Vastutaja haluaa tehdä siirron " + this.peliOhjaus.getPeli().getSiirtoNimet().get(siirto) + " \nosanottajaa " + kohde + " vastaan.");
         JButton alaTeeMitaan = new JButton("Ok!");
         if (siirto == 4 || siirto == 5 || siirto == 6 && this.peliOhjaus.getPeli().getOsanottajajoukko().get(kohde) instanceof Pelaaja) {
-            lisaykset.add(new JTextArea("Vastustajan " + vastustaja.getNimi()
-                    + " vuoro.\nVastustaja haluaa tehdä siirron " + siirto
+            ilmoitus.setText("Vastustajan " + vastustaja.getNimi()
+                    + " vuoro.\nVastustaja haluaa tehdä siirron " + this.peliOhjaus.getPeli().getSiirtoNimet().get(siirto)
                     + "\nosanottajaa " + kohde + " kohtaan."
-                    + "\nHaluatko torjua siirron tai epäillä sitä?"));
-
+                    + "\nHaluatko torjua siirron tai epäillä sitä?");
             JButton epaily = new JButton("Epäile!");
             JButton torju = new JButton("Torju!");
             alaTeeMitaan = new JButton("Älä tee mitään!");
@@ -275,6 +276,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         alaTeeMitaan.addActionListener(new AlaTeeMitaanActionListener(peliOhjaus, vastustaja, siirto, kohde,
                 this.pelausIkkuna, this.pelinSeurantapaneeli));
         lisaykset.add(alaTeeMitaan);
+        lisaykset.add(ilmoitus);
 
         this.pelausIkkuna.add(lisaykset);
         

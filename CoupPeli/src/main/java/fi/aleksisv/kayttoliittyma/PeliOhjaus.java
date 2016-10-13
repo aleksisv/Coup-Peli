@@ -2,10 +2,8 @@ package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.*;
 import java.util.Random;
-import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 /**
@@ -144,7 +142,7 @@ public class PeliOhjaus {
     public boolean onkoPelaajallaRahaa(int siirtoNumero) {
         if(siirtoNumero == 3) {
             return this.peli.getPelaaja().getRaha() >= 7;
-        } else if (siirtoNumero == 6) {
+        } else if (siirtoNumero == 5) {
             return this.peli.getPelaaja().getRaha() >= 3;
         } else return true;
     }

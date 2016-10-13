@@ -10,16 +10,16 @@ import java.util.Random;
  * olioita.
  */
 public class Peli {
-
+    
     private int osanottajamaara;
     private ArrayList<Osanottaja> osanottajajoukko;
-    private boolean pysayta;
     private int vuoronumero;
     private Pelaaja pelinPelaaja;
     private Pankki pankki;
     private Korttipakka korttipakka;
     private ArrayList<Osanottaja> havinnytJoukko;
     private HashMap<Integer, Kortti> siirtoNumerot;
+    private HashMap<Integer, String> siirtoNimet;
     
     /**
      * Luokan konstruktori.
@@ -35,11 +35,11 @@ public class Peli {
         this.pankki = new Pankki();
         this.korttipakka = new Korttipakka();
         this.siirtoNumerot = luoSiirtonumerot();
+        this.siirtoNimet = luoSiirtoNimet();
     }
 
     /**
      * Metodi pistää pelin käyntiin. Tällä hetkellä metodi ei ole käytössä.
-     *
      */
     public void kaynnistaPeli() {
         luoOsanottajat();
@@ -47,7 +47,6 @@ public class Peli {
     
     /**
      * Metodi lisää pelaajan osanottajien joukkoon.
-     *
      */
     public void lisaaPelaajaJoukkoon() {
         this.osanottajajoukko.add(pelinPelaaja);
@@ -201,6 +200,23 @@ public class Peli {
         mappi.put(6, new Kortti("Kapteeni"));
         return mappi;
     }
+    
+    private HashMap<Integer, String> luoSiirtoNimet() {
+        HashMap<Integer, String> mappi = new HashMap<Integer, String>();
+        mappi.put(1, "Perustulo");
+        mappi.put(2, "Ulkomaanapu");
+        mappi.put(3, "Vallankumous");
+        mappi.put(4, "Verotus");
+        mappi.put(5, "Assassinoi");
+        mappi.put(6, "Varasta");
+        return mappi;
+    }
+
+    public HashMap<Integer, String> getSiirtoNimet() {
+        return siirtoNimet;
+    }
+    
+    
 
     public HashMap<Integer, Kortti> getSiirtoNumerot() {
         return siirtoNumerot;
@@ -209,5 +225,6 @@ public class Peli {
     public ArrayList<Osanottaja> getHavinnytJoukko() {
         return havinnytJoukko;
     }
+
 
 }

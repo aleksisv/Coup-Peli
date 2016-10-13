@@ -44,6 +44,7 @@ public class OsanottajaTest {
         osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Contessa"));
         boolean epaily = osanottaja1.epaile(osanottaja2, new Kortti("Contessa"));
         assertEquals(epaily, false);
+        assertEquals(osanottaja1.montakoNakyvaaKorttia(), 1);
     }
 
     @Test
@@ -54,6 +55,7 @@ public class OsanottajaTest {
         osanottaja2.lisaaKorttiKorttipakkaan(new Kortti("Assassin"));
         boolean epaily = osanottaja1.epaile(osanottaja2, new Kortti("Contessa"));
         assertEquals(epaily, true);
+        assertEquals(osanottaja2.montakoNakyvaaKorttia(), 1);
     }
 
     @Test

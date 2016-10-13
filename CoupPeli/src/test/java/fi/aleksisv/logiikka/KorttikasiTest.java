@@ -46,7 +46,21 @@ public class KorttikasiTest {
         korttikasi.lisaaKorttikateen(pakka.getPakka().get(0));
         assertEquals(korttikasi.koko(), 2);
     }
-
+    
+    @Test
+    public void setKortitToimii1() {
+        Korttikasi k = new Korttikasi();
+        assertEquals(k.koko(), 0);
+        Kortti k1 = new Kortti("A");
+        Kortti k2 = new Kortti("B");
+        
+        ArrayList<Kortti> kortit = new ArrayList();
+        k.setKortit(kortit);
+        kortit.add(k1);
+        kortit.add(k2);
+        assertEquals(k.koko(), 2);
+        
+    }
     @BeforeClass
     public static void setUpClass() {
     }

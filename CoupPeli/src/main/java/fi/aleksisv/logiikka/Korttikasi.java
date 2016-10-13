@@ -9,25 +9,26 @@ import java.util.Random;
 public class Korttikasi {
 
     private ArrayList<Kortti> kortit;
-    
+
     /**
      * Luokan konstruktori.
+     *
      * @param kortit ArrayList, joka kuvaa korttikättä.
      */
     public Korttikasi(ArrayList<Kortti> kortit) {
         this.kortit = kortit;
     }
-    
+
     /**
      * Luokan konstruktori.
      */
     public Korttikasi() {
         this.kortit = new ArrayList();
     }
-    
+
     /**
      * Metodi palauttaa korttikäden koon.
-     * 
+     *
      * @return Korttikäden koko.
      */
     public int koko() {
@@ -83,10 +84,10 @@ public class Korttikasi {
      */
     public void lisaaKaksiSatunnaistaKorttia(Korttipakka pakka) {
         Random r = new Random();
-        for (int i = 0; i < 2; i++) {
-            int lisattavanSijainti = r.nextInt(pakka.korttipakanKoko());
-            lisaaKorttikateen(pakka.nostaPakastaTassaKohdassaOleva(i));
-        }
+        int lisattavanSijainti = r.nextInt(pakka.korttipakanKoko());
+        lisaaKorttikateen(pakka.nostaPakastaTassaKohdassaOleva(lisattavanSijainti));
+        lisattavanSijainti = r.nextInt(pakka.korttipakanKoko());
+        lisaaKorttikateen(pakka.nostaPakastaTassaKohdassaOleva(lisattavanSijainti));
     }
 
     /**

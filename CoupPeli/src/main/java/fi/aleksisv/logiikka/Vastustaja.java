@@ -152,10 +152,19 @@ public class Vastustaja extends Osanottaja {
                 + "\nStatus: " + status;
     }
 
-    public int valitseSiirto(Random r) {
+    public int valitseSiirto(Random r, int pelaajaMaara) {
         int siirtoEhdokas = 0;
+        
+        if(this.getRaha() >= 3) {
+            if(this.getKorttikasi().sisaltyykoKortti(new Kortti("Salamurhaaja"))) {
+                return 5;
+            } else if (this.getRaha() >= 7) {
+                return 3;
+            }
+        }
+        
         while(true) {
-            siirtoEhdokas = r.nextInt();
+            siirtoEhdokas = r.nextInt(5) + 1;
             if(siirtoEhdokas == 3) {
                 if(this.getRaha() >= 7) {
                     break;
@@ -164,9 +173,21 @@ public class Vastustaja extends Osanottaja {
                 if(this.getRaha() >= 3) {
                     break;
                 }
+            } else {
+                break;
             }
         }
         return siirtoEhdokas;
+    }
+    
+    public int valitseKohde(Random r, int pelaajaMaara) {
+        int kohdeEhdokas = 0;
+        while(true) {
+            kohdeEhdokas = r.nextInt(pelaajaMaara);
+            if(!(kohdeEhdokas == Integer.parseInt(this.getNimi()))) {
+                return kohdeEhdokas;
+            }
+        }
     }
 
 }
