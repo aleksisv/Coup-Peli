@@ -79,7 +79,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
             this.avausIkkuna.dispose();
             this.valiIkkuna = new JFrame("Coup-Peli");
             this.valiIkkuna.setVisible(true);
-            this.valiIkkuna.setSize(500, 500);
+            this.valiIkkuna.setSize(1000, 700);
             valiIkkuna.getContentPane().setLayout(new GridLayout(3, 2));
             valiIkkuna.add(huomioTekstit);
             this.peliOhjaus.luoPeli(pelaajaMaara);
@@ -151,7 +151,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         Vastustaja vastustaja = (Vastustaja) this.peliOhjaus.getPeli().getOsanottajajoukko().get(kohde);
         Kortti siirto = this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirtonumero);
 
-        if (vastustaja.haluaaEpailla(pelaaja, siirto)) {
+        if (vastustaja.haluaaEpailla(pelaaja, siirto) && false) {
             this.epailyJaTorjuntaIkkuna = new JFrame("Vastustaja haluaa epäillä.");
             JPanel epailyPaneeli = new JPanel(new GridLayout(3, 1));
             this.epailyJaTorjuntaIkkuna.setVisible(true);
@@ -163,7 +163,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
             epailyPaneeli.add(tee);
             epailyPaneeli.add(alaTee);
             this.epailyJaTorjuntaIkkuna.pack();
-        } else if (vastustaja.haluaaTorjua(pelaaja, siirto)) {
+        } else if (vastustaja.haluaaTorjua(pelaaja, siirto) && false) {
             this.epailyJaTorjuntaIkkuna = new JFrame("Vastustaja haluaa torjua siirtosi.");
             JPanel torjuntaPaneeli = new JPanel(new GridLayout(3, 1));
             this.epailyJaTorjuntaIkkuna.setVisible(true);
