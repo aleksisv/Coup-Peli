@@ -4,7 +4,8 @@ package fi.aleksisv.logiikka;
  * Luokka kuvaa pelin rahavarastoa.
  */
 public class Pankki {
-
+    
+    /** Pankin rahamäärä.*/
     private int rahamaara;
     
     /**

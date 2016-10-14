@@ -11,7 +11,8 @@ import javax.swing.*;
  * Luokka vastaa ohjelman GUI-puolesta.
  */
 public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionListener {
-
+    
+    /** Komponentit, joita käyttöliittymä tarvitsee. */
     private JFrame valiIkkuna, pelausIkkuna, epailyJaTorjuntaIkkuna;
     private AvausIkkuna avausIkkuna;
     private PeliOhjaus peliOhjaus;
@@ -20,6 +21,8 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
     private JTextArea huomioTekstit;
     private PelinSeurantaPaneeli pelinSeurantapaneeli;
     private ButtonGroup nappularyhma1, nappularyhma2;
+    
+    /** Random r.*/
     private Random r;
 
     /**
@@ -28,6 +31,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
     public GraafinenKayttoliittyma() {
         this.r = new Random();
     }
+
     /**
      * Metodi pyörittää peliä.
      */
@@ -46,9 +50,9 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
             SwingUtilities.updateComponentTreeUI(pelausIkkuna);
         } else if (tapahtuma.getSource() == teeSiirto) {
             int siirtoNumero = Integer.parseInt(nappularyhma1.getSelection().getActionCommand());
-            if(this.peliOhjaus.onkoPelaajallaRahaa(siirtoNumero)) {
-            yritaSiirtoa(Integer.parseInt(nappularyhma1.getSelection().getActionCommand()),
-                    Integer.parseInt(nappularyhma2.getSelection().getActionCommand()));
+            if (this.peliOhjaus.onkoPelaajallaRahaa(siirtoNumero)) {
+                yritaSiirtoa(Integer.parseInt(nappularyhma1.getSelection().getActionCommand()),
+                        Integer.parseInt(nappularyhma2.getSelection().getActionCommand()));
             } else {
                 this.huomioTekstit.setText("Liian vähän rahaa siirtoon. Valitse uusi siirto.");
             }
@@ -69,7 +73,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         }
         SwingUtilities.updateComponentTreeUI(valiIkkuna);
     }
-    
+
     private void aloitaPeli() {
         int pelaajaMaara = Integer.parseInt(avausIkkuna.getMontakoPelaajaa().getText());
         if (!(2 <= pelaajaMaara && pelaajaMaara <= 5)) {
@@ -93,7 +97,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         avausIkkuna.getAloitaPeliNappi().setVisible(false);
         avausIkkuna.getMontakoPelaajaa().setVisible(false);
         this.valiIkkuna.validate();
-        
+
     }
 
     private void luoPelinseuranta() {
@@ -102,7 +106,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         this.pelinSeurantapaneeli.asetaAlkutila(this.peliOhjaus.getPeli());
         this.valiIkkuna.add(pelinSeurantapaneeli);
     }
-    
+
     private void luoPelausNappi() {
         this.pelaaVuoroNappi = new JButton("Pelaa vuoro!");
         pelaaVuoroNappi.addActionListener(this);
@@ -132,7 +136,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         JPanel kohdenapit = new JPanel();
         String[][] siirtoVaihtoehdot = {{"Perustulo:", "Ota 1 kolikko pankista."}, {"Ulkomaanapu:", "Ota 2 kolikkoa pankista."},
             {"Vallankumous:", "Maksa 7 kolikkoa ja hyökkää yhtä osanottajaa vastaan."},
-            {"Verotus:", "Ota 3 kolikkoa pankista."}, {"Assassinoi:","Maksa 3 kolikkoa ja hyökkää yhtä osanottajaa kohtaan."}, {"Varasta:", "Ota vastustajalta kaksi kolikkoa."}};
+            {"Verotus:", "Ota 3 kolikkoa pankista."}, {"Assassinoi:", "Maksa 3 kolikkoa ja hyökkää yhtä osanottajaa kohtaan."}, {"Varasta:", "Ota vastustajalta kaksi kolikkoa."}};
 
         lisaaSiirtonapit(siirtoVaihtoehdot, siirtonapit);
         lisaaKohdenapit(kohdenapit);
@@ -256,7 +260,7 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         lisaykset.add(ilmoitus);
 
         this.pelausIkkuna.add(lisaykset);
-        
+
         this.pelausIkkuna.setVisible(true);
 
     }
@@ -271,6 +275,9 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         private JFrame pelausikkuna;
         private PelinSeurantaPaneeli pelinseuranta;
 
+        /**
+         * Luokan olio toimii pelin aloitusvalikkona.
+         */
         public EpailyActionListener(PeliOhjaus peliOhjaus, Vastustaja vastustaja,
                 int siirto, int kohde, JFrame pelausikkuna, PelinSeurantaPaneeli pelinseuranta) {
             this.peliOhjaus = peliOhjaus;
@@ -308,6 +315,9 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         private JFrame pelausikkuna;
         private PelinSeurantaPaneeli pelinseuranta;
 
+        /**
+         * Luokan konstruktori.
+         */
         public TorjuActionListener(PeliOhjaus peliOhjaus, Osanottaja torjuja, int siirto, int kohde, JFrame pelausikkuna,
                 PelinSeurantaPaneeli pelinseuranta) {
             this.peliOhjaus = peliOhjaus;
@@ -344,6 +354,9 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
         private JFrame pelausikkuna;
         private PelinSeurantaPaneeli pelinseuranta;
 
+        /**
+         * Luokan konstruktori.
+         */
         public AlaTeeMitaanActionListener(PeliOhjaus peliOhjaus, Vastustaja vastustaja,
                 int siirto, int kohde, JFrame pelausikkuna, PelinSeurantaPaneeli pelinseuranta) {
             this.peliOhjaus = peliOhjaus;
@@ -373,6 +386,5 @@ public class GraafinenKayttoliittyma extends JPanel implements Runnable, ActionL
     public void setAloitaPeliNappi(JButton aloitaPeliNappi) {
         this.aloitaPeliNappi = aloitaPeliNappi;
     }
-    
-}
 
+}

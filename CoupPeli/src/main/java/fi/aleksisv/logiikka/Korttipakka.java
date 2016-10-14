@@ -7,7 +7,8 @@ import java.util.Random;
  * Luokka kuvaa koko pelissä mukana olevien korttien joukkoa.
  */
 public class Korttipakka {
-
+    
+    /** Lista, joka kuvaa korttipakkaa.*/
     private ArrayList<Kortti> pakka;
     
     /**

@@ -4,8 +4,11 @@ package fi.aleksisv.logiikka;
  * Luokka kuvaa pelin yhtä korttia.
  */
 public class Kortti {
-
+    
+    /** Kortin tyyppi.*/
     private String tyyppi;
+    
+    /** Onko kortti paljastettu vai ei.*/
     private boolean onkoPaljastettu;
 
     /**

@@ -11,14 +11,23 @@ import java.util.Random;
  */
 public class Peli {
     
+    /** Montako osanottajaa pelissä on.*/
     private int osanottajamaara;
+    /** Pelissä mukana olevat sanottajat sisälleen säilövä lista.*/
     private ArrayList<Osanottaja> osanottajajoukko;
+    /** Mikä vuoro pelissä on menossa.*/
     private int vuoronumero;
+    /** Kuka on pelin pelaaja.*/
     private Pelaaja pelinPelaaja;
+    /** Pelin pankki.*/
     private Pankki pankki;
+    /** Pelin korttipakka.*/
     private Korttipakka korttipakka;
+    /** Hävinneet osanottajat sisällään pitävä lista.*/
     private ArrayList<Osanottaja> havinnytJoukko;
+    /** HashMap, joka liittää siirtonumeron vastaavaan korttiin.*/
     private HashMap<Integer, Kortti> siirtoNumerot;
+    /** HashMap, joka liittää siirtonumeron tätä vastaavaan nimeen.*/
     private HashMap<Integer, String> siirtoNimet;
     
     /**

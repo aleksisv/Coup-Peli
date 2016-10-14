@@ -8,9 +8,6 @@ import java.util.Random;
  * vastaan pelaaja pelaa.
  */
 public class Vastustaja extends Osanottaja {
-
-    private Korttikasi kasi;
-
     /**
      * Luokan konstruktori.
      *
@@ -124,29 +121,36 @@ public class Vastustaja extends Osanottaja {
             status = " pelissä.";
         }
         return "Nimi: " + this.getNimi() + "\nRahaa: " + this.getRaha()
-                + "\nNäkyvät kortit: " + this.naytaNakyvatKortit() 
+                + "\nNäkyvät kortit: " + this.naytaNakyvatKortit()
                 + "\nStatus: " + status;
     }
 
+    /**
+     * Metodi valitsee vastustajalle siiron, minkä hän haluaa tehdä.
+     * 
+     * @param r Random-olio.
+     * 
+     * @return Minkä numeroinen siirto.
+     */
     public int valitseSiirto(Random r) {
         int siirtoEhdokas = 0;
-        
-        if(this.getRaha() >= 3) {
-            if(this.getKorttikasi().sisaltyykoKortti(new Kortti("Salamurhaaja"))) {
+
+        if (this.getRaha() >= 3) {
+            if (this.getKorttikasi().sisaltyykoKortti(new Kortti("Salamurhaaja"))) {
                 return 5;
             } else if (this.getRaha() >= 7) {
                 return 3;
             }
         }
-        
-        while(true) {
+
+        while (true) {
             siirtoEhdokas = r.nextInt(5) + 1;
-            if(siirtoEhdokas == 3) {
-                if(this.getRaha() >= 7) {
+            if (siirtoEhdokas == 3) {
+                if (this.getRaha() >= 7) {
                     break;
                 }
             } else if (siirtoEhdokas == 5) {
-                if(this.getRaha() >= 3) {
+                if (this.getRaha() >= 3) {
                     break;
                 }
             } else {
@@ -156,11 +160,19 @@ public class Vastustaja extends Osanottaja {
         return siirtoEhdokas;
     }
     
+    /**
+     * Metodi valitsee mihin kohteeseen vastustaja haluaa tehdä siirron.
+     * 
+     * @param r Random-olio.
+     * @param pelaajaMaara Montako pelaajaa pelissä on mukana.
+     * 
+     * @return Minkä numeroinen siirto.
+     */
     public int valitseKohde(Random r, int pelaajaMaara) {
         int kohdeEhdokas = 0;
-        while(true) {
+        while (true) {
             kohdeEhdokas = r.nextInt(pelaajaMaara);
-            if(!(kohdeEhdokas == Integer.parseInt(this.getNimi()))) {
+            if (!(kohdeEhdokas == Integer.parseInt(this.getNimi()))) {
                 return kohdeEhdokas;
             }
         }

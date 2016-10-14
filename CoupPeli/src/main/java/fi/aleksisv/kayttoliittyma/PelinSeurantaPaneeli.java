@@ -16,17 +16,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author aleksisvuoksenmaa
- */
 public class PelinSeurantaPaneeli extends JPanel {
-
+    
+    /**
+     * Luokan konstruktori.
+     * 
+     * @param layout Mikä layout paneelille halutaan.
+     */
     public PelinSeurantaPaneeli(GridLayout layout) {
         super(layout);
         this.setVisible(true);
     }
-    
+
+    /**
+     * Metodi asettaa pelin tilanne-esityksen alkutilaansa.
+     *
+     * @param peli Peli, jota tällä hetkellä käsitellään.
+     */
     public void asetaAlkutila(Peli peli) {
         for (Osanottaja o : peli.getOsanottajajoukko()) {
             if (o instanceof Pelaaja) {
@@ -43,7 +49,12 @@ public class PelinSeurantaPaneeli extends JPanel {
         }
         SwingUtilities.updateComponentTreeUI(this);
     }
-    
+
+    /**
+     * Metodin avulla pelinseurannan tila päivitetään.
+     *
+     * @param peli Mikä peli päivitetään.
+     */
     public void paivitaTila(Peli peli) {
         ArrayList<Osanottaja> kaikki = (ArrayList<Osanottaja>) peli.getOsanottajajoukko().clone();
         kaikki.addAll(peli.getHavinnytJoukko());
@@ -62,6 +73,5 @@ public class PelinSeurantaPaneeli extends JPanel {
         }
         SwingUtilities.updateComponentTreeUI(this);
     }
-    
-    
+
 }

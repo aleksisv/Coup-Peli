@@ -7,7 +7,8 @@ import java.util.Random;
  * Luokka kuvaa kokoelmaa kortteja sellaisena kuin ne ovat osanottajan kädessä.
  */
 public class Korttikasi {
-
+    
+    /** Lista korteista.*/
     private ArrayList<Kortti> kortit;
 
     /**

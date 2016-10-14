@@ -8,12 +8,24 @@ import javax.swing.JTextField;
  * Luokan olio toimii pelin aloitusvalikkona.
  */
 public class AvausIkkuna extends JFrame {
-
+    
+    /** GUI, johon frame kuuluu.*/
     private GraafinenKayttoliittyma gkl;
+    /** Nappi, jolla peli aloitetaan.*/
     private JButton aloitaPeliNappi;
+    /** Pelaajien määrästä kertova JTextField.*/
     private JTextField montakoPelaajaa;
+    /** Erityishuomioista kertova tekstialue.*/
     private JTextArea huomioTekstit;
 
+    /**
+     * Luokan konstruktori.
+     * 
+     * @param otsikko Ikkunan otsikko.
+     * @param gkl Graafinen käyttöliittymä.
+     * 
+     * @throws HeadlessException Heittää headless-exceptionin.
+     */
     public AvausIkkuna(String otsikko, GraafinenKayttoliittyma gkl) throws HeadlessException {
         super(otsikko);
 
@@ -60,8 +72,5 @@ public class AvausIkkuna extends JFrame {
     public JButton getAloitaPeliNappi() {
         return aloitaPeliNappi;
     }
-    
-    
-
 
 }

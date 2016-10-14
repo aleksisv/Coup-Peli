@@ -6,9 +6,12 @@ import java.util.Random;
  * Luokka kuvaa pelin osanottajaa.
  */
 public class Osanottaja {
-
+    
+    /** Osanottajan nimi.*/
     private String nimi;
+    /** Osanottajan rahamäärä.*/
     private int raha;
+    /** Osanottajan korttikäsi.*/
     private Korttikasi korttikasi;
     
     /**
