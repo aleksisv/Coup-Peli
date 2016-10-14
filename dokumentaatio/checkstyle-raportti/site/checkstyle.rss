@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2016</copyright>
     <item>
-      <title>File: 17,
+      <title>File: 13,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -116,34 +116,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.PelaajienLisaysKuuntelija.java">fi/aleksisv/kayttoliittyma/PelaajienLisaysKuuntelija.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.PelausNappi.java">fi/aleksisv/kayttoliittyma/PelausNappi.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.PeliOhjaus.java">fi/aleksisv/kayttoliittyma/PeliOhjaus.java</a>
                 </td>
                 <td>
@@ -200,21 +172,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.TilanteenSeuraajaKuuntelija.java">fi/aleksisv/kayttoliittyma/TilanteenSeuraajaKuuntelija.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.PelinAloitusKuuntelija.java">fi/aleksisv/kayttoliittyma/PelinAloitusKuuntelija.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.AvausIkkuna.java">fi/aleksisv/kayttoliittyma/AvausIkkuna.java</a>
                 </td>
                 <td>
                   0
@@ -242,21 +200,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.PelausIkkuna.java">fi/aleksisv/kayttoliittyma/PelausIkkuna.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.PelaaVuoroKuuntelija.java">fi/aleksisv/kayttoliittyma/PelaaVuoroKuuntelija.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.aleksisv.kayttoliittyma.PelinSeurantaPaneeli.java">fi/aleksisv/kayttoliittyma/PelinSeurantaPaneeli.java</a>
                 </td>
                 <td>
                   0
