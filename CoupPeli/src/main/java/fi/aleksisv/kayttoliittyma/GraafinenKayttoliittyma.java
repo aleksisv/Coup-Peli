@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.*;
 
 /**
@@ -40,40 +42,38 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
      */
     public void run() {
         avausIkkuna = new AvausIkkuna("Coup-Peli", this);
-        peliOhjaus = new PeliOhjaus();
-
-        if (onkoAloitettu) {
-            if (this.peliOhjaus.getPeli().getOsanottajajoukko().size() == 1) {
-                lopetaPeli();
-            }
-        }
+        peliOhjaus = new PeliOhjaus(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent tapahtuma) {
         if (tapahtuma.getSource() == aloitaPeliNappi) {
             aloitaPeli();
-            this.valiIkkuna.luoPelausYmparisto();
-            avausIkkuna.getAloitaPeliNappi().setVisible(false);
-            avausIkkuna.getMontakoPelaajaa().setVisible(false);
         }
-        
-        SwingUtilities.updateComponentTreeUI(valiIkkuna);
     }
 
     private void aloitaPeli() {
-        int pelaajaMaara = Integer.parseInt(avausIkkuna.getMontakoPelaajaa().getText());
-        if (!(2 <= pelaajaMaara && pelaajaMaara <= 5)) {
-            this.huomioTekstit.setText("Anna validi määrä (2-5) pelaajia.");
+        String pelaajaMaaraTeksti = avausIkkuna.getMontakoPelaajaa().getText();
+        Pattern p = Pattern.compile("[2-5]");
+        Matcher m = p.matcher(pelaajaMaaraTeksti);
+
+        if (!m.matches()) {
+            this.huomioTekstit.setText("Validi määrä (2-5) pelaajia.");
+            return;
         } else {
-            pelaajaMaara = (int) pelaajaMaara;
+            int pelaajaMaara = Integer.parseInt(avausIkkuna.getMontakoPelaajaa().getText());
             this.avausIkkuna.dispose();
             this.peliOhjaus.luoPeli(pelaajaMaara);
             this.valiIkkuna = new ValiIkkuna(peliOhjaus, this);
             this.peliOhjaus.luoPeli(pelaajaMaara);
             this.huomioTekstit.setText("Aloitit pelin " + pelaajaMaara + " pelaajalla. Tee siirto.");
+
+            this.valiIkkuna.luoPelausYmparisto();
+            avausIkkuna.getAloitaPeliNappi().setVisible(false);
+            avausIkkuna.getMontakoPelaajaa().setVisible(false);
+            onkoAloitettu = true;
         }
-        onkoAloitettu = true;
+
     }
 
     public void paivitaPelinseuranta(PelinSeurantaPaneeli seuranta) {
@@ -87,8 +87,12 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
     void setAloitaPeliNappi(JButton aloitaPeliNappi) {
         this.aloitaPeliNappi = aloitaPeliNappi;
     }
-
-    private void lopetaPeli() {
+    
+    /**
+     * Metodi lopettaa pelin.
+     *
+     */
+    public void lopetaPeli() {
         this.valiIkkuna.dispose();
         JFrame lopetusikkuna = new JFrame("Peli on ohi!");
         lopetusikkuna.add(new JTextArea("Voittaja: " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));

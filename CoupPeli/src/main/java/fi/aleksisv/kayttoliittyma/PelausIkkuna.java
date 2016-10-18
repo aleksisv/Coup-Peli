@@ -75,13 +75,17 @@ public class PelausIkkuna extends JFrame {
 
     public void luoVastustajanVuoro(Vastustaja vastustaja, Container sailio) {
         sailio.removeAll();
+        
         JPanel paneeli = new JPanel(new GridLayout(2, 1));
         JLabel otsikko = new JLabel("Vastustajan vuoro.");
         paneeli.add(otsikko);
+        
         JButton vastustajanSiirto = new JButton("Anna vastustajan tehdä siirto!");
         vastustajanSiirto.addActionListener(new VastustajanSiirtoKuuntelija(this.peliOhjaus, this.gkl, this, vastustaja));
         paneeli.add(vastustajanSiirto);
+        
         sailio.add(paneeli);
+        
         validate();
         setVisible(true);
     }

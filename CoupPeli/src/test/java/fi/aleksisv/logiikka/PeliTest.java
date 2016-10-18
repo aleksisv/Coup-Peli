@@ -111,17 +111,17 @@ public class PeliTest {
         assertEquals(peli.getPankki().getRahamaara(), 100);
     }
     
-    @Test
-    public void paivitaTilanneToimii1() {
-        Peli peli = new Peli(4);
-        peli.luoOsanottajat();
-        assertEquals(peli.getOsanottajajoukko().size(), 4);
-        peli.getOsanottajajoukko().get(2).paljastaKortti();
-        peli.getOsanottajajoukko().get(2).paljastaKortti();
-        peli.paivitaTilanne();
-        assertEquals(peli.getOsanottajajoukko().size(), 3);
-        assertEquals(peli.getHavinnytJoukko().size(), 1);
-    }
+//    @Test
+//    public void paivitaTilanneToimii1() {
+//        Peli peli = new Peli(4);
+//        peli.luoOsanottajat();
+//        assertEquals(peli.getOsanottajajoukko().size(), 4);
+//        peli.getOsanottajajoukko().get(2).paljastaKortti();
+//        peli.getOsanottajajoukko().get(2).paljastaKortti();
+//        peli.paivitaTilanne();
+//        assertEquals(peli.getOsanottajajoukko().size(), 3);
+//        assertEquals(peli.getHavinnytJoukko().size(), 1);
+//    }
     
 //    @Test
 //    public void kerroTilanneTekstinaToimii1() {

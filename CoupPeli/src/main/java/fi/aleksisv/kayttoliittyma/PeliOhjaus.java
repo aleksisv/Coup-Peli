@@ -2,10 +2,7 @@ package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.*;
 import java.util.Random;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
+
 
 /**
  * Luokka vastaa pelin ohjauksesta.
@@ -24,8 +21,9 @@ public class PeliOhjaus {
     /**
      * Luokan konstruktori.
      */
-    public PeliOhjaus() {
+    public PeliOhjaus(GraafinenKayttoliittyma gkl) {
         this.r = new Random();
+        this.gkl = gkl;
     }
 
     /**
@@ -65,7 +63,7 @@ public class PeliOhjaus {
             this.suoritaSiirto(pelivuorossa, keneenKohdistuu, siirto);
         }
         this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
-        this.peli.paivitaTilanne();
+        this.paivitaTilanne();
     }
 
     /**
@@ -83,7 +81,7 @@ public class PeliOhjaus {
             suoritaVastustajanSiirto(pelivuorossa, kohde, siirtoVaihtoehto);
         }
         this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
-        this.peli.paivitaTilanne();
+        this.paivitaTilanne();
     }
 
     private void suoritaPelaajanSiirto(Osanottaja pelivuorossa, Osanottaja kohde, int siirtoVaihtoehto) {
@@ -144,5 +142,35 @@ public class PeliOhjaus {
             return true;
         }
     }
+    
+    /**
+     * Metodi päivittää pelitilanteen, eli tarkistaa, ketkä osanottajista ovat
+     * jo pudonneet ja ketkä ovat vielä mukana pelissä.
+     *
+     */
+    public void paivitaTilanne() {
+        boolean kaytaPoistettavaa = false;
+        Osanottaja poistettava = new Osanottaja("");
+        for (Osanottaja o : peli.getOsanottajajoukko()) {
+            if (o.getKorttikasi().paljastettujenKorttienLukumaara() == 2) {
+                poistettava = o;
+                kaytaPoistettavaa = true;
+            }
+        }
+        if (kaytaPoistettavaa) {
+            peli.getHavinnytJoukko().add(poistettava);
+            peli.getOsanottajajoukko().remove(poistettava);
+        }
+        
+        if(peli.getOsanottajajoukko().size() == 1) {
+            this.gkl.lopetaPeli();
+        }
+    }
+
+    public void setGkl(GraafinenKayttoliittyma gkl) {
+        this.gkl = gkl;
+    }
+    
+    
 
 }

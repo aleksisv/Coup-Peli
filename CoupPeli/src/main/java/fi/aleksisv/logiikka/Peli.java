@@ -149,25 +149,6 @@ public class Peli {
 
     }
 
-    /**
-     * Metodi päivittää pelitilanteen, eli tarkistaa, ketkä osanottajista ovat
-     * jo pudonneet ja ketkä ovat vielä mukana pelissä.
-     *
-     */
-    public void paivitaTilanne() {
-        boolean kaytaPoistettavaa = false;
-        Osanottaja poistettava = new Osanottaja("");
-        for (Osanottaja o : osanottajajoukko) {
-            if (o.getKorttikasi().paljastettujenKorttienLukumaara() == 2) {
-                poistettava = o;
-                kaytaPoistettavaa = true;
-            }
-        }
-        if (kaytaPoistettavaa) {
-            this.havinnytJoukko.add(poistettava);
-            this.osanottajajoukko.remove(poistettava);
-        }
-    }
 
     /**
      * Metodi pudottaa vastustajan osanottajien joukosta.
