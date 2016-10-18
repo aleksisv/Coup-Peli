@@ -72,41 +72,6 @@ public class PeliOhjaus {
      * Metodi vastaa yhdestä siirtoyrityksestä ja tämän tiedon kertomisesta
      * GUI:lle.
      *
-     * @param siirtonumero Minkä numeroista siirtoa yritetään.
-     * @param kohde Mitä osanottajaa vastaan siirto halutaan tehdä.
-     * @param pelausIkkuna pelausikkuna.
-     */
-    public void yritaSiirtoa(int siirtonumero, int kohde, JFrame pelausIkkuna) {
-        Pelaaja pelaaja = this.getPeli().getPelaaja();
-        Vastustaja vastustaja = (Vastustaja) this.getPeli().getOsanottajajoukko().get(kohde);
-        Kortti siirto = this.getPeli().getSiirtoNumerot().get(siirtonumero);
-
-        if (vastustaja.haluaaEpailla(pelaaja, siirto)) {
-
-            JButton tee = new JButton("Tee siirto.");
-            JButton alaTee = new JButton("Älä tee siirtoa.");
-            pelausIkkuna.add(new JTextArea("Vastustaja haluaa epäillä siirtoasi. Haluatko perua siirron?"));
-            pelausIkkuna.add(tee);
-            pelausIkkuna.add(alaTee);
-            SwingUtilities.updateComponentTreeUI(pelausIkkuna);
-
-        } else if (vastustaja.haluaaTorjua(pelaaja, siirto)) {
-            JButton tee = new JButton("Tee siirto.");
-            JButton alaTee = new JButton("Älä tee siirtoa");
-            pelausIkkuna.add(new JTextArea("Vastustaja haluaa torjua siirtosi. Haluatko epäillä vastustajan torjumista?"));
-            pelausIkkuna.add(tee);
-            pelausIkkuna.add(alaTee);
-            SwingUtilities.updateComponentTreeUI(pelausIkkuna);
-
-        } else {
-            this.suoritaSiirto(pelaaja, vastustaja, siirtonumero);
-        }
-    }
-
-    /**
-     * Metodi vastaa yhdestä siirtoyrityksestä ja tämän tiedon kertomisesta
-     * GUI:lle.
-     *
      * @param pelivuorossa Kuka on pelivuorossa.
      * @param kohde Mitä osanottajaa vastaan siirto halutaan tehdä.
      * @param siirtoVaihtoehto mikä siirto halutaan tehdä.

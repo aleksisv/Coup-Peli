@@ -1,30 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fi.aleksisv.kayttoliittyma;
 
-import fi.aleksisv.logiikka.Osanottaja;
-import fi.aleksisv.logiikka.Pelaaja;
-import fi.aleksisv.logiikka.Peli;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Insets;
+import fi.aleksisv.logiikka.*;
+import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class PelinSeurantaPaneeli extends JPanel {
+    PeliOhjaus peliOhjaus;
     
     /**
      * Luokan konstruktori.
      * 
      * @param layout Mikä layout paneelille halutaan.
      */
-    public PelinSeurantaPaneeli(GridLayout layout) {
+    public PelinSeurantaPaneeli(GridLayout layout, PeliOhjaus peliOhjaus) {
         super(layout);
+        this.peliOhjaus = peliOhjaus;
         this.setVisible(true);
     }
 
@@ -56,6 +48,7 @@ public class PelinSeurantaPaneeli extends JPanel {
      * @param peli Mikä peli päivitetään.
      */
     public void paivitaTila(Peli peli) {
+        this.removeAll();
         ArrayList<Osanottaja> kaikki = (ArrayList<Osanottaja>) peli.getOsanottajajoukko().clone();
         kaikki.addAll(peli.getHavinnytJoukko());
         for (Osanottaja o : kaikki) {
@@ -63,12 +56,12 @@ public class PelinSeurantaPaneeli extends JPanel {
                 JTextArea teksti = new JTextArea("Pelaaja: \n" + o.toString());
                 teksti.setSize(new Dimension(80, 80));
                 teksti.setMargin(new Insets(10, 10, 10, 10));
-                super.add(teksti);
+                this.add(teksti);
             } else {
                 JTextArea teksti = new JTextArea("Vastustaja: \n" + o.toString());
                 teksti.setSize(new Dimension(80, 80));
                 teksti.setMargin(new Insets(10, 10, 10, 10));
-                super.add(teksti);
+                this.add(teksti);
             }
         }
         SwingUtilities.updateComponentTreeUI(this);

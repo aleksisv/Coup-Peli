@@ -10,29 +10,51 @@ import java.util.Random;
  * olioita.
  */
 public class Peli {
-    
-    /** Montako osanottajaa pelissä on.*/
+
+    /**
+     * Montako osanottajaa pelissä on.
+     */
     private int osanottajamaara;
-    /** Pelissä mukana olevat sanottajat sisälleen säilövä lista.*/
+    /**
+     * Pelissä mukana olevat sanottajat sisälleen säilövä lista.
+     */
     private ArrayList<Osanottaja> osanottajajoukko;
-    /** Mikä vuoro pelissä on menossa.*/
+    /**
+     * Mikä vuoro pelissä on menossa.
+     */
     private int vuoronumero;
-    /** Kuka on pelin pelaaja.*/
+    /**
+     * Kuka on pelin pelaaja.
+     */
     private Pelaaja pelinPelaaja;
-    /** Pelin pankki.*/
+    /**
+     * Pelin pankki.
+     */
     private Pankki pankki;
-    /** Pelin korttipakka.*/
+    /**
+     * Pelin korttipakka.
+     */
     private Korttipakka korttipakka;
-    /** Hävinneet osanottajat sisällään pitävä lista.*/
+    /**
+     * Hävinneet osanottajat sisällään pitävä lista.
+     */
     private ArrayList<Osanottaja> havinnytJoukko;
-    /** HashMap, joka liittää siirtonumeron vastaavaan korttiin.*/
+    /**
+     * HashMap, joka liittää siirtonumeron vastaavaan korttiin.
+     */
     private HashMap<Integer, Kortti> siirtoNumerot;
-    /** HashMap, joka liittää siirtonumeron tätä vastaavaan nimeen.*/
+    /**
+     * HashMap, joka liittää siirtonumeron tätä vastaavaan nimeen.
+     */
     private HashMap<Integer, String> siirtoNimet;
-    
+    /**
+     * HashMap, joka liittää siirtonumeron tätä vastaavaan nimeen.
+     */
+    private HashMap<Integer, Kortti> torjuntaLista;
+
     /**
      * Luokan konstruktori.
-     * 
+     *
      * @param pelaajamaara Montako pelaajaa pelissä on.
      */
     public Peli(int pelaajamaara) {
@@ -45,6 +67,7 @@ public class Peli {
         this.korttipakka = new Korttipakka();
         this.siirtoNumerot = luoSiirtonumerot();
         this.siirtoNimet = luoSiirtoNimet();
+        this.torjuntaLista = luoTorjuntalista();
     }
 
     /**
@@ -53,14 +76,14 @@ public class Peli {
     public void kaynnistaPeli() {
         luoOsanottajat();
     }
-    
+
     /**
      * Metodi lisää pelaajan osanottajien joukkoon.
      */
     public void lisaaPelaajaJoukkoon() {
         this.osanottajajoukko.add(pelinPelaaja);
     }
-    
+
     /**
      * Metodi kertoo, kuinka monta osanottajaa pelissä on.
      *
@@ -69,7 +92,7 @@ public class Peli {
     public int getOsanottajamaara() {
         return osanottajamaara;
     }
-    
+
     /**
      * Metodi kertoo, monesko vuoro on menossa.
      *
@@ -145,17 +168,17 @@ public class Peli {
             this.osanottajajoukko.remove(poistettava);
         }
     }
-    
+
     /**
      * Metodi pudottaa vastustajan osanottajien joukosta.
-     * 
+     *
      * @param vastustaja Pudotettava vastustaja.
      */
     public void pudotaVastustaja(Vastustaja vastustaja) {
         this.osanottajajoukko.remove(vastustaja);
         this.osanottajamaara--;
     }
-    
+
     /**
      * Metodi tarkastaa, kuinka monta osanottajaa pelissä on tällä hetkellä.
      *
@@ -186,7 +209,7 @@ public class Peli {
     public Pelaaja getPelaaja() {
         return this.pelinPelaaja;
     }
-    
+
     /**
      * Vuoronumerosetteri.
      *
@@ -209,7 +232,7 @@ public class Peli {
         mappi.put(6, new Kortti("Kapteeni"));
         return mappi;
     }
-    
+
     private HashMap<Integer, String> luoSiirtoNimet() {
         HashMap<Integer, String> mappi = new HashMap<Integer, String>();
         mappi.put(1, "Perustulo");
@@ -221,11 +244,18 @@ public class Peli {
         return mappi;
     }
 
+    private HashMap<Integer, Kortti> luoTorjuntalista() {
+        HashMap<Integer, Kortti> mappi = new HashMap();
+        mappi.put(2, new Kortti("Herttua"));
+        mappi.put(5, new Kortti("Kreivitär"));
+        mappi.put(6, new Kortti("Kapteeni"));
+
+        return mappi;
+    }
+
     public HashMap<Integer, String> getSiirtoNimet() {
         return siirtoNimet;
     }
-    
-    
 
     public HashMap<Integer, Kortti> getSiirtoNumerot() {
         return siirtoNumerot;
@@ -235,5 +265,7 @@ public class Peli {
         return havinnytJoukko;
     }
 
-
+    public HashMap<Integer, Kortti> getTorjuntaLista() {
+        return torjuntaLista;
+    }
 }

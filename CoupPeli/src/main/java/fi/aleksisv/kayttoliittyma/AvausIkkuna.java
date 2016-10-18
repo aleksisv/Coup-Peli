@@ -34,15 +34,14 @@ public class AvausIkkuna extends JFrame {
         this.setPreferredSize(new Dimension(1000, 600));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        luokomponentit();
+        luokomponentit(this.getContentPane());
 
         this.pack();
         this.setVisible(true);
 
     }
 
-    private void luokomponentit() {
-        Container sailio = this.getContentPane();
+    private void luokomponentit(Container sailio) {
         sailio.setLayout(new GridLayout(2, 2));
         sailio.add(luoAvausvalikko());
         this.huomioTekstit = new JTextArea("Luo peli haluamallasi määrällä pelaajia!");
