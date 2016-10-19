@@ -16,10 +16,12 @@ Säännöt lyhyesti:
 4. Kortit eivät aluksi näy muille, mutta vastustajien siirtojen myötä ne voivat paljastua.
 5. Pelin korttipakassa on yhteensä 12 korttia.
 6. Kortteja on yhteensä 4 eri tyyppiä:
-..1. Kreivitär
-..2. Herttua
-..3. Kapteeni
-..4. Salamurhaaja
+
+... Kreivitär
+... Herttua
+... Kapteeni
+... Salamurhaaja
+
 7. Jokaisella vuorolla joku tekee siirron. Siirrot ja niihin tarvittavat kortit sekä kortit joilla ne on mahdollista torjua on esitetty seuraavassa taulukossa:
 Siirto | Kuvaus | Tarvittava kortti | Torjuva kortti
 Perustulo | Ota 1 raha pankista | - | -
