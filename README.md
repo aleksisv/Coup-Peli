@@ -8,8 +8,11 @@ jossa pelaajan tehtävänä on omia korttejaan ja näiden erikoisominaisuuksia k
 
 [Aiheen kuvaus ja määrittely](dokumentaatio/aiheenKuvausJaRakenne.md)
 
+[Käyttöohjeet](dokumentaatio/kayttoohjeet.md)
+
 [Pit-raportti](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/dokumentaatio/pit-raportti/201610141408/index.html)
 
 [Checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/dokumentaatio/checkstyle-raportti/site/checkstyle.html)
+
 
 
