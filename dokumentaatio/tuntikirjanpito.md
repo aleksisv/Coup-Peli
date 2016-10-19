@@ -40,3 +40,10 @@ Päivä | Tunnit | Kuvaus
 11.10.2016 | 4h | Käyttöliittymän päivitystä ja ohjelmarakenteen muutosta.
 12.10.2016 | 3h | Käyttöliittymän päivitystä, testausta, luokkien muutosta.
 13.10.2016 | 4h | Käyttöliittymän päivitystä. Ohjelman hiomista käytettökelpoiseksi.
+14.10.2016 | 2h | Dokumentaatiota.
+15.10.2016 | 3h | Ohjelmointia.
+16.10.2016 | - | -
+17.10.2016 | 5h | Valtavia rakenteellisia muutoksia ohjelmaan.
+18.10.2016 | 6h | Ohjelmointia, erityisesti käyttöliittymän arkkitehtuurin muuttamista.
+19.10.2016 | 4h | Ohjelmointia, dokumentaatiota, luokka- ja sekvenssikaavioiden piirtämistä.
+
