@@ -11,18 +11,19 @@ Peli jatkuu vuoro kerrallaan, kunnes pelaajia on jäljellä enää yksi. Viimeis
 Säännöt lyhyesti:
 
 1. Osanottajia 2-5
-2. Jokaisella osanottajalla 2 korttia kädessään.
-3. Pelin alussa pelaajilla on 2 rahaa kädessään.
-4. Kortit eivät aluksi näy muille, mutta vastustajien siirtojen myötä ne voivat paljastua.
-5. Pelin korttipakassa on yhteensä 12 korttia.
-6. Kortteja on yhteensä 4 eri tyyppiä:
+2. Jokaisella osanottajalla 2 korttia kädessään
+3. Pelin alussa pelaajilla on 2 rahaa kädessään
+4. Kortit eivät aluksi näy muille, mutta vastustajien siirtojen myötä ne voivat paljastua
+5. Pelin korttipakassa on yhteensä 12 korttia
+6. Kortteja on yhteensä 4 eri tyyppiä
 
 ... Kreivitär
 ... Herttua
 ... Kapteeni
 ... Salamurhaaja
 
-7. Jokaisella vuorolla joku tekee siirron. Siirrot ja niihin tarvittavat kortit sekä kortit joilla ne on mahdollista torjua on esitetty seuraavassa taulukossa:
+7. Jokaisella vuorolla joku tekee siirron. Siirrot ja niihin tarvittavat kortit sekä kortit joilla ne on mahdollista torjua on esitetty seuraavassa taulukossa.
+
 Siirto | Kuvaus | Tarvittava kortti | Torjuva kortti
 Perustulo | Ota 1 raha pankista | - | -
 Ulkomaanapu | Ota 2 rahaa pankista | - | Herttua
