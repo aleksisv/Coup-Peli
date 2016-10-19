@@ -20,6 +20,7 @@ public class PeliOhjaus {
 
     /**
      * Luokan konstruktori.
+     * @param gkl Graafinen käyttöliittymä.
      */
     public PeliOhjaus(GraafinenKayttoliittyma gkl) {
         this.r = new Random();
@@ -31,8 +32,8 @@ public class PeliOhjaus {
      *
      * @param pelaajaMaara Monenko pelaajan peli luodaan.
      */
-    public void luoPeli(int pelaajaMaara) {
-        this.peli = new Peli(pelaajaMaara);
+    public void luoPeli(int pelaajaMaara, String pelaajanNimi) {
+        this.peli = new Peli(pelaajaMaara, pelaajanNimi);
         peli.luoOsanottajat();
     }
 

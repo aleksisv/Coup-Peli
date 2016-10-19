@@ -56,13 +56,14 @@ public class Peli {
      * Luokan konstruktori.
      *
      * @param pelaajamaara Montako pelaajaa pelissä on.
+     * @param pelaajanNimi Minkä niminen pelin pelaaja on.
      */
-    public Peli(int pelaajamaara) {
+    public Peli(int pelaajamaara, String pelaajanNimi) {
         this.osanottajamaara = pelaajamaara;
         this.osanottajajoukko = new ArrayList();
         this.havinnytJoukko = new ArrayList();
         this.vuoronumero = 0;
-        this.pelinPelaaja = new Pelaaja("Aleksis");
+        this.pelinPelaaja = new Pelaaja(pelaajanNimi);
         this.pankki = new Pankki();
         this.korttipakka = new Korttipakka();
         this.siirtoNumerot = luoSiirtonumerot();
@@ -107,10 +108,13 @@ public class Peli {
      *
      */
     public void luoOsanottajat() {
+        Random r = new Random();
+        String[] nimet = {"Azra", "Mazra", "Miia", "Jea", "Sirpiina", "Make", "Santtu",
+            "Siiri", "Pia", "Pai"};
         annaKortit(this.pelinPelaaja);
         lisaaPelaajaJoukkoon();
         for (int i = 0; i < osanottajamaara - 1; i++) {
-            luojaLisaaVastustaja(Integer.toString(i + 1));
+            luojaLisaaVastustaja(nimet[r.nextInt(nimet.length)]);
         }
 
     }
@@ -123,6 +127,7 @@ public class Peli {
      */
     public void luojaLisaaVastustaja(String nimi) {
         Vastustaja vastustaja = new Vastustaja(nimi);
+        vastustaja.setPeli(this);
         lisaaVastustaja(vastustaja);
         annaKortit(vastustaja);
     }
@@ -148,7 +153,6 @@ public class Peli {
         osanottaja.getKorttikasi().lisaaKorttikateen(this.korttipakka.nostaPakastaSatunnainenKortti());
 
     }
-
 
     /**
      * Metodi pudottaa vastustajan osanottajien joukosta.

@@ -2,14 +2,27 @@ package fi.aleksisv.kayttoliittyma;
 
 import java.awt.*;
 import javax.swing.*;
-
+/** Luokka vastaa pelin perusnäkymästä.
+ */
 public class ValiIkkuna extends JFrame {
+    
+    /** Tekstialue, joka ilmoittaa erityisistä huomioista.*/
     JTextArea huomioTekstit;
+    /** Peliä ohjaava taho.*/
     PeliOhjaus peliOhjaus;
+    /** Pelinseurantaa yllä pitävä taho.*/
     PelinSeurantaPaneeli pelinSeurantapaneeli;
+    /** Nappi, jota painamalla edetään yksi vuoro.*/
     JButton pelaaVuoroNappi;
+    /** Graafinen käyttöliittymä.*/
     GraafinenKayttoliittyma gkl;
-
+    
+    /** Luokan konstruktori.
+     * @param peliOhjaus Peliä pyörittävä taho.
+     * @param gkl Käyttöliittymä.
+     * 
+     *@throws HeadlessException
+     */
     public ValiIkkuna(PeliOhjaus peliOhjaus, GraafinenKayttoliittyma gkl) throws HeadlessException {
         super("Coup-Peli");
         this.peliOhjaus = peliOhjaus;
@@ -18,9 +31,14 @@ public class ValiIkkuna extends JFrame {
         this.setVisible(true);
         this.setSize(1000, 700);
         
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         this.luoKomponentit();
     }
 
+    /**
+     * Metodi luo tarvittavat komponentit.
+     */
     public void luoKomponentit() {
         Container sailio = this.getContentPane();
 
@@ -28,10 +46,13 @@ public class ValiIkkuna extends JFrame {
         this.huomioTekstit = new JTextArea("JEE");
 
         sailio.add(huomioTekstit);
-        
+
         this.huomioTekstit.setText("Aloitit pelin " + this.peliOhjaus.getPeli().getOsanottajamaara() + " pelaajalla. Tee siirto.");
     }
 
+    /**
+     * Metodi luo pelausympäristön.
+     */
     void luoPelausYmparisto() {
         luoPelinseuranta();
         luoPelausNappi();

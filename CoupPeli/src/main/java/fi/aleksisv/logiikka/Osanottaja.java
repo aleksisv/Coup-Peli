@@ -13,6 +13,8 @@ public class Osanottaja {
     private int raha;
     /** Osanottajan korttikäsi.*/
     private Korttikasi korttikasi;
+    /** Osanottajan korttikäsi.*/
+    protected Peli peli;
     
     /**
      * Luokan konstruktori.
@@ -23,6 +25,9 @@ public class Osanottaja {
         this.nimi = nimi;
         this.raha = 2;
         this.korttikasi = new Korttikasi();
+    }
+    
+    public Osanottaja() {
     }
 
     public Korttikasi getKorttikasi() {
@@ -88,10 +93,6 @@ public class Osanottaja {
 
     public void setRaha(int raha) {
         this.raha = raha;
-    }
-
-    public void setKasi(Korttikasi kasi) {
-        this.korttikasi = kasi;
     }
 
     public void setNimi(String nimi) {
@@ -311,5 +312,11 @@ public class Osanottaja {
         String palautettava = merkkijono.toString();
         return palautettava.replaceAll(", $", "");
     }
+
+    public void setPeli(Peli peli) {
+        this.peli = peli;
+    }
+    
+    
 
 }

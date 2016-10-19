@@ -16,6 +16,7 @@ public class Vastustaja extends Osanottaja {
     public Vastustaja(String nimi) {
         super(nimi);
     }
+    
 
     @Override
     public void annaRahaaPankille(int maara, Pankki pankki) {
@@ -172,7 +173,7 @@ public class Vastustaja extends Osanottaja {
         int kohdeEhdokas = 0;
         while (true) {
             kohdeEhdokas = r.nextInt(pelaajaMaara);
-            if (!(kohdeEhdokas == Integer.parseInt(this.getNimi()))) {
+            if (!(this.peli.getOsanottajajoukko().get(kohdeEhdokas).equals(this))) {
                 return kohdeEhdokas;
             }
         }

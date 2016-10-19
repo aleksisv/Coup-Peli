@@ -4,53 +4,94 @@ import fi.aleksisv.logiikka.Vastustaja;
 import java.awt.*;
 import javax.swing.*;
 
-
+/**
+ * Luokka kuvaa ikkunaa, jossa siirron tapahtuvat.
+ */
 public class PelausIkkuna extends JFrame {
-    ButtonGroup nappularyhma1;
-    ButtonGroup nappularyhma2;
+
+    /**
+     * Tarvittavat nappularyhmät.
+     */
+    ButtonGroup siirtonappularyhma;
+    ButtonGroup kohdenappularyhma;
+    /**
+     * Peliä pyörittävä taho.
+     */
     PeliOhjaus peliOhjaus;
+    /**
+     * Graafinen käyttöliittymä.
+     */
     GraafinenKayttoliittyma gkl;
+    /**
+     * Erityishuomioista ilmoittava tekstialue..
+     */
     JTextArea huomiotekstit;
 
+    /**
+     * Luokan konstruktori.
+     *
+     * @param peliOhjaus Peliä pyörittävä taho.
+     * @param gkl Graafinen käyttöliittymä.
+     *
+     * @throws HeadlessException
+     */
     public PelausIkkuna(PeliOhjaus peliOhjaus, GraafinenKayttoliittyma gkl) throws HeadlessException {
         super("Pelausikkuna");
         this.peliOhjaus = peliOhjaus;
         this.gkl = gkl;
         this.huomiotekstit = new JTextArea();
-        
+
         this.setVisible(true);
         this.setSize(1000, 700);
     }
 
+    /**
+     * Metodi luo pelausvaihtoehdot ikkunaan.
+     *
+     * @param sailio Container-olio.
+     *
+     * @throws HeadlessException
+     */
     public void luoPelausVaihtoehdot(Container sailio) {
         this.huomiotekstit.setText("Valitse siirto ja mahdollinen kohde.");
-        JPanel napit = new JPanel(new GridLayout(4, 1));
-        napit.add(this.huomiotekstit);
+        JPanel kokonaisuus = new JPanel(new BorderLayout());
+        this.huomiotekstit.setPreferredSize(new Dimension(1000, 100));
+        kokonaisuus.add(this.huomiotekstit, BorderLayout.PAGE_START);
+        JPanel napit = new JPanel(new GridLayout(2, 1));
         JPanel siirtonapit = new JPanel();
         JPanel kohdenapit = new JPanel();
-        String[][] siirtoVaihtoehdot = {{"Perustulo:", "Ota 1 kolikko pankista."}, {"Ulkomaanapu:", "Ota 2 kolikkoa pankista."},
+        String[][] siirtoVaihtoehdot = {{"Perustulo:", "Ota 1 kolikko pankista."}, 
+            {"Ulkomaanapu:", "Ota 2 kolikkoa pankista. Torjuu: Herttua"},
         {"Vallankumous:", "Maksa 7 kolikkoa ja hyökkää yhtä osanottajaa vastaan."},
-        {"Verotus:", "Ota 3 kolikkoa pankista."}, {"Assassinoi:", "Maksa 3 kolikkoa ja hyökkää yhtä osanottajaa kohtaan."}, {"Varasta:", "Ota vastustajalta kaksi kolikkoa."}};
+        {"Verotus:", "Ota 3 kolikkoa pankista. Tarvitset: Herttua."},
+        {"Assassinoi:", "Maksa 3 kolikkoa ja hyökkää yhtä osanottajaa kohtaan. Tarvitset: Salamurhaaja. Torjuu: Kreivitär."},
+        {"Varasta:", "Ota vastustajalta 2 kolikkoa. Tarvitsee: Kapteeni. Torjuu: Kapteeni."}};
 
         napit.add(lisaaSiirtonapit(siirtoVaihtoehdot, siirtonapit));
-        napit.add(lisaaKohdenapit(kohdenapit));
 
-        JButton teeSiirto = new JButton("Tee siirto!");
-        teeSiirto.addActionListener(new PeliSiirtoKuuntelija(peliOhjaus, this, gkl, this.nappularyhma1, this.nappularyhma2));
-        napit.add(teeSiirto);
+        napit.add(lisaaKohdenapit(kohdenapit));
         
-        sailio.add(napit);
+        kokonaisuus.add(napit, BorderLayout.CENTER);
+        
+        JButton teeSiirto = new JButton("Tee siirto!");
+        teeSiirto.setPreferredSize(new Dimension(1000, 80));
+        teeSiirto.addActionListener(new PeliSiirtoKuuntelija(peliOhjaus, this, gkl, this.siirtonappularyhma, this.kohdenappularyhma));
+        kokonaisuus.add(teeSiirto, BorderLayout.PAGE_END);
+        kokonaisuus.validate();
+
+        sailio.add(kokonaisuus);
+        this.pack();
     }
 
     private JPanel lisaaSiirtonapit(String[][] siirtoVaihtoehdot, JPanel siirtonapit) {
         JPanel seliteJaNappi = new JPanel(new GridLayout(6, 1));
-        this.nappularyhma1 = new ButtonGroup();
+        this.siirtonappularyhma = new ButtonGroup();
         for (int i = 0; i < siirtoVaihtoehdot.length; i++) {
             JRadioButton nappi = new JRadioButton(siirtoVaihtoehdot[i][0]);
             nappi.setActionCommand(Integer.toString(i + 1));
-            seliteJaNappi.add(nappi);
+            seliteJaNappi.add(nappi, BorderLayout.PAGE_START);
             seliteJaNappi.add(new JLabel(siirtoVaihtoehdot[i][1]));
-            nappularyhma1.add(nappi);
+            siirtonappularyhma.add(nappi);
             if (i == 0) {
                 nappi.setSelected(true);
             }
@@ -60,40 +101,56 @@ public class PelausIkkuna extends JFrame {
     }
 
     private JPanel lisaaKohdenapit(JPanel kohdenapit) {
-        this.nappularyhma2 = new ButtonGroup();
+        int osanottajiaMukana = this.peliOhjaus.getPeli().getOsanottajajoukko().size();
+
+        JPanel seliteJaNappi = new JPanel(new GridLayout(osanottajiaMukana, 1));
+
+        this.kohdenappularyhma = new ButtonGroup();
         for (int i = 1; i < this.peliOhjaus.getPeli().getOsanottajajoukko().size(); i++) {
             JRadioButton nappi = new JRadioButton(Integer.toString(i));
             nappi.setActionCommand(Integer.toString(i));
-            kohdenapit.add(nappi);
-            nappularyhma2.add(nappi);
+            seliteJaNappi.add(nappi);
+            seliteJaNappi.add(new JLabel("osanottaja"));
+            kohdenappularyhma.add(nappi);
             if (i == 1) {
                 nappi.setSelected(true);
             }
         }
+        kohdenapit.add(seliteJaNappi);
         return kohdenapit;
     }
 
+    /**
+     * Metodi luo vastustajan vuoroon tarvittavat komponentit ja kuuntelijat.
+     *
+     * @param vastustaja Vastustaja, jonka vuoro luodaan.
+     * @param sailio Container-olio.
+     */
     public void luoVastustajanVuoro(Vastustaja vastustaja, Container sailio) {
         sailio.removeAll();
-        
+
         JPanel paneeli = new JPanel(new GridLayout(2, 1));
         JLabel otsikko = new JLabel("Vastustajan vuoro.");
         paneeli.add(otsikko);
-        
+
         JButton vastustajanSiirto = new JButton("Anna vastustajan tehdä siirto!");
         vastustajanSiirto.addActionListener(new VastustajanSiirtoKuuntelija(this.peliOhjaus, this.gkl, this, vastustaja));
         paneeli.add(vastustajanSiirto);
-        
+
         sailio.add(paneeli);
-        
+
         validate();
         setVisible(true);
+        this.pack();
     }
 
+    /**
+     * Metodi palauttaa huomiotekstit-tekstialueen.
+     *
+     * @return Huomiotekstit.
+     */
     public JTextArea getHuomiotekstit() {
         return huomiotekstit;
     }
-    
-    
 
 }

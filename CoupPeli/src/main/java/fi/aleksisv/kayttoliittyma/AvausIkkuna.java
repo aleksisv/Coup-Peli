@@ -1,6 +1,7 @@
 package fi.aleksisv.kayttoliittyma;
 
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.JTextField;
 
@@ -15,6 +16,8 @@ public class AvausIkkuna extends JFrame {
     private JButton aloitaPeliNappi;
     /** Pelaajien määrästä kertova JTextField.*/
     private JTextField montakoPelaajaa;
+    /** Pelaajan nimestä kertova JTextField.*/
+    private JTextField pelaajanNimi;
     /** Erityishuomioista kertova tekstialue.*/
     private JTextArea huomioTekstit;
 
@@ -33,6 +36,7 @@ public class AvausIkkuna extends JFrame {
 
         this.setPreferredSize(new Dimension(1000, 600));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
 
         luokomponentit(this.getContentPane());
 
@@ -42,24 +46,45 @@ public class AvausIkkuna extends JFrame {
     }
 
     private void luokomponentit(Container sailio) {
-        sailio.setLayout(new GridLayout(2, 2));
+        sailio.setLayout(new GridLayout(2, 1));
         sailio.add(luoAvausvalikko());
-        this.huomioTekstit = new JTextArea("Luo peli haluamallasi määrällä pelaajia!");
+        this.huomioTekstit = new JTextArea("Tämä on Coup-peli. Tehtävänäsi on paljastaa vastustajiesi kortit ja suojella omiasi. \n"
+                + "Saat pelin alussa kaksi kortti. Jokaisella kortilla on oma. Joka vuoro joudut tekemään siirron, joista johoinkin vaaditaan"
+                + " tietyn kortin omistamista.\nVastustaja voi yrittää torjua siirron tai epäillä, että sinulla ei ole korttia."
+                + "Voit tehdä samoin. Jos epäilijä on oikeassa eikä siirron tekijällä ole korttia, siirron tekijä menettää yhden kortin.\n"
+                + "Vastaavasti jos epäilijä on väärässä epäilijä itse menettää kortin ja siirto osuu häneen."
+                + "\n\nValitse sopiva nimi itsellesi ja luo peli haluamallasi määrällä pelaajia!");
         sailio.add(huomioTekstit);
         gkl.setHuomioTekstit(huomioTekstit);
 
     }
 
     private JPanel luoAvausvalikko() {
-        JPanel paneeli = new JPanel(new GridLayout(1, 2));
+        JPanel paneeli = new JPanel(new GridLayout(1, 3));
+        
+        JPanel aloitusSala = new JPanel(new BorderLayout());
         this.aloitaPeliNappi = new JButton("Aloita peli!");
+        this.aloitaPeliNappi.setSize(40, 40);
+        aloitusSala.add(this.aloitaPeliNappi);
         this.aloitaPeliNappi.addActionListener(gkl);
         gkl.setAloitaPeliNappi(aloitaPeliNappi);
-
+        
+        JPanel osanottajia = new JPanel(new GridLayout(3, 1));
+        osanottajia.add(new JLabel("Monellako pelaajalla haluat pelata?"));
+        osanottajia.add(new JPanel());
         this.montakoPelaajaa = new JTextField();
+        osanottajia.add(montakoPelaajaa);
+        
+        JPanel nimi = new JPanel(new GridLayout(3,1));
+        nimi.add(new JLabel("Minkä nimen haluat?"));
+        nimi.add(new JPanel());
+        this.pelaajanNimi = new JTextField();
+        nimi.add(pelaajanNimi);
 
-        paneeli.add(aloitaPeliNappi);
-        paneeli.add(montakoPelaajaa);
+
+        paneeli.add(aloitusSala);
+        paneeli.add(osanottajia);
+        paneeli.add(nimi);
 
         return paneeli;
     }
@@ -72,4 +97,11 @@ public class AvausIkkuna extends JFrame {
         return aloitaPeliNappi;
     }
 
+    public JTextField getPelaajanNimi() {
+        return pelaajanNimi;
+    }
+
+    
+    
+    
 }

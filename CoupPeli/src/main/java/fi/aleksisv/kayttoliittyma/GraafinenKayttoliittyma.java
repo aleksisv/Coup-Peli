@@ -23,7 +23,6 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
     private PeliOhjaus peliOhjaus;
     private JButton aloitaPeliNappi;
     private JTextArea huomioTekstit;
-    private boolean onkoAloitettu;
 
     /**
      * Random r.
@@ -54,28 +53,35 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
 
     private void aloitaPeli() {
         String pelaajaMaaraTeksti = avausIkkuna.getMontakoPelaajaa().getText();
-        Pattern p = Pattern.compile("[2-5]");
-        Matcher m = p.matcher(pelaajaMaaraTeksti);
+        String pelaajanNimi = avausIkkuna.getPelaajanNimi().getText();
+        Pattern p1 = Pattern.compile("[2-5]");
+        Matcher m1 = p1.matcher(pelaajaMaaraTeksti);
+        Pattern p2 = Pattern.compile("[a-z]+");
+        Matcher m2 = p2.matcher(pelaajanNimi.toLowerCase());
 
-        if (!m.matches()) {
+        if (!m1.matches()) {
             this.huomioTekstit.setText("Validi määrä (2-5) pelaajia.");
-            return;
+        } else if (!m2.matches()) {
+            this.huomioTekstit.setText("Anna aakkosista koostuva nimi.");
         } else {
             int pelaajaMaara = Integer.parseInt(avausIkkuna.getMontakoPelaajaa().getText());
             this.avausIkkuna.dispose();
-            this.peliOhjaus.luoPeli(pelaajaMaara);
+            this.peliOhjaus.luoPeli(pelaajaMaara, pelaajanNimi);
             this.valiIkkuna = new ValiIkkuna(peliOhjaus, this);
-            this.peliOhjaus.luoPeli(pelaajaMaara);
             this.huomioTekstit.setText("Aloitit pelin " + pelaajaMaara + " pelaajalla. Tee siirto.");
 
             this.valiIkkuna.luoPelausYmparisto();
             avausIkkuna.getAloitaPeliNappi().setVisible(false);
             avausIkkuna.getMontakoPelaajaa().setVisible(false);
-            onkoAloitettu = true;
         }
 
     }
 
+    /**
+     * Metodi päivittää pelinseurantapaneelin.
+     *
+     * @param seuranta Pelin seurannasta vastaava paneeli.
+     */
     public void paivitaPelinseuranta(PelinSeurantaPaneeli seuranta) {
         seuranta.paivitaTila(this.peliOhjaus.getPeli());
     }
@@ -87,10 +93,9 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
     void setAloitaPeliNappi(JButton aloitaPeliNappi) {
         this.aloitaPeliNappi = aloitaPeliNappi;
     }
-    
+
     /**
      * Metodi lopettaa pelin.
-     *
      */
     public void lopetaPeli() {
         this.valiIkkuna.dispose();

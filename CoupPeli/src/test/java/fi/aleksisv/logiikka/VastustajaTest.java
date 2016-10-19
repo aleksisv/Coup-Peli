@@ -14,10 +14,6 @@ import static org.junit.Assert.*;
  */
 public class VastustajaTest {
 
-    public VastustajaTest() {
-
-    }
-
     @Test
     public void luoVastustajanOikein1() {
         Vastustaja v = new Vastustaja("Aino");
@@ -291,14 +287,12 @@ public class VastustajaTest {
     @Test
     public void valitseKohdeToimii1() {
         Random r = new Random();
-        Vastustaja v = new Vastustaja("0");
-        int pelaajaMaara = 2;
-        int kohde = v.valitseKohde(r, pelaajaMaara);
-        assertEquals(kohde, 1);
-        pelaajaMaara = 4;
-        kohde = v.valitseKohde(r, pelaajaMaara);
-        boolean joku = kohde == 1 || kohde == 2 || kohde ==3;
-        assertEquals(joku, true);
+        Peli peli = new Peli(3, "Aleksis");
+        peli.kaynnistaPeli();
+        Vastustaja v = (Vastustaja) peli.getOsanottajajoukko().get(1);
+        int kohde = v.valitseKohde(r, peli.getOsanottajamaara());
+        System.out.println(kohde);
+        assertNotEquals(kohde, 1);
     }
     
     

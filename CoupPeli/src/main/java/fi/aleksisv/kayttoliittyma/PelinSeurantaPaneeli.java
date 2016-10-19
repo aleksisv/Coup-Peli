@@ -1,4 +1,3 @@
-
 package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.*;
@@ -6,13 +5,18 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
+/**
+ * Luokka kuvaa paneelia, joka liittyy pelin tilanteen näyttämiseen.
+ */
 public class PelinSeurantaPaneeli extends JPanel {
+
     PeliOhjaus peliOhjaus;
-    
+
     /**
      * Luokan konstruktori.
-     * 
+     *
      * @param layout Mikä layout paneelille halutaan.
+     * @param peliOhjaus Peliä pyörittävä taho.
      */
     public PelinSeurantaPaneeli(GridLayout layout, PeliOhjaus peliOhjaus) {
         super(layout);

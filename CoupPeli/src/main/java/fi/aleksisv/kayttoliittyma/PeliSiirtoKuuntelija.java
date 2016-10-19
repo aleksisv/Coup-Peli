@@ -1,40 +1,65 @@
-
 package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class PeliSiirtoKuuntelija implements ActionListener{
-    ButtonGroup nappularyhma1, nappularyhma2;
+/**
+ * Luokka vastaa siirtoon liittyvästä kuuntelemisesta.
+ */
+public class PeliSiirtoKuuntelija implements ActionListener {
+
+    /**
+     * Tarvittavat nappularyhmät.
+     */
+    ButtonGroup siirtonappularyhma, kohdenappularyhma;
+    /**
+     * Pelausikkuna, jota käytetään.
+     */
     PelausIkkuna pelausIkkuna;
+    /**
+     * Graafinen käyttöliittymä.
+     */
     GraafinenKayttoliittyma gkl;
+    /**
+     * Erityishuomioista kertova tekstialue.
+     */
     JTextArea huomioTekstit;
+    /**
+     * Peliä pyörittävä taho.
+     */
     PeliOhjaus peliOhjaus;
 
+    /**
+     * Luokan konstruktori.
+     *
+     * @param siirtonappularyhma Siirtoihin liittyvät nappulat.
+     * @param pelausIkkuna Pelaus-näkymästä vastaava ikkuna.
+     * @param peliOhjaus Peliä ohjaava taho.
+     * @param gkl Graafinen käyttöliittymä.
+     * @param kohdenappularyhma Kohteisiin liittyvät nappulat.
+     */
     public PeliSiirtoKuuntelija(PeliOhjaus peliOhjaus, PelausIkkuna pelausIkkuna,
-            GraafinenKayttoliittyma gkl, ButtonGroup nappularyhma1,
-            ButtonGroup nappularyhma2) {
-        
+            GraafinenKayttoliittyma gkl, ButtonGroup siirtonappularyhma,
+            ButtonGroup kohdenappularyhma) {
+
         this.peliOhjaus = peliOhjaus;
         this.pelausIkkuna = pelausIkkuna;
         this.gkl = gkl;
-        this.nappularyhma1 = nappularyhma1;
-        this.nappularyhma2 = nappularyhma2;
+        this.siirtonappularyhma = siirtonappularyhma;
+        this.kohdenappularyhma = kohdenappularyhma;
     }
-    
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int siirtoNumero = Integer.parseInt(nappularyhma1.getSelection().getActionCommand());
-            if (this.peliOhjaus.onkoPelaajallaRahaa(siirtoNumero)) {
-                yritaSiirtoa(Integer.parseInt(nappularyhma1.getSelection().getActionCommand()),
-                        Integer.parseInt(nappularyhma2.getSelection().getActionCommand()));
-            } else {
-                pelausIkkuna.getHuomiotekstit().setText("Liian vähän rahaa siirtoon. Valitse uusi siirto.");
-            }   
-            SwingUtilities.updateComponentTreeUI(pelausIkkuna);
+        int siirtoNumero = Integer.parseInt(siirtonappularyhma.getSelection().getActionCommand());
+        if (this.peliOhjaus.onkoPelaajallaRahaa(siirtoNumero)) {
+            yritaSiirtoa(Integer.parseInt(siirtonappularyhma.getSelection().getActionCommand()),
+                    Integer.parseInt(kohdenappularyhma.getSelection().getActionCommand()));
+        } else {
+            pelausIkkuna.getHuomiotekstit().setText("Liian vähän rahaa siirtoon. Valitse uusi siirto.");
+        }
+        SwingUtilities.updateComponentTreeUI(pelausIkkuna);
     }
 
     private void yritaSiirtoa(int siirtonumero, int kohde) {
@@ -45,23 +70,19 @@ public class PeliSiirtoKuuntelija implements ActionListener{
         if (vastustaja.haluaaEpailla(pelaaja, siirto)) {
             Epailyikkuna epailyIkkuna = new Epailyikkuna(true, vastustaja, peliOhjaus, siirtonumero, gkl);
             epailyIkkuna.luoKomponentit(epailyIkkuna.getContentPane());
-            
-            System.out.println("EPÄILYSSÄ!");
-            
+
         } else if (vastustaja.haluaaTorjua(pelaaja, siirto)) {
             Torjuntaikkuna torjuntaikkuna = new Torjuntaikkuna(vastustaja, peliOhjaus, siirtonumero, gkl);
             torjuntaikkuna.luoKomponentit(torjuntaikkuna.getContentPane());
-            
-            System.out.println("TORJUNNASSA!");
-            
+
         } else {
             this.peliOhjaus.suoritaSiirto(pelaaja, vastustaja, siirtonumero);
+            this.gkl.getValiIkkuna().huomioTekstit.setText("Onnistuit tekemään siirron " 
+                    + this.peliOhjaus.getPeli().getSiirtoNimet().get(siirtonumero) 
+                    + " vastustajaa " + vastustaja.getNimi() + " kohtaan.");
             this.pelausIkkuna.setVisible(false);
         }
-        GraafinenKayttoliittyma gkl = this.gkl;
-        gkl.getValiIkkuna().pelinSeurantapaneeli.paivitaTila(peliOhjaus.getPeli());
+        this.gkl.getValiIkkuna().pelinSeurantapaneeli.paivitaTila(peliOhjaus.getPeli());
     }
-    
-    
-    
+
 }

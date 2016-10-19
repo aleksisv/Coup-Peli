@@ -5,13 +5,33 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import javax.swing.*;
 
+/**
+ * Luokka kuvaa sellaista JFramea, jota käytetään tilanteessa, jossa vastustaja
+ * haluaa epäillä siirtoasi.
+ */
 public class Epailyikkuna extends JFrame {
+    
+    /** Onko kyseessä vuoron ensimmäinen epäilyikkuna.*/
     private boolean onkoEnsimmainen;
+    /** Tilanteeseen liittyvä vastustaja.*/
     private Vastustaja vastustaja;
+    /** Pelin pyörittämisestä vastaava taho.*/
     PeliOhjaus peliOhjaus;
+    /** Siirron numero.*/
     int siirto;
+    /** Graafinen käyttöliittymä.*/
     GraafinenKayttoliittyma gkl;
 
+    /**
+     * Luokan konstruktori.
+     * 
+     * @param onkoEnsimmainen Onko kyseessä kierroksen ensimmäinen vai toinen
+     * epäilykerta. Onko epäilijä siis pelaaja vai vastustaja.
+     * @param vastustaja Tilanteessa osallisena oleva vastustaja.
+     * @param peliOhjaus PeliOhjaus.
+     * @param siirto Siirron numero.
+     * @param gkl Graafinen käyttöliittymä.
+     */
     public Epailyikkuna(boolean onkoEnsimmainen, Vastustaja vastustaja, PeliOhjaus peliOhjaus, int siirto, GraafinenKayttoliittyma gkl) {
         super("Epäilyikkuna");
         this.onkoEnsimmainen = onkoEnsimmainen;
@@ -19,9 +39,14 @@ public class Epailyikkuna extends JFrame {
         this.peliOhjaus = peliOhjaus;
         this.siirto = siirto;
         this.gkl = gkl;
-        
-    }
 
+    }
+    
+    /**
+     * Luokan konstruktori.
+     * 
+     * @param sailio Container-olio.
+     */
     public void luoKomponentit(Container sailio) {
         JPanel epailyPaneeli = new JPanel(new GridLayout(3, 1));
         sailio.setVisible(true);
@@ -38,11 +63,11 @@ public class Epailyikkuna extends JFrame {
 
         epailyPaneeli.add(tee);
         epailyPaneeli.add(alaTee);
-        
+
         sailio.add(epailyPaneeli);
-        
+
         this.setVisible(true);
-        
+
         this.pack();
     }
 
