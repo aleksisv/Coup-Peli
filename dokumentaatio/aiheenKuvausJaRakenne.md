@@ -31,8 +31,8 @@ Graafinen käyttöliittymä vastaa käyttäjän ja pelin vuorovaikutuksesta. Gra
 
 # Käyttötapauksia
 ## Sekvenssikaaviot
-### Pelin luominen
-![Luo Peli](luoPeli-sekvenssikaavio.png)
+### Pelin aloittaminen
+![Aloita peli](AloitaPeliSekvenssikaavio.png)
 
 ### Siirron tekeminen
-![Tee siirto](pelaaSiirto-sekvenssikaavio.png)
+![Tee siirto](SiirronTekeminenSekvenssikaavio.png)
