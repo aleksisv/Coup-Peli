@@ -1,6 +1,7 @@
 package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.*;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.*;
@@ -43,7 +44,8 @@ public class VastustajanSiirtoKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         this.pelausIkkuna.getContentPane().removeAll();
-        JPanel lisaykset = new JPanel(new GridLayout(4, 1));
+        JPanel paneeli = new JPanel(new GridLayout(2, 1));
+        JPanel napit = new JPanel(new GridLayout(1, 3));
 
         int siirto = vastustaja.valitseSiirto(r);
         int kohde = vastustaja.valitseKohde(r, this.peliOhjaus.getPeli().getOsanottajajoukko().size());
@@ -53,40 +55,49 @@ public class VastustajanSiirtoKuuntelija implements ActionListener {
         HashMap torjuntalista = this.peliOhjaus.getPeli().getTorjuntaLista();
         HashMap siirtonumerot = this.peliOhjaus.getPeli().getSiirtoNumerot();
         HashMap siirtonimet = this.peliOhjaus.getPeli().getSiirtoNimet();
+        
+        JButton torju = new JButton("Torju.");
+        torju.setEnabled(false);
+        
+        JButton epaile = new JButton("Epäile");
+        epaile.setEnabled(false);
+        
+        
 
-        JTextArea ilmoitus = new JTextArea("Vastutaja haluaa tehdä siirron "
+        JTextArea ilmoitus = new JTextArea("Vastutaja" + " haluaa tehdä siirron "
                 + siirtonimet.get(siirto) + " \nosanottajaa "
                 + this.peliOhjaus.getPeli().getOsanottajajoukko().get(kohde).getNimi()
                 + " vastaan.");
         Osanottaja oKohde = this.peliOhjaus.getPeli().getOsanottajajoukko().get(kohde);
 
         if (oKohde instanceof Pelaaja && torjuntalista.keySet().contains(siirto)) {
-            ilmoitus.setText(ilmoitus.getText() + "\nHaluatko torjua siirron?");
+            ilmoitus.setText(ilmoitus.getText() + "\nSiirron voi torjua kortilla " + torjuntalista.get(siirto) + ".\nHaluatko torjua siirron?");
 
-            JButton torju = new JButton("Torju.");
+            torju.setEnabled(true);
 
             torju.addActionListener(new VastustajanVuoroTorjuKuuntelija(this.gkl,
                     this.peliOhjaus, this.vastustaja, siirto));
 
-            lisaykset.add(torju);
+            napit.add(torju);
         }
 
         if (oKohde instanceof Pelaaja && siirtonumerot.keySet().contains(siirto)) {
-            ilmoitus.setText(ilmoitus.getText() + "\nHaluatko epäillä siirtoa?");
-
-            JButton epaile = new JButton("Epäile.");
+            ilmoitus.setText(ilmoitus.getText() + "\nSiirtoon tarvitaan kortti " 
+                    + siirtonumerot.get(siirto) + "\nHaluatko epäillä siirtoa?");
+            epaile.setEnabled(true);
 
             epaile.addActionListener(new VastustajanVuoroEpailyKuuntelija(this.gkl, this.peliOhjaus, this.pelausIkkuna, this.vastustaja, siirto));
 
-            lisaykset.add(epaile);
+            napit.add(epaile);
 
         }
 
         alaTeeMitaan.addActionListener(new VastustajanVuoroAlaTeeMitaanKuuntelija(gkl, peliOhjaus, pelausIkkuna, vastustaja, siirto, oKohde));
 
-        lisaykset.add(alaTeeMitaan);
-        lisaykset.add(ilmoitus);
-        this.pelausIkkuna.getContentPane().add(lisaykset);
+        napit.add(alaTeeMitaan);
+        paneeli.add(ilmoitus);
+        paneeli.add(napit);
+        this.pelausIkkuna.getContentPane().add(paneeli);
         this.pelausIkkuna.setVisible(true);
 
         SwingUtilities.updateComponentTreeUI(pelausIkkuna);

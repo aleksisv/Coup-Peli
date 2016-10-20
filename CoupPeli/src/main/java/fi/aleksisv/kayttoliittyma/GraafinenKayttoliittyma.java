@@ -56,13 +56,13 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
         String pelaajanNimi = avausIkkuna.getPelaajanNimi().getText();
         Pattern p1 = Pattern.compile("[2-5]");
         Matcher m1 = p1.matcher(pelaajaMaaraTeksti);
-        Pattern p2 = Pattern.compile("[a-z]+");
+        Pattern p2 = Pattern.compile("(\\s|[a-z|å|ö|ä]+)+");
         Matcher m2 = p2.matcher(pelaajanNimi.toLowerCase());
 
         if (!m1.matches()) {
             this.huomioTekstit.setText("Validi määrä (2-5) pelaajia.");
         } else if (!m2.matches()) {
-            this.huomioTekstit.setText("Anna aakkosista koostuva nimi.");
+            this.huomioTekstit.setText("Nimeen saa kuulua vain aakkosia.");
         } else {
             int pelaajaMaara = Integer.parseInt(avausIkkuna.getMontakoPelaajaa().getText());
             this.avausIkkuna.dispose();
@@ -71,8 +71,6 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
             this.huomioTekstit.setText("Aloitit pelin " + pelaajaMaara + " pelaajalla. Tee siirto.");
 
             this.valiIkkuna.luoPelausYmparisto();
-            avausIkkuna.getAloitaPeliNappi().setVisible(false);
-            avausIkkuna.getMontakoPelaajaa().setVisible(false);
         }
 
     }
@@ -97,10 +95,16 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
     /**
      * Metodi lopettaa pelin.
      */
-    public void lopetaPeli() {
+    public void lopetaPeli(boolean voittanut) {
         this.valiIkkuna.dispose();
         JFrame lopetusikkuna = new JFrame("Peli on ohi!");
-        lopetusikkuna.add(new JTextArea("Voittaja: " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
+
+        if (voittanut) {
+            lopetusikkuna.add(new JTextArea("Voitit: " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
+        } else {
+            lopetusikkuna.add(new JTextArea("Valitettavasti olit huonompi ja hävisit."));
+        }
+
         lopetusikkuna.setSize(400, 400);
         lopetusikkuna.setVisible(true);
         lopetusikkuna.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,6 +124,10 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
 
     public PelausIkkuna getPelausIkkuna() {
         return pelausIkkuna;
+    }
+
+    void pelaajaOnHavinnyt() {
+
     }
 
 }

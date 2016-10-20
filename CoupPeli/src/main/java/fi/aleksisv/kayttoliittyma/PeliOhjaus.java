@@ -164,7 +164,11 @@ public class PeliOhjaus {
         }
         
         if(peli.getOsanottajajoukko().size() == 1) {
-            this.gkl.lopetaPeli();
+            this.gkl.lopetaPeli(true);
+        }
+        
+        if(!peli.getOsanottajajoukko().contains(peli.getPelaaja())) {
+            this.gkl.lopetaPeli(false);
         }
     }
 

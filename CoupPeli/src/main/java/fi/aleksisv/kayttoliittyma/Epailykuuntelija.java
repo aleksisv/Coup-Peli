@@ -62,7 +62,9 @@ public class Epailykuuntelija implements ActionListener {
             }
         } else {
             if (e.getSource() == this.tee) {
-                this.peliOhjaus.getPeli().getPelaaja().epaile(vastustaja, this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirto));
+                if(this.peliOhjaus.getPeli().getPelaaja().epaile(vastustaja, this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirto))) {
+                    this.peliOhjaus.suoritaSiirto(this.peliOhjaus.getPeli().getPelaaja(), vastustaja, siirto);
+                }
                 this.gkl.getPelausIkkuna().setVisible(false);
                 this.epailyikkuna.setVisible(false);
             } else {
@@ -71,6 +73,7 @@ public class Epailykuuntelija implements ActionListener {
             }
         }
         this.peliOhjaus.getPeli().setVuoronumero(this.peliOhjaus.getPeli().getVuoronumero() + 1);
+        this.peliOhjaus.paivitaTilanne();
         this.gkl.getValiIkkuna().pelinSeurantapaneeli.paivitaTila(this.peliOhjaus.getPeli());
     }
 

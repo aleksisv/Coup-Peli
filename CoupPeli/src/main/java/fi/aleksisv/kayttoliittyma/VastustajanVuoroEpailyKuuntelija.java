@@ -43,6 +43,7 @@ public class VastustajanVuoroEpailyKuuntelija implements ActionListener {
         if (peli.getPelaaja().epaile(o, peli.getSiirtoNumerot().get(this.siirto))) {
             this.gkl.getValiIkkuna().huomioTekstit.setText("Onnistuit torjumaan vastustajan siirron.");
             peli.setVuoronumero(peli.getVuoronumero() + 1);
+            this.peliOhjaus.paivitaTilanne();
         } else {
             this.peliOhjaus.suoritaSiirto(o, kohdistuu, siirto);
             this.gkl.getValiIkkuna().huomioTekstit.setText("Osanottaja " +  o.getNimi() + " kohdisti siirron osanottajaa " + kohdistuu.getNimi() + " kohti.");

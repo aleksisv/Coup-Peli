@@ -33,6 +33,7 @@ public class VastustajanVuoroTorjuKuuntelija implements ActionListener {
         this.peliOhjaus = peliOhjaus;
         this.vastustaja = vastustaja;
         this.siirto = siirto;
+        this.pelausIkkuna = this.gkl.getPelausIkkuna();
     }
 
     @Override
@@ -44,6 +45,7 @@ public class VastustajanVuoroTorjuKuuntelija implements ActionListener {
         if (siirtoMappi.containsKey(siirto)) {
             if (vastustaja.haluaaEpailla(kohde, (Kortti) siirtoMappi.get(siirto))) {
                 if(vastustaja.epaile((Osanottaja) kohde, (Kortti) siirtoMappi.get(siirto))) {
+                    peliOhjaus.suoritaSiirto(vastustaja, kohde, siirto);
                     this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja epäili torjuntaasi onnistuneesti. Menetit kortin.");
                 } else {
                     this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja koitti epäillä torjuntaasi, mutta epäonnistui ja menetti kortin.");
@@ -55,6 +57,7 @@ public class VastustajanVuoroTorjuKuuntelija implements ActionListener {
             this.gkl.getValiIkkuna().huomioTekstit.setText("Torjuit vastustajan siirron.");
         }
 
+        peliOhjaus.paivitaTilanne();
         peli.setVuoronumero(peli.getVuoronumero() + 1);
 
         this.gkl.paivitaPelinseuranta(this.gkl.getPelinSeurantapaneeli());

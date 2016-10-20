@@ -37,7 +37,8 @@ public class Korttikasi {
     }
 
     /**
-     * Metodi tarkastaa, sisältyykö jokin kortti pelaajan käteen.
+     * Metodi tarkastaa, sisältyykö jokin kortti pelaajan piilossa olevien korttien
+     * joukkoon.
      *
      * @param kortti Minkä kortin sisältyminen halutaan tarkastaa.
      *
@@ -46,7 +47,7 @@ public class Korttikasi {
      */
     public boolean sisaltyykoKortti(Kortti kortti) {
         for (Kortti kortit1 : kortit) {
-            if (kortit1.equals(kortti)) {
+            if (kortit1.equals(kortti) && !kortit1.onkoPaljastettu()) {
                 return true;
             }
         }
