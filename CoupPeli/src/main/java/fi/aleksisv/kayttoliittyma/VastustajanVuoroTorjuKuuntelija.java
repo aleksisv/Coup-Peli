@@ -5,24 +5,36 @@ import java.awt.event.*;
 import java.util.HashMap;
 import javax.swing.SwingUtilities;
 
-
 /**
- * Luokka kuuntelee tilannetta, jossa käyttäjä haluaa torjua vastustajan siirron.
+ * Luokka kuuntelee tilannetta, jossa käyttäjä haluaa torjua vastustajan
+ * siirron.
  */
 public class VastustajanVuoroTorjuKuuntelija implements ActionListener {
-    
-    /** Graafinen käyttöliittymä.*/
+
+    /**
+     * Graafinen käyttöliittymä.
+     */
     GraafinenKayttoliittyma gkl;
-    /** Peliä pyörittävä taho.*/
+    /**
+     * Peliä pyörittävä taho.
+     */
     PeliOhjaus peliOhjaus;
-    /** Tilanteeseen liittyvä ikkuna.*/
+    /**
+     * Tilanteeseen liittyvä ikkuna.
+     */
     PelausIkkuna pelausIkkuna;
-    /** Tilanteeseen liittyvä vastustaja.*/
+    /**
+     * Tilanteeseen liittyvä vastustaja.
+     */
     Vastustaja vastustaja;
-    /** Siirtonumero.*/
+    /**
+     * Siirtonumero.
+     */
     int siirto;
-    
-    /** Luokan konstruktori.
+
+    /**
+     * Luokan konstruktori.
+     *
      * @param gkl Graafinen käyttöliittymä.
      * @param peliOhjaus Pelin ohjauksesta vastaava taho.
      * @param vastustaja Vastustaja.
@@ -44,12 +56,12 @@ public class VastustajanVuoroTorjuKuuntelija implements ActionListener {
 
         if (siirtoMappi.containsKey(siirto)) {
             if (vastustaja.haluaaEpailla(kohde, (Kortti) siirtoMappi.get(siirto))) {
-                if(vastustaja.epaile((Osanottaja) kohde, (Kortti) siirtoMappi.get(siirto))) {
+                if (vastustaja.epaile((Osanottaja) kohde, (Kortti) siirtoMappi.get(siirto))) {
                     peliOhjaus.suoritaSiirto(vastustaja, kohde, siirto);
                     this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja epäili torjuntaasi onnistuneesti. Menetit kortin.");
                 } else {
                     this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja koitti epäillä torjuntaasi, mutta epäonnistui ja menetti kortin.");
-                }   
+                }
             } else {
                 this.gkl.getValiIkkuna().huomioTekstit.setText("Torjuit vastustajan siirron.");
             }
@@ -63,7 +75,7 @@ public class VastustajanVuoroTorjuKuuntelija implements ActionListener {
         this.gkl.paivitaPelinseuranta(this.gkl.getPelinSeurantapaneeli());
         this.pelausIkkuna.setVisible(false);
         SwingUtilities.updateComponentTreeUI(this.gkl.getValiIkkuna());
-        
+
     }
 
 }

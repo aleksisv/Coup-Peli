@@ -3,23 +3,29 @@ package fi.aleksisv.kayttoliittyma;
 import fi.aleksisv.logiikka.*;
 import java.util.Random;
 
-
 /**
  * Luokka vastaa pelin ohjauksesta.
  */
 public class PeliOhjaus {
-    
-    /** Random-olio.*/
+
+    /**
+     * Random-olio.
+     */
     private Random r;
-    
-    /** Peli, jota ohjataan.*/
+
+    /**
+     * Peli, jota ohjataan.
+     */
     private Peli peli;
-    
-    /** Graafinen käyttöliittymä.*/
+
+    /**
+     * Graafinen käyttöliittymä.
+     */
     GraafinenKayttoliittyma gkl;
 
     /**
      * Luokan konstruktori.
+     *
      * @param gkl Graafinen käyttöliittymä.
      */
     public PeliOhjaus(GraafinenKayttoliittyma gkl) {
@@ -31,6 +37,7 @@ public class PeliOhjaus {
      * Metodi luo pelin halutulla pelaajamäärällä.
      *
      * @param pelaajaMaara Monenko pelaajan peli luodaan.
+     * @param pelaajanNimi Mikä on pelaajan nimi.
      */
     public void luoPeli(int pelaajaMaara, String pelaajanNimi) {
         this.peli = new Peli(pelaajaMaara, pelaajanNimi);
@@ -130,10 +137,9 @@ public class PeliOhjaus {
      * GUI:lle.
      *
      * @param siirtoNumero Minkä numeroista siirtoa yritetään.
-     * 
+     *
      * @return Onko pelaajalla tarvpeeksi rahaa vai ei.
      */
-    
     public boolean onkoPelaajallaRahaa(int siirtoNumero) {
         if (siirtoNumero == 3) {
             return this.peli.getPelaaja().getRaha() >= 7;
@@ -143,7 +149,7 @@ public class PeliOhjaus {
             return true;
         }
     }
-    
+
     /**
      * Metodi päivittää pelitilanteen, eli tarkistaa, ketkä osanottajista ovat
      * jo pudonneet ja ketkä ovat vielä mukana pelissä.
@@ -162,12 +168,12 @@ public class PeliOhjaus {
             peli.getHavinnytJoukko().add(poistettava);
             peli.getOsanottajajoukko().remove(poistettava);
         }
-        
-        if(peli.getOsanottajajoukko().size() == 1) {
+
+        if (peli.getOsanottajajoukko().size() == 1) {
             this.gkl.lopetaPeli(true);
         }
-        
-        if(!peli.getOsanottajajoukko().contains(peli.getPelaaja())) {
+
+        if (!peli.getOsanottajajoukko().contains(peli.getPelaaja())) {
             this.gkl.lopetaPeli(false);
         }
     }
@@ -175,7 +181,5 @@ public class PeliOhjaus {
     public void setGkl(GraafinenKayttoliittyma gkl) {
         this.gkl = gkl;
     }
-    
-    
 
 }

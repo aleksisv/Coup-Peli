@@ -1,6 +1,7 @@
 package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.Vastustaja;
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 import javax.swing.*;
@@ -50,6 +51,13 @@ public class Epailyikkuna extends JFrame {
     public void luoKomponentit(Container sailio) {
         JPanel epailyPaneeli = new JPanel(new GridLayout(3, 1));
         sailio.setVisible(true);
+        
+        JTextArea teksti = new JTextArea("Vastustaja haluaa epäillä siirtoasi."
+                + " Haluatko perua siirron?");
+        JPanel tekstiPaneeli = new JPanel(new BorderLayout());
+        
+        tekstiPaneeli.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        tekstiPaneeli.add(teksti);
 
         JButton tee = new JButton("Tee siirto.");
         JButton alaTee = new JButton("Älä tee siirtoa.");
@@ -65,10 +73,11 @@ public class Epailyikkuna extends JFrame {
         epailyPaneeli.add(alaTee);
 
         sailio.add(epailyPaneeli);
-
+        
         this.setVisible(true);
-
-        this.pack();
+        this.setSize(400, 500);
+        
+        
     }
 
 }

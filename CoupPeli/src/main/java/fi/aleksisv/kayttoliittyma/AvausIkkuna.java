@@ -9,24 +9,34 @@ import javax.swing.JTextField;
  * Luokan olio toimii pelin aloitusvalikkona.
  */
 public class AvausIkkuna extends JFrame {
-    
-    /** GUI, johon frame kuuluu.*/
+
+    /**
+     * GUI, johon frame kuuluu.
+     */
     private GraafinenKayttoliittyma gkl;
-    /** Nappi, jolla peli aloitetaan.*/
+    /**
+     * Nappi, jolla peli aloitetaan.
+     */
     private JButton aloitaPeliNappi;
-    /** Pelaajien määrästä kertova JTextField.*/
+    /**
+     * Pelaajien määrästä kertova JTextField.
+     */
     private JTextField montakoPelaajaa;
-    /** Pelaajan nimestä kertova JTextField.*/
+    /**
+     * Pelaajan nimestä kertova JTextField.
+     */
     private JTextField pelaajanNimi;
-    /** Erityishuomioista kertova tekstialue.*/
+    /**
+     * Erityishuomioista kertova tekstialue.
+     */
     private JTextArea huomioTekstit;
 
     /**
      * Luokan konstruktori.
-     * 
+     *
      * @param otsikko Ikkunan otsikko.
      * @param gkl Graafinen käyttöliittymä.
-     * 
+     *
      * @throws HeadlessException Heittää headless-exceptionin.
      */
     public AvausIkkuna(String otsikko, GraafinenKayttoliittyma gkl) throws HeadlessException {
@@ -36,7 +46,6 @@ public class AvausIkkuna extends JFrame {
 
         this.setPreferredSize(new Dimension(1000, 600));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
 
         luokomponentit(this.getContentPane());
 
@@ -66,30 +75,27 @@ public class AvausIkkuna extends JFrame {
 
     private JPanel luoAvausvalikko() {
         JPanel paneeli = new JPanel(new GridLayout(1, 3));
-        
-        
 
         JPanel aloitusSala = new JPanel(new BorderLayout());
         this.aloitaPeliNappi = new JButton("Aloita peli!");
         this.aloitaPeliNappi.setSize(40, 40);
-        
+
         aloitusSala.setBorder(BorderFactory.createEmptyBorder(135, 20, 20, 20));
         aloitusSala.add(this.aloitaPeliNappi, BorderLayout.CENTER);
         this.aloitaPeliNappi.addActionListener(gkl);
         gkl.setAloitaPeliNappi(aloitaPeliNappi);
-        
+
         JPanel osanottajia = new JPanel(new GridLayout(2, 1));
         osanottajia.setBorder(BorderFactory.createEmptyBorder(100, 20, 20, 20));
         osanottajia.add(new JLabel("Monellako pelaajalla haluat pelata?"));
         this.montakoPelaajaa = new JTextField();
         osanottajia.add(montakoPelaajaa);
-        
-        JPanel nimi = new JPanel(new GridLayout(2,1));
+
+        JPanel nimi = new JPanel(new GridLayout(2, 1));
         nimi.setBorder(BorderFactory.createEmptyBorder(100, 20, 20, 20));
         nimi.add(new JLabel("Minkä nimen haluat?"));
         this.pelaajanNimi = new JTextField();
         nimi.add(pelaajanNimi);
-
 
         paneeli.add(aloitusSala);
         paneeli.add(osanottajia);
@@ -110,7 +116,4 @@ public class AvausIkkuna extends JFrame {
         return pelaajanNimi;
     }
 
-    
-    
-    
 }

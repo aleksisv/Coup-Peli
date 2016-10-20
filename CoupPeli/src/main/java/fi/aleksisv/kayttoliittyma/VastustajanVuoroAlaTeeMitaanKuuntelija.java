@@ -62,8 +62,11 @@ public class VastustajanVuoroAlaTeeMitaanKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.peliOhjaus.suoritaSiirto(vastustaja, kohde, siirto);
-        this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja " + vastustaja.getNimi() + " onnistui tekemään siirron " 
-                + this.peliOhjaus.getPeli().getSiirtoNimet().get(siirto) + " osanottajaa " + kohde.getNimi() + " vastaan.");
+        
+        this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja " + vastustaja.getNimi() 
+                + " onnistui tekemään siirron " + this.peliOhjaus.getPeli().getSiirtoNimet().get(siirto).toLowerCase() 
+                + " osanottajaa " + kohde.getNimi() + " vastaan.");
+        
         this.gkl.paivitaPelinseuranta(this.gkl.getPelinSeurantapaneeli());
         this.pelausIkkuna.setVisible(false);
         SwingUtilities.updateComponentTreeUI(this.gkl.getValiIkkuna());

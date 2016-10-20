@@ -69,7 +69,7 @@ public class Pankki {
 
     @Override
     public String toString() {
-        return "Pankilla on rahaa " + this.rahamaara + "Coup-yksikköä.";
+        return "Pankilla on rahaa " + this.rahamaara + " yksikköä.";
     }
 
 }

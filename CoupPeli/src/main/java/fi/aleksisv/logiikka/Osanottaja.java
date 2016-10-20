@@ -1,21 +1,30 @@
 package fi.aleksisv.logiikka;
 
 import java.util.Random;
+import jdk.nashorn.internal.objects.annotations.Getter;
 
 /**
  * Luokka kuvaa pelin osanottajaa.
  */
 public class Osanottaja {
-    
-    /** Osanottajan nimi.*/
+
+    /**
+     * Osanottajan nimi.
+     */
     private String nimi;
-    /** Osanottajan rahamäärä.*/
+    /**
+     * Osanottajan rahamäärä.
+     */
     private int raha;
-    /** Osanottajan korttikäsi.*/
+    /**
+     * Osanottajan korttikäsi.
+     */
     private Korttikasi korttikasi;
-    /** Osanottajan korttikäsi.*/
+    /**
+     * Osanottajan korttikäsi.
+     */
     protected Peli peli;
-    
+
     /**
      * Luokan konstruktori.
      *
@@ -27,9 +36,6 @@ public class Osanottaja {
         this.korttikasi = new Korttikasi();
     }
     
-    public Osanottaja() {
-    }
-
     public Korttikasi getKorttikasi() {
         return this.korttikasi;
     }
@@ -148,6 +154,7 @@ public class Osanottaja {
 
     /**
      * Metodin avulla osanottajan käteen lisätään kortti.
+     *
      * @param osanottaja Osanottaja, jonka käteen kortti lisätään.
      * @param kortti Kortti, joka on tarkoitus lisätä osanottajan käteen.
      *
@@ -165,6 +172,7 @@ public class Osanottaja {
     /**
      * Metodin kuvaa tilannetta, jossa vastustaja yrittää torjua toisen
      * osanottajan siirron.
+     *
      * @param osanottaja Osanottaja, jonka siirto halutaan torjua.
      * @param kortti Kortti, jonka torjuja tarvitsee torjuakseen.
      *
@@ -298,9 +306,10 @@ public class Osanottaja {
     public String toString() {
         return this.nimi;
     }
-    
+
     /**
      * Metodi palauttaa merkkijonoesityksen osanottajan korttikädestä.
+     *
      * @return Korttikäden merkkijonoesitys.
      */
     public String naytaKorttikasi() {
@@ -316,7 +325,5 @@ public class Osanottaja {
     public void setPeli(Peli peli) {
         this.peli = peli;
     }
-    
-    
 
 }

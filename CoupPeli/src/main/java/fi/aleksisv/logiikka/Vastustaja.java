@@ -145,7 +145,7 @@ public class Vastustaja extends Osanottaja {
         }
 
         while (true) {
-            siirtoEhdokas = r.nextInt(5) + 1;
+            siirtoEhdokas = r.nextInt(6) + 1;
             if (siirtoEhdokas == 3) {
                 if (this.getRaha() >= 7) {
                     break;

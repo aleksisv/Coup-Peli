@@ -8,28 +8,44 @@ import javax.swing.*;
  * Luokka tarkkailee, haluaako pelaaja epäillä vastustajan siirtoa.
  */
 public class Epailykuuntelija implements ActionListener {
-    
-    /** Tarvittavat napit.*/
+
+    /**
+     * Tarvittavat napit.
+     */
     JButton tee, alaTee;
-    
-    /** Onko kyseessä vastustaja joka haluaa epäillä.*/
+
+    /**
+     * Onko kyseessä vastustaja joka haluaa epäillä.
+     */
     boolean haluaakoVastustajaEpailla;
-    /** Tilanteeseen liittyvä vastustaja.*/
+    /**
+     * Tilanteeseen liittyvä vastustaja.
+     */
     Vastustaja vastustaja;
-    /** Pelin pyörittämisestä vastaava taho.*/
+    /**
+     * Pelin pyörittämisestä vastaava taho.
+     */
     PeliOhjaus peliOhjaus;
-    /** Siirron numero.*/
+    /**
+     * Siirron numero.
+     */
     int siirto;
-    /** Graafinen käyttöliittymä.*/
+    /**
+     * Graafinen käyttöliittymä.
+     */
     GraafinenKayttoliittyma gkl;
-    /** Tilanteeseen liittyvä näkymä.*/
+    /**
+     * Tilanteeseen liittyvä näkymä.
+     */
     JFrame epailyikkuna;
 
     /**
      * Luokan konstruktori.
+     *
      * @param tee Nappi, jota painamalla pelaaja epäilee.
      * @param alaTee Nappi, jota painamalla pelaaja ei epäile.
-     * @param haluaakoVastustajaEpailla Totuusarvo: haluaako vastustaja epäillä vai ei.
+     * @param haluaakoVastustajaEpailla Totuusarvo: haluaako vastustaja epäillä
+     * vai ei.
      * @param vastustaja Vastustaja, joka on siirrossa osallisena.
      * @param siirto Siirron numero.
      * @param peliOhjaus Peliä ohjaava taho.
@@ -53,16 +69,7 @@ public class Epailykuuntelija implements ActionListener {
 
         if (haluaakoVastustajaEpailla) {
             if (e.getSource() == this.tee) {
-                vastustaja.epaile(this.peliOhjaus.getPeli().getPelaaja(), this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirto));
-                this.gkl.getPelausIkkuna().setVisible(false);
-                this.epailyikkuna.setVisible(false);
-            } else {
-                this.gkl.getPelausIkkuna().setVisible(false);
-                this.epailyikkuna.setVisible(false);
-            }
-        } else {
-            if (e.getSource() == this.tee) {
-                if(this.peliOhjaus.getPeli().getPelaaja().epaile(vastustaja, this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirto))) {
+                if(!vastustaja.epaile(this.peliOhjaus.getPeli().getPelaaja(), this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirto))) {
                     this.peliOhjaus.suoritaSiirto(this.peliOhjaus.getPeli().getPelaaja(), vastustaja, siirto);
                 }
                 this.gkl.getPelausIkkuna().setVisible(false);
@@ -71,6 +78,15 @@ public class Epailykuuntelija implements ActionListener {
                 this.gkl.getPelausIkkuna().setVisible(false);
                 this.epailyikkuna.setVisible(false);
             }
+        } else if (e.getSource() == this.tee) {
+            if (this.peliOhjaus.getPeli().getPelaaja().epaile(vastustaja, this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirto))) {
+                this.peliOhjaus.suoritaSiirto(this.peliOhjaus.getPeli().getPelaaja(), vastustaja, siirto);
+            }
+            this.gkl.getPelausIkkuna().setVisible(false);
+            this.epailyikkuna.setVisible(false);
+        } else {
+            this.gkl.getPelausIkkuna().setVisible(false);
+            this.epailyikkuna.setVisible(false);
         }
         this.peliOhjaus.getPeli().setVuoronumero(this.peliOhjaus.getPeli().getVuoronumero() + 1);
         this.peliOhjaus.paivitaTilanne();

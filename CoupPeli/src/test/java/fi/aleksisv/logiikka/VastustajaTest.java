@@ -148,6 +148,9 @@ public class VastustajaTest {
                 + "\nNäkyvät kortit: " + v.naytaNakyvatKortit() 
                 + "\nStatus: " + " pelissä.");
     }
+    
+   
+
 
     @Test
     public void annaRahaaPankilleToimii1() {
@@ -282,6 +285,17 @@ public class VastustajaTest {
         siirtoNumero = v.valitseSiirto(r);
         assertNotEquals(siirtoNumero, 5);
         assertNotEquals(siirtoNumero, 3);
+    }
+    
+    @Test
+    public void valitseSiirtoToimii2() {
+        Random r = new Random();
+        Vastustaja v = new Vastustaja("Azra");
+        v.paljastaKortti();
+        v.paljastaKortti();
+        v.saaRahaa(1);
+        
+        assertNotEquals(v.valitseSiirto(r), 3);
     }
     
     @Test

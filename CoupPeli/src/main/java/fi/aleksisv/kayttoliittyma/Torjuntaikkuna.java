@@ -1,8 +1,11 @@
 package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.Vastustaja;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -51,26 +54,37 @@ public class Torjuntaikkuna extends JFrame {
      */
     public void luoKomponentit(Container sailio) {
         JPanel torjuntaPaneeli = new JPanel(new GridLayout(3, 1));
+        torjuntaPaneeli.setBounds(30, 30, 30, 30);
+        
         sailio.setVisible(true);
-
+        
+        JTextArea teksti = new JTextArea("Vastustaja haluaa torjua siirtosi.\nHaluatko epäillä vastustajan torjumista?");
+        
+        JPanel ilmoitusPaneeli = new JPanel(new BorderLayout());
+        ilmoitusPaneeli.setBorder(BorderFactory.createEtchedBorder(Color.lightGray, Color.black));
+        
+       
         JButton epaileVastustajanTorjuntaa = new JButton("Epäile vastustajan torjuntaa.");
         JButton peruutaSiirto = new JButton("Peruuta siirto.");
 
         Epailykuuntelija epailykuuntelija = new Epailykuuntelija(epaileVastustajanTorjuntaa,
                 peruutaSiirto, false, vastustaja, peliOhjaus, siirto, gkl, this);
-
         epaileVastustajanTorjuntaa.addActionListener(epailykuuntelija);
+        
         peruutaSiirto.addActionListener(epailykuuntelija);
-        torjuntaPaneeli.add(new JTextArea("Vastustaja haluaa torjua siirtosi. Haluatko epäillä vastustajan torjumista?"));
+        
+        ilmoitusPaneeli.add(teksti, BorderLayout.CENTER);
+        
+        torjuntaPaneeli.add(ilmoitusPaneeli);
+        
         torjuntaPaneeli.add(epaileVastustajanTorjuntaa);
         torjuntaPaneeli.add(peruutaSiirto);
 
         sailio.add(torjuntaPaneeli);
-        sailio.setSize(700, 400);
-
+        
         this.setVisible(true);
-
-        this.pack();
+        this.setSize(400, 500);
+        
     }
 
 }

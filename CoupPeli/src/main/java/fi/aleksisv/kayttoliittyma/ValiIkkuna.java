@@ -2,26 +2,40 @@ package fi.aleksisv.kayttoliittyma;
 
 import java.awt.*;
 import javax.swing.*;
-/** Luokka vastaa pelin perusnäkymästä.
+
+/**
+ * Luokka vastaa pelin perusnäkymästä.
  */
 public class ValiIkkuna extends JFrame {
-    
-    /** Tekstialue, joka ilmoittaa erityisistä huomioista.*/
+
+    /**
+     * Tekstialue, joka ilmoittaa erityisistä huomioista.
+     */
     JTextArea huomioTekstit;
-    /** Peliä ohjaava taho.*/
+    /**
+     * Peliä ohjaava taho.
+     */
     PeliOhjaus peliOhjaus;
-    /** Pelinseurantaa yllä pitävä taho.*/
+    /**
+     * Pelinseurantaa yllä pitävä taho.
+     */
     PelinSeurantaPaneeli pelinSeurantapaneeli;
-    /** Nappi, jota painamalla edetään yksi vuoro.*/
+    /**
+     * Nappi, jota painamalla edetään yksi vuoro.
+     */
     JButton pelaaVuoroNappi;
-    /** Graafinen käyttöliittymä.*/
+    /**
+     * Graafinen käyttöliittymä.
+     */
     GraafinenKayttoliittyma gkl;
-    
-    /** Luokan konstruktori.
+
+    /**
+     * Luokan konstruktori.
+     *
      * @param peliOhjaus Peliä pyörittävä taho.
      * @param gkl Käyttöliittymä.
-     * 
-     *@throws HeadlessException
+     *
+     * @throws HeadlessException
      */
     public ValiIkkuna(PeliOhjaus peliOhjaus, GraafinenKayttoliittyma gkl) throws HeadlessException {
         super("Coup-Peli");
@@ -29,8 +43,8 @@ public class ValiIkkuna extends JFrame {
         this.gkl = gkl;
 
         this.setVisible(true);
-        this.setSize(1000, 700);
-        
+        this.setSize(1200, 700);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.luoKomponentit();
@@ -41,14 +55,13 @@ public class ValiIkkuna extends JFrame {
      */
     public void luoKomponentit() {
         Container sailio = this.getContentPane();
-        
+
         sailio.setLayout(new GridLayout(3, 2));
-        
-        
+
         this.huomioTekstit = new JTextArea();
-        
+
         sailio.add(huomioTekstit);
-        
+
         this.huomioTekstit.setText("Aloitit pelin " + this.peliOhjaus.getPeli().getOsanottajamaara() + " pelaajalla. Tee siirto.");
     }
 
@@ -72,13 +85,13 @@ public class ValiIkkuna extends JFrame {
         this.pelaaVuoroNappi = new JButton("Pelaa vuoro!");
         pelaaVuoroNappi.setPreferredSize(new Dimension(150, 50));
         pelaaVuoroNappi.addActionListener(new PelinSeurantaKuuntelija(peliOhjaus, gkl));
-        
+
         JPanel takaPaneeli = new JPanel();
         takaPaneeli.setBorder(BorderFactory.createEtchedBorder(Color.lightGray, Color.black));
-        
+
         JPanel nappiPaneeli = new JPanel();
         nappiPaneeli.setBorder(BorderFactory.createEmptyBorder(50, 30, 30, 30));
-        
+
         nappiPaneeli.add(pelaaVuoroNappi);
         takaPaneeli.add(nappiPaneeli);
         this.add(takaPaneeli);

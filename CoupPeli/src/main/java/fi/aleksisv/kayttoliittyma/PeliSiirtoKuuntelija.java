@@ -80,9 +80,14 @@ public class PeliSiirtoKuuntelija implements ActionListener {
 
         } else {
             this.peliOhjaus.suoritaSiirto(pelaaja, vastustaja, siirtonumero);
+            String ketaVastaan = "";
+            if(siirtonumero == 3 || siirtonumero == 5 || siirtonumero == 6) {
+                ketaVastaan = " osanottajaa " + vastustaja.getNimi() + " vastaan";
+            }
+            
             this.gkl.getValiIkkuna().huomioTekstit.setText("Onnistuit tekemään siirron " 
-                    + this.peliOhjaus.getPeli().getSiirtoNimet().get(siirtonumero) 
-                    + " vastustajaa " + vastustaja.getNimi() + " kohtaan.");
+                    + this.peliOhjaus.getPeli().getSiirtoNimet().get(siirtonumero).toLowerCase()
+                    + ".");
             this.pelausIkkuna.setVisible(false);
         }
         this.gkl.getValiIkkuna().pelinSeurantapaneeli.paivitaTila(peliOhjaus.getPeli());

@@ -94,6 +94,8 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
 
     /**
      * Metodi lopettaa pelin.
+     * 
+     * @param voittanut Onko lopetustilanteessa pelaaja voittanut vai hävinnyt.
      */
     public void lopetaPeli(boolean voittanut) {
         this.valiIkkuna.dispose();

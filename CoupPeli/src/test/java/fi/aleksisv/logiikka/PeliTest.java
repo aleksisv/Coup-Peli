@@ -110,6 +110,37 @@ public class PeliTest {
         assertEquals(peli.getPankki().getRahamaara(), 100);
     }
     
+    @Test
+    public void getSiirtoNimetToimii1() {
+        Peli peli = new Peli(3, "Maa");
+        assertEquals("Perustulo", peli.getSiirtoNimet().get(1));
+        assertEquals(6, peli.getSiirtoNimet().size());
+    }
+    
+    @Test
+    public void getSiirtoNumerotToimii1() {
+        Peli peli = new Peli(3, "Maa");
+        assertEquals("Herttua", peli.getSiirtoNumerot().get(4).getTyyppi());
+        assertEquals(3, peli.getSiirtoNumerot().size());
+    }
+    
+    @Test
+    public void getTorjuntalistaToimii1() {
+        Peli peli = new Peli(3, "Maa");
+        assertEquals("Herttua", peli.getTorjuntaLista().get(2).getTyyppi());
+        assertEquals(3, peli.getTorjuntaLista().size());
+    }
+    
+    @Test
+    public void getHavinnytJoukkoToimii1() {
+        Peli peli = new Peli(3, "SAASSD");
+        peli.luoOsanottajat();
+        Osanottaja o = peli.getOsanottajajoukko().get(0);
+        o.paljastaKortti();
+        o.paljastaKortti();
+        peli.getHavinnytJoukko().contains(o);
+    }
+    
 //    @Test
 //    public void paivitaTilanneToimii1() {
 //        Peli peli = new Peli(4);

@@ -46,7 +46,9 @@ public class VastustajanVuoroEpailyKuuntelija implements ActionListener {
             this.peliOhjaus.paivitaTilanne();
         } else {
             this.peliOhjaus.suoritaSiirto(o, kohdistuu, siirto);
-            this.gkl.getValiIkkuna().huomioTekstit.setText("Osanottaja " +  o.getNimi() + " kohdisti siirron osanottajaa " + kohdistuu.getNimi() + " kohti.");
+            this.gkl.getValiIkkuna().huomioTekstit.setText("Osanottaja " +  o.getNimi() 
+                    + " kohdisti  siirron " + peli.getSiirtoNimet().get(siirto) + " osanottajaa " 
+                    + kohdistuu.getNimi() + " kohtaan.");
         }
         
         

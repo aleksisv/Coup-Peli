@@ -110,7 +110,9 @@ public class Peli {
     public void luoOsanottajat() {
         Random r = new Random();
         String[] nimet = {"Azra", "Mazra", "Miia", "Jea", "Sirpiina", "Make", "Santtu",
-            "Siiri", "Pia", "Pai"};
+            "Siiri", "Pia", "Pai", "Pauliina", "Aleksis", "Asko", "Salim", "Frank",
+            "Plumpton", "Ramsey", "Ramsay", "Andre Weil", "Hilla", "Kerttu",
+            "Slothrop"};
         annaKortit(this.pelinPelaaja);
         lisaaPelaajaJoukkoon();
         for (int i = 0; i < osanottajamaara - 1; i++) {

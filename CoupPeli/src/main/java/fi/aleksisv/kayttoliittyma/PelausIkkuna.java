@@ -33,7 +33,6 @@ public class PelausIkkuna extends JFrame {
      *
      * @param peliOhjaus Peliä pyörittävä taho.
      * @param gkl Graafinen käyttöliittymä.
-     *
      * @throws HeadlessException
      */
     public PelausIkkuna(PeliOhjaus peliOhjaus, GraafinenKayttoliittyma gkl) throws HeadlessException {
@@ -54,30 +53,42 @@ public class PelausIkkuna extends JFrame {
      * @throws HeadlessException
      */
     public void luoPelausVaihtoehdot(Container sailio) {
-        this.huomiotekstit.setText("Valitse siirto ja mahdollinen kohde.");
         JPanel kokonaisuus = new JPanel(new BorderLayout());
+         
+        JPanel tekstiPaneeli = new JPanel(new BorderLayout());
+        this.huomiotekstit.setText("Valitse siirto ja mahdollinen kohde.");
+       
+        
         this.huomiotekstit.setPreferredSize(new Dimension(1000, 100));
-        kokonaisuus.add(this.huomiotekstit, BorderLayout.PAGE_START);
+        this.huomiotekstit.setBorder(BorderFactory.createEtchedBorder(Color.lightGray, Color.black));
+        
+        tekstiPaneeli.add(this.huomiotekstit, BorderLayout.CENTER);
+        tekstiPaneeli.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        kokonaisuus.add(tekstiPaneeli, BorderLayout.PAGE_START);
         JPanel napit = new JPanel(new GridLayout(2, 1));
         JPanel siirtonapit = new JPanel();
         JPanel kohdenapit = new JPanel();
-        String[][] siirtoVaihtoehdot = {{"Perustulo:", "Ota 1 kolikko pankista."}, 
+        String[][] siirtoVaihtoehdot = {{"Perustulo:", "Ota 1 kolikko pankista."},
             {"Ulkomaanapu:", "Ota 2 kolikkoa pankista. Torjuu: Herttua"},
-        {"Vallankumous:", "Maksa 7 kolikkoa ja hyökkää yhtä osanottajaa vastaan."},
-        {"Verotus:", "Ota 3 kolikkoa pankista. Tarvitset: Herttua."},
-        {"Assassinoi:", "Maksa 3 kolikkoa ja hyökkää yhtä osanottajaa kohtaan. Tarvitset: Salamurhaaja. Torjuu: Kreivitär."},
-        {"Varasta:", "Ota vastustajalta 2 kolikkoa. Tarvitsee: Kapteeni. Torjuu: Kapteeni."}};
+            {"Vallankumous:", "Maksa 7 kolikkoa ja hyökkää yhtä osanottajaa vastaan."},
+            {"Verotus:", "Ota 3 kolikkoa pankista. Tarvitset: Herttua."},
+            {"Assassinoi:", "Maksa 3 kolikkoa ja hyökkää yhtä osanottajaa kohtaan. Tarvitset: Salamurhaaja. Torjuu: Kreivitär."},
+            {"Varasta:", "Ota vastustajalta 2 kolikkoa. Tarvitset: Kapteeni. Torjuu: Kapteeni."}};
 
         napit.add(lisaaSiirtonapit(siirtoVaihtoehdot, siirtonapit));
 
         napit.add(lisaaKohdenapit(kohdenapit));
-        
+
         kokonaisuus.add(napit, BorderLayout.CENTER);
-        
+
         JButton teeSiirto = new JButton("Tee siirto!");
-        teeSiirto.setPreferredSize(new Dimension(1000, 80));
+        JPanel teeNappiPaneeli = new JPanel(new BorderLayout());
+        teeNappiPaneeli.setBorder(BorderFactory.createEmptyBorder(15, 560, 15, 560));
+        teeNappiPaneeli.add(teeSiirto, BorderLayout.CENTER);
+        
         teeSiirto.addActionListener(new PeliSiirtoKuuntelija(peliOhjaus, this, gkl, this.siirtonappularyhma, this.kohdenappularyhma));
-        kokonaisuus.add(teeSiirto, BorderLayout.PAGE_END);
+        kokonaisuus.add(teeNappiPaneeli, BorderLayout.PAGE_END);
         kokonaisuus.validate();
 
         sailio.add(kokonaisuus);
@@ -85,7 +96,10 @@ public class PelausIkkuna extends JFrame {
     }
 
     private JPanel lisaaSiirtonapit(String[][] siirtoVaihtoehdot, JPanel siirtonapit) {
+        
         JPanel seliteJaNappi = new JPanel(new GridLayout(6, 1));
+        seliteJaNappi.setBorder(BorderFactory.createEtchedBorder(Color.lightGray, Color.black));
+        
         this.siirtonappularyhma = new ButtonGroup();
         for (int i = 0; i < siirtoVaihtoehdot.length; i++) {
             JRadioButton nappi = new JRadioButton(siirtoVaihtoehdot[i][0]);
@@ -93,11 +107,15 @@ public class PelausIkkuna extends JFrame {
             seliteJaNappi.add(nappi, BorderLayout.PAGE_START);
             seliteJaNappi.add(new JLabel(siirtoVaihtoehdot[i][1]));
             siirtonappularyhma.add(nappi);
+            
             if (i == 0) {
                 nappi.setSelected(true);
             }
         }
+        siirtonapit.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
         siirtonapit.add(seliteJaNappi);
+        
+        
         return siirtonapit;
     }
 
@@ -105,22 +123,27 @@ public class PelausIkkuna extends JFrame {
         int osanottajiaMukana = this.peliOhjaus.getPeli().getOsanottajajoukko().size();
 
         JPanel seliteJaNappi = new JPanel(new GridLayout(osanottajiaMukana, 1));
+        seliteJaNappi.setBorder(BorderFactory.createEtchedBorder(Color.lightGray, Color.black));
 
         this.kohdenappularyhma = new ButtonGroup();
         for (int i = 1; i < this.peliOhjaus.getPeli().getOsanottajajoukko().size(); i++) {
+            
             JRadioButton nappi = new JRadioButton(Integer.toString(i));
             nappi.setActionCommand(Integer.toString(i));
+            
             seliteJaNappi.add(nappi);
-            seliteJaNappi.add(new JLabel("osanottaja"));
+            seliteJaNappi.add(new JLabel("osanottaja " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(i).getNimi() + "  "));
+            
             kohdenappularyhma.add(nappi);
+            
             if (i == 1) {
                 nappi.setSelected(true);
             }
         }
         
-        
-        
+        kohdenapit.setBorder(BorderFactory.createEmptyBorder(50, 0, 50, 0));
         kohdenapit.add(seliteJaNappi);
+        
         return kohdenapit;
     }
 
@@ -134,8 +157,12 @@ public class PelausIkkuna extends JFrame {
         sailio.removeAll();
 
         JPanel paneeli = new JPanel(new GridLayout(2, 1));
-        paneeli.setSize(200, 500);
+        paneeli.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        
         JLabel otsikko = new JLabel("Vastustajan vuoro.");
+        otsikko.setBorder(BorderFactory.createEmptyBorder(20, 20, 20,20));
+        
         paneeli.add(otsikko);
 
         JButton vastustajanSiirto = new JButton("Anna vastustajan tehdä siirto!");
@@ -143,11 +170,7 @@ public class PelausIkkuna extends JFrame {
         paneeli.add(vastustajanSiirto);
 
         sailio.add(paneeli);
-        sailio.setPreferredSize(new Dimension(400, 200));
-        
-        
-        setVisible(true);
-        this.pack();
+
     }
 
     /**

@@ -64,6 +64,15 @@ public class PankkiTest {
         assertEquals(pankki.getRahamaara(), loppumaara);
 
     }
+    
+    @Test
+    public void toStringToimiiOikein1() {
+        Pankki pankki = new Pankki();
+        assertEquals(pankki.toString(), "Pankilla on rahaa 100 yksikköä.");
+        pankki.lisaaRahaa(20);
+        assertEquals(pankki.toString(), "Pankilla on rahaa 120 yksikköä.");
+
+    }
 
     @BeforeClass
     public static void setUpClass() {
