@@ -63,7 +63,7 @@ public class VastustajanVuoroTorjuKuuntelija implements ActionListener {
                     this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja koitti epäillä torjuntaasi, mutta epäonnistui ja menetti kortin.");
                 }
             } else {
-                this.gkl.getValiIkkuna().huomioTekstit.setText("Torjuit vastustajan siirron.");
+                this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja ei halua epäillä torjuntaasi.");
             }
         } else {
             this.gkl.getValiIkkuna().huomioTekstit.setText("Torjuit vastustajan siirron.");

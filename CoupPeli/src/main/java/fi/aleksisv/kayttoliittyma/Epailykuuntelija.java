@@ -1,6 +1,6 @@
 package fi.aleksisv.kayttoliittyma;
 
-import fi.aleksisv.logiikka.Vastustaja;
+import fi.aleksisv.logiikka.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -66,11 +66,13 @@ public class Epailykuuntelija implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Peli peli = this.peliOhjaus.getPeli();
+        Osanottaja pelaaja = (Osanottaja) peli.getPelaaja();
 
         if (haluaakoVastustajaEpailla) {
             if (e.getSource() == this.tee) {
-                if(!vastustaja.epaile(this.peliOhjaus.getPeli().getPelaaja(), this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirto))) {
-                    this.peliOhjaus.suoritaSiirto(this.peliOhjaus.getPeli().getPelaaja(), vastustaja, siirto);
+                if(!vastustaja.epaile(pelaaja, peli.getSiirtoNumerot().get(siirto))) {
+                    this.peliOhjaus.suoritaSiirto(pelaaja, vastustaja, siirto);
                 }
                 this.gkl.getPelausIkkuna().setVisible(false);
                 this.epailyikkuna.setVisible(false);
@@ -79,8 +81,8 @@ public class Epailykuuntelija implements ActionListener {
                 this.epailyikkuna.setVisible(false);
             }
         } else if (e.getSource() == this.tee) {
-            if (this.peliOhjaus.getPeli().getPelaaja().epaile(vastustaja, this.peliOhjaus.getPeli().getSiirtoNumerot().get(siirto))) {
-                this.peliOhjaus.suoritaSiirto(this.peliOhjaus.getPeli().getPelaaja(), vastustaja, siirto);
+            if (pelaaja.epaile(vastustaja, peli.getTorjuntaLista().get(siirto))) {
+                this.peliOhjaus.suoritaSiirto(pelaaja, vastustaja, siirto);
             }
             this.gkl.getPelausIkkuna().setVisible(false);
             this.epailyikkuna.setVisible(false);
@@ -88,7 +90,7 @@ public class Epailykuuntelija implements ActionListener {
             this.gkl.getPelausIkkuna().setVisible(false);
             this.epailyikkuna.setVisible(false);
         }
-        this.peliOhjaus.getPeli().setVuoronumero(this.peliOhjaus.getPeli().getVuoronumero() + 1);
+        peli.setVuoronumero(this.peliOhjaus.getPeli().getVuoronumero() + 1);
         this.peliOhjaus.paivitaTilanne();
         this.gkl.getValiIkkuna().pelinSeurantapaneeli.paivitaTila(this.peliOhjaus.getPeli());
     }
