@@ -63,13 +63,21 @@ public class VastustajanVuoroAlaTeeMitaanKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.peliOhjaus.suoritaSiirto(vastustaja, kohde, siirto);
         
-        this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja " + vastustaja.getNimi() 
-                + " onnistui tekemään siirron " + this.peliOhjaus.getPeli().getSiirtoNimet().get(siirto).toLowerCase() 
-                + " osanottajaa " + kohde.getNimi() + " vastaan.");
+        this.gkl.getValiIkkuna().huomioTekstit.setText(vuoroteksti());
         
         this.gkl.paivitaPelinseuranta(this.gkl.getPelinSeurantapaneeli());
         this.pelausIkkuna.setVisible(false);
         SwingUtilities.updateComponentTreeUI(this.gkl.getValiIkkuna());
+    }
+    
+    private String vuoroteksti() {
+        String siirronNimi = this.peliOhjaus.getPeli().getSiirtoNimet().get(siirto);
+        
+        if(siirto == 3 || siirto == 5 || siirto == 6) {
+            return "Vastustaja onnistui tekemään siirron " + siirronNimi + "\nosanottajaa " + this.kohde.getNimi() + " vastaan.";
+        } else {
+            return "Vastustaja onnistui tekemään siirron " + siirronNimi + ".";
+        }
     }
 
 }

@@ -83,7 +83,7 @@ public class VastustajanSiirtoKuuntelija implements ActionListener {
         JButton epaile = new JButton("Epäile");
         epaile.setEnabled(false);
 
-        JTextArea ilmoitus = new JTextArea("Vastustaja " + vastustaja.getNimi() + " haluaa tehdä\n siirron "
+        JTextArea ilmoitus = new JTextArea("Vastustaja " + vastustaja.getNimi() + " haluaa tehdä\nsiirron "
                 + siirtonimet.get(siirto).toString().toLowerCase()  + ketaVastaan + ".");
         Osanottaja oKohde = this.peliOhjaus.getPeli().getOsanottajajoukko().get(kohde);
 

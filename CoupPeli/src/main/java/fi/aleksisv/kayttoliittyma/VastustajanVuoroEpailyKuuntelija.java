@@ -46,15 +46,23 @@ public class VastustajanVuoroEpailyKuuntelija implements ActionListener {
             this.peliOhjaus.paivitaTilanne();
         } else {
             this.peliOhjaus.suoritaSiirto(o, kohdistuu, siirto);
-            this.gkl.getValiIkkuna().huomioTekstit.setText("Osanottaja " +  o.getNimi() 
-                    + " kohdisti  siirron " + peli.getSiirtoNimet().get(siirto) + " osanottajaa " 
-                    + kohdistuu.getNimi() + " kohtaan.");
+            this.gkl.getValiIkkuna().huomioTekstit.setText(vuoroteksti());
         }
         
         
         this.gkl.paivitaPelinseuranta(this.gkl.getPelinSeurantapaneeli());
         this.pelausIkkuna.setVisible(false);
         SwingUtilities.updateComponentTreeUI(this.gkl.getValiIkkuna());
+    }
+    
+    private String vuoroteksti() {
+        String siirronNimi = this.peliOhjaus.getPeli().getSiirtoNimet().get(siirto);
+        
+        if(siirto == 3 || siirto == 5 || siirto == 6) {
+            return "Vastustaja onnistui tekemään siirron " + siirronNimi + " sinua vastaan.";
+        } else {
+            return "Vastustaja onnistui tekemään siirron " + siirronNimi + ".";
+        }
     }
 
 }

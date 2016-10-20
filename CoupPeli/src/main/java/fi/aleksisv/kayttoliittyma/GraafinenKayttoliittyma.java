@@ -104,7 +104,7 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
         if (voittanut) {
             lopetusikkuna.add(new JTextArea("Voitit: " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
         } else {
-            lopetusikkuna.add(new JTextArea("Valitettavasti olit huonompi ja hävisit."));
+            lopetusikkuna.add(new JTextArea("Valitettavasti hävisit."));
         }
 
         lopetusikkuna.setSize(400, 400);
