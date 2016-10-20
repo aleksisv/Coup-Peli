@@ -12,9 +12,9 @@ Graafinen käyttöliittymä on olennainen osa ohjelmaan, sillä pelaajan pitää
 
 **Pelaajan toiminnot**: 
 * Aloita peli.
-** Pelaaja voi valita nimensä ja vastustajien lukumäärän.
+**1 Pelaaja voi valita nimensä ja vastustajien lukumäärän.
 * Tee siirto.
-** Pelaaja voi valita kohteen sekä siirron, jonka tekee.
+**1 Pelaaja voi valita kohteen sekä siirron, jonka tekee.
 * Epäile tai torju vastustaja siirto.
 
 
