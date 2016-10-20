@@ -46,4 +46,5 @@ Päivä | Tunnit | Kuvaus
 17.10.2016 | 5h | Valtavia rakenteellisia muutoksia ohjelmaan.
 18.10.2016 | 6h | Ohjelmointia, erityisesti käyttöliittymän arkkitehtuurin muuttamista.
 19.10.2016 | 4h | Ohjelmointia, dokumentaatiota, luokka- ja sekvenssikaavioiden piirtämistä.
+20.10.2016 | 6h | Ohjelmointia, dokumentaatiota.
 
