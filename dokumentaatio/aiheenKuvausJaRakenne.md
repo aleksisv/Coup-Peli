@@ -12,8 +12,10 @@ Graafinen käyttöliittymä on olennainen osa ohjelmaan, sillä pelaajan pitää
 
 **Pelaajan toiminnot**: 
 * Aloita peli.
+** Pelaaja voi valita nimensä ja vastustajien lukumäärän.
 * Tee siirto.
-* Epäile vastustajan siirtoa.
+** Pelaaja voi valita kohteen sekä siirron, jonka tekee.
+* Epäile tai torju vastustaja siirto.
 
 
 #Rakenne
@@ -23,7 +25,7 @@ korttipakan ja pankin. Osanottaja luokka kuvaa yleisellä tasolla yhtä pelin os
 on korttikäsi, luokan Korttikäsi olio, joka sisältään pelikortteja kuvaavia Kortti-olioita. Osanottajalla on myös rahaa ja nimi. Luokkaa laajentavat luokat Pelaaja ja Vastustaja, joista
 Pelaaja-luokan oliot kuvaavat pelin uniikkia pelaajaa ja vastustajat ovat pelissä muuten esiintyvät osanottajat.
 
-Graafinen käyttöliittymä vastaa käyttäjän ja pelin vuorovaikutuksesta. Graafinen käyttöliittymä pyörittää peliä osittain luokan PeliOhjaus avulla. PeliOhjaus-luokan olio luo pelin ja vastaa esimerkiksi pelin siirtojen kutsumisesta.
+Graafinen käyttöliittymä vastaa käyttäjän ja pelin vuorovaikutuksesta. Käyttöliittymä-paketissa on useita erilaisia graafisia luokkia laajentavia komponentteja ja näitä kuuntelevia toiminnankuuntelijoita.  Graafinen käyttöliittymä pyörittää peliä osittain luokan PeliOhjaus avulla. PeliOhjaus-luokan olio luo pelin ja vastaa esimerkiksi pelin siirtojen kutsumisesta.
  
 ###Luokkakaaviot
 
