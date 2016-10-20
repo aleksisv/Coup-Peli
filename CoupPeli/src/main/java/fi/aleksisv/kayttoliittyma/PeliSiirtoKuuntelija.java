@@ -1,7 +1,9 @@
 package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.*;
+import java.awt.Button;
 import java.awt.event.*;
+import java.util.Enumeration;
 import javax.swing.*;
 
 /**
@@ -53,6 +55,7 @@ public class PeliSiirtoKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         int siirtoNumero = Integer.parseInt(siirtonappularyhma.getSelection().getActionCommand());
+        
         if (this.peliOhjaus.onkoPelaajallaRahaa(siirtoNumero)) {
             yritaSiirtoa(Integer.parseInt(siirtonappularyhma.getSelection().getActionCommand()),
                     Integer.parseInt(kohdenappularyhma.getSelection().getActionCommand()));

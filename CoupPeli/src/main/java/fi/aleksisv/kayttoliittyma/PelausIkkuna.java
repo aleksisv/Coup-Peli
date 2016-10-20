@@ -2,6 +2,7 @@ package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.Vastustaja;
 import java.awt.*;
+import java.util.Enumeration;
 import javax.swing.*;
 
 /**
@@ -116,6 +117,9 @@ public class PelausIkkuna extends JFrame {
                 nappi.setSelected(true);
             }
         }
+        
+        
+        
         kohdenapit.add(seliteJaNappi);
         return kohdenapit;
     }
@@ -130,6 +134,7 @@ public class PelausIkkuna extends JFrame {
         sailio.removeAll();
 
         JPanel paneeli = new JPanel(new GridLayout(2, 1));
+        paneeli.setSize(200, 500);
         JLabel otsikko = new JLabel("Vastustajan vuoro.");
         paneeli.add(otsikko);
 
@@ -138,8 +143,9 @@ public class PelausIkkuna extends JFrame {
         paneeli.add(vastustajanSiirto);
 
         sailio.add(paneeli);
-
-        validate();
+        sailio.setPreferredSize(new Dimension(400, 200));
+        
+        
         setVisible(true);
         this.pack();
     }

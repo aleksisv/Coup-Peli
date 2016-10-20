@@ -41,7 +41,7 @@ public class VastustajanVuoroEpailyKuuntelija implements ActionListener {
         Peli peli = this.peliOhjaus.getPeli();
         Osanottaja kohdistuu = peli.getPelaaja();
         if (peli.getPelaaja().epaile(o, peli.getSiirtoNumerot().get(this.siirto))) {
-            this.gkl.getValiIkkuna().huomioTekstit.setText("Onnistuit torjumaan vastustajan siirron.");
+            this.gkl.getValiIkkuna().huomioTekstit.setText("Onnistuit epäilemään vastustajan siirtoa.");
             peli.setVuoronumero(peli.getVuoronumero() + 1);
             this.peliOhjaus.paivitaTilanne();
         } else {

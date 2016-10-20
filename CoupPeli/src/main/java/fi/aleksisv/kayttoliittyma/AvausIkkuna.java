@@ -53,8 +53,13 @@ public class AvausIkkuna extends JFrame {
                 + " tietyn kortin omistamista.\nVastustaja voi yrittää torjua siirron tai epäillä, että sinulla ei ole korttia."
                 + "Voit tehdä samoin. Jos epäilijä on oikeassa eikä siirron tekijällä ole korttia, siirron tekijä menettää yhden kortin.\n"
                 + "Vastaavasti jos epäilijä on väärässä epäilijä itse menettää kortin ja siirto osuu häneen."
-                + "\n\nValitse sopiva nimi itsellesi ja luo peli haluamallasi määrällä pelaajia!");
-        sailio.add(huomioTekstit);
+                + "\n\nValitse sopiva nimi itsellesi ja luo peli haluamallasi määrällä pelaajia!"
+                + "\nSallittu määrä pelaajia on 2-5.");
+        this.huomioTekstit.setBorder(BorderFactory.createEtchedBorder(Color.lightGray, Color.black));
+        JPanel tekstiPaneeli = new JPanel(new BorderLayout());
+        tekstiPaneeli.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        tekstiPaneeli.add(huomioTekstit);
+        sailio.add(tekstiPaneeli);
         gkl.setHuomioTekstit(huomioTekstit);
 
     }
@@ -62,22 +67,26 @@ public class AvausIkkuna extends JFrame {
     private JPanel luoAvausvalikko() {
         JPanel paneeli = new JPanel(new GridLayout(1, 3));
         
+        
+
         JPanel aloitusSala = new JPanel(new BorderLayout());
         this.aloitaPeliNappi = new JButton("Aloita peli!");
         this.aloitaPeliNappi.setSize(40, 40);
-        aloitusSala.add(this.aloitaPeliNappi);
+        
+        aloitusSala.setBorder(BorderFactory.createEmptyBorder(135, 20, 20, 20));
+        aloitusSala.add(this.aloitaPeliNappi, BorderLayout.CENTER);
         this.aloitaPeliNappi.addActionListener(gkl);
         gkl.setAloitaPeliNappi(aloitaPeliNappi);
         
-        JPanel osanottajia = new JPanel(new GridLayout(3, 1));
+        JPanel osanottajia = new JPanel(new GridLayout(2, 1));
+        osanottajia.setBorder(BorderFactory.createEmptyBorder(100, 20, 20, 20));
         osanottajia.add(new JLabel("Monellako pelaajalla haluat pelata?"));
-        osanottajia.add(new JPanel());
         this.montakoPelaajaa = new JTextField();
         osanottajia.add(montakoPelaajaa);
         
-        JPanel nimi = new JPanel(new GridLayout(3,1));
+        JPanel nimi = new JPanel(new GridLayout(2,1));
+        nimi.setBorder(BorderFactory.createEmptyBorder(100, 20, 20, 20));
         nimi.add(new JLabel("Minkä nimen haluat?"));
-        nimi.add(new JPanel());
         this.pelaajanNimi = new JTextField();
         nimi.add(pelaajanNimi);
 

@@ -1,7 +1,6 @@
 package fi.aleksisv.kayttoliittyma;
 
 import fi.aleksisv.logiikka.*;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.*;
@@ -50,7 +49,7 @@ public class VastustajanSiirtoKuuntelija implements ActionListener {
         int siirto = vastustaja.valitseSiirto(r);
         int kohde = vastustaja.valitseKohde(r, this.peliOhjaus.getPeli().getOsanottajajoukko().size());
 
-        JButton alaTeeMitaan = new JButton("Ok!");
+        JButton alaTeeMitaan = new JButton("Älä tee mitään!");
 
         HashMap torjuntalista = this.peliOhjaus.getPeli().getTorjuntaLista();
         HashMap siirtonumerot = this.peliOhjaus.getPeli().getSiirtoNumerot();
@@ -64,7 +63,7 @@ public class VastustajanSiirtoKuuntelija implements ActionListener {
         
         
 
-        JTextArea ilmoitus = new JTextArea("Vastutaja" + " haluaa tehdä siirron "
+        JTextArea ilmoitus = new JTextArea("Vastutaja" + vastustaja.getNimi() +" haluaa tehdä siirron "
                 + siirtonimet.get(siirto) + " \nosanottajaa "
                 + this.peliOhjaus.getPeli().getOsanottajajoukko().get(kohde).getNimi()
                 + " vastaan.");
@@ -86,17 +85,20 @@ public class VastustajanSiirtoKuuntelija implements ActionListener {
                     + siirtonumerot.get(siirto) + "\nHaluatko epäillä siirtoa?");
             epaile.setEnabled(true);
 
-            epaile.addActionListener(new VastustajanVuoroEpailyKuuntelija(this.gkl, this.peliOhjaus, this.pelausIkkuna, this.vastustaja, siirto));
+            epaile.addActionListener(new VastustajanVuoroEpailyKuuntelija(this.gkl,
+                    this.peliOhjaus, this.pelausIkkuna, this.vastustaja, siirto));
 
             napit.add(epaile);
 
         }
 
-        alaTeeMitaan.addActionListener(new VastustajanVuoroAlaTeeMitaanKuuntelija(gkl, peliOhjaus, pelausIkkuna, vastustaja, siirto, oKohde));
+        alaTeeMitaan.addActionListener(new VastustajanVuoroAlaTeeMitaanKuuntelija(gkl,
+                peliOhjaus, pelausIkkuna, vastustaja, siirto, oKohde));
 
         napit.add(alaTeeMitaan);
         paneeli.add(ilmoitus);
         paneeli.add(napit);
+        
         this.pelausIkkuna.getContentPane().add(paneeli);
         this.pelausIkkuna.setVisible(true);
 

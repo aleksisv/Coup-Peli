@@ -41,12 +41,14 @@ public class ValiIkkuna extends JFrame {
      */
     public void luoKomponentit() {
         Container sailio = this.getContentPane();
-
+        
         sailio.setLayout(new GridLayout(3, 2));
-        this.huomioTekstit = new JTextArea("JEE");
-
+        
+        
+        this.huomioTekstit = new JTextArea();
+        
         sailio.add(huomioTekstit);
-
+        
         this.huomioTekstit.setText("Aloitit pelin " + this.peliOhjaus.getPeli().getOsanottajamaara() + " pelaajalla. Tee siirto.");
     }
 
@@ -68,8 +70,18 @@ public class ValiIkkuna extends JFrame {
 
     private void luoPelausNappi() {
         this.pelaaVuoroNappi = new JButton("Pelaa vuoro!");
+        pelaaVuoroNappi.setPreferredSize(new Dimension(150, 50));
         pelaaVuoroNappi.addActionListener(new PelinSeurantaKuuntelija(peliOhjaus, gkl));
-        this.add(pelaaVuoroNappi);
+        
+        JPanel takaPaneeli = new JPanel();
+        takaPaneeli.setBorder(BorderFactory.createEtchedBorder(Color.lightGray, Color.black));
+        
+        JPanel nappiPaneeli = new JPanel();
+        nappiPaneeli.setBorder(BorderFactory.createEmptyBorder(50, 30, 30, 30));
+        
+        nappiPaneeli.add(pelaaVuoroNappi);
+        takaPaneeli.add(nappiPaneeli);
+        this.add(takaPaneeli);
     }
 
 }
