@@ -64,13 +64,13 @@
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>          String pelaajanNimi = avausIkkuna.getPelaajanNimi().getText();
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>          Pattern p1 = Pattern.compile(<span class="jxr_string">"[2-5]"</span>);
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>          Matcher m1 = p1.matcher(pelaajaMaaraTeksti);
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>          Pattern p2 = Pattern.compile(<span class="jxr_string">"(&#92;&#92;s|[a-z|å|ö|ä]+)+"</span>);
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>          Pattern p2 = Pattern.compile(<span class="jxr_string">"(&#92;&#92;s|[a-z|å|ö|ä|0-9]+)+"</span>);
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>          Matcher m2 = p2.matcher(pelaajanNimi.toLowerCase());
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>          <strong class="jxr_keyword">if</strong> (!m1.matches()) {
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>              <strong class="jxr_keyword">this</strong>.huomioTekstit.setText(<span class="jxr_string">"Validi määrä (2-5) pelaajia."</span>);
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>              <strong class="jxr_keyword">this</strong>.huomioTekstit.setText(<span class="jxr_string">"Anna validi määrä (2-5) pelaajia."</span>);
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>          } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (!m2.matches()) {
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>              <strong class="jxr_keyword">this</strong>.huomioTekstit.setText(<span class="jxr_string">"Nimeen saa kuulua vain aakkosia."</span>);
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>              <strong class="jxr_keyword">this</strong>.huomioTekstit.setText(<span class="jxr_string">"Nimeen saa kuulua vain aakkosia, välilyöntejä ja numeraaleja."</span>);
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>          } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>              <strong class="jxr_keyword">int</strong> pelaajaMaara = Integer.parseInt(avausIkkuna.getMontakoPelaajaa().getText());
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>              <strong class="jxr_keyword">this</strong>.avausIkkuna.dispose();
@@ -102,7 +102,7 @@
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>  
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>  <em class="jxr_javadoccomment">     * Metodi lopettaa pelin.</em>
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>  <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>  <em class="jxr_javadoccomment">     * </em>
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>  <em class="jxr_javadoccomment">     * @param voittanut Onko lopetustilanteessa pelaaja voittanut vai hävinnyt.</em>
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> lopetaPeli(<strong class="jxr_keyword">boolean</strong> voittanut) {
@@ -110,9 +110,9 @@
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>         JFrame lopetusikkuna = <strong class="jxr_keyword">new</strong> JFrame(<span class="jxr_string">"Peli on ohi!"</span>);
 <a class="jxr_linenumber" name="L103" href="#L103">103</a> 
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>         <strong class="jxr_keyword">if</strong> (voittanut) {
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>             lopetusikkuna.add(<strong class="jxr_keyword">new</strong> JTextArea(<span class="jxr_string">"Voitit: "</span> + <strong class="jxr_keyword">this</strong>.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>             lopetusikkuna.add(<strong class="jxr_keyword">new</strong> JTextArea(<span class="jxr_string">"Voitit:\n"</span> + <strong class="jxr_keyword">this</strong>.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L107" href="#L107">107</a>             lopetusikkuna.add(<strong class="jxr_keyword">new</strong> JTextArea(<span class="jxr_string">"Valitettavasti olit huonompi ja hävisit."</span>));
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>             lopetusikkuna.add(<strong class="jxr_keyword">new</strong> JTextArea(<span class="jxr_string">"Valitettavasti hävisit."</span>));
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>         }
 <a class="jxr_linenumber" name="L109" href="#L109">109</a> 
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>         lopetusikkuna.setSize(400, 400);
