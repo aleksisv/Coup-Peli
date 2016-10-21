@@ -60,16 +60,18 @@ public class VastustajanVuoroTorjuKuuntelija implements ActionListener {
                     peliOhjaus.suoritaSiirto(vastustaja, kohde, siirto);
                     this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja epäili torjuntaasi onnistuneesti. Menetit kortin.");
                 } else {
+                    peliOhjaus.paivitaTilanne();
                     this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja koitti epäillä torjuntaasi, mutta epäonnistui ja menetti kortin.");
                 }
             } else {
+                peliOhjaus.paivitaTilanne();
                 this.gkl.getValiIkkuna().huomioTekstit.setText("Vastustaja ei halua epäillä torjuntaasi.");
             }
         } else {
+            peliOhjaus.paivitaTilanne();
             this.gkl.getValiIkkuna().huomioTekstit.setText("Torjuit vastustajan siirron.");
         }
 
-        peliOhjaus.paivitaTilanne();
         peli.setVuoronumero(peli.getVuoronumero() + 1);
 
         this.gkl.paivitaPelinseuranta(this.gkl.getPelinSeurantapaneeli());

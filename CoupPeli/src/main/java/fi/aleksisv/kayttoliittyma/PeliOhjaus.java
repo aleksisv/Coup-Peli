@@ -45,36 +45,6 @@ public class PeliOhjaus {
     }
 
     /**
-     * Metodi vastaa yhden siirron suorittamisesta.
-     *
-     * @param siirto Mikä siirto halutaan suorittaa.
-     * @param kohde Mitä osanottajaa vastaan siirto halutaan tehdä.
-     */
-    public void pelaaSiirto(int siirto, int kohde) {
-        Osanottaja keneenKohdistuu = this.peli.getOsanottajajoukko().get(kohde);
-        Pelaaja pelivuorossa = this.peli.getPelaaja();
-        boolean epailikoTaiTorjuikoJoku = false;
-        if (siirto == 3 || siirto == 5 || siirto == 6) {
-
-            if (this.peli.getOsanottajajoukko().get(kohde).haluaaTorjua(this.peli.getPelaaja(), this.peli.getSiirtoNumerot().get(siirto))) {
-                keneenKohdistuu.torju(pelivuorossa, this.peli.getSiirtoNumerot().get(siirto));
-                epailikoTaiTorjuikoJoku = true;
-            }
-
-            if (keneenKohdistuu.haluaaEpailla(pelivuorossa, this.peli.getSiirtoNumerot().get(siirto))) {
-                keneenKohdistuu.epaile(pelivuorossa, this.peli.getSiirtoNumerot().get(siirto));
-                epailikoTaiTorjuikoJoku = true;
-            }
-
-        }
-        if (!epailikoTaiTorjuikoJoku) {
-            this.suoritaSiirto(pelivuorossa, keneenKohdistuu, siirto);
-        }
-        this.peli.setVuoronumero(this.peli.getVuoronumero() + 1);
-        this.paivitaTilanne();
-    }
-
-    /**
      * Metodi vastaa yhdestä siirtoyrityksestä ja tämän tiedon kertomisesta
      * GUI:lle.
      *
@@ -152,8 +122,8 @@ public class PeliOhjaus {
 
     /**
      * Metodi päivittää pelitilanteen, eli tarkistaa, ketkä osanottajista ovat
-     * jo pudonneet ja ketkä ovat vielä mukana pelissä.
-     *
+     * jo pudonneet ja ketkä ovat vielä mukana pelissä. Lisäksi metodi ilmoittaa
+     * käyttöliittymälle, mikäli pelin on aika loppua.
      */
     public void paivitaTilanne() {
         boolean kaytaPoistettavaa = false;
@@ -168,13 +138,11 @@ public class PeliOhjaus {
             peli.getHavinnytJoukko().add(poistettava);
             peli.getOsanottajajoukko().remove(poistettava);
         }
-
-        if (peli.getOsanottajajoukko().size() == 1) {
-            this.gkl.lopetaPeli(true);
-        }
-
+        
         if (!peli.getOsanottajajoukko().contains(peli.getPelaaja())) {
             this.gkl.lopetaPeli(false);
+        } else if (peli.getOsanottajajoukko().size() == 1) {
+            this.gkl.lopetaPeli(true);
         }
     }
 

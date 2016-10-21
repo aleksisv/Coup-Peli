@@ -73,25 +73,30 @@ public class Epailykuuntelija implements ActionListener {
             if (e.getSource() == this.tee) {
                 if (!vastustaja.epaile(pelaaja, peli.getSiirtoNumerot().get(siirto))) {
                     this.peliOhjaus.suoritaSiirto(pelaaja, vastustaja, siirto);
+                } else {
+                    this.peliOhjaus.paivitaTilanne();
                 }
                 this.gkl.getPelausIkkuna().setVisible(false);
                 this.epailyikkuna.setVisible(false);
             } else {
+                this.peliOhjaus.paivitaTilanne();
                 this.gkl.getPelausIkkuna().setVisible(false);
                 this.epailyikkuna.setVisible(false);
             }
         } else if (e.getSource() == this.tee) {
             if (pelaaja.epaile(vastustaja, peli.getTorjuntaLista().get(siirto))) {
                 this.peliOhjaus.suoritaSiirto(pelaaja, vastustaja, siirto);
+            } else {
+                this.peliOhjaus.paivitaTilanne();
             }
             this.gkl.getPelausIkkuna().setVisible(false);
             this.epailyikkuna.setVisible(false);
         } else {
+            this.peliOhjaus.paivitaTilanne();
             this.gkl.getPelausIkkuna().setVisible(false);
             this.epailyikkuna.setVisible(false);
         }
         peli.setVuoronumero(this.peliOhjaus.getPeli().getVuoronumero() + 1);
-        this.peliOhjaus.paivitaTilanne();
         this.gkl.getValiIkkuna().pelinSeurantapaneeli.paivitaTila(this.peliOhjaus.getPeli());
     }
 
