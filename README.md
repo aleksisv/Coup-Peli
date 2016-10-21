@@ -10,9 +10,8 @@ jossa pelaajan tehtävänä on omia korttejaan ja näiden erikoisominaisuuksia k
 
 [Käyttöohjeet](dokumentaatio/kayttoohjeet.md)
 
-[Pit-raportti](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/dokumentaatio/pit-raportti/201610211058/index.html)
+[Pit-raportti](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/dokumentaatio/pit-raportti/201610211202/index.html)
 
 [Checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/dokumentaatio/checkstyle-raportti/site/checkstyle.html)
 
-
-
+[Javadoc](https://htmlpreview.github.io/?https://github.com/aleksisv/Coup-Peli/blob/master/apidocs/index.html)
