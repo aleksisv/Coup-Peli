@@ -40,6 +40,7 @@ public class Epailyikkuna extends JFrame {
         this.peliOhjaus = peliOhjaus;
         this.siirto = siirto;
         this.gkl = gkl;
+        this.setLocation(0, 500);
 
     }
     

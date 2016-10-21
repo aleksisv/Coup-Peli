@@ -58,7 +58,7 @@ public class VastustajanVuoroEpailyKuuntelija implements ActionListener {
     private String vuoroteksti() {
         String siirronNimi = this.peliOhjaus.getPeli().getSiirtoNimet().get(siirto);
         
-        if(siirto == 3 || siirto == 5 || siirto == 6) {
+        if (siirto == 3 || siirto == 5 || siirto == 6) {
             return "Vastustaja onnistui tekemään siirron " + siirronNimi + " sinua vastaan.";
         } else {
             return "Vastustaja onnistui tekemään siirron " + siirronNimi + ".";

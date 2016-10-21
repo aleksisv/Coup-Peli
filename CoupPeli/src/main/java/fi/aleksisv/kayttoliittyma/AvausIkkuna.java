@@ -58,8 +58,8 @@ public class AvausIkkuna extends JFrame {
         sailio.setLayout(new GridLayout(2, 1));
         sailio.add(luoAvausvalikko());
         this.huomioTekstit = new JTextArea("Tämä on Coup-peli. Tehtävänäsi on paljastaa vastustajiesi kortit ja suojella omiasi. \n"
-                + "Saat pelin alussa kaksi korttia. Jokaisella kortilla on oma. Joka vuoro joudut tekemään siirron, joista johoinkin vaaditaan"
-                + " tietyn kortin omistamista.\nVastustaja voi yrittää torjua siirron tai epäillä, että sinulla ei ole korttia."
+                + "Saat pelin alussa kaksi korttia. Jokaisella kortilla on erikoisominaisuuksia. Joka vuoro joudut tekemään siirron, joista johoinkin vaaditaan"
+                + " tietyn kortin omistamista.\nVastustaja voi yrittää torjua siirron jollain omista korteistaan. Vaihtoehtoisesti hän voi epäillä, omistatko väittämääsi korttia lainkaan."
                 + "Voit tehdä samoin. Jos epäilijä on oikeassa eikä siirron tekijällä ole korttia, siirron tekijä menettää yhden kortin.\n"
                 + "Vastaavasti jos epäilijä on väärässä epäilijä itse menettää kortin ja siirto osuu häneen."
                 + "\n\nValitse sopiva nimi itsellesi ja luo peli haluamallasi määrällä pelaajia!"

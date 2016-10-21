@@ -9,7 +9,7 @@ import javax.swing.SwingUtilities;
 public class NewMain {
     
     /**
-     * Luokan konstruktori.
+     * Metodi pistää kaiken pyörimää.
      * @param args Argumentit.
      */
     public static void main(String[] args) {

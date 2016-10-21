@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Luokka vangitsee pelin sellaisen osanottajan, jota ohjaa tekoäly ja jota
- * vastaan pelaaja pelaa.
+ * Luokka vangitsee pelin sellaisen osanottajan, jota ohjaa äärimmäisen alkeellinen
+ * tekoäly ja jota vastaan pelaaja pelaa.
  */
 public class Vastustaja extends Osanottaja {
     /**
@@ -128,6 +128,10 @@ public class Vastustaja extends Osanottaja {
 
     /**
      * Metodi valitsee vastustajalle siiron, minkä hän haluaa tehdä.
+     * Vastustaja pyrkii aina hyökkäämään pelaajan korttia vastaan, mikäli hänellä
+     * on tähän edellytykset. Jos näin ei ole, vastustaja arpoo minkä siirron tekee.
+     * Useissa tapauksissa vastustaja bluffaa, eli valitsee siirron johon liittyvää korttia
+     * hän ei edes omista.
      * 
      * @param r Random-olio.
      * 
@@ -163,6 +167,7 @@ public class Vastustaja extends Osanottaja {
     
     /**
      * Metodi valitsee mihin kohteeseen vastustaja haluaa tehdä siirron.
+     * Vastustaja valitsee kohteen satunnaisesti.
      * 
      * @param r Random-olio.
      * @param pelaajaMaara Montako pelaajaa pelissä on mukana.

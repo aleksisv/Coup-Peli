@@ -40,6 +40,7 @@ public class PelausIkkuna extends JFrame {
         this.peliOhjaus = peliOhjaus;
         this.gkl = gkl;
         this.huomiotekstit = new JTextArea();
+        this.setLocation(500, 500);
 
         this.setVisible(true);
         this.setSize(1000, 700);
@@ -161,7 +162,7 @@ public class PelausIkkuna extends JFrame {
         
         
         JLabel otsikko = new JLabel("Vastustajan vuoro.");
-        otsikko.setBorder(BorderFactory.createEmptyBorder(20, 20, 20,20));
+        otsikko.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
         paneeli.add(otsikko);
 

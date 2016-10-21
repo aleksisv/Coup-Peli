@@ -7,7 +7,7 @@ import java.util.Enumeration;
 import javax.swing.*;
 
 /**
- * Luokka vastaa siirtoon liittyvästä kuuntelemisesta.
+ * Luokka vastaa pelaajan siirtoon liittyvästä kuuntelemisesta.
  */
 public class PeliSiirtoKuuntelija implements ActionListener {
 
@@ -81,7 +81,7 @@ public class PeliSiirtoKuuntelija implements ActionListener {
         } else {
             this.peliOhjaus.suoritaSiirto(pelaaja, vastustaja, siirtonumero);
             String ketaVastaan = "";
-            if(siirtonumero == 3 || siirtonumero == 5 || siirtonumero == 6) {
+            if (siirtonumero == 3 || siirtonumero == 5 || siirtonumero == 6) {
                 ketaVastaan = " osanottajaa " + vastustaja.getNimi() + " vastaan";
             }
             

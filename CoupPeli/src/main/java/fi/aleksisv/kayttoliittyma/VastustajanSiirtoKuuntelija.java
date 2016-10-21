@@ -64,7 +64,7 @@ public class VastustajanSiirtoKuuntelija implements ActionListener {
         int siirto = vastustaja.valitseSiirto(r);
         int kohde = vastustaja.valitseKohde(r, this.peliOhjaus.getPeli().getOsanottajajoukko().size());
         
-        if(siirto == 3 || siirto ==5 || siirto == 6) {
+        if (siirto == 3 || siirto == 5 || siirto == 6) {
             ketaVastaan = " osanottajaa " 
                     + this.peliOhjaus.getPeli().getOsanottajajoukko().get(kohde).getNimi() 
                     + " vastaan";
@@ -119,7 +119,7 @@ public class VastustajanSiirtoKuuntelija implements ActionListener {
         
         alaTeeMitaan.setBorder(BorderFactory.createEtchedBorder(Color.lightGray, Color.black));
         napit.add(alaTeeMitaan);
-        napit.setBorder(BorderFactory.createEmptyBorder(60,20, 60,20));
+        napit.setBorder(BorderFactory.createEmptyBorder(60, 20, 60, 20));
         
         ilmoitus.setBorder(BorderFactory.createEtchedBorder(Color.lightGray, Color.black));
         paneeli.add(ilmoitus);

@@ -56,13 +56,13 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
         String pelaajanNimi = avausIkkuna.getPelaajanNimi().getText();
         Pattern p1 = Pattern.compile("[2-5]");
         Matcher m1 = p1.matcher(pelaajaMaaraTeksti);
-        Pattern p2 = Pattern.compile("(\\s|[a-z|å|ö|ä]+)+");
+        Pattern p2 = Pattern.compile("(\\s|[a-z|å|ö|ä|0-9]+)+");
         Matcher m2 = p2.matcher(pelaajanNimi.toLowerCase());
 
         if (!m1.matches()) {
-            this.huomioTekstit.setText("Validi määrä (2-5) pelaajia.");
+            this.huomioTekstit.setText("Anna validi määrä (2-5) pelaajia.");
         } else if (!m2.matches()) {
-            this.huomioTekstit.setText("Nimeen saa kuulua vain aakkosia.");
+            this.huomioTekstit.setText("Nimeen saa kuulua vain aakkosia, välilyöntejä ja numeraaleja.");
         } else {
             int pelaajaMaara = Integer.parseInt(avausIkkuna.getMontakoPelaajaa().getText());
             this.avausIkkuna.dispose();
@@ -102,7 +102,7 @@ public class GraafinenKayttoliittyma implements Runnable, ActionListener {
         JFrame lopetusikkuna = new JFrame("Peli on ohi!");
 
         if (voittanut) {
-            lopetusikkuna.add(new JTextArea("Voitit: " + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
+            lopetusikkuna.add(new JTextArea("Voitit:\n" + this.peliOhjaus.getPeli().getOsanottajajoukko().get(0)));
         } else {
             lopetusikkuna.add(new JTextArea("Valitettavasti hävisit."));
         }

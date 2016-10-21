@@ -71,7 +71,7 @@ public class Epailykuuntelija implements ActionListener {
 
         if (haluaakoVastustajaEpailla) {
             if (e.getSource() == this.tee) {
-                if(!vastustaja.epaile(pelaaja, peli.getSiirtoNumerot().get(siirto))) {
+                if (!vastustaja.epaile(pelaaja, peli.getSiirtoNumerot().get(siirto))) {
                     this.peliOhjaus.suoritaSiirto(pelaaja, vastustaja, siirto);
                 }
                 this.gkl.getPelausIkkuna().setVisible(false);
